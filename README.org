@@ -30,8 +30,8 @@ yet. Therefore, install it using:
 devtools::install_github("japhir/clumpedr")
 #+end_src
 
-If this doesn't work, make sure you have `devtools` installed
-(`install.packages("devtools")`).
+If this doesn't work, make sure you have ~devtools~ installed
+(~install.packages("devtools")~).
 
 ** Explanation
 
