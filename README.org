@@ -1,6 +1,6 @@
-[[https://cran.r-project.org/package=clumpedr][https://www.r-pkg.org/badges/version/clumpedr]]
+[[https://www.r-pkg.org/badges/version/clumpedr][https://cran.r-project.org/package=clumpedr]]
 
-# clumpedr
+* clumpedr
 
 Clumpedr aims to facilitate analysis of clumped isotope data. It builds on
 [[https://github.com/kopflab/isoreader][isoreader]], which is used to import raw data files from the mass spectrometer.
@@ -17,7 +17,7 @@ Clumpedr includes dataprocessing steps such as:
 - summary per sample
 - per-run correction and calculation of the empirical reference frame
 
-## Installation
+** Installation
 
 clumpedr is currently in development, and thus has not been released on [[https://CRAN.R-project.org][CRAN]]
 yet. Therefore, install it using:
@@ -29,7 +29,7 @@ devtools::install_github("japhir/clumpedr")
 If this doesn't work, make sure you have `devtools` installed
 (`install.packages("devtools")`).
 
-## Explanation
+** Explanation
 
 See the data processing vignette called clumped for an extensive example on how
 to use clumpedr!
@@ -40,7 +40,7 @@ These will be properly written asap!
 vignette("clumped")
 #+end_src
 
-## Contributing
+** Contributing
 
 Contributions to improving the clumped data processing package are more than
 welcome! If something doesn't work the way you expect and you don't know how to
