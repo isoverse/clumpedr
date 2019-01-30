@@ -30,6 +30,8 @@ Once you have `clumpedr` installed (see the README), you can first load the libr
 
 Then get your data into R, and start processing it!
 
+# TODO: add example data for reproducibility.
+
 ```{r}
   dids  <- iso_read_dual_inlet("out/dids.di.rds")
   didinfo  <- clean_did_info(dids, "MOTU")
