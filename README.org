@@ -1,4 +1,6 @@
-[[https://www.r-pkg.org/badges/version/clumpedr][https://cran.r-project.org/package=clumpedr]]
+[[https://www.r-pkg.org/badges/version/clumpedr]]
+
+[[https://cran.r-project.org/package=clumpedr]]
 
 * clumpedr
 
