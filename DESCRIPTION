@@ -1,0 +1,74 @@
+Package: clumpedr
+Title: A package for clumped isotope analysis in R
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Ilja",
+           family = "Kocken",
+           role = c("aut", "cre"),
+           email = "i.j.kocken@uu.nl")
+Description: This package makes analyzing clumped isotope data as easy as possible.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Licence: GPL-3 + file LICENCE
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Imports:
+    magrittr,
+    rlang,
+    glue,
+    dplyr,
+    tidyr,
+    ggplot2,
+    isoreader (>= 0.9.29.9000),
+    purrr,
+    stringr
+Suggests:
+    broom,
+    plotly,
+    ggridges,
+    naniar,
+    tictoc
+Remotes:
+    KopfLab/isoreader
+Collate:
+    'abundance_ratios.R'
+    'acid_fractionation.R'
+    'add_info.R'
+    'append_ms_info.R'
+    'bulk_and_clumping_deltas.R'
+    'calibration.R'
+    'clean_did_info.R'
+    'clumpedr-package.R'
+    'collapse_cycles.R'
+    'constants.R'
+    'correct_backgrounds.R'
+    'defaults.R'
+    'delta_values.R'
+    'disable_cycles.R'
+    'empirical_transfer_function.R'
+    'filter_clumped.R'
+    'find_bad_cycles.R'
+    'find_outliers.R'
+    'isobar_ratios.R'
+    'little_deltas.R'
+    'make_smp_info.R'
+    'make_std_table.R'
+    'match_intensities.R'
+    'nse.R'
+    'plot_base.R'
+    'plot_delta.R'
+    'plot_disabled_cycles.R'
+    'plot_outliers.R'
+    'plot_raw_delta.R'
+    'plot_sim.R'
+    'plot_stds.R'
+    'remove_outliers.R'
+    'settings.R'
+    'utils.R'
+    'sim_stds.R'
+    'spread_intensities.R'
+    'spread_match.R'
+    'temperature_calculation.R'
+    'utils-pipe.R'
+    'zzz.R'

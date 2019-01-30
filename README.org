@@ -1,0 +1,48 @@
+[[https://cran.r-project.org/package=clumpedr][https://www.r-pkg.org/badges/version/clumpedr]]
+
+# clumpedr
+
+Clumpedr aims to facilitate analysis of clumped isotope data. It builds on
+[[https://github.com/kopflab/isoreader][isoreader]], which is used to import raw data files from the mass spectrometer.
+
+Clumpedr includes dataprocessing steps such as:
+
+- exclusion of failed cycles, based on a sudden drop of pressure
+- simple (probably wrong) background corrections using the mass 47.5 cup
+- linear intensity matching of reference gas mass 44 to the sample gas, and
+  application of this shift to all other masses
+- calculation of delta values
+- default calculations use the Brand et al., 2010 pararameters.
+- calculation of big delta values
+- summary per sample
+- per-run correction and calculation of the empirical reference frame
+
+## Installation
+
+clumpedr is currently in development, and thus has not been released on [[https://CRAN.R-project.org][CRAN]]
+yet. Therefore, install it using:
+
+#+begin_src R
+devtools::install_github("japhir/clumpedr")
+#+end_src
+
+If this doesn't work, make sure you have `devtools` installed
+(`install.packages("devtools")`).
+
+## Explanation
+
+See the data processing vignette called clumped for an extensive example on how
+to use clumpedr!
+
+These will be properly written asap!
+
+#+begin_src R
+vignette("clumped")
+#+end_src
+
+## Contributing
+
+Contributions to improving the clumped data processing package are more than
+welcome! If something doesn't work the way you expect and you don't know how to
+fix it, write an issue. If you do know how to fix it, feel free to write a pull
+request!

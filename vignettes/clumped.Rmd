@@ -1,0 +1,65 @@
+---
+title: "Optimising the distribution and proportion of standards for clumped isotope measurements"
+author: "Ilja J. Kocken"
+date: 2018-05-24
+output:
+  rmarkdown::html_vignette:
+    self_contained: no
+vignette: >
+  %\VignetteIndexEntry{Optimising the distribution and proportion of standards for clumped isotope measurements}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  cache = TRUE,
+  autodep = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Once you have `clumpedr` installed (see the README), you can first load the libraries:
+
+```{r}
+  library(tidyverse)
+  library(isoreader)
+  library(clumpedr)
+```
+
+Then get your data into R, and start processing it!
+
+```{r}
+  dids  <- iso_read_dual_inlet("out/dids.di.rds")
+  didinfo  <- clean_did_info(dids, "MOTU")
+
+  out  <-
+      dids %>%
+      ## we can subset to some files of interest (e.g., based on a regular expression)
+      ## iso_filter_files(grepl("[0-9]{6}_129|[0-9]{6}_130", file_id)) %>%
+      ## all clumped runs
+      filter_clumped() %>%
+      ## get all the raw data, per cycle from the dids
+      iso_get_raw_data() %>%
+      ## get rid of bad cycles
+      disable_cycles(fac = 2, genplot = FALSE) %>%
+      ## do a very simple background correction
+      correct_backgrounds(factor = 0.92) %>%
+      ## calculate delta's and raw clumped values
+      delta_values(plot_info = didinfo, genplot = FALSE) %>%
+      ## summarize per sample (take averages and standard deviations of all cycles)
+      collapse_cycles() %>%
+      add_info(didinfo) %>%
+      remove_outliers() #%>%
+      empirical_transfer_function() %>%
+      acid_fractionation() %>%
+      temperature_calculation() %>%
+      pipe_plot(plot_delta)
+```
+
+If you don't understand any of the steps, look at the function documentation
+(e.g.: `?empirical_transfer_function`) or look at the source code (type the
+function name without parentheses into the command line).
+
+Enjoy!
