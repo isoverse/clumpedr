@@ -3,10 +3,11 @@
 #' Based on the $(R_i / R_i_wg - 1) * 1000$ formula.
 #'
 #' @param dat A dataframe with abundance ratios.
+#' @encoding UTF-8
 #' @export
 little_deltas <- function(dat, quiet = default(quiet)) {
     if (!quiet)
-       message("Info: calculating δ values with (Ri / Ri_wg - 1) * 1000")
+       message("Info: calculating \U03B4 values with (Ri / Ri_wg - 1) * 1000")
     dat %>%
         mutate(
             d45 = (R45 / R45_wg - 1) * 1000,

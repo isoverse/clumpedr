@@ -5,6 +5,7 @@
 #' data into the desired format.
 #'
 #' @param dat a data frame or tibble containing mass intensities per cycle
+#' @importFrom tidyr spread unite gather
 #' @return a [tibble][tibble:tibble-package]  with the sample  and reference
 #'     gasses side-by-side.
 #' @export

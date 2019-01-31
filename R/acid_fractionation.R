@@ -10,5 +10,5 @@ acid_fractionation <- function(dat, aff = 0.062, quiet = default(quiet)) {
         glue("Info: adding temperature-dependent acid fractionation factor of {aff}.") %>%
             message()
     dat %>%
-        mutate(D47_final = D47_etf + kaff)
+        mutate(D47_final = D47_etf + aff)
 }

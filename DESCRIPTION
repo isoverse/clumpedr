@@ -22,7 +22,8 @@ Imports:
     ggplot2,
     isoreader (>= 0.9.29.9000),
     purrr,
-    stringr
+    stringr,
+    tibble
 Suggests:
     broom,
     plotly,
@@ -41,7 +42,6 @@ Collate:
     'clean_did_info.R'
     'clumpedr-package.R'
     'collapse_cycles.R'
-    'constants.R'
     'correct_backgrounds.R'
     'defaults.R'
     'delta_values.R'
@@ -52,8 +52,6 @@ Collate:
     'find_outliers.R'
     'isobar_ratios.R'
     'little_deltas.R'
-    'make_smp_info.R'
-    'make_std_table.R'
     'match_intensities.R'
     'nse.R'
     'plot_base.R'
@@ -61,12 +59,10 @@ Collate:
     'plot_disabled_cycles.R'
     'plot_outliers.R'
     'plot_raw_delta.R'
-    'plot_sim.R'
     'plot_stds.R'
     'remove_outliers.R'
     'settings.R'
     'utils.R'
-    'sim_stds.R'
     'spread_intensities.R'
     'spread_match.R'
     'temperature_calculation.R'

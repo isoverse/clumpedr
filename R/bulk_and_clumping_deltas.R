@@ -1,9 +1,10 @@
-#' Compute δ^13^C (‰ PDB), δ^18^O (‰ PDB-CO2), Δ~47~, Δ~48~ and Δ~49~ values
-#' (‰)
+#' Compute δ^13^C (‰ PDB), δ^18^O (‰ PDB-CO2), Δ~47~,
+#' Δ~48~ and Δ~49~ values (‰).
 #'
-#' Requires a dataframe with little δ values, and working gas δ^13^C
-#' and δ^18^O values.
+#' Requires a dataframe with little δ values, and working gas δ^13^C and δ^18^O
+#' values.
 #'
+#' @encoding UTF-8
 #' @param dat A tibble containing delta values 45 through 49.
 #' @param d13C_PDB_wg Reference gas δ^13^C value.
 #' @param d18O_PDBCO2_wg Reference gas δ^13^C gas value.

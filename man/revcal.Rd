@@ -17,6 +17,8 @@ revcal(D47, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
 \item{slpcnf}{The confidence of the slope of the regression.}
 
 \item{intcnf}{The confidence of the intercept of the regression.}
+
+\item{ignorecnf}{Whether or not to ignore the confidence of the temperature calibration.}
 }
 \value{
 A tibble with input D47 and estimated Tc value with lower and upper bounds.
