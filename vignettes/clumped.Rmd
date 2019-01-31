@@ -1,12 +1,12 @@
 ---
-title: "Optimising the distribution and proportion of standards for clumped isotope measurements"
+title: "Using clumpedr: basic data analysis"
 author: "Ilja J. Kocken"
-date: 2018-05-24
+date: 2019-01-31
 output:
   rmarkdown::html_vignette:
     self_contained: no
 vignette: >
-  %\VignetteIndexEntry{Optimising the distribution and proportion of standards for clumped isotope measurements}
+  %\VignetteIndexEntry{Using clumpedr: basic data analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,6 +31,7 @@ Once you have `clumpedr` installed (see the README), you can first load the libr
 Then get your data into R, and start processing it!
 
 # TODO: add example data for reproducibility.
+# TODO: cut into smaller steps with better explanation.
 
 ```{r}
   dids  <- iso_read_dual_inlet("out/dids.di.rds")
