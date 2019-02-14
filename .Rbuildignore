@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.httr-oauth$
+^Makefile$
+^NEWS$
+^cache$
+^tmp$
+^README-.*\.png$
+^README\.Rmd$
+^logo\.png$
