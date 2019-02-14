@@ -4,7 +4,7 @@
 [![Build
 Status](https://travis-ci.org/isoverse/clumpedr.svg?branch=master)](https://travis-ci.org/isoverse/clumpedr)
 [![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/isoverse/clumpedr?branch=master&svg=true)](https://ci.appveyor.com/project/isoverse/clumpedr)
+Status](https://ci.appveyor.com/api/projects/status/github/KopfLab/clumpedr?branch=master&svg=true)](https://ci.appveyor.com/project/KopfLab/clumpedr)
 
 Clumpedr aims to facilitate analysis of clumped isotope data. It builds on
 [isoreader](https://github.com/isoverse/isoreader) which is used to import raw data files from the mass spectrometer,
