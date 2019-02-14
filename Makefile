@@ -11,5 +11,5 @@ vignettes:
 check:
 	Rscript -e "devtools::check()"
 
-auto_test:
-	R -q -e "rm(list = ls()); testthat::auto_test_package()"
+#auto_test:
+#	R -q -e "rm(list = ls()); testthat::auto_test_package()"

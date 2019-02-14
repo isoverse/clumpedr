@@ -8,11 +8,12 @@ clumpedr_get_default_parameters()
 }
 \description{
 Retrieve a table with all default function parameters for this package. To
-set read parameters, see \code{\link{clumpedr_set_default_read_parameters}}.
-TODO: add clumpedr_set_default_parameters() To set messaging and caching
-parameters see \code{\link{clumpedr_info_messages}} and see. For a piping
+set read parameters, see
+TODO: add clumpedr_set_default_parameters()
+To set messaging and caching
+parameters see
+and see. For a piping
 compatible version of this function, see
-\link{clumpedr_show_default_reader_parameters}.
 TODO: create show_default_reader_parameters function
 }
 \seealso{

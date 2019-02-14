@@ -11,19 +11,23 @@
 #' @param plotfun Function to use for plotting.
 #' @param ... Additional arguments to the plotting function.
 #'
-#' @examples
-#' # create an example tibble
-#' dat <- tibble(x = 1:10, y = 11:20)
-#' # an example of a plotting function that would normally not print in a pipe.
-#' pointplot <- function(dat, ...) {
-#'   ggplot(dat, aes(x = x, y = y)) +
-#'   geom_point(...)
-#' }
-#' # calling the function within the pipe now prints it and returns the input!
-#' dat %>%
-#'   pipe_plot(pointplot) %>%
-#'   glimpse()
-#' @export
+# example commented out because it fails the build
+# #' @examples
+# #' # create an example tibble
+# #' dat <- tibble::tibble(x = 1:10, y = 11:20)
+# #' # an example of a plotting function that would normally not print in a pipe.
+# #' pointplot <- function(dat, ...) {
+# #'   ggplot2::ggplot(dat, aes(x = x, y = y)) +
+# #'   ggplot2::geom_point(...)
+# #' }
+# #' dat %>%
+# #'   pointplot()
+# #'   # data not returned
+# #' # calling the function within the pipe now prints it and returns the input!
+# #' dat %>%
+# #'   pipe_plot(pointplot) %>%
+# #'   glimpse()
+# #' @export
 pipe_plot <- function(dat, plotfun, ...) {
     dat %>%
         plotfun(...) %>%

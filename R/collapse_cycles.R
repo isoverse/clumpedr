@@ -3,6 +3,7 @@
 #' This collapses the (filtered) cycles of the raw measurements and calculates
 #' averages and standard deviations.
 #' @param dat A tibble resulting from `bulk_and_clumping_deltas()`.
+#' @param na.rm Logical. Whether or not to remove NA values.
 #' @export
 collapse_cycles <- function(dat, na.rm = TRUE, quiet = default(quiet)) {
     if (!quiet)

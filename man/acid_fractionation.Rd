@@ -4,7 +4,8 @@
 \alias{acid_fractionation}
 \title{Add acid fractionation}
 \usage{
-acid_fractionation(dat, aff = 0.062, quiet = default(quiet))
+acid_fractionation(dat, aff = 0.062, D47_etf = quo(D47_etf),
+  quiet = default(quiet))
 }
 \arguments{
 \item{dat}{Data.}
@@ -13,6 +14,9 @@ acid_fractionation(dat, aff = 0.062, quiet = default(quiet))
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See also Müller et al.,
 2017.}
+
+\item{D47_etf}{The quoted column name of the Δ47 values to use for the acid
+fractionation calculation.}
 }
 \description{
 Add acid fractionation

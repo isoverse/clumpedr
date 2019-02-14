@@ -36,11 +36,12 @@ get_all_options <- function(with_temp = FALSE) {
 #' Get the current default parameters
 #'
 #' Retrieve a table with all default function parameters for this package. To
-#' set read parameters, see \code{\link{clumpedr_set_default_read_parameters}}.
-#' TODO: add clumpedr_set_default_parameters() To set messaging and caching
-#' parameters see \code{\link{clumpedr_info_messages}} and see. For a piping
+#' set read parameters, see
+#' TODO: add clumpedr_set_default_parameters()
+#' To set messaging and caching
+#' parameters see
+#' and see. For a piping
 #' compatible version of this function, see
-#' \link{clumpedr_show_default_reader_parameters}.
 #' TODO: create show_default_reader_parameters function
 #' @family settings functions
 #' @export
@@ -56,7 +57,10 @@ clumpedr_get_default_parameters <- function() {
 
 #' Turn information messages on/off
 #'
-#' These functions turn information messages on/off in all subsequent function calls by changing the global settings for the \code{quiet} parameter of most isoreader functions. These functions can be called stand alone or within a pipeline to turn messages on/off at a certain point during the pipeline.
+#' These functions turn information messages on/off in all subsequent function
+#' calls by changing the global settings for the \code{quiet} parameter of most
+#' isoreader functions. These functions can be called stand alone or within a
+#' pipeline to turn messages on/off at a certain point during the pipeline.
 #'
 #' @name clumpedr_info_messages
 NULL

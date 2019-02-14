@@ -11,7 +11,10 @@ clumpedr_turn_info_messages_on(data = NULL)
 clumpedr_turn_info_messages_off(data = NULL)
 }
 \description{
-These functions turn information messages on/off in all subsequent function calls by changing the global settings for the \code{quiet} parameter of most isoreader functions. These functions can be called stand alone or within a pipeline to turn messages on/off at a certain point during the pipeline.
+These functions turn information messages on/off in all subsequent function
+calls by changing the global settings for the \code{quiet} parameter of most
+isoreader functions. These functions can be called stand alone or within a
+pipeline to turn messages on/off at a certain point during the pipeline.
 }
 \seealso{
 Other settings functions: \code{\link{clumpedr_get_default_parameters}}

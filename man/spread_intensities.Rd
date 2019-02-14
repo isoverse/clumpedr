@@ -10,7 +10,7 @@ spread_intensities(dat, quiet = default(quiet))
 \item{dat}{a data frame or tibble containing mass intensities per cycle}
 }
 \value{
-a \link[=tibble:tibble-package]{tibble}  with the sample  and reference
+A \link[tibble:tibble-package]{tibble} with the sample and reference
 gasses side-by-side.
 }
 \description{

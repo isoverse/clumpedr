@@ -18,6 +18,6 @@ parse_info(dat, masspec, std_names = paste0("ETH-", 1:4),
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 }
 \description{
-Converts the information from \code{\link[isoreaser:iso_get_file_info]{isoreaser::iso_get_file_info()}} into the
+Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}} into the
 appropriate types.
 }

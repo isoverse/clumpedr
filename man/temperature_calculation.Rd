@@ -4,11 +4,17 @@
 \alias{temperature_calculation}
 \title{temperature_calculation}
 \usage{
-temperature_calculation(dat, quiet = default(quiet))
+temperature_calculation(dat, D47 = quo(D47_final),
+  quiet = default(quiet))
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{acid_fractionation()}}
+
+\item{D47}{The quoted column name of the Δ47 values to use as input.}
 }
 \description{
 This calculates the temperatures.
+}
+\seealso{
+revcal tempcal
 }

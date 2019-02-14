@@ -25,6 +25,7 @@ Imports:
     stringr,
     tibble
 Suggests:
+    testthat,
     broom,
     plotly,
     ggridges,

@@ -10,7 +10,7 @@
 #' @param ms_name The column name to use for the mass spec label.
 #' @param broadid_name The column name for the broad id (standard name or other).
 #' @param group Logical. Group by file_path, file_datetime, Identifier 1, type if `TRUE` (default).
-#' @param @sort Logical. Arrange by the newly created groups if `TRUE` (default).
+#' @param sort Logical. Arrange by the newly created groups if `TRUE` (default).
 #' @export
 append_ms_info <- function(dat, masspec, standards = paste0("ETH-", 1:4),
                            other_label = "other", ms_name = quo(masspec),

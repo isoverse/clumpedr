@@ -8,7 +8,7 @@ find_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
   std_names = paste0("ETH-", 1:3))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=previous_function]{previous_function()}}}
+\item{dat}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{parameter}{parameter description}
 }

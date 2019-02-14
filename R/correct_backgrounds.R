@@ -8,7 +8,6 @@
 #' @export
 correct_backgrounds  <- function(dat, factor,
                                  ## i47 = quo(m47.mV), i54 = quo(m54.mV),
-                                 method = "linterp",
                                  quiet = default(quiet)) {
     if (!quiet)
         glue("Info: adding background based on half-mass with factor {factor}") %>%

@@ -10,6 +10,8 @@ add_info(dat, info, ..., quiet = default(quiet))
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{collapse_cycles}}
 
 \item{info}{A \link[tibble:tibble-package]{tibble}, resulting from \code{clean_did_info()}}
+
+\item{...}{Optional additional arguments to pass to the \code{left_join} call.}
 }
 \description{
 Add the info from the did files.

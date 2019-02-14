@@ -22,7 +22,7 @@ bulk_and_clumping_deltas  <- function(dat, d13C_PDB_wg, d18O_PDBCO2_wg,
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = default(quiet)) {
     if (!quiet)
-      message("Info: calculating δ13C, δ18O, and Δ's.")
+      message("Info: calculating \u3b413C, \u03b418O, and \u0394's.")
     # assemble wg into tibble
     wg  <- tibble(d13C_PDB_wg = d13C_PDB_wg, d18O_PDBCO2_wg = d18O_PDBCO2_wg)
 

@@ -22,16 +22,3 @@ unaffected.
 This is equivalent to running the \code{magrittr::\%T>\%} operator with
 curly braces and a print command, but this is much cleaner.
 }
-\examples{
-# create an example tibble
-dat <- tibble(x = 1:10, y = 11:20)
-# an example of a plotting function that would normally not print in a pipe.
-pointplot <- function(dat, ...) {
-  ggplot(dat, aes(x = x, y = y)) +
-  geom_point(...)
-}
-# calling the function within the pipe now prints it and returns the input!
-dat \%>\%
-  pipe_plot(pointplot) \%>\%
-  glimpse()
-}

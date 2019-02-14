@@ -23,7 +23,7 @@ append_ms_info(dat, masspec, standards = paste0("ETH-", 1:4),
 
 \item{group}{Logical. Group by file_path, file_datetime, Identifier 1, type if \code{TRUE} (default).}
 
-\item{@sort}{Logical. Arrange by the newly created groups if \code{TRUE} (default).}
+\item{sort}{Logical. Arrange by the newly created groups if \code{TRUE} (default).}
 }
 \description{
 Append mass spectrometer name, as well as a new "broadid" for easy plotting.

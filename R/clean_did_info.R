@@ -25,7 +25,7 @@ clean_did_info  <- function(did, ..., masspec = NULL, std_names = paste0("ETH-",
 
 #' Parse info
 #'
-#' Converts the information from [isoreaser::iso_get_file_info()] into the
+#' Converts the information from [isoreader::iso_get_file_info()] into the
 #' appropriate types.
 #'
 #' @param dat The result of [isoreader::iso_get_file_info()].
