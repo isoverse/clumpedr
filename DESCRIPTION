@@ -32,7 +32,7 @@ Suggests:
     naniar,
     tictoc
 Remotes:
-    KopfLab/isoreader
+    isoverse/isoreader
 Collate:
     'abundance_ratios.R'
     'acid_fractionation.R'

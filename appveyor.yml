@@ -13,7 +13,8 @@ install:
 cache:
   - C:\RLibrary
 
-use_rtools: true
+environment:
+  USE_RTOOLS: true
 
 build_script:
   - travis-tool.sh install_github isoverse/isoreader
