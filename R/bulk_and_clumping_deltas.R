@@ -1,5 +1,6 @@
 #' Compute δ^13^C (‰ PDB), δ^18^O (‰ PDB-CO2), Δ~47~,
 #' Δ~48~ and Δ~49~ values (‰).
+# TODO: get superscript/subscript to work in function documentation
 #'
 #' Requires a dataframe with little δ values, and working gas δ^13^C and δ^18^O
 #' values.
