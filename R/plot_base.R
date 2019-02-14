@@ -5,6 +5,7 @@
 #' @param dat A [tibble][tibble::tibble-package], resulting from any of the
 #'     processing functions that returns the metadata.
 #' @param ... Additional aesthetics to pass to ggplot.
+#' @export
 plot_base <- function(dat, ...) {
     dat %>%
         ggplot(aes(colour = broadid, # the rest are fake aesthetics for plotly

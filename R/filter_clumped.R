@@ -5,6 +5,7 @@
 #' @param regex The regular expression that captures the desired methods. The
 #'   default is a very explicit filtering of our presently used method names,
 #'   be sure to change this!
+#' @export
 filter_clumped <- function(dat,
                            regex = NULL, quiet = default(quiet)) {
     if (is.null(regex)) {

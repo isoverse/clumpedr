@@ -30,6 +30,7 @@ empirical_transfer_function <- function(dat,
 #' @param names Names of the standards.
 #' @param D47 Expected values of the standards at 25 °C, from Müller et al., 2017.
 #' @inheritParams acid_fractionation
+#' @export
 append_expected_values <- function(dat,
                                    names = paste0("ETH-", 1:3),  # we don't use ETH-4!
                                    D47 = c(0.258, 0.256, 0.691), #, 0.507),
@@ -43,6 +44,9 @@ append_expected_values <- function(dat,
                                      NA_real_))))
 }
 
+#' Calculate the Empirical Transfer Function
+#'
+#' @export
 calculate_etf <- function(dat) {
     etf <- dat %>%
         filter(!is.na(D47raw_mean)) %>%
@@ -59,12 +63,15 @@ calculate_etf <- function(dat) {
 #'
 #' @param dat A [tibble][tibble::tibble-package] containing column D47.
 #' @param D47 The column with \eqn{\Delta_47} values to use.
+#' @export
 apply_etf <- function(dat, D47 = quo(D47raw_mean)) {
     dat %>%
         mutate(D47_etf = - (intercept / slope) + (1 / slope) * !!D47)
 }
 
 #' Plot the Empirical Transfer Function
+#'
+#' @export
 plot_etf <- function(dat, std_names = paste0("ETH-", 1:3)) {
     pld <- dat %>%
         mutate(expected_D47 = ifelse(is.na(expected_D47), D47_etf, expected_D47))

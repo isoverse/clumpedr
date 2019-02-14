@@ -7,6 +7,7 @@
 #'   2017.
 #' @param D47_etf The quoted column name of the \eqn{\Delta_47} values to use
 #'   for the acid fractionation calculation.
+#' @export
 acid_fractionation <- function(dat, aff = 0.062, D47_etf = quo(D47_etf),
                                quiet = default(quiet)) {
     if (!quiet)

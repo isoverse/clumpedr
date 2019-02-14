@@ -3,6 +3,7 @@
 #' @param dat A [tibble][tibble::tibble-package], resulting from `acid_fractionation()`
 #' @param D47 The quoted column name of the \eqn{\Delta_47} values to use as input.
 #' @seealso revcal tempcal
+#' @export
 temperature_calculation <- function(dat, D47 = quo(D47_final), quiet = default(quiet)) {
     if (!quiet)
        message("Info: calculating temperature using default calibration, ignoring uncertainty in the calibration.")

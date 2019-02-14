@@ -27,7 +27,7 @@
 # #' dat %>%
 # #'   pipe_plot(pointplot) %>%
 # #'   glimpse()
-# #' @export
+#' @export
 pipe_plot <- function(dat, plotfun, ...) {
     dat %>%
         plotfun(...) %>%

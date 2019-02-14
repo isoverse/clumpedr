@@ -9,6 +9,7 @@
 #' @param method Method for matching reference gas to sample gas. Defaults to "linterp".
 #' @param plot_info The needed metadata for plotting. Result of [clean_did_info()].
 #' @param plot_column The quoted column that will be plotted. Defaults to `quo(D47raw)`.
+#' @export
 delta_values <- function(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
                          method = "linterp",
                          genplot = default(genplot), quiet = default(quiet),

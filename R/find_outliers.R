@@ -4,6 +4,7 @@
 #'
 #' @param dat A [tibble][tibble::tibble-package].
 #' @param parameter parameter description
+#' @export
 find_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                           std_names = paste0("ETH-", 1:3)) {
     means <- dat %>%
