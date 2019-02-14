@@ -36,7 +36,7 @@ If this doesn't work, make sure you have ~devtools~ installed
 For the development version, use:
 
 #+begin_src R
-devtools::install_github("isoverse/clumpedr", rel = "dev")
+devtools::install_github("isoverse/clumpedr", ref = "dev")
 #+end_src
 
 ** Explanation
