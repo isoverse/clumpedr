@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_delta.R
 \name{plot_delta}
 \alias{plot_delta}
-\title{plot_delta}
+\title{Create a plot of column \code{col} as a function of \code{file_datetime}.}
 \usage{
 plot_delta(dat, col = quo(D47_final))
 }
@@ -12,5 +12,5 @@ plot_delta(dat, col = quo(D47_final))
 \item{col}{Target column.}
 }
 \description{
-plot_delta
+Create a plot of column \code{col} as a function of \code{file_datetime}.
 }

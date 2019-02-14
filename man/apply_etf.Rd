@@ -9,7 +9,7 @@ apply_etf(dat, D47 = quo(D47raw_mean))
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble} containing column D47.}
 
-\item{D47}{The column with Δ47 values to use.}
+\item{D47}{The column with \eqn{\Delta_47} values to use.}
 }
 \description{
 Apply the ETF

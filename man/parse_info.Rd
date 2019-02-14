@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean_did_info.R
 \name{parse_info}
 \alias{parse_info}
-\title{Parse info}
+\title{Parse info into appropriate types.}
 \usage{
 parse_info(dat, masspec, std_names = paste0("ETH-", 1:4),
   oth_name = "other")

@@ -1,5 +1,3 @@
-#' spread_match
-#'
 #' Spread and match sample gas and reference gas.
 #'
 # #' @param dat A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()]

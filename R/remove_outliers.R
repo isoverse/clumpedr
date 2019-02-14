@@ -1,10 +1,10 @@
-#' remove_outliers
+#' Remove outliers
 #'
 #' @details This function removes outliers based on several criteria. 1) The
-#'     initial intensity of both sample and reference gas is above 8 V. 2) The
-#'     difference in intensity between sample and reference gas is less than
-#'     1.2 V. 3) The sample or reference raw Δ47 value is less than 4 SD away
-#'     from the run mean.
+#'   initial intensity of both sample and reference gas is above 8 V. 2) The
+#'   difference in intensity between sample and reference gas is less than 1.2
+#'   V. 3) The sample or reference raw \eqn{\Delta_47} value is less than 4 SD
+#'   away from the run mean.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from
 #'     `collapse_cycles()`.

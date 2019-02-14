@@ -1,4 +1,4 @@
-#' plot_base
+#' Create a basic plot layer for further expansion.
 #'
 #' This function creates a ggplot with all of the extra default aesthetics set up.
 #'

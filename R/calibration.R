@@ -3,16 +3,17 @@
 #' A clumped isotope temperature calibration of the form: y = a * 10^6^ / T^2^ + b
 #'
 #' Defaults to Bonifacie et al. 2017
-#' Δ_47_ = (0.0449 ± 0.001 * 10^6^) / T^2^ + (0.167 ± 0.01)
+#' \eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
 #' @param Tc The temperature in °C.
 #' @param slope The slope of the regression.
 #' @param intercept The intercept of the regression.
 #' @param slpcnf The confidence of the slope of the regression.
 #' @param intcnf The confidence of the intercept of the regression.
-#' @param ignorecnf Whether or not to ignore the confidence of the temperature calibration.
-#' @return A [tibble][tibble::tibble-package] with input Tc and estimated Δ47
-#'     value with lower and upper bounds.
+#' @param ignorecnf Whether or not to ignore the confidence of the temperature
+#'   calibration.
+#' @return A [tibble][tibble::tibble-package] with input Tc and estimated
+#'   \eqn{\Delta_47} value with lower and upper bounds.
 #' @seealso revcal
 #' @export
 tempcal <- function(Tc,
@@ -44,17 +45,17 @@ tempcal <- function(Tc,
 #' Reverse temperature calibration
 #'
 #' A clumped isotope temperature calibration in reversed form, where the normal
-#' calibration y = a * 10^6 / T_K^2 + b is expressed as a function of T_C:
-#' T_C = sqrt((a * 10^6) / (y - b)) - 273.15
+#' calibration \eqn{y = a \times 10^6 / T_K^2 + b} is expressed as a function
+#' of \eqn{T_C}: \eqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
 #'
 #' Defaults to Bonifacie et al. 2017
-#' Δ_47_ = (0.0449 ± 0.001 * 10^6^) / T^2^ + (0.167 ± 0.01)
+#' \eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
-#' @param D47 The Δ47 value.
+#' @param D47 The \eqn{\Delta_47} value.
 #' @inheritParams tempcal
-#' @return A tibble with input D47 and estimated Tc value with lower and upper bounds.
+#' @return A tibble with input \eqn{\Delta_47} and estimated Tc value with
+#'   lower and upper bounds.
 #' @seealso tempcal
-# #' @importFrom investr calibrate
 #' @export
 revcal <- function(D47,
                    slope = 0.0449, intercept = 0.167,

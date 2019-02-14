@@ -1,4 +1,4 @@
-#' Empirical transfer function
+#' Empirical Transfer Function
 #'
 #' Calculate and apply the empirical transfer function (ETF). First append the
 #' expected values for the standards, then calculate the ETF per Preparation,
@@ -58,7 +58,7 @@ calculate_etf <- function(dat) {
 #' Apply the ETF
 #'
 #' @param dat A [tibble][tibble::tibble-package] containing column D47.
-#' @param D47 The column with Δ47 values to use.
+#' @param D47 The column with \eqn{\Delta_47} values to use.
 apply_etf <- function(dat, D47 = quo(D47raw_mean)) {
     dat %>%
         mutate(D47_etf = - (intercept / slope) + (1 / slope) * !!D47)

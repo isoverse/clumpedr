@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_outliers.R
 \name{find_outliers}
 \alias{find_outliers}
-\title{find_outliers}
+\title{Find outliers}
 \usage{
 find_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
   std_names = paste0("ETH-", 1:3))
@@ -13,5 +13,5 @@ find_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
 \item{parameter}{parameter description}
 }
 \description{
-This function finds outliers.
+This function finds outliers based on several criteria.
 }

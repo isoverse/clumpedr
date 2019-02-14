@@ -1,4 +1,4 @@
-#' plot_delta
+#' Create a plot of column `col` as a function of `file_datetime`.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from `temperature_calculation`
 #' @param col Target column.

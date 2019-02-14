@@ -11,5 +11,5 @@ little_deltas(dat, quiet = default(quiet))
 \item{dat}{A dataframe with abundance ratios.}
 }
 \description{
-Based on the $(R_i / R_i_wg - 1) * 1000$ formula.
+Based on the \eqn{(R_i / R_iwg - 1) \times 1000} formula.
 }

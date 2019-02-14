@@ -18,18 +18,19 @@ tempcal(Tc, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
 
 \item{intcnf}{The confidence of the intercept of the regression.}
 
-\item{ignorecnf}{Whether or not to ignore the confidence of the temperature calibration.}
+\item{ignorecnf}{Whether or not to ignore the confidence of the temperature
+calibration.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with input Tc and estimated Δ47
-value with lower and upper bounds.
+A \link[tibble:tibble-package]{tibble} with input Tc and estimated
+\eqn{\Delta_47} value with lower and upper bounds.
 }
 \description{
 A clumped isotope temperature calibration of the form: y = a * 10^6^ / T^2^ + b
 }
 \details{
 Defaults to Bonifacie et al. 2017
-Δ_47_ = (0.0449 ± 0.001 * 10^6^) / T^2^ + (0.167 ± 0.01)
+\eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 }
 \seealso{
 revcal

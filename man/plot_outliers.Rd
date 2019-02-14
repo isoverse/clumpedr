@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_outliers.R
 \name{plot_outliers}
 \alias{plot_outliers}
-\title{plot_outliers}
+\title{Plot outliers}
 \usage{
 plot_outliers(dat, col = quo(D47raw_mean))
 }

@@ -1,6 +1,6 @@
-#' plot_stds
+#' Plot standards
 #'
-#' Plot the standards in the familiar δ vs Δ plot.
+#' Plot the standards in the familiar \eqn{\delta} vs \eqn{\Delta} plot.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from [acid_fractionation()]
 #' @param parameter parameter description

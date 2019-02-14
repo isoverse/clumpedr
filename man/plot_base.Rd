@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_base.R
 \name{plot_base}
 \alias{plot_base}
-\title{plot_base}
+\title{Create a basic plot layer for further expansion.}
 \usage{
 plot_base(dat, ...)
 }

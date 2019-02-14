@@ -1,4 +1,4 @@
-#' plot_outliers
+#' Plot outliers
 #'
 #' This function plots raw delta values that are outliers, based on several criteria.
 #'

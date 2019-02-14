@@ -2,7 +2,8 @@
 % Please edit documentation in R/delta_values.R
 \name{delta_values}
 \alias{delta_values}
-\title{Calculate abundance ratios, δ18O, δ13C, δ's, and raw Δ values}
+\title{Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C,
+\eqn{\delta}'s, and raw \eqn{\Delta} values}
 \usage{
 delta_values(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
   method = "linterp", genplot = default(genplot),
@@ -18,9 +19,9 @@ delta_values(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 
 \item{plot_column}{The quoted column that will be plotted. Defaults to \code{quo(D47raw)}.}
 
-\item{d13C_PBD_wg}{Working gas δ13C value.}
+\item{d13C_PBD_wg}{Working gas \eqn{\delta^{13}}C value.}
 
-\item{d18O_PBDCO2_wg}{Working gas δ18O value.}
+\item{d18O_PBDCO2_wg}{Working gas \eqn{\delta^{18}}O value.}
 }
 \description{
 This is a wrapper function that calculates all delta values.

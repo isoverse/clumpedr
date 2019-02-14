@@ -20,8 +20,8 @@ Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 \item{R18_PDBCO2}{The R18 value of PDB (g). Defaults to 0.00208839, derrived
 from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 
-\item{lambda}{Isotopic fractionation of ^17^O. Defaults to 0.528, from
-Barkan and Luz, 2005.}
+\item{lambda}{Isotopic fractionation of \eqn{{}^17}O. Defaults to 0.528,
+from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
 }
@@ -30,9 +30,9 @@ Default parameters
 }
 \references{
 Brand, W. A., Assonov, S. S., & Coplen, T. B. (2010). Correction
-for the 17O interference in δ(13C) measurements when analyzing CO2 with
-stable isotope mass spectrometry (IUPAC Technical Report). Pure and
-Applied Chemistry, 82(8), 1719–1733.
+for the 17O interference in \eqn{\delta^{13}}C measurements when analyzing
+CO2 with stable isotope mass spectrometry (IUPAC Technical Report). Pure
+and Applied Chemistry, 82(8), 1719–1733.
 https://doi.org/10.1351/PAC-REP-09-01-05
 }
 \keyword{internal}

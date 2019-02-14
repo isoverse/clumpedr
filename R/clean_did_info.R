@@ -23,7 +23,7 @@ clean_did_info  <- function(did, ..., masspec = NULL, std_names = paste0("ETH-",
     full_join(parsedinfo, inits, by = "file_id")
 }
 
-#' Parse info
+#' Parse info into appropriate types.
 #'
 #' Converts the information from [isoreader::iso_get_file_info()] into the
 #' appropriate types.

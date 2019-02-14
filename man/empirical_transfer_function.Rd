@@ -2,7 +2,7 @@
 % Please edit documentation in R/empirical_transfer_function.R
 \name{empirical_transfer_function}
 \alias{empirical_transfer_function}
-\title{Empirical transfer function}
+\title{Empirical Transfer Function}
 \usage{
 empirical_transfer_function(dat, names = paste0("ETH-", 1:3),
   D47 = c(0.258, 0.256, 0.691), aff = 0.062, quiet = default(quiet),

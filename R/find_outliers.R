@@ -1,6 +1,6 @@
-#' find_outliers
+#' Find outliers
 #'
-#' This function finds outliers.
+#' This function finds outliers based on several criteria.
 #'
 #' @param dat A [tibble][tibble::tibble-package].
 #' @param parameter parameter description

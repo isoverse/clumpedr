@@ -27,11 +27,17 @@ clumpedr is currently in development, and thus has not been released on [[https:
 yet. Therefore, install it using:
 
 #+begin_src R
-devtools::install_github("japhir/clumpedr")
+devtools::install_github("isoverse/clumpedr")
 #+end_src
 
 If this doesn't work, make sure you have ~devtools~ installed
 (~install.packages("devtools")~).
+
+For the development version, use:
+
+#+begin_src R
+devtools::install_github("isoverse/clumpedr", rel = "dev")
+#+end_src
 
 ** Explanation
 
