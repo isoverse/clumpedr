@@ -35,6 +35,7 @@ clean_did_info  <- function(did, ..., masspec = NULL, std_names = paste0("ETH-",
 #' @param std_names Character vector of the standard names to find in
 #'     'Identifier 1'.
 #' @param oth_name Single general name to assign to non-standard "other" measurements.
+#' @export
 #' @family metadata cleaning functions
 parse_info <- function(dat, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other") {
     dat %>%
@@ -57,6 +58,7 @@ parse_info <- function(dat, masspec, std_names = paste0("ETH-", 1:4), oth_name =
 
 #' Add initial intensities
 #' @family metadata cleaning functions
+#' @export
 get_inits <- function(did) {
     did %>%
         isoreader::iso_get_raw_data(quiet = TRUE) %>%
