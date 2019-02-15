@@ -6,6 +6,8 @@
 \alias{clumpedr.parameters}
 \alias{default.parameters}
 \alias{brand.parameters}
+\alias{Brand}
+\alias{brand_parameters}
 \title{Default parameters}
 \arguments{
 \item{R13_PDB}{The R13 value of the PDB reference. Defaults to 0.01118, from
@@ -20,7 +22,7 @@ Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 \item{R18_PDBCO2}{The R18 value of PDB (g). Defaults to 0.00208839, derrived
 from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 
-\item{lambda}{Isotopic fractionation of \eqn{{}^17}O. Defaults to 0.528,
+\item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
@@ -29,10 +31,12 @@ from Barkan and Luz, 2005.}
 Default parameters
 }
 \references{
-Brand, W. A., Assonov, S. S., & Coplen, T. B. (2010). Correction
-for the 17O interference in \eqn{\delta^{13}}C measurements when analyzing
-CO2 with stable isotope mass spectrometry (IUPAC Technical Report). Pure
-and Applied Chemistry, 82(8), 1719–1733.
+TODO: add all the references here!
+
+Brand, W. A., Assonov, S. S., & Coplen, T. B. Correction for the 17O
+interference in \eqn{\delta^{13}}{δ13}C measurements when analyzing
+CO\eqn{{}_2}{2} with stable isotope mass spectrometry (IUPAC Technical
+Report). \emph{Pure and Applied Chemistry}, \strong{2010}, \emph{82(8)}, 1719–1733.
 \url{https://doi.org/10.1351/PAC-REP-09-01-05}
 }
 \keyword{internal}

@@ -8,7 +8,7 @@
 #'   Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.
 #' @param R18_PDBCO2 The R18 value of PDB (g). Defaults to 0.00208839, derrived
 #'   from Baertschi, 1976, calculated by Brand 2010 eq. 2.
-#' @param lambda Isotopic fractionation of \eqn{{}^17}{17}O. Defaults to 0.528,
+#' @param lambda Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 #'   from Barkan and Luz, 2005.
 #' @param D17O TODO: look up in Daëron 2016 what this does again.
 #' @references

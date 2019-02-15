@@ -1,12 +1,12 @@
 Package: clumpedr
-Title: A package for clumped isotope analysis in R
-Version: 0.0.0.9000
+Title: Clumped isotope analysis in R
+Version: 0.0.1
 Authors@R:
     person(given = "Ilja",
            family = "Kocken",
            role = c("aut", "cre"),
            email = "i.j.kocken@uu.nl")
-Description: This package makes analyzing clumped isotope data as easy as possible.
+Description: Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final Δ47 values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
