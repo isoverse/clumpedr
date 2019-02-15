@@ -71,6 +71,8 @@ calculate_etf <- function(dat) {
     etf <- dat %>%
         filter(!is.na(D47raw_mean)) %>%
         group_by(Preparation) %>%
+        # TODO: figure out how to make this not throw an error and quit if one
+        # of the groups fails, maybe with safely?
         do(model = broom::tidy(lm(D47raw_mean ~ expected_D47, data = .))) %>%
         unnest() %>%
         select(Preparation, term, estimate) %>%

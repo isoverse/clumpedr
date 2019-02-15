@@ -5,7 +5,7 @@
 #' @export
 plot_disabled_cycles  <- function(dat, min = 1500, max = 50000, quiet = default(quiet)) {
     if (!quiet)
-        glue("Info: generating plot of {length(dat)} data files with a maximum of {max(dat$cycle)} cycles.") %>%
+      glue("Info: generating plot of {length(unique(dat$file_id))} data files, of which {length(unique(pull(filter(dat, cycle_dis), file_id)))} have a drop in pressure.") %>%
             message()
     # we need a weird group for the lines
     pld <- dat %>%
