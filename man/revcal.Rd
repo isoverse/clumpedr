@@ -27,12 +27,14 @@ lower and upper bounds.
 }
 \description{
 A clumped isotope temperature calibration in reversed form, where the normal
-calibration \eqn{y = a \times 10^6 / T_K^2 + b} is expressed as a function
-of \eqn{T_C}: \eqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
+calibration
+\deqn{y = a \times 10^6 / T_K^2 + b}
+is expressed as a function of \eqn{T_C}:
+\deqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
 }
 \details{
 Defaults to Bonifacie et al. 2017
-\eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
+\deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 }
 \seealso{
 tempcal

@@ -1,6 +1,6 @@
 #' Calculate little deltas from abundance ratios
 #'
-#' For all intensities \eqsn{i},
+#' For all intensities \eqn{i},
 #' \deqn{\delta_i = (R_i / R_iwg - 1) \times 1000}
 #'
 #' @param dat A dataframe with abundance ratios.
