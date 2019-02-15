@@ -15,7 +15,7 @@
 #'   for the 17O interference in \eqn{\delta^{13}}C measurements when analyzing
 #'   CO2 with stable isotope mass spectrometry (IUPAC Technical Report). Pure
 #'   and Applied Chemistry, 82(8), 1719–1733.
-#'   https://doi.org/10.1351/PAC-REP-09-01-05
+#'   \url{https://doi.org/10.1351/PAC-REP-09-01-05}
 #' @keywords internal
 #' @name default.params
 #' @aliases clumpedr.params clumpedr.parameters default.parameters

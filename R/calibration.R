@@ -1,9 +1,10 @@
 #' Temperature calibration
 #'
-#' A clumped isotope temperature calibration of the form: y = a * 10^6^ / T^2^ + b
+#' A clumped isotope temperature calibration of the form:
+#' \deqn{y = a \times 10^6 / T^2 + b}
 #'
 #' Defaults to Bonifacie et al. 2017
-#' \eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
+#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
 #' @param Tc The temperature in °C.
 #' @param slope The slope of the regression.
@@ -45,11 +46,13 @@ tempcal <- function(Tc,
 #' Reverse temperature calibration
 #'
 #' A clumped isotope temperature calibration in reversed form, where the normal
-#' calibration \eqn{y = a \times 10^6 / T_K^2 + b} is expressed as a function
-#' of \eqn{T_C}: \eqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
+#' calibration
+#' \deqn{y = a \times 10^6 / T_K^2 + b}
+#' is expressed as a function of \eqn{T_C}:
+#' \deqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
 #'
 #' Defaults to Bonifacie et al. 2017
-#' \eqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
+#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
 #' @param D47 The \eqn{\Delta_47} value.
 #' @inheritParams tempcal

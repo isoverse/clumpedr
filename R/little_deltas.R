@@ -1,9 +1,9 @@
 #' Calculate little deltas from abundance ratios
 #'
-#' Based on the \eqn{(R_i / R_iwg - 1) \times 1000} formula.
+#' For all intensities \eqsn{i},
+#' \deqn{\delta_i = (R_i / R_iwg - 1) \times 1000}
 #'
 #' @param dat A dataframe with abundance ratios.
-#' @encoding UTF-8
 #' @export
 little_deltas <- function(dat, quiet = default(quiet)) {
     if (!quiet)
