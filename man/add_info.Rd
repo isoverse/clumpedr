@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_info.R
 \name{add_info}
 \alias{add_info}
-\title{add_info}
+\title{Add the information from the did files}
 \usage{
 add_info(dat, info, ..., quiet = default(quiet))
 }
@@ -14,5 +14,10 @@ add_info(dat, info, ..., quiet = default(quiet))
 \item{...}{Optional additional arguments to pass to the \code{left_join} call.}
 }
 \description{
-Add the info from the did files.
+Append mass spectrometer metadata to the raw data.
 }
+\seealso{
+Other metadata cleaning functions: \code{\link{clean_did_info}},
+  \code{\link{get_inits}}, \code{\link{parse_info}}
+}
+\concept{metadata cleaning functions}

@@ -9,7 +9,8 @@ find_bad_cycles(dat, min = 1500, max = 50000, fac = 1.5,
   quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{isoreader::iso_get_raw_data()}}
+\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{isoreader::iso_get_raw_data()}}
 
 \item{min}{Minimum intensity level for good cycles. Defaults to 1,500 mV.}
 
@@ -18,7 +19,8 @@ find_bad_cycles(dat, min = 1500, max = 50000, fac = 1.5,
 \item{fac}{Factor for how much larger the current drop should be than the
 one specified in \code{relative_to}.}
 
-\item{cycle}{quoted column name of the column with the measurement cycle number.}
+\item{cycle}{quoted column name of the column with the measurement cycle
+number.}
 
 \item{relative_to}{cycle Drop detection occurs relative to either the first
 cycle ("init", default) or to the previous cycle ("prev").}
@@ -26,5 +28,19 @@ cycle ("init", default) or to the previous cycle ("prev").}
 \item{m44.mv}{quoted column name of mass 44.}
 }
 \description{
-Find bad cycles based on several criteria.
+This filters out any cycles that:
+\itemize{
+\item have an initial intensity of mass 44 that is lower than \code{min}.
+\item have an initial intensity of mass 44 that is larger than \code{max}.
+\item has a sudden drop in intensity of mass 44
 }
+}
+\details{
+The drop in intensity can be defined relative to the first change
+in intensity (default), or to the previous cycle.
+}
+\seealso{
+Other cycle functions: \code{\link{disable_cycles}},
+  \code{\link{plot_disabled_cycles}}
+}
+\concept{cycle functions}

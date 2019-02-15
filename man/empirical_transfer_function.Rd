@@ -2,14 +2,14 @@
 % Please edit documentation in R/empirical_transfer_function.R
 \name{empirical_transfer_function}
 \alias{empirical_transfer_function}
-\title{Empirical transfer function}
+\title{Empirical Transfer Function}
 \usage{
 empirical_transfer_function(dat, names = paste0("ETH-", 1:3),
   D47 = c(0.258, 0.256, 0.691), aff = 0.062, quiet = default(quiet),
   genplot = default(genplot))
 }
 \arguments{
-\item{dat}{Tibble passed from \code{collapse_cycles}.}
+\item{dat}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
 \item{names}{Names of the standards.}
 
@@ -17,11 +17,15 @@ empirical_transfer_function(dat, names = paste0("ETH-", 1:3),
 
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
-De Vlieze et al., 2015 and Murray et al., 2016. See also Müller et al.,
-2017.}
+De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
 }
 \description{
 Calculate and apply the empirical transfer function (ETF). First append the
 expected values for the standards, then calculate the ETF per Preparation,
 then apply the ETF to all the samples and standards.
 }
+\seealso{
+Other empirical transfer functions: \code{\link{append_expected_values}},
+  \code{\link{apply_etf}}, \code{\link{plot_etf}}
+}
+\concept{empirical transfer functions}

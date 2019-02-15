@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_stds.R
 \name{plot_stds}
 \alias{plot_stds}
-\title{plot_stds}
+\title{Plot standards}
 \usage{
 plot_stds(dat, parameter)
 }
@@ -12,5 +12,5 @@ plot_stds(dat, parameter)
 \item{parameter}{parameter description}
 }
 \description{
-Plot the standards in the familiar δ vs Δ plot.
+Plot the standards in the familiar \eqn{\delta} vs \eqn{\Delta} plot.
 }

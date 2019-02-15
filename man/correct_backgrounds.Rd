@@ -4,8 +4,7 @@
 \alias{correct_backgrounds}
 \title{Background corrections}
 \usage{
-correct_backgrounds(dat, factor, method = "linterp",
-  quiet = default(quiet))
+correct_backgrounds(dat, factor, quiet = default(quiet))
 }
 \arguments{
 \item{dat}{The dataframe with raw iso files.}

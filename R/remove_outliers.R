@@ -1,10 +1,10 @@
-#' remove_outliers
+#' Remove outliers
 #'
 #' @details This function removes outliers based on several criteria. 1) The
-#'     initial intensity of both sample and reference gas is above 8 V. 2) The
-#'     difference in intensity between sample and reference gas is less than
-#'     1.2 V. 3) The sample or reference raw Δ47 value is less than 4 SD away
-#'     from the run mean.
+#'   initial intensity of both sample and reference gas is above 8 V. 2) The
+#'   difference in intensity between sample and reference gas is less than 1.2
+#'   V. 3) The sample or reference raw \eqn{\Delta_47} value is less than 4 SD
+#'   away from the run mean.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from
 #'     `collapse_cycles()`.
@@ -17,6 +17,7 @@
 #' @param plot_col The column to use for plotting. Defaults to
 #'     `quo(D47raw_mean)`.
 #' @inheritParams find_outliers
+#' @export
 remove_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                             std_names = paste0("ETH-", 1:3),
                             plot_col = quo(D47raw_mean),

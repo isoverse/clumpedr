@@ -25,19 +25,20 @@ Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 \item{R18_PDBCO2}{The R18 value of PDB (g). Defaults to 0.00208839, derrived
 from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 
-\item{lambda}{Isotopic fractionation of ^17^O. Defaults to 0.528, from
-Barkan and Luz, 2005.}
+\item{lambda}{Isotopic fractionation of \eqn{{}^17}O. Defaults to 0.528,
+from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
 }
 \description{
 Compute isotopic ratios for a sample with isotopic ratios R13 and R18,
-optionally accounting for non-zero values of Δ^17^O and clumped isotope
-anomalies (all expressed in permil). Function based on Daëron et al., 2016.
+optionally accounting for non-zero values of \eqn{\Delta^{17}}{Δ17}O and
+clumped isotope anomalies (all expressed in permil). Function based on
+Daëron et al., 2016.
 }
 \references{
-Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute isotopic
-abundance ratios and the accuracy of Δ~47~ measurements, Chemical
-Geology, 442, 83–96 (2016).
-http://dx.doi.org/10.1016/j.chemgeo.2016.08.014
+Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
+  measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
+\url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
 }

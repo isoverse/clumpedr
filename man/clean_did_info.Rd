@@ -20,10 +20,15 @@ clean_did_info(did, ..., masspec = NULL, std_names = paste0("ETH-",
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 }
 \description{
-Clean up and parse the file info.
+Converts mass spectrometer metadata into the correct types and appends the
+initial intensity of mass 44.
 }
 \seealso{
 \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}
 
 \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}
+
+Other metadata cleaning functions: \code{\link{add_info}},
+  \code{\link{get_inits}}, \code{\link{parse_info}}
 }
+\concept{metadata cleaning functions}

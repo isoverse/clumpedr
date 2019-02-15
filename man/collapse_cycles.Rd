@@ -8,6 +8,8 @@ collapse_cycles(dat, na.rm = TRUE, quiet = default(quiet))
 }
 \arguments{
 \item{dat}{A tibble resulting from \code{bulk_and_clumping_deltas()}.}
+
+\item{na.rm}{Logical. Whether or not to remove NA values.}
 }
 \description{
 This collapses the (filtered) cycles of the raw measurements and calculates

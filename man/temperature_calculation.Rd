@@ -2,7 +2,7 @@
 % Please edit documentation in R/temperature_calculation.R
 \name{temperature_calculation}
 \alias{temperature_calculation}
-\title{temperature_calculation}
+\title{Calculate the temperatures}
 \usage{
 temperature_calculation(dat, D47 = quo(D47_final),
   quiet = default(quiet))
@@ -10,10 +10,10 @@ temperature_calculation(dat, D47 = quo(D47_final),
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{acid_fractionation()}}
 
-\item{D47}{The quoted column name of the Δ47 values to use as input.}
+\item{D47}{The quoted column name of the \eqn{\Delta_47} values to use as input.}
 }
 \description{
-This calculates the temperatures.
+Calculate the temperatures
 }
 \seealso{
 revcal tempcal

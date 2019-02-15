@@ -8,7 +8,7 @@ revcal(D47, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
   intcnf = 0.01, ignorecnf = FALSE)
 }
 \arguments{
-\item{D47}{The Δ47 value.}
+\item{D47}{The \eqn{\Delta_{47}}{Δ47} value.}
 
 \item{slope}{The slope of the regression.}
 
@@ -18,19 +18,24 @@ revcal(D47, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
 
 \item{intcnf}{The confidence of the intercept of the regression.}
 
-\item{ignorecnf}{Whether or not to ignore the confidence of the temperature calibration.}
+\item{ignorecnf}{Whether or not to ignore the confidence of the temperature
+calibration.}
 }
 \value{
-A tibble with input D47 and estimated Tc value with lower and upper bounds.
+A tibble with input \eqn{\Delta_{47}}{Δ47} and estimated Tc value
+with lower and upper bounds.
 }
 \description{
 A clumped isotope temperature calibration in reversed form, where the normal
-calibration y = a * 10^6 / T_K^2 + b is expressed as a function of T_C:
-T_C = sqrt((a * 10^6) / (y - b)) - 273.15
+calibration
+\deqn{y = a \times 10^6 / T_K^2 + b}{y = a * 10^6 / T_K^2 + b}
+is expressed as a function of \eqn{T_C}:
+\deqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
 }
 \details{
-Defaults to Bonifacie et al. 2017
-Δ_47_ = (0.0449 ± 0.001 * 10^6^) / T^2^ + (0.167 ± 0.01)
+Defaults to Bonifacie et al. 2017 \deqn{\Delta_47 = (0.0449 \pm 0.001 \times
+10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167
+± 0.01)}
 }
 \seealso{
 tempcal

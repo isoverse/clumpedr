@@ -3,9 +3,9 @@
 #' Cycles are averaged and pointranges indicate one standard deviation offset
 #' based on the number of cycles taken into account.
 #'
-#' @details Note that with δ^13^C and δ^18^O, the pointrange is invisible
-#'     because the cycles have so little variance that the line segment usually
-#'     falls within the dots.
+#' @details Note that with \eqn{\delta^{13}}C and \eqn{\delta^{18}}O, the
+#'   pointrange is invisible because the cycles have so little variance that
+#'   the line segment usually falls within the dots.
 #'
 #' @param dat The input tibble, result of `bulk_and_clumping_deltas()`.
 #' @param info The metadata of the raw cycles, used to get the `file_datetime`.

@@ -1,9 +1,16 @@
-#' filter_clumped
+#' Filter out all the clumped files from regular stable isotope geochemistry
 #'
-#' This function filters out all the clumped files from regular stable isotope geochemistry.
+#' This function applies the [iso_filter_files()][isoreader::iso_filter_files]
+#' function to filter by the Method using a regular expression.
 #'
-#' @param dat A [tibble][tibble::tibble-package], resulting from `isoreader::iso_read_dual_inlet()`
-#' @param regex The regular expression that captures the desired methods. The default is a very explicit filtering of our presently used method names, be sure to change this!
+#' @param dat A [tibble][tibble::tibble-package], resulting from
+#'   [iso_read_dual_inlet()][isoreader::iso_read_dual_inlet()]
+#' @param regex The regular expression that captures the desired methods. The
+#'   default is a very explicit filtering of our presently used method names,
+#'   be sure to change this!
+#' @references
+#' \url{https://en.wikipedia.org/wiki/Regular_expression}
+#' @export
 filter_clumped <- function(dat,
                            regex = NULL, quiet = default(quiet)) {
     if (is.null(regex)) {

@@ -1,17 +1,14 @@
 #' Calculate abundance ratio based on input intensities
 #'
+#' Calculate abundance ratios by dividing input mass column \eqn{i} over mass
+#' 44. \deqn{R_i = mass_i / mass_{44}}
+#'
 #' @param dat Input dataframe.
-#' @param i44 Name of mass 44 column.
-#' @param i45 Name of mass 45 column.
-#' @param i46 Name of mass 46 column.
-#' @param i47 Name of mass 47 column.
-#' @param i48 Name of mass 48 column.
-#' @param i49 Name of mass 49 column.
-#' @param R45 Desired new name of the calculated ratio for mass 45.
-#' @param R46 Desired new name of the calculated ratio for mass 46.
-#' @param R47 Desired new name of the calculated ratio for mass 47.
-#' @param R48 Desired new name of the calculated ratio for mass 48.
-#' @param R49 Desired new name of the calculated ratio for mass 49.
+#' @param i44 Quoted name of mass 44 column.
+#' @param i45 Quoted name of mass 45 column. Same for intensities 46 through
+#'   49.
+#' @param R45 Desired quoted new name of the calculated ratio for mass 45. Same
+#'   for intensities 46 through 49.
 #' @export
 abundance_ratios <- function(dat,
                              i44 = quo(s44), i45 = quo(s45),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spread_match.R
 \name{spread_match}
 \alias{spread_match}
-\title{spread_match}
+\title{Spread and match sample gas and reference gas.}
 \usage{
 spread_match(dat, method = "normal", quiet = default(quiet))
 }

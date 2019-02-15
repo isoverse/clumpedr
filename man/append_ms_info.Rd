@@ -26,6 +26,6 @@ append_ms_info(dat, masspec, standards = paste0("ETH-", 1:4),
 \item{sort}{Logical. Arrange by the newly created groups if \code{TRUE} (default).}
 }
 \description{
-Append mass spectrometer name, as well as a new "broadid" for easy plotting.
+Append mass spectrometer name, as well as a new \code{broadid} for easy plotting.
 TODO: Furthermore, add an v44.mV_init column
 }

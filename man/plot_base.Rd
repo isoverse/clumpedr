@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_base.R
 \name{plot_base}
 \alias{plot_base}
-\title{plot_base}
+\title{Create a basic plot layer for further expansion.}
 \usage{
 plot_base(dat, ...)
 }
@@ -13,5 +13,8 @@ processing functions that returns the metadata.}
 \item{...}{Additional aesthetics to pass to ggplot.}
 }
 \description{
-This function creates a ggplot with all of the extra default aesthetics set up.
+This function creates a ggplot with all of the metadata applied to named
+default aesthetics. This is especially useful when creating interactive plot
+with \link[plotly:ggplotly]{ggplotly}, since all the metadata aesthetics show up
+when hovering the mouse over a point.
 }

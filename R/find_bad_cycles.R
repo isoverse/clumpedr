@@ -1,14 +1,24 @@
 #' Find bad cycles based on several criteria.
 #'
-#' @param dat A [tibble][tibble::tibble-package], resulting from `isoreader::iso_get_raw_data()`
+#' This filters out any cycles that:
+#' - have an initial intensity of mass 44 that is lower than `min`.
+#' - have an initial intensity of mass 44 that is larger than `max`.
+#' - has a sudden drop in intensity of mass 44
+#'
+#' @details The drop in intensity can be defined relative to the first change
+#'   in intensity (default), or to the previous cycle.
+#' @param dat A [tibble][tibble::tibble-package], resulting from
+#'   `isoreader::iso_get_raw_data()`
 #' @param min Minimum intensity level for good cycles. Defaults to 1,500 mV.
 #' @param max Maximum intensity level for good cycles. Defaults to 50,000 mV.
 #' @param fac Factor for how much larger the current drop should be than the
-#'     one specified in `relative_to`.
+#'   one specified in `relative_to`.
 #' @param relative_to cycle Drop detection occurs relative to either the first
-#'     cycle ("init", default) or to the previous cycle ("prev").
+#'   cycle ("init", default) or to the previous cycle ("prev").
 #' @param m44.mv quoted column name of mass 44.
-#' @param cycle quoted column name of the column with the measurement cycle number.
+#' @param cycle quoted column name of the column with the measurement cycle
+#'   number.
+#' @family cycle functions
 #' @export
 find_bad_cycles <- function(dat, min = 1500, max = 50000, fac = 1.5,
                             m44.mV = quo(v44.mV), cycle = quo(cycle),

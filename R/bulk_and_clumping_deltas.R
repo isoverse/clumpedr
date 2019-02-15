@@ -1,14 +1,12 @@
-#' Compute δ^13^C (‰ PDB), δ^18^O (‰ PDB-CO2), Δ~47~,
-#' Δ~48~ and Δ~49~ values (‰).
-# TODO: get superscript/subscript to work in function documentation
+#' Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
+#' \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values
 #'
-#' Requires a dataframe with little δ values, and working gas δ^13^C and δ^18^O
-#' values.
+#' Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
+#' \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
 #'
-#' @encoding UTF-8
 #' @param dat A tibble containing delta values 45 through 49.
-#' @param d13C_PDB_wg Reference gas δ^13^C value.
-#' @param d18O_PDBCO2_wg Reference gas δ^13^C gas value.
+#' @param d13C_PDB_wg Reference gas \eqn{\delta^{13}}{δ13}C value.
+#' @param d18O_PDBCO2_wg Reference gas \eqn{\delta^{13}}{δ13}C gas value.
 #' @inheritParams isobar_ratios
 #' @export
 bulk_and_clumping_deltas  <- function(dat, d13C_PDB_wg, d18O_PDBCO2_wg,

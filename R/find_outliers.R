@@ -1,9 +1,15 @@
-#' find_outliers
+#' Find outliers
 #'
-#' This function finds outliers.
+#' This function finds outliers based on several criteria.
+#'
+#' Here, we define an outlier as a measurement that has:
+#' - an initial mass 44 intensity below `init`.
+#' - an imbalance between sample and reference gas of more than `diff`.
+#' - a clumped value that is more than `nsd_off` standard deviations away from the mean.
 #'
 #' @param dat A [tibble][tibble::tibble-package].
 #' @param parameter parameter description
+#' @export
 find_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                           std_names = paste0("ETH-", 1:3)) {
     means <- dat %>%

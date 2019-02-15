@@ -13,3 +13,8 @@ plot_disabled_cycles(dat, min = 1500, max = 50000,
 \description{
 Plot disabled cycles
 }
+\seealso{
+Other cycle functions: \code{\link{disable_cycles}},
+  \code{\link{find_bad_cycles}}
+}
+\concept{cycle functions}

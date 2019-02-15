@@ -7,6 +7,7 @@
 #'     thresholds (min, max), and then TODO
 #'
 #' @inheritParams find_bad_cycles
+#' @family cycle functions
 #' @export
 disable_cycles  <- function(dat, min = 1500, max = 50000, fac = 1.5,
                             m44.mV = quo(v44.mV), cycle = quo(cycle),
