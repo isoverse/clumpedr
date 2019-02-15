@@ -8,12 +8,16 @@ filter_clumped(dat, regex = NULL, quiet = default(quiet))
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{isoreader::iso_read_dual_inlet()}}
+\link[isoreader:iso_read_dual_inlet]{iso_read_dual_inlet()}}
 
 \item{regex}{The regular expression that captures the desired methods. The
 default is a very explicit filtering of our presently used method names,
 be sure to change this!}
 }
 \description{
-Filter out all the clumped files from regular stable isotope geochemistry
+This function applies the \link[isoreader:iso_filter_files]{iso_filter_files()}
+function to filter by the Method using a regular expression.
+}
+\references{
+\url{https://en.wikipedia.org/wiki/Regular_expression}
 }

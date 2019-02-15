@@ -15,3 +15,11 @@ find_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
 \description{
 This function finds outliers based on several criteria.
 }
+\details{
+Here, we define an outlier as a measurement that has:
+\itemize{
+\item an initial mass 44 intensity below \code{init}.
+\item an imbalance between sample and reference gas of more than \code{diff}.
+\item a clumped value that is more than \code{nsd_off} standard deviations away from the mean.
+}
+}

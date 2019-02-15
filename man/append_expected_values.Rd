@@ -16,9 +16,30 @@ append_expected_values(dat, names = paste0("ETH-", 1:3), D47 = c(0.258,
 
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
-De Vlieze et al., 2015 and Murray et al., 2016. See also Müller et al.,
-2017.}
+De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
 }
 \description{
-Append expected values
+Append the expected values for the standards. Defaults to using ETH-1--ETH-3.
 }
+\references{
+W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature
+effects of phosphoric acid fractionation on \eqn{\Delta_{47}}{Δ47} analysis
+and implications for discrepant calibrations. \emph{Chem. Geol.} \strong{2016}, \emph{396},
+51.
+
+S. T. Murray, M. M. Arienzo, P. K. Swart. Determining the
+\eqn{\Delta_{47}}{Δ47} acid fractionation in dolomites. \emph{Geochem. Cosmochim.
+Acta} \strong{2016}, \emph{174}, 42.
+
+I. A. Müller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
+S. M. Bernasconi. Carbonate clumped isotope analyses with the
+long-integration dual-inlet (LIDI) workflow: scratching at the lower sample
+weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
+1057--1066.
+}
+\seealso{
+Other empirical transfer functions: \code{\link{apply_etf}},
+  \code{\link{empirical_transfer_function}},
+  \code{\link{plot_etf}}
+}
+\concept{empirical transfer functions}

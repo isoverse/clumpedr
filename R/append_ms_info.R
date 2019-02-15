@@ -1,6 +1,6 @@
 #' Append Mass Spectrometer name and some metadata
 #'
-#' Append mass spectrometer name, as well as a new "broadid" for easy plotting.
+#' Append mass spectrometer name, as well as a new `broadid` for easy plotting.
 #' TODO: Furthermore, add an v44.mV_init column
 #'
 #' @param dat The data in flattened format.

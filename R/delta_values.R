@@ -1,12 +1,12 @@
-#' Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C,
-#' \eqn{\delta}'s, and raw \eqn{\Delta} values
+#' Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O,
+#' \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
 #'
 #' This is a wrapper function that calculates all delta values.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()].
-#' @param d13C_PBD_wg Working gas \eqn{\delta^{13}}C value.
-#' @param d18O_PBDCO2_wg Working gas \eqn{\delta^{18}}O value.
-#' @param method Method for matching reference gas to sample gas. Defaults to "linterp".
+#' @param d13C_PBD_wg Working gas \eqn{\delta^{13}}{δ13}C value.
+#' @param d18O_PBDCO2_wg Working gas \eqn{\delta^{18}}{δ18}O value.
+#' @param method Method for matching reference gas to sample gas. Defaults to `"linterp"`.
 #' @param plot_info The needed metadata for plotting. Result of [clean_did_info()].
 #' @param plot_column The quoted column that will be plotted. Defaults to `quo(D47raw)`.
 #' @export

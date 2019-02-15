@@ -21,3 +21,8 @@ parse_info(dat, masspec, std_names = paste0("ETH-", 1:4),
 Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}} into the
 appropriate types.
 }
+\seealso{
+Other metadata cleaning functions: \code{\link{add_info}},
+  \code{\link{clean_did_info}}, \code{\link{get_inits}}
+}
+\concept{metadata cleaning functions}

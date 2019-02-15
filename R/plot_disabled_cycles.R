@@ -1,6 +1,7 @@
 #' Plot disabled cycles
 #'
 #' @param dat Dataframe with output from `disable_cycles()`.
+#' @family cycle functions
 #' @export
 plot_disabled_cycles  <- function(dat, min = 1500, max = 50000, quiet = default(quiet)) {
     if (!quiet)

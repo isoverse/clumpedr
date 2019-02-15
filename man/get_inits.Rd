@@ -9,3 +9,8 @@ get_inits(did)
 \description{
 Add initial intensities
 }
+\seealso{
+Other metadata cleaning functions: \code{\link{add_info}},
+  \code{\link{clean_did_info}}, \code{\link{parse_info}}
+}
+\concept{metadata cleaning functions}

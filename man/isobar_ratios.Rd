@@ -32,13 +32,13 @@ from Barkan and Luz, 2005.}
 }
 \description{
 Compute isotopic ratios for a sample with isotopic ratios R13 and R18,
-optionally accounting for non-zero values of \eqn{\Delta^17}O and clumped
-isotope anomalies (all expressed in permil). Function based on Daëron et
-al., 2016.
+optionally accounting for non-zero values of \eqn{\Delta^{17}}{Δ17}O and
+clumped isotope anomalies (all expressed in permil). Function based on
+Daëron et al., 2016.
 }
 \references{
 Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
-isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
-measurements, Chemical Geology, 442, 83–96 (2016).
+isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
+  measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
 \url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
 }

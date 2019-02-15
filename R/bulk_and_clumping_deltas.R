@@ -1,12 +1,12 @@
-#' Compute \eqn{\delta^{13}}C, \eqn{\delta^{18}}O \eqn{\Delta_{47}},
-#' \eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values
+#' Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
+#' \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values
 #'
-#' Requires a dataframe with little \eqn{\delta} values, and working gas
-#' \eqn{\delta^{13}}C and \eqn{\delta^{18}}O values.
+#' Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
+#' \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
 #'
 #' @param dat A tibble containing delta values 45 through 49.
-#' @param d13C_PDB_wg Reference gas \eqn{\delta^{13}}C value.
-#' @param d18O_PDBCO2_wg Reference gas \eqn{\delta^{13}}C gas value.
+#' @param d13C_PDB_wg Reference gas \eqn{\delta^{13}}{δ13}C value.
+#' @param d18O_PDBCO2_wg Reference gas \eqn{\delta^{13}}{δ13}C gas value.
 #' @inheritParams isobar_ratios
 #' @export
 bulk_and_clumping_deltas  <- function(dat, d13C_PDB_wg, d18O_PDBCO2_wg,

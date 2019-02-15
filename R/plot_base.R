@@ -1,6 +1,9 @@
 #' Create a basic plot layer for further expansion.
 #'
-#' This function creates a ggplot with all of the extra default aesthetics set up.
+#' This function creates a ggplot with all of the metadata applied to named
+#' default aesthetics. This is especially useful when creating interactive plot
+#' with [ggplotly][plotly::ggplotly], since all the metadata aesthetics show up
+#' when hovering the mouse over a point.
 #'
 #' @param dat A [tibble][tibble::tibble-package], resulting from any of the
 #'     processing functions that returns the metadata.

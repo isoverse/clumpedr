@@ -1,12 +1,14 @@
 #' Clean up the did file info
 #'
-#' Clean up and parse the file info.
+#' Converts mass spectrometer metadata into the correct types and appends the
+#' initial intensity of mass 44.
 #'
 #' @param did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @param ... Additional options to pass to [isoreader::iso_get_file_info()].
 #' @inheritParams parse_info
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
+#' @family metadata cleaning functions
 #' @export
 clean_did_info  <- function(did, ..., masspec = NULL, std_names = paste0("ETH-", 1:4),
                             oth_name = "other", quiet = default(quiet)) {
@@ -33,6 +35,7 @@ clean_did_info  <- function(did, ..., masspec = NULL, std_names = paste0("ETH-",
 #' @param std_names Character vector of the standard names to find in
 #'     'Identifier 1'.
 #' @param oth_name Single general name to assign to non-standard "other" measurements.
+#' @family metadata cleaning functions
 parse_info <- function(dat, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other") {
     dat %>%
         mutate(
@@ -53,6 +56,7 @@ parse_info <- function(dat, masspec, std_names = paste0("ETH-", 1:4), oth_name =
 }
 
 #' Add initial intensities
+#' @family metadata cleaning functions
 get_inits <- function(did) {
     did %>%
         isoreader::iso_get_raw_data(quiet = TRUE) %>%
