@@ -3,6 +3,7 @@
 # #' @param dat A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()]
 #' @inheritParams spread_intensities
 #' @inheritParams match_intensities
+#' @export
 spread_match <- function(dat, method = "normal", quiet = default(quiet)) {
     dat %>%
         spread_intensities(quiet = quiet) %>%
