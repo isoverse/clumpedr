@@ -7,7 +7,7 @@
 #' @export
 plot_stds <- function(dat, parameter) {
   dat %>%
-    plot_base() +
-    geom_point(aes(x = d47_mean, y = D47_final, colour = broadid)) +
+    plot_base(x = d47_mean, y = D47_final, colour = broadid) +
+    geom_point() +
     labs(x = delta[47]~"(\u2030)", y = Delta[47]~"(\u2030)")
 }

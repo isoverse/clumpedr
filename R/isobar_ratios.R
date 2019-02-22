@@ -68,6 +68,7 @@ isobar_ratios <- function(dat, ## input columns
             !!R48 := !!R48 * (1 + D48 / 1000),
             !!R49 := !!R49 * (1 + D49 / 1000)) %>%
     ## Return isobar ratios
+    ## TODO: reconsider whether to omit these or not
     select(-c(C12, C13, C16, C17, C18, C626, C627, C628, C636, C637, C638, C727,
               C728, C737, C738, C828, C838))
 }

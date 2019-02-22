@@ -8,7 +8,7 @@
 delta_values(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
   method = "linterp", genplot = default(genplot),
   quiet = default(quiet), plot_info = NULL,
-  plot_column = quo(D47raw))
+  plot_column = quo(D47_raw))
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
@@ -17,7 +17,7 @@ delta_values(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 
 \item{plot_info}{The needed metadata for plotting. Result of \code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{plot_column}{The quoted column that will be plotted. Defaults to \code{quo(D47raw)}.}
+\item{plot_column}{The quoted column that will be plotted. Defaults to \code{quo(D47_raw)}.}
 
 \item{d13C_PBD_wg}{Working gas \eqn{\delta^{13}}{δ13}C value.}
 

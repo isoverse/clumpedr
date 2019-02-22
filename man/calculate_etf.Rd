@@ -4,7 +4,10 @@
 \alias{calculate_etf}
 \title{Calculate the Empirical Transfer Function}
 \usage{
-calculate_etf(dat)
+calculate_etf(dat, session = quo(Preparation))
+}
+\arguments{
+\item{session}{The quoted column name to group analyses by. Defaults to \code{quo(Preparation)}.}
 }
 \description{
 Calculate the Empirical Transfer Function

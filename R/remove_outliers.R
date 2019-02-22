@@ -15,12 +15,12 @@
 #' @param nsd_off The number of standard deviations away from the median
 #'     Preparation of the standards.
 #' @param plot_col The column to use for plotting. Defaults to
-#'     `quo(D47raw_mean)`.
+#'     `quo(D47_raw_mean)`.
 #' @inheritParams find_outliers
 #' @export
 remove_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                             std_names = paste0("ETH-", 1:3),
-                            plot_col = quo(D47raw_mean),
+                            plot_col = quo(D47_raw_mean),
                             quiet = default(quiet), genplot = default(genplot)) {
     if (!quiet)
         glue("Info: Removing aliquots with initial intensity < {init}, difference in initial

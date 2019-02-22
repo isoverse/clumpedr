@@ -4,7 +4,7 @@
 \alias{plot_raw_delta}
 \title{Plot raw delta values as a function of measurement time.}
 \usage{
-plot_raw_delta(dat, info, column = quo(D47raw), rawpoints = FALSE,
+plot_raw_delta(dat, info, column = quo(D47_raw), rawpoints = FALSE,
   pointalpha = 0.5, quiet = default(quiet))
 }
 \arguments{

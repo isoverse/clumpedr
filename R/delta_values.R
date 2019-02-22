@@ -8,22 +8,22 @@
 #' @param d18O_PBDCO2_wg Working gas \eqn{\delta^{18}}{δ18}O value.
 #' @param method Method for matching reference gas to sample gas. Defaults to `"linterp"`.
 #' @param plot_info The needed metadata for plotting. Result of [clean_did_info()].
-#' @param plot_column The quoted column that will be plotted. Defaults to `quo(D47raw)`.
+#' @param plot_column The quoted column that will be plotted. Defaults to `quo(D47_raw)`.
 #' @export
 delta_values <- function(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
                          method = "linterp",
                          genplot = default(genplot), quiet = default(quiet),
-                         plot_info = NULL, plot_column = quo(D47raw)) {
+                         plot_info = NULL, plot_column = quo(D47_raw)) {
     if (genplot & is.null(plot_info))
         stop("Supply plotting information, generated with `clean_did_info()`")
     ## defaults for d13c and d18o of working gas
     if (is.null(d13C_PDB_wg)) {
-        d13C_PDB_wg = -2.68
+        d13C_PDB_wg = -2.820 #-2.68
         if (!quiet)
             glue("Warning: no d13C_PDB_wg value specified, using UU-default of {d13C_PDB_wg}") %>% message()
     }
     if (is.null(d18O_PDBCO2_wg)) {
-        d18O_PDBCO2_wg = -4.86
+        d18O_PDBCO2_wg = -4.670 #-4.86
         if (!quiet)
             glue("Warning: no d18O_PDBCO2_wg value specified, using UU-default of {d18O_PDBCO2_wg}") %>% message()
     }

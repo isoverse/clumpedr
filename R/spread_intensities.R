@@ -27,9 +27,16 @@ spread_intensities  <- function(dat, quiet = default(quiet)) {
     unite(mir, type, mass, sep = "") %>%
     # spread them back out into format file_id, cycle, s44, s45, ..., r44, r45
     spread(mir, intensity)
-  ## TODO: figure out how to give a message with a character vector
-  if (!quiet)
-    message("Info: removing columns:\n",
-            glue("{paste(names(dat)[!names(dat) %in% names(out)])}"))
-  out
+  ## DONE: do not remove the info columns (e.g. cycle_drop and hasdrop etc.),
+  ## only the raw intensities
+  ## TODO: or, in stead add nested raw intensities?
+  ## TODO: figure out how to give a message with a character vector if (!quiet)
+  ## message("Info: removing columns:\n", glue("{paste(names(dat)[!names(dat)
+  ## %in% names(out)])}"))
+  dat %>%
+    ungroup() %>%
+    ## TODO: make this more general so that it only gets rid of the type and
+    ## raw intensities even when there is no half-cup mass 54 or when they're not in mV
+    select(-c(type, v44.mV:v54.mV)) %>%
+    right_join(out, c("file_id", "cycle"))
 }

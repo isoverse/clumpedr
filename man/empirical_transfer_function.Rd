@@ -5,7 +5,8 @@
 \title{Empirical Transfer Function}
 \usage{
 empirical_transfer_function(dat, names = paste0("ETH-", 1:3),
-  D47 = c(0.258, 0.256, 0.691), aff = 0.062, quiet = default(quiet),
+  D47 = c(0.258, 0.256, 0.691), aff = 0.062,
+  session = quo(Preparation), quiet = default(quiet),
   genplot = default(genplot))
 }
 \arguments{
@@ -18,6 +19,8 @@ empirical_transfer_function(dat, names = paste0("ETH-", 1:3),
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
+
+\item{session}{The quoted column name to group analyses by. Defaults to \code{quo(Preparation)}.}
 }
 \description{
 Calculate and apply the empirical transfer function (ETF). First append the

@@ -5,7 +5,7 @@
 \title{Remove outliers}
 \usage{
 remove_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
-  std_names = paste0("ETH-", 1:3), plot_col = quo(D47raw_mean),
+  std_names = paste0("ETH-", 1:3), plot_col = quo(D47_raw_mean),
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
@@ -20,7 +20,7 @@ remove_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
 Preparation of the standards.}
 
 \item{plot_col}{The column to use for plotting. Defaults to
-\code{quo(D47raw_mean)}.}
+\code{quo(D47_raw_mean)}.}
 
 \item{info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{clean_did_info()}.}

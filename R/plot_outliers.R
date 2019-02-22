@@ -5,7 +5,7 @@
 #' @param dat A [tibble][tibble::tibble-package], resulting from [add_info()]
 #' @param col The quoted column that should be plotted.
 #' @export
-plot_outliers <- function(dat, col = quo(D47raw_mean)) {
+plot_outliers <- function(dat, col = quo(D47_raw_mean)) {
   dat %>%
       plot_base() +
       geom_point(aes(x = file_datetime, y = !!col, shape = outlier,

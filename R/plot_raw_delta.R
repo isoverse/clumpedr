@@ -12,7 +12,7 @@
 #' @param rawpoints Logical, whether to include individual cycle estimates (defaults to `FALSE`).
 #' @param pointalpha The alpha value of the raw points if they are plotted.
 #' @export
-plot_raw_delta <- function(dat, info, column = quo(D47raw), rawpoints = FALSE,
+plot_raw_delta <- function(dat, info, column = quo(D47_raw), rawpoints = FALSE,
                            pointalpha = .5, quiet = default(quiet)) {
     if (!quiet)
         glue("Info: generating a plot of raw delta value {quos_to_text(column)} as a function of measurement time.") %>%

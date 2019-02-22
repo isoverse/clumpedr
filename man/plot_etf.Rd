@@ -4,7 +4,11 @@
 \alias{plot_etf}
 \title{Plot the Empirical Transfer Function}
 \usage{
-plot_etf(dat, std_names = paste0("ETH-", 1:3))
+plot_etf(dat, std_names = paste0("ETH-", 1:3),
+  session = quo(Preparation))
+}
+\arguments{
+\item{session}{The quoted column name to group analyses by. Defaults to \code{quo(Preparation)}.}
 }
 \description{
 Create a plot with the expected \eqn{\Delta_{47}}{Δ47} value on the x-axis

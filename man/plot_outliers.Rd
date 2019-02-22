@@ -4,7 +4,7 @@
 \alias{plot_outliers}
 \title{Plot outliers}
 \usage{
-plot_outliers(dat, col = quo(D47raw_mean))
+plot_outliers(dat, col = quo(D47_raw_mean))
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=add_info]{add_info()}}}

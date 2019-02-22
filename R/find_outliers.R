@@ -14,9 +14,9 @@ find_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                           std_names = paste0("ETH-", 1:3)) {
     means <- dat %>%
         group_by(Preparation, `Identifier 1`) %>%
-        summarize(run_mean = mean(D47raw_mean, na.rm = TRUE),
-                  run_med = median(D47raw_mean, na.rm = TRUE),
-                  run_sd = sd(D47raw_mean, na.rm = TRUE),
+        summarize(run_mean = mean(D47_raw_mean, na.rm = TRUE),
+                  run_med = median(D47_raw_mean, na.rm = TRUE),
+                  run_sd = sd(D47_raw_mean, na.rm = TRUE),
                   run_n = n())
 
     ## average standard run sd
@@ -35,7 +35,7 @@ find_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
                                         # difference in initial intensity too large
                          ifelse(abs(s44_init - r44_init) >= diff, TRUE,
                                         # sample too far off from run mean
-                                D47raw_mean < run_med - nsd_off * mean_run_std_sd |
-                                D47raw_mean > run_med + nsd_off * mean_run_std_sd |
+                                D47_raw_mean < run_med - nsd_off * mean_run_std_sd |
+                                D47_raw_mean > run_med + nsd_off * mean_run_std_sd |
                                 is.na(run_med))))
 }

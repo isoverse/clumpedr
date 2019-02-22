@@ -95,11 +95,12 @@ bulk_and_clumping_deltas  <- function(dat, d13C_PDB_wg, d18O_PDBCO2_wg,
 
     ## Compute raw clumped isotope anomalies
     dat  <- dat %>%
-        mutate(D47raw = 1000 * (R47 / R47_stoch - 1),
-               D48raw = 1000 * (R48 / R48_stoch - 1),
-               D49raw = 1000 * (R49 / R49_stoch - 1))
+        mutate(D47_raw = 1000 * (R47 / R47_stoch - 1),
+               D48_raw = 1000 * (R48 / R48_stoch - 1),
+               D49_raw = 1000 * (R49 / R49_stoch - 1))
 
     ## omit taylor polynomial coefficients
+    ## TODO: reconsider whether to omit these or not
     dat %>%
         select(-c(K, A, B, C, D, aa, bb, cc))
 }
