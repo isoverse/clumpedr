@@ -60,11 +60,10 @@ append_expected_values <- function(dat,
                                    aff = 0.062) {
     ## TODO: vectorize this, so you can add as many standards as desired!
     dat %>%
-        mutate(expected_D47 = ifelse(`Identifier 1` == names[1], D47[1] - aff,
-                              ifelse(`Identifier 1` == names[2], D47[2] - aff,
-                              ifelse(`Identifier 1` == names[3], D47[3] - aff,
-                              ## ifelse(`Identifier 1` == names[4], D47[4] - aff,
-                                     NA_real_))))
+        mutate(expected_D47 = case_when(`Identifier 1` == names[1] ~ D47[1] - aff,
+                                        `Identifier 1` == names[2] ~ D47[2] - aff,
+                                        `Identifier 1` == names[3] ~ D47[3] - aff,
+                                        TRUE ~ NA_real_))
 }
 
 #' Calculate the Empirical Transfer Function
