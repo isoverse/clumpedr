@@ -4,13 +4,11 @@
 \alias{plot_stds}
 \title{Plot standards}
 \usage{
-plot_stds(dat, parameter)
+plot_stds(dat, x = d47_mean, y = D47_final, ...)
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}}
-
-\item{parameter}{parameter description}
 }
 \description{
-Plot the standards in the familiar \eqn{\delta} vs \eqn{\Delta} plot.
+Plot the standards in the familiar \eqn{\delta}{δ} vs \eqn{\Delta}{Δ} plot.
 }

@@ -4,13 +4,13 @@
 \alias{disable_cycles}
 \title{Disable cycles that failed}
 \usage{
-disable_cycles(dat, min = 1500, max = 50000, fac = 1.5,
-  m44.mV = quo(v44.mV), cycle = quo(cycle), relative_to = "init",
+disable_cycles(.data, min = 1500, max = 50000, fac = 1.5,
+  v44 = v44.mV, cycle = cycle, relative_to = "init",
   genplot = default(genplot), quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{isoreader::iso_get_raw_data()}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 
 \item{min}{Minimum intensity level for good cycles. Defaults to 1,500 mV.}
 
@@ -19,8 +19,9 @@ disable_cycles(dat, min = 1500, max = 50000, fac = 1.5,
 \item{fac}{Factor for how much larger the current drop should be than the
 one specified in \code{relative_to}.}
 
-\item{cycle}{quoted column name of the column with the measurement cycle
-number.}
+\item{v44}{Column name of mass 44.}
+
+\item{cycle}{Column name of the column with the measurement cycle number.}
 
 \item{relative_to}{cycle Drop detection occurs relative to either the first
 cycle ("init", default) or to the previous cycle ("prev").}
@@ -29,9 +30,11 @@ cycle ("init", default) or to the previous cycle ("prev").}
 Based on several criteria, filter out cycles that show a sudden pressure drop.
 }
 \details{
-This function tries to identify cycles in which the pressure has
-dropped fast. It first disables all the cycles above or below certain
-thresholds (min, max), and then TODO
+This function tries to identify cycles in which the pressure has dropped
+fast. It first disables all the cycles above or below certain thresholds
+(\code{min}, \code{max}), and then calculates whether the next cycle has dropped by
+more than \code{fac} times either the initial (\code{relative to = "init"}, default)
+or the previous (\code{relative_to = "prev"}) cycle.
 }
 \seealso{
 Other cycle functions: \code{\link{find_bad_cycles}},

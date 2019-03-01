@@ -1,8 +1,11 @@
+# Taken from isoreader!
+
 # retrieve package settings, internal function, not exported
 default <- function(name, allow_null = FALSE) {
   name <- enquo(name) %>% quos_to_text(variable = "setting")
   value <- getOption(str_c("clumpedr.", name))
-  if (!allow_null && is.null(value)) stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
+  if (!allow_null && is.null(value))
+    stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
   return(value)
 }
 
@@ -16,7 +19,8 @@ set_default <- function(name, value, overwrite = TRUE) {
 # retrieve temp option
 get_temp <- function(name, allow_null = TRUE) {
   value <- getOption(str_c("clumpedr_temp.", name))
-  if (!allow_null && is.null(value)) stop("isoreader temporary setting '", name, "' does not exist", call. = FALSE)
+  if (!allow_null && is.null(value))
+    stop("clumpedr temporary setting '", name, "' does not exist", call. = FALSE)
   return(value)
 }
 
@@ -46,8 +50,8 @@ get_all_options <- function(with_temp = FALSE) {
 #' @family settings functions
 #' @export
 clumpedr_get_default_parameters <- function() {
-    c("quiet", "genplot", "R13_PDB", "R18_PDB", "R17_PDBCO2", "R18_PDBCO2",
-      "lambda", "D47", "D48", "D49", "D18O") %>%
+  c("quiet", "genplot", "R13_PDB", "R18_PDB", "R17_PDBCO2", "R18_PDBCO2",
+    "lambda", "D47", "D48", "D49", "D18O") %>%
     sapply(function(x) list(default(!!x))) %>%
     {
       data_frame(parameter = names(.),

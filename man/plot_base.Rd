@@ -4,17 +4,17 @@
 \alias{plot_base}
 \title{Create a basic plot layer for further expansion.}
 \usage{
-plot_base(dat, ...)
+plot_base(.data, ...)
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from any of the
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from any of the
 processing functions that returns the metadata.}
 
 \item{...}{Additional aesthetics to pass to ggplot.}
 }
 \description{
 This function creates a ggplot with all of the metadata applied to named
-default aesthetics. This is especially useful when creating interactive plot
-with \link[plotly:ggplotly]{ggplotly}, since all the metadata aesthetics show up
-when hovering the mouse over a point.
+default aesthetics. This is only useful when creating interactive plot with
+\link[plotly:ggplotly]{ggplotly}, since all the metadata aesthetics show up when
+hovering the mouse over a point.
 }

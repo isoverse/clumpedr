@@ -4,11 +4,15 @@
 \alias{plot_disabled_cycles}
 \title{Plot disabled cycles}
 \usage{
-plot_disabled_cycles(dat, min = 1500, max = 50000,
+plot_disabled_cycles(.data, min = 1500, max = 50000,
   quiet = default(quiet))
 }
 \arguments{
-\item{dat}{Dataframe with output from \code{disable_cycles()}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} with output from \code{\link[=disable_cycles]{disable_cycles()}}.}
+
+\item{min}{Minimum intensity cutoff.}
+
+\item{max}{Maximum intensity cutoff.}
 }
 \description{
 Plot disabled cycles

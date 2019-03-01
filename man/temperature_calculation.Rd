@@ -4,16 +4,17 @@
 \alias{temperature_calculation}
 \title{Calculate the temperatures}
 \usage{
-temperature_calculation(dat, D47 = quo(D47_final),
-  quiet = default(quiet))
+temperature_calculation(.data, D47 = D47_final, quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{acid_fractionation()}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}
 
-\item{D47}{The quoted column name of the \eqn{\Delta_47} values to use as input.}
+\item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
 }
 \description{
-Calculate the temperatures
+This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from
+\eqn{\Delta_{47}}{Δ47} values. At the moment it ignores the uncertainty in
+the regression.
 }
 \seealso{
 revcal tempcal

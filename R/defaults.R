@@ -12,11 +12,12 @@
 #'   from Barkan and Luz, 2005.
 #' @param D17O TODO: look up in Daëron 2016 what this does again.
 #' @references
+#'
 #' TODO: add all the references here!
 #'
 #' Brand, W. A., Assonov, S. S., & Coplen, T. B. Correction for the 17O
 #' interference in \eqn{\delta^{13}}{δ13}C measurements when analyzing
-#' CO\eqn{{}_2}{2} with stable isotope mass spectrometry (IUPAC Technical
+#' CO\eqn{_{2}}{2} with stable isotope mass spectrometry (IUPAC Technical
 #' Report). _Pure and Applied Chemistry_, **2010**, _82(8)_, 1719–1733.
 #' \url{https://doi.org/10.1351/PAC-REP-09-01-05}
 #' @keywords internal

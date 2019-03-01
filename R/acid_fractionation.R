@@ -3,12 +3,13 @@
 #' The temperature-dependent acid fractionation projection from 70 °C to 25 °C.
 #' It subtracts the `aff` from the `D47`-value.
 #'
-#' @param dat Data.
+#' @param .data A [tibble][tibble::tibble-package].
 #' @param aff Temperature-dependent acid fractionation projection from 70 °C to
 #'   25 °C. Defaults to 0.062, which is the average of the values obtained by
 #'   De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.
-#' @param D47 The quoted column name of the \eqn{\Delta_47} values to use
-#'   for the acid fractionation calculation.
+#' @param D47 The column name of the \eqn{\Delta_47} values to use for the acid
+#'   fractionation calculation.
+#' @param D47_out The desired new column name.
 #'
 #' @references
 #'
@@ -27,11 +28,14 @@
 #' 1057--1066.
 #'
 #' @export
-acid_fractionation <- function(dat, aff = 0.062, D47 = quo(D47_etf),
+acid_fractionation <- function(.data, aff = 0.062, D47 = D47_etf,
+                               D47_out = D47_final,
                                quiet = default(quiet)) {
-    if (!quiet)
-        glue("Info: adding temperature-dependent acid fractionation factor of {aff}.") %>%
-            message()
-    dat %>%
-        mutate(D47_final = !!D47 + aff)
+  D47 <- enquo(D47)
+  D47_out <- enquo(D47_out)
+  if (!quiet)
+    glue("Info: adding temperature-dependent acid fractionation factor of {aff}.") %>%
+      message()
+  .data %>%
+    mutate(!! D47_final := !! D47 + aff)
 }

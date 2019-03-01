@@ -4,17 +4,17 @@
 \alias{plot_raw_delta}
 \title{Plot raw delta values as a function of measurement time.}
 \usage{
-plot_raw_delta(dat, info, column = quo(D47_raw), rawpoints = FALSE,
-  pointalpha = 0.5, quiet = default(quiet))
+plot_raw_delta(.data, .info, y = D47_raw, raw_points = FALSE,
+  point_alpha = 0.5, quiet = default(quiet))
 }
 \arguments{
-\item{dat}{The input tibble, result of \code{bulk_and_clumping_deltas()}.}
+\item{.data}{The input tibble, result of \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
-\item{info}{The metadata of the raw cycles, used to get the \code{file_datetime}.}
+\item{.info}{The metadata of the raw cycles, used to get the \code{file_datetime}.}
 
-\item{rawpoints}{Logical, whether to include individual cycle estimates (defaults to \code{FALSE}).}
+\item{raw_points}{Logical, whether to include individual cycle estimates (defaults to \code{FALSE}).}
 
-\item{pointalpha}{The alpha value of the raw points if they are plotted.}
+\item{point_alpha}{The alpha value of the raw points if they are plotted.}
 }
 \description{
 Cycles are averaged and pointranges indicate one standard deviation offset

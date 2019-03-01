@@ -4,7 +4,10 @@
 \alias{get_inits}
 \title{Add initial intensities}
 \usage{
-get_inits(did)
+get_inits(.did)
+}
+\arguments{
+\item{.did}{the did data resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 }
 \description{
 Add initial intensities

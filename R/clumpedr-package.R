@@ -19,7 +19,7 @@
 "_PACKAGE"
 
 #' @encoding UTF-8
-#' @importFrom stats lm median sd
+#' @importFrom stats lm median sd C D cycle na.omit setNames
 #' @importFrom rlang enquo quo quos UQ !! !!! := get_expr quo_expr quo_text quo_is_null quo_is_symbol quo_is_lang is_quosure is_empty is_integerish eval_tidy sym lang_head new_formula f_lhs f_rhs
 # #' @importFrom tidyselect everything starts_with ends_with matches vars_select
 #' @importFrom tibble tibble

@@ -4,10 +4,10 @@
 \alias{filter_clumped}
 \title{Filter out all the clumped files from regular stable isotope geochemistry}
 \usage{
-filter_clumped(dat, regex = NULL, quiet = default(quiet))
+filter_clumped(.did, regex = NULL, quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
+\item{.did}{A \link[tibble:tibble-package]{tibble}, resulting from
 \link[isoreader:iso_read_dual_inlet]{iso_read_dual_inlet()}}
 
 \item{regex}{The regular expression that captures the desired methods. The

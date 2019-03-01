@@ -4,22 +4,29 @@
 \alias{append_expected_values}
 \title{Append expected values}
 \usage{
-append_expected_values(dat, names = paste0("ETH-", 1:3), D47 = c(0.258,
-  0.256, 0.691), aff = 0.062)
+append_expected_values(.data, std_names = paste0("ETH-", 1:3),
+  D47 = c(0.258, 0.256, 0.691), aff = 0.062, id1 = `Identifier 1`,
+  exp = expected_D47)
 }
 \arguments{
-\item{dat}{Data yadayada.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
-\item{names}{Names of the standards.}
+\item{std_names}{Names of the standards.}
 
-\item{D47}{Expected values of the standards at 25 °C, from Müller et al., 2017.}
+\item{D47}{Expected values of the standards at 25 °C. Defaults to Müller et
+al., 2017.}
 
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
+
+\item{id1}{Name of the standard/sample identifier column.}
+
+\item{exp}{Name of the new column that will hold expected values.}
 }
 \description{
-Append the expected values for the standards. Defaults to using ETH-1--ETH-3.
+Append the expected values for the standards. Defaults to using
+ETH-1--ETH-3, subtracting the acid fractionation factor before-hand.
 }
 \references{
 W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature

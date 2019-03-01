@@ -4,11 +4,14 @@
 \alias{plot_etf}
 \title{Plot the Empirical Transfer Function}
 \usage{
-plot_etf(dat, std_names = paste0("ETH-", 1:3),
-  session = quo(Preparation))
+plot_etf(.data, std_names = paste0("ETH-", 1:3), D47_etf = D47_etf,
+  exp = expected_D47, raw = D47_raw_mean, session = Preparation)
 }
 \arguments{
-\item{session}{The quoted column name to group analyses by. Defaults to \code{quo(Preparation)}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
+
+\item{session}{The column name to group analyses by. Defaults to
+\code{Preparation}.}
 }
 \description{
 Create a plot with the expected \eqn{\Delta_{47}}{Δ47} value on the x-axis

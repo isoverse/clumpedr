@@ -4,10 +4,13 @@
 \alias{calculate_etf}
 \title{Calculate the Empirical Transfer Function}
 \usage{
-calculate_etf(dat, session = quo(Preparation))
+calculate_etf(.data, session = Preparation, quiet = default(quiet))
 }
 \arguments{
-\item{session}{The quoted column name to group analyses by. Defaults to \code{quo(Preparation)}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
+
+\item{session}{The column name to group analyses by. Defaults to
+\code{Preparation}.}
 }
 \description{
 Calculate the Empirical Transfer Function

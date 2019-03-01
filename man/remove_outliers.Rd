@@ -4,13 +4,14 @@
 \alias{remove_outliers}
 \title{Remove outliers}
 \usage{
-remove_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
-  std_names = paste0("ETH-", 1:3), plot_col = quo(D47_raw_mean),
+remove_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
+  std_names = paste0("ETH-", 1:3), plot_x = file_datetime,
+  plot_y = D47_raw_mean, session = Preparation,
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{collapse_cycles()}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
 \item{init}{The minimum initial intensity of mass 44.}
 
@@ -19,11 +20,15 @@ remove_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
 \item{nsd_off}{The number of standard deviations away from the median
 Preparation of the standards.}
 
-\item{plot_col}{The column to use for plotting. Defaults to
-\code{quo(D47_raw_mean)}.}
+\item{std_names}{Names of the standards used for the correction.}
+
+\item{session}{Column name that defines correction session.}
 
 \item{info}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{clean_did_info()}.}
+\code{\link[=clean_did_info]{clean_did_info()}}.}
+
+\item{plot_col}{The column to use for plotting. Defaults to
+\code{D47_raw_mean}.}
 }
 \description{
 Remove outliers
@@ -33,5 +38,5 @@ This function removes outliers based on several criteria. 1) The
 initial intensity of both sample and reference gas is above 8 V. 2) The
 difference in intensity between sample and reference gas is less than 1.2
 V. 3) The sample or reference raw \eqn{\Delta_47} value is less than 4 SD
-away from the run mean.
+away from the preparation mean.
 }

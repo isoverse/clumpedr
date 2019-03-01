@@ -4,14 +4,17 @@
 \alias{add_info}
 \title{Add the information from the did files}
 \usage{
-add_info(dat, info, ..., quiet = default(quiet))
+add_info(.data, .info, ..., quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{collapse_cycles}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
-\item{info}{A \link[tibble:tibble-package]{tibble}, resulting from \code{clean_did_info()}}
+\item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{...}{Optional additional arguments to pass to the \code{left_join} call.}
+\item{...}{Optional additional arguments to pass to the \code{\link[dplyr:left_join]{dplyr::left_join()}}
+call.}
 }
 \description{
 Append mass spectrometer metadata to the raw data.

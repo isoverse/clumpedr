@@ -4,13 +4,26 @@
 \alias{find_outliers}
 \title{Find outliers}
 \usage{
-find_outliers(dat, init = 8000, diff = 1200, nsd_off = 4,
-  std_names = paste0("ETH-", 1:3))
+find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
+  n_id1 = 5, std_names = paste0("ETH-", 1:3), session = Preparation,
+  id1 = `Identifier 1`)
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
-\item{parameter}{parameter description}
+\item{init}{Initial intensity threshold for mass 44.}
+
+\item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
+
+\item{nsd_off}{Number of standard deviations away from the mean threshold.}
+
+\item{n_id1}{Minimum number of aliquots within session to calculate threshold within group.}
+
+\item{std_names}{Names of the standards used for the correction.}
+
+\item{session}{Column name that defines correction session.}
+
+\item{id1}{Column name of the sample/standard identifier.}
 }
 \description{
 This function finds outliers based on several criteria.

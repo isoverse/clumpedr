@@ -4,14 +4,19 @@
 \alias{correct_backgrounds}
 \title{Background corrections}
 \usage{
-correct_backgrounds(dat, factor, quiet = default(quiet))
+correct_backgrounds(.data, factor, i47 = m47.mV, i54 = m54.mV,
+  quiet = default(quiet))
 }
 \arguments{
-\item{dat}{The dataframe with raw iso files.}
+\item{.data}{The dataframe with raw iso files.}
 
 \item{factor}{Factor by which to multiply the half-cup before subtraction.}
+
+\item{i47}{Column with mass 47 intensities to correct.}
+
+\item{i54}{Column with mass 47.5 intensities to use for correction.}
 }
 \description{
-This function applies a very simple backgorund correction based on the
-half-cup mass 54 intensity.
+This function applies a very simple background correction based on the cup
+54 intensity and an input scaling factor.
 }

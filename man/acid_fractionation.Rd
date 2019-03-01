@@ -4,18 +4,20 @@
 \alias{acid_fractionation}
 \title{Add acid fractionation}
 \usage{
-acid_fractionation(dat, aff = 0.062, D47 = quo(D47_etf),
-  quiet = default(quiet))
+acid_fractionation(.data, aff = 0.062, D47 = D47_etf,
+  D47_out = D47_final, quiet = default(quiet))
 }
 \arguments{
-\item{dat}{Data.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
 
-\item{D47}{The quoted column name of the \eqn{\Delta_47} values to use
-for the acid fractionation calculation.}
+\item{D47}{The column name of the \eqn{\Delta_47} values to use for the acid
+fractionation calculation.}
+
+\item{D47_out}{The desired new column name.}
 }
 \description{
 The temperature-dependent acid fractionation projection from 70 °C to 25 °C.

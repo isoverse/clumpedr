@@ -4,38 +4,47 @@
 #' expected values for the standards, then calculate the ETF per Preparation,
 #' then apply the ETF to all the samples and standards.
 #'
-#' @param dat A [tibble][tibble::tibble-package] resulting from [collapse_cycles()].
+#' @param .data A [tibble][tibble::tibble-package] resulting from [collapse_cycles()].
 #' @inheritParams append_expected_values
 #' @inheritParams calculate_etf
 #' @family empirical transfer functions
 #' @export
-empirical_transfer_function <- function(dat,
-                                        names = paste0("ETH-", 1:3),
+empirical_transfer_function <- function(.data,
+                                        std_names = paste0("ETH-", 1:3),
                                         D47 = c(0.258, 0.256, 0.691), #0.507),
                                         aff = 0.062,
-                                        session = quo(Preparation),
+                                        session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
-    if (!quiet)
-        message("Info: calculating and applying Emperical Transfer Function.")
-    out <- dat %>%
-        append_expected_values(names = names, D47 = D47, aff = aff) %>%
-        calculate_etf(session = session) %>%
-        apply_etf()
-    if (genplot)
-        out %>%
-            pipe_plot(plot_etf, std_names = names, session = session)
-    out
+  session <- enquo(session)
+
+  if (!quiet)
+    message("Info: calculating and applying Emperical Transfer Function.")
+  out <- .data %>%
+    append_expected_values(std_names = std_names, D47 = D47, aff = aff) %>%
+    calculate_etf(session = session) %>%
+    apply_etf()
+  if (genplot)
+    out %>%
+      pipe_plot(plot_etf, std_names = std_names, session = session)
+  out
 }
+
+# http://r-pkgs.had.co.nz/man.html#dry2
+# TODO: use @describeIn or @rdname to also include the references from below in the wrapper.
 
 #' Append expected values
 #'
-#' Append the expected values for the standards. Defaults to using ETH-1--ETH-3.
+#' Append the expected values for the standards. Defaults to using
+#' ETH-1--ETH-3, subtracting the acid fractionation factor before-hand.
 #'
-#' @param dat Data yadayada.
-#' @param names Names of the standards.
-#' @param D47 Expected values of the standards at 25 °C, from Müller et al., 2017.
+#' @param .data A [tibble][tibble::tibble-package].
+#' @param std_names Names of the standards.
+#' @param D47 Expected values of the standards at 25 °C. Defaults to Müller et
+#'   al., 2017.
 #' @inheritParams acid_fractionation
+#' @param id1 Name of the standard/sample identifier column.
+#' @param exp Name of the new column that will hold expected values.
 #'
 #' @references
 #' W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature
@@ -54,34 +63,44 @@ empirical_transfer_function <- function(dat,
 #' 1057--1066.
 #' @family empirical transfer functions
 #' @export
-append_expected_values <- function(dat,
-                                   names = paste0("ETH-", 1:3),  # we don't use ETH-4!
+append_expected_values <- function(.data,
+                                   std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!
                                    D47 = c(0.258, 0.256, 0.691), #, 0.507),
-                                   aff = 0.062) {
-    ## TODO: vectorize this, so you can add as many standards as desired!
-    dat %>%
-        mutate(expected_D47 = case_when(`Identifier 1` == names[1] ~ D47[1] - aff,
-                                        `Identifier 1` == names[2] ~ D47[2] - aff,
-                                        `Identifier 1` == names[3] ~ D47[3] - aff,
-                                        TRUE ~ NA_real_))
+                                   aff = 0.062,
+                                   id1 = `Identifier 1`,
+                                   exp = expected_D47) {
+  id1 <- enquo(id1)
+  exp <- enquo(exp)
+
+  # TODO: vectorize this, so you can add as many standards as desired?
+  .data %>%
+    mutate(!! exp := case_when(!! id1 == std_names[1] ~ D47[1] - aff,
+                               !! id1 == std_names[2] ~ D47[2] - aff,
+                               !! id1 == std_names[3] ~ D47[3] - aff,
+                               TRUE ~ NA_real_))
 }
 
 #' Calculate the Empirical Transfer Function
 #'
-#' @param session The quoted column name to group analyses by. Defaults to `quo(Preparation)`.
+#' @param .data A [tibble][tibble::tibble-package].
+#' @param session The column name to group analyses by. Defaults to
+#'   `Preparation`.
 #' @export
-calculate_etf <- function(dat, session = quo(Preparation)) {
-    etf <- dat %>%
-        filter(!is.na(D47_raw_mean)) %>%
-        group_by(!!session) %>%
-        # TODO: figure out how to make this not throw an error and quit if one
-        # of the groups fails, maybe with safely?
-        do(model = broom::tidy(lm(D47_raw_mean ~ expected_D47, data = .))) %>%
-        unnest() %>%
-        select(!!session, term, estimate) %>%
-        spread(term, estimate) %>%
-        select(!!session, intercept = `(Intercept)`, slope = expected_D47) %>%
-        right_join(dat, by = as.character(session)[2])
+calculate_etf <- function(.data, session = Preparation, quiet = default(quiet)) {
+  session <- enquo(session)
+
+  # this makes it continue even if lm fails.
+  pos_lm <- purrr::possibly(lm, otherwise = NA, quiet = quiet)
+
+  etf <- .data %>%
+    group_by(!! session) %>%
+    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47, data = .,
+                                  na.action = na.omit))) %>%
+    unnest() %>%
+    select(!! session, term, estimate) %>%
+    spread(term, estimate) %>%
+    select(!! session, intercept = `(Intercept)`, slope = expected_D47) %>%
+    right_join(dat, by = quo_name(session))
 }
 
 #' Apply the ETF
@@ -93,13 +112,15 @@ calculate_etf <- function(dat, session = quo(Preparation)) {
 #'   dependent and independent variables in the other direction, so we flip
 #'   them here. i.e.: \deqn{\Delta_{47etf} = - (\alpha / \beta) + (1 / \beta)
 #'   \times \Delta_{47_raw}}{Δ47_etf = - (α / β) + (1 / β) * Δ47_raw}
-#' @param dat A [tibble][tibble::tibble-package] containing column D47.
+#'
+#' @param .data A [tibble][tibble::tibble-package] containing column D47.
 #' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values to use.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(dat, D47 = quo(D47_raw_mean)) {
-    dat %>%
-        mutate(D47_etf = - (intercept / slope) + (1 / slope) * !!D47)
+apply_etf <- function(.data, D47 = D47_raw_mean) {
+  D47 <- enquo(D47)
+  .data %>%
+    mutate(D47_etf = - (intercept / slope) + (1 / slope) * !! D47)
 }
 
 #' Plot the Empirical Transfer Function
@@ -110,14 +131,23 @@ apply_etf <- function(dat, D47 = quo(D47_raw_mean)) {
 #' @inheritParams calculate_etf
 #' @family empirical transfer functions
 #' @export
-plot_etf <- function(dat, std_names = paste0("ETH-", 1:3), session = quo(Preparation)) {
-    pld <- dat %>%
-        mutate(expected_D47 = ifelse(is.na(expected_D47), D47_etf, expected_D47))
+plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
+                     D47_etf = D47_etf,
+                     exp = expected_D47,
+                     raw = D47_raw_mean,
+                     session = Preparation) {
+  session <- enquo(session)
+  D47_etf <- enquo(D47_etf)
+  exp <- enquo(exp)
+  raw <- enquo(raw)
 
-    pld %>%
-        plot_base() +
-        geom_point(aes(x = expected_D47, y = D47_raw_mean)) +
-        geom_smooth(aes(x = expected_D47, y = D47_raw_mean, group = "yes"), method = "lm",
-                    data = filter(pld, broadid %in% std_names)) +
-        facet_grid(rows = vars(!!session))
+  pld <- .data %>%
+    mutate(!! exp := ifelse(is.na(!! exp), !! D47_etf, !! exp))
+
+  pld %>%
+    plot_base() +
+    geom_point(aes(x = !! exp, y = !! raw)) +
+    geom_smooth(aes(group = "yes"), method = "lm",
+                data = filter(pld, broadid %in% std_names)) +
+    facet_grid(rows = vars(!! session))
 }

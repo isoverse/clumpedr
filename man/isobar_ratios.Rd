@@ -4,20 +4,20 @@
 \alias{isobar_ratios}
 \title{Compute isotopic ratios}
 \usage{
-isobar_ratios(dat, R13 = quo(R13), R18 = quo(R18), R45 = quo(R45),
-  R46 = quo(R46), R47 = quo(R47), R48 = quo(R48), R49 = quo(R49),
+isobar_ratios(.data, R13 = R13, R18 = R18, R45 = R45, R46 = R46,
+  R47 = R47, R48 = R48, R49 = R49,
   R17_PDBCO2 = default(R17_PDBCO2), R18_PDBCO2 = default(R18_PDBCO2),
   lambda = default(lambda), D17O = default(D17O), D47 = default(D47),
   D48 = default(D48), D49 = default(D49))
 }
 \arguments{
-\item{dat}{A tibble with columns R13 and R18.}
+\item{.data}{A tibble with columns R13 and R18.}
 
-\item{R13}{The quoted column name for R13 (default \code{quo(R13)}).}
+\item{R13}{The column name for R13.}
 
-\item{R18}{The quoted column name for R18 (default \code{quo(R18)}).}
+\item{R18}{The column name for R18.}
 
-\item{R45}{the quoted output column name for R45 (default \code{quo(R45)})}
+\item{R45}{the output column name for R45.}
 
 \item{R17_PDBCO2}{The R17 value of PDB (g). Defaults to 0.0003931, from
 Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}

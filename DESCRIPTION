@@ -37,7 +37,6 @@ Collate:
     'abundance_ratios.R'
     'acid_fractionation.R'
     'add_info.R'
-    'append_ms_info.R'
     'bulk_and_clumping_deltas.R'
     'calibration.R'
     'clean_did_info.R'

@@ -4,10 +4,15 @@
 \alias{spread_intensities}
 \title{Spread intensities from iso_read format into wide format.}
 \usage{
-spread_intensities(dat, quiet = default(quiet))
+spread_intensities(.data, ids = NULL, our_cols = NULL,
+  quiet = default(quiet))
 }
 \arguments{
-\item{dat}{a data frame or tibble containing mass intensities per cycle}
+\item{.data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
+
+\item{ids}{Identifying columns that we'll group by.}
+
+\item{our_cols}{Columns with data values that need to be reshaped.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the sample and reference

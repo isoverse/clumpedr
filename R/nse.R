@@ -1,5 +1,8 @@
 # Convert quo to text accounting for plain text and symbol quos
 # stolen from isoreader!
+
+# TODO: replace with quo_name()? It's used in plot_raw_delta.R for the info
+# message, and settings.R
 quos_to_text <- function(lquos, check_for_validity = TRUE, variable = "variable") {
     single_quo <- is_quosure(lquos)
     lquos <- quos(!!!lquos)

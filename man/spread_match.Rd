@@ -4,10 +4,10 @@
 \alias{spread_match}
 \title{Spread and match sample gas and reference gas.}
 \usage{
-spread_match(dat, method = "normal", quiet = default(quiet))
+spread_match(.data, method = "normal", quiet = default(quiet))
 }
 \arguments{
-\item{dat}{a data frame or tibble containing mass intensities per cycle}
+\item{.data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
 
 \item{method}{"linterp" for linear interpolation, or "normal" for
 conventional bracketing of sample gas.}
