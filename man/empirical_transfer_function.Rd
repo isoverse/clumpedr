@@ -5,8 +5,9 @@
 \title{Empirical Transfer Function}
 \usage{
 empirical_transfer_function(.data, std_names = paste0("ETH-", 1:3),
-  D47 = c(0.258, 0.256, 0.691), aff = 0.062, session = Preparation,
-  quiet = default(quiet), genplot = default(genplot))
+  D47 = c(0.258, 0.256, 0.691), aff = 0.062, raw = D47_raw_mean,
+  exp = expected_D47, session = Preparation, quiet = default(quiet),
+  genplot = default(genplot))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
@@ -19,6 +20,8 @@ al., 2017.}
 \item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
+
+\item{exp}{Name of the new column that will hold expected values.}
 
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}

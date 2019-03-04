@@ -13,20 +13,23 @@ empirical_transfer_function <- function(.data,
                                         std_names = paste0("ETH-", 1:3),
                                         D47 = c(0.258, 0.256, 0.691), #0.507),
                                         aff = 0.062,
+                                        raw = D47_raw_mean, exp = expected_D47,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
+  raw <- enquo(raw)
+  exp <- enquo(exp)
   session <- enquo(session)
 
   if (!quiet)
     message("Info: calculating and applying Emperical Transfer Function.")
   out <- .data %>%
     append_expected_values(std_names = std_names, D47 = D47, aff = aff) %>%
-    calculate_etf(session = session) %>%
-    apply_etf()
+    calculate_etf(raw = !! raw, exp = !! exp, session = !! session) %>%
+    apply_etf(D47 = !! raw)
   if (genplot)
     out %>%
-      pipe_plot(plot_etf, std_names = std_names, session = session)
+      pipe_plot(plot_etf, std_names = std_names, session = !! session)
   out
 }
 
@@ -86,7 +89,14 @@ append_expected_values <- function(.data,
 #' @param session The column name to group analyses by. Defaults to
 #'   `Preparation`.
 #' @export
-calculate_etf <- function(.data, session = Preparation, quiet = default(quiet)) {
+calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
+                          session = Preparation, quiet = default(quiet)) {
+  raw <- enquo(raw)
+  exp <- enquo(exp)
+
+  if (quo_name(raw) != "D47_raw_mean" | quo_name(exp) != "expected_D47")
+    warning("Currently ignoring option, lm call cannot process quosure.")
+
   session <- enquo(session)
 
   # this makes it continue even if lm fails.
@@ -94,13 +104,13 @@ calculate_etf <- function(.data, session = Preparation, quiet = default(quiet)) 
 
   etf <- .data %>%
     group_by(!! session) %>%
-    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47, data = .,
-                                  na.action = na.omit))) %>%
+    # TODO: pass quosures as expression to lm? For now I've hard-coded it.
+    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47, data = ., na.action = na.omit))) %>%
     unnest() %>%
     select(!! session, term, estimate) %>%
     spread(term, estimate) %>%
     select(!! session, intercept = `(Intercept)`, slope = expected_D47) %>%
-    right_join(dat, by = quo_name(session))
+    right_join(.data, by = quo_name(session))
 }
 
 #' Apply the ETF
@@ -147,7 +157,7 @@ plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
   pld %>%
     plot_base() +
     geom_point(aes(x = !! exp, y = !! raw)) +
-    geom_smooth(aes(group = "yes"), method = "lm",
+    geom_smooth(aes(x = !! exp, y = !! raw, group = "yes"), method = "lm",
                 data = filter(pld, broadid %in% std_names)) +
     facet_grid(rows = vars(!! session))
 }

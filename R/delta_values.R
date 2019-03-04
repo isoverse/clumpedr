@@ -44,7 +44,8 @@ delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
     bulk_and_clumping_deltas(d13C_PDB_wg = d13C_PDB_wg, d18O_PDBCO2_wg = d18O_PDBCO2_wg)
 
   if (genplot)
-    pipe_plot(out, plot_raw_delta, info = plot_info, column = plot_column, quiet = quiet)
+    pipe_plot(out, plot_raw_delta, .info = plot_info, y = !! plot_column,
+              quiet = quiet)
 
   return(out)
 }

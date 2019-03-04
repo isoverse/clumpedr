@@ -43,7 +43,7 @@ clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-"
 parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other",
                        ms_name = masspec, broadid_name = broadid, id1 = `Identifier 1`) {
   ms_name <- enquo(ms_name)
-  broadid_name <- enquo(broadi_name)
+  broadid_name <- enquo(broadid_name)
   id1 <- enquo(id1)
 
   .data %>%

@@ -34,7 +34,7 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
     mutate(mass = str_sub(mass, 2, 3),
            type = ifelse(type == "sample", "s", "r")) %>%
     # unite type and mass into s44, r44, etc.
-    unite(mir, type, mass, sep = "") %>%
+    tidyr::unite(mir, type, mass, sep = "") %>%
     # spread them back out into format file_id, cycle, s44, s45, ..., r44, r45
     spread(mir, intensity)
   .data %>%

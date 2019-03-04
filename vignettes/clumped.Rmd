@@ -64,7 +64,7 @@ iso_save(dids, "out/dids.di.rds")
 Once we have saved the r data storage (`.rds`) file, we can load it much faster
 than the raw data.
 
-``` {.r org-language="R"}
+```{r}
 dids  <- iso_read_dual_inlet("out/dids.di.rds")
 ```
 
@@ -74,7 +74,7 @@ Clean up the metadata and append the mass spectrometer name. This function
 parses integers, numbers, etc. so that all the types are correct.
 
 ```{r}
-didinfo  <- clean_did_info(dids, "MOTU")
+didinfo  <- clean_did_info(dids, masspec = "MOTU")
 ```
 
 ## run the processing step-by-step
@@ -155,13 +155,16 @@ poorly than the regular calculation though, probably due to cycle elimination.
 
 For example, we convert from the below:
 
-| `file_id`      | `file_datetime`     | type       | cycle | m44  | m45  | m46  | m47  |
-| `"file_1.did"` | 2019-03-01 12:00:00 | `"sample"` | 1     | 1200 | 1100 | 1000 | 5000 |
+| `file_id`      | type         | cycle | v44.mV | v45.mV | v46.mV | v47.mV | v54.mV |
+| `"file_1.did"` | `"sample"`   | 1     | 1200   | 1100   | 1000   | 5000   | -302   |
+| ...            | ...          | ...   | ...    | ...    | ...    | ...    | ...    |
+| `"file_1.did"` | `"standard"` | 0     | 1300   | 1100   | 1000   | 5000   | -260   |
+| `"file_1.did"` | `"standard"` | 1     | 1200   | 1120   | 1020   | 5020   | -230   |
 
 to the following output:
 
-| `file_id`      | `file_datetime`     | cycle | s44  | s45  | s46  | s47  | r44  | r45  | r46  | r47  |
-| `"file_1.did"` | 2019-03-01 12:00:00 | 1     | 1200 | 1100 | 1000 | 5000 | 1250 | 1100 | 1000 | 5000 |
+| `file_id`      | `file_datetime`     | cycle | s44  | s45  | s46  | s47  | s54  | r44  | r45  | r46  | r47  | r54  |
+| `"file_1.did"` | 2019-03-01 12:00:00 | 1     | 1200 | 1100 | 1000 | 5000 | -302 | 1250 | 1110 | 1010 | 5010 | -245 |
 
 
 ```{r}
@@ -209,7 +212,7 @@ rout <- dati %>%
 
 ```{r}
 detf <- rout %>%
-  empirical_transfer_function(genplot = TRUE)
+  empirical_transfer_function(session = Preparation, genplot = TRUE)
 ```
 
 ### acid fractionation factor

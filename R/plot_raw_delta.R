@@ -21,11 +21,10 @@ plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
       message()
 
   pl <- .data %>%
-    select(file_id, !!column) %>%
+    select(file_id, !! y) %>%
     left_join(.info, by = "file_id") %>%
     group_by(file_id) %>%
     plot_base(x = file_datetime, y = !! y) +
-    ggplot() +
     stat_summary(fun.y = mean,
                  fun.ymin = function(x) mean(x) - sd(x),
                  fun.ymax = function(x) mean(x) + sd(x),

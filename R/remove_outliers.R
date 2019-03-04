@@ -37,7 +37,7 @@ remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
   if (genplot) {
     plot_x <- enquo(plot_x)
     plot_y <- enquo(plot_y)
-    pipe_plot(out, plot_outliers, x = plot_x, y = plot_y)
+    pipe_plot(out, plot_outliers, x = !! plot_x, y = !! plot_y)
   }
 
   # TODO: remove actual removal and still include them, but not in ETF calculations?
