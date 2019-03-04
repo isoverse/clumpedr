@@ -15,7 +15,7 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
     message("Info: reshaping data into wide format.")
 
   if (!"type" %in% colnames(.data))
-    stop("Column 'type' not found in ", colnames(.data))
+    stop(glue("Column 'type' not found in {paste(colnames(.data))}")
 
   if (is.null(ids)) {
     ids <- c("file_id", "cycle")
