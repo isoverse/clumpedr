@@ -12,6 +12,8 @@ plot_stds(.data, x = d47_mean, y = D47_final, ...)
 \item{x}{Column to put on the x axis.}
 
 \item{y}{Column to put on the y ayis.}
+
+\item{...}{Additional aesthetics to pass to \code{\link[=plot_base]{plot_base()}}.}
 }
 \description{
 Plot the standards in the familiar \eqn{\delta}{δ} vs \eqn{\Delta}{Δ} plot.

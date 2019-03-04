@@ -24,7 +24,7 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
                             relative_to = "init",
                             quiet = default(quiet)) {
   # global variables and defaults
-  v44.mV <- cycle <- cycle_dis <- v44_diff <- file_id <- v44_diff_init <-
+  v44.mV <- cycle_dis <- v44_diff <- file_id <- v44_diff_init <-
     v44_diff <- v44_drop <- hasdrop <- v44_drop_NA <- cycle_drop <- type <- NULL
 
   v44 <- enquo(v44)

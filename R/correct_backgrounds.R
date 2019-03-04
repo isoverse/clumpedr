@@ -9,10 +9,10 @@
 #' @param i54 Column with mass 47.5 intensities to use for correction.
 #' @export
 correct_backgrounds  <- function(.data, factor,
-                                 i47 = m47.mV, i54 = m54.mV,
+                                 i47 = v47.mV, i54 = v54.mV,
                                  quiet = default(quiet)) {
   # global variables and defaults
-  m47.mV <- m54.mV <- NULL
+  v47.mV <- v54.mV <- NULL
 
   i47 <- enquo(i47)
   i54 <- enquo(i54)
@@ -20,6 +20,7 @@ correct_backgrounds  <- function(.data, factor,
   if (!quiet)
     glue("Info: adding background based on half-mass with factor {factor}") %>%
       message()
+
   .data %>%
-    mutate(!! i47 := !! i47 - factor * !! i54)
+    mutate(!! i47 := !! i47 - (factor * !! i54))
 }

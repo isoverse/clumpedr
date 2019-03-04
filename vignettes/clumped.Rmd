@@ -130,13 +130,13 @@ library(plotly)
 ggplotly(dynamicTicks = TRUE)
 ```
 
-### perform bg correction
+### background correction
 
 Do a very simple background correction.
 
 ```{r}
 bgds <- disc %>%
-      ## do a very simple background correction
+  # do a very simple background correction
   correct_backgrounds(factor = 0.82)
 ```
 
@@ -212,6 +212,8 @@ rout <- dati %>%
 
 ```{r}
 detf <- rout %>%
+  # TODO: this currently throws an error due to something in append_expected_valuse()
+  # Error: Column `exp` must be length 5180 (the number of rows) or one, not 0
   empirical_transfer_function(session = Preparation, genplot = TRUE)
 ```
 

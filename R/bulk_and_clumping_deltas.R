@@ -29,10 +29,9 @@ bulk_and_clumping_deltas  <- function(.data, d13C_PDB_wg, d18O_PDBCO2_wg,
   # global variables and defaults
   K <- A <- B <- C <- D <- aa <- bb <- cc <- R18 <- R18_wg <- R17 <- R13 <-
     R13_wg <- R45_flag <- R46_flag <- D47_raw <- D48_raw <- D49_raw <- R45 <-
-      R46 <- R47 <- R48 <- R48 <- d13C_PDB_wg <- d18O_PDBCO2_wg <-
-        d18O_PDBCO2 <- d18O_PDB <- R45 <- R46 <- R47 <- R48 <- R49 <-
-          R45_stoch <- R46_stoch <- R47_stoch <- R48_stoch <- R49_stoch <-
-            R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <-NULL
+      R46 <- R47 <- R48 <- R48 <- d18O_PDBCO2 <- d18O_PDB <- R45 <- R46 <-
+        R47 <- R48 <- R49 <- R45_stoch <- R46_stoch <- R47_stoch <- R48_stoch <-
+          R49_stoch <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <-NULL
 
   if (!quiet)
     # d13C and d18O with nice UTF-8 glyphs

@@ -6,8 +6,8 @@
 \usage{
 empirical_transfer_function(.data, std_names = paste0("ETH-", 1:3),
   D47 = c(0.258, 0.256, 0.691), aff = 0.062, raw = D47_raw_mean,
-  exp = expected_D47, session = Preparation, quiet = default(quiet),
-  genplot = default(genplot))
+  exp = expected_D47, id1 = `Identifier 1`, session = Preparation,
+  quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
@@ -24,6 +24,8 @@ De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
 \item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
 
 \item{exp}{Name of the new column that will hold expected values.}
+
+\item{id1}{Name of the standard/sample identifier column.}
 
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}

@@ -5,6 +5,7 @@
 #' @param .data A [tibble][tibble::tibble-package], resulting from [acid_fractionation()]
 #' @param x Column to put on the x axis.
 #' @param y Column to put on the y ayis.
+#' @param ... Additional aesthetics to pass to [plot_base()].
 #' @export
 plot_stds <- function(.data, x = d47_mean, y = D47_final, ...) {
   # global variables and defaults

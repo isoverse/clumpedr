@@ -25,14 +25,15 @@ delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 
   if (genplot & is.null(plot_info))
     stop("Supply plotting information, generated with `clean_did_info()`")
+
   # defaults for d13c and d18o of working gas
   if (is.null(d13C_PDB_wg)) {
-    d13C_PDB_wg = -2.820 #-2.68
+    d13C_PDB_wg <- -2.820
     if (!quiet)
       glue("Warning: no d13C_PDB_wg value specified, using UU-default of {d13C_PDB_wg}") %>% message()
   }
   if (is.null(d18O_PDBCO2_wg)) {
-    d18O_PDBCO2_wg = -4.670 #-4.86
+    d18O_PDBCO2_wg <- -4.670
     if (!quiet)
       glue("Warning: no d18O_PDBCO2_wg value specified, using UU-default of {d18O_PDBCO2_wg}") %>% message()
   }

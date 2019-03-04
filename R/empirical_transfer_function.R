@@ -14,11 +14,12 @@ empirical_transfer_function <- function(.data,
                                         D47 = c(0.258, 0.256, 0.691), #0.507),
                                         aff = 0.062,
                                         raw = D47_raw_mean, exp = expected_D47,
+                                        id1 = `Identifier 1`,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
 # global variables and defaults
-  D47_raw_mean <- expected_D47 <- Preparation <- NULL
+  D47_raw_mean <- expected_D47 <- Preparation <- `Identifier 1` <- NULL
 
   raw <- enquo(raw)
   exp <- enquo(exp)
@@ -27,9 +28,10 @@ empirical_transfer_function <- function(.data,
   if (!quiet)
     message("Info: calculating and applying Emperical Transfer Function.")
   out <- .data %>%
-    append_expected_values(std_names = std_names, D47 = D47, aff = aff) %>%
-    calculate_etf(raw = !! raw, exp = !! exp, session = !! session) %>%
-    apply_etf(D47 = !! raw)
+    append_expected_values(std_names = std_names, D47 = D47, aff = aff,
+                           id1 = id1, exp = exp) %>%
+    calculate_etf(raw = raw, exp = exp, session = session, quiet = quiet) %>%
+    apply_etf(D47 = raw)
   if (genplot)
     out %>%
       pipe_plot(plot_etf, std_names = std_names, session = !! session)
@@ -107,7 +109,7 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
   exp <- enquo(exp)
 
   if (quo_name(raw) != "D47_raw_mean" | quo_name(exp) != "expected_D47")
-    warning("Currently ignoring option, lm call cannot process quosure.")
+    warning("Currently ignoring `raw` and `exp`, lm call cannot process quosure.")
 
   session <- enquo(session)
 
@@ -117,7 +119,8 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
   etf <- .data %>%
     group_by(!! session) %>%
     # TODO: pass quosures as expression to lm? For now I've hard-coded it.
-    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47, data = ., na.action = na.omit))) %>%
+    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47,
+                                  data = ., na.action = na.omit))) %>%
     unnest() %>%
     select(!! session, term, estimate) %>%
     spread(term, estimate) %>%

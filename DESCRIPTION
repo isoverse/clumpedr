@@ -19,7 +19,7 @@ Imports:
     readr,
     glue (>= 1.2.0),
     dplyr,
-    tidyr,
+    tidyr (>= 0.8.2),
     ggplot2,
     isoreader (>= 0.9.29.9000),
     purrr,

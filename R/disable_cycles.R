@@ -22,14 +22,15 @@ disable_cycles  <- function(.data, min = 1500, max = 50000, fac = 1.5,
   cycle <- enquo(cycle)
 
   bad_dat <- find_bad_cycles(.data, min = min, max = max, fac = fac,
-                             v44 = v44, cycle = cycle,
+                             v44 = !! v44, cycle = !! cycle,
                              relative_to = relative_to)
 
   if (genplot) pipe_plot(bad_dat, plot_disabled_cycles, min = min, max = max)
 
-  if (!quiet)
-    glue("Info: filtering out {sum(bad_dat$cycle_dis)} bad cycles out of total {nrow(bad_dat)}.") %>%
-      message()
+  out <- filter(bad_dat, ! cycle_dis)
 
-  filter(bad_dat, !cycle_dis)
+  if (!quiet)
+    glue("Info: Applying bad cycle filter, keeping {nrow(out)} out of {nrow(.data)} cycles.") %>%
+      message()
+  out
 }

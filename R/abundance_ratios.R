@@ -23,8 +23,7 @@ abundance_ratios <- function(.data,
                              R45 = R45, R46 = R46, R47 = R47,
                              R48 = R48, R49 = R49) {
   # global variables and defaults
-  s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- R47 <- NULL
-  # TODO: are the defaults of R45 still global?
+  s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 
   i44 <- enquo(i44)
   i45 <- enquo(i45)
