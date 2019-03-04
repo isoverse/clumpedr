@@ -12,11 +12,14 @@
 #' \url{https://en.wikipedia.org/wiki/Regular_expression}
 #' @export
 filter_clumped <- function(.did, regex = NULL, quiet = default(quiet)) {
-    if (is.null(regex)) {
-        regex <- "(Clumped LIDI Kiel.met)|(Clumped Kiel click clack.met)|(Clumped LIDI Kiel big samples.met)"
-        if (!quiet)
-            glue("Warning: no regex passed, using default UU-configuration of:\n{regex}") %>%
-                message()
-    }
-    .did %>% isoreader::iso_filter_files(grepl(regex, Method))
+  # global variables and defaults
+  Method <- NULL
+
+  if (is.null(regex)) {
+    regex <- "(Clumped LIDI Kiel.met)|(Clumped Kiel click clack.met)|(Clumped LIDI Kiel big samples.met)"
+    if (!quiet)
+      glue("Warning: no regex passed, using default UU-configuration of:\n{regex}") %>%
+        message()
+  }
+  .did %>% isoreader::iso_filter_files(grepl(regex, Method))
 }

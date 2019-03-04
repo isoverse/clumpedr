@@ -8,6 +8,10 @@ plot_outliers(dat, x = file_datetime, y = D47_raw_mean)
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=add_info]{add_info()}}}
+
+\item{x}{Column to put on the x axis.}
+
+\item{y}{Column to put on the y ayis.}
 }
 \description{
 This function plots raw delta values that are outliers, based on several criteria.

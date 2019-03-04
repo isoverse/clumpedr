@@ -16,7 +16,8 @@ RoxygenNote: 6.1.1
 Imports:
     magrittr,
     rlang,
-    glue,
+    readr,
+    glue (>= 1.2.0),
     dplyr,
     tidyr,
     ggplot2,

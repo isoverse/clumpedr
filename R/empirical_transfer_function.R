@@ -17,6 +17,9 @@ empirical_transfer_function <- function(.data,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
+# global variables and defaults
+  D47_raw_mean <- expected_D47 <- Preparation <- NULL
+
   raw <- enquo(raw)
   exp <- enquo(exp)
   session <- enquo(session)
@@ -72,6 +75,9 @@ append_expected_values <- function(.data,
                                    aff = 0.062,
                                    id1 = `Identifier 1`,
                                    exp = expected_D47) {
+  # global variables and defaults
+  `Identifier 1` <- expected_D47 <- NULL
+
   id1 <- enquo(id1)
   exp <- enquo(exp)
 
@@ -86,11 +92,17 @@ append_expected_values <- function(.data,
 #' Calculate the Empirical Transfer Function
 #'
 #' @param .data A [tibble][tibble::tibble-package].
+#' @param raw Column name of raw \eqn{\Delta_{47}}{Δ47} values.
+#' @param exp Column name of expected \eqn{\Delta_{47}}{Δ47} values.
 #' @param session The column name to group analyses by. Defaults to
 #'   `Preparation`.
 #' @export
 calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
                           session = Preparation, quiet = default(quiet)) {
+  # global variables and defaults
+  D47_raw_mean <- expected_D47 <- Preparation <- `(Intercept)` <-
+    term <- estimate <- intercept <- slope <- NULL
+
   raw <- enquo(raw)
   exp <- enquo(exp)
 
@@ -125,12 +137,18 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
 #'
 #' @param .data A [tibble][tibble::tibble-package] containing column D47.
 #' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values to use.
+#' @param D47_out The new column name.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(.data, D47 = D47_raw_mean) {
+apply_etf <- function(.data, D47 = D47_raw_mean, D47_out = D47_etf) {
+  # global variables and defaults
+  D47_raw_mean <- intercept <- slope <- D47_etf <- NULL
+
   D47 <- enquo(D47)
+  D47_out <- enquo(D47_out)
+
   .data %>%
-    mutate(D47_etf = - (intercept / slope) + (1 / slope) * !! D47)
+    mutate(!! D47_out := - (intercept / slope) + (1 / slope) * !! D47)
 }
 
 #' Plot the Empirical Transfer Function
@@ -139,13 +157,21 @@ apply_etf <- function(.data, D47 = D47_raw_mean) {
 #' and the \eqn{\Delta_{47}}{Δ47} derrived from the ETF on the y-axis.
 #'
 #' @inheritParams calculate_etf
+#' @param std_names The names of the standards.
+#' @param D47_etf The column name that holds the \eqn{\Delta_{47}}{Δ47} values
+#'   after the application of the empirical transfer function.
+#' @param raw The column name with raw \eqn{\Delta_{47}}{Δ47} values.
+#' @param exp The column name with expected \eqn{\Delta_{47}}{Δ47} values.
 #' @family empirical transfer functions
 #' @export
 plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
                      D47_etf = D47_etf,
-                     exp = expected_D47,
                      raw = D47_raw_mean,
+                     exp = expected_D47,
                      session = Preparation) {
+  # global variables and defaults
+  D47_etf <- expected_D47 <- D47_raw_mean <- Preparation <- broadid <- NULL
+
   session <- enquo(session)
   D47_etf <- enquo(D47_etf)
   exp <- enquo(exp)

@@ -17,7 +17,7 @@ clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-"
     # TODO: include parameters  with std_names = {stringr::str_c(std_names)} and oth_name = {oth_name}
   }
   parsedinfo <- .did %>%
-    iso_get_file_info(...) %>%
+    isoreader::iso_get_file_info(...) %>%
     parse_info(masspec, std_names, oth_name)
 
   inits <- get_inits(.did)
@@ -42,6 +42,11 @@ clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-"
 #' @family metadata cleaning functions
 parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other",
                        ms_name = masspec, broadid_name = broadid, id1 = `Identifier 1`) {
+  # global variables and defaults
+  masspec <- broadid <- `Identifier 1` <- Row <- `Peak Center` <-
+    Background <- Pressadjust <- `Reference Refill` <- Line <- Sample <-
+      `Weight [mg]` <- Analysis <- Preparation <- NULL
+
   ms_name <- enquo(ms_name)
   broadid_name <- enquo(broadid_name)
   id1 <- enquo(id1)
@@ -71,6 +76,8 @@ parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name
 #' @export
 get_inits <- function(.did) {
   # TODO: document this function better.
+  # global variables and defaults
+  type <- cycle <- file_id <- v44.mV <- sample <- standard <- NULL
 
   # TODO: check if all the columns are present, otherwise stop?
   .did %>%

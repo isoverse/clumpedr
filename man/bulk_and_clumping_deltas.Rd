@@ -19,6 +19,22 @@ bulk_and_clumping_deltas(.data, d13C_PDB_wg, d18O_PDBCO2_wg, d45 = d45,
 
 \item{d18O_PDBCO2_wg}{Reference gas \eqn{\delta^{13}}{δ13}C gas value.}
 
+\item{d45}{Column name of d45.}
+
+\item{d46}{Column name of d46.}
+
+\item{d47}{Column name of d47.}
+
+\item{d48}{Column name of d48.}
+
+\item{d49}{Column name of d49.}
+
+\item{R13_PDB}{The R13 value of the PDB reference. Defaults to 0.01118, from
+Chang and Li, 1990.}
+
+\item{R18_PDB}{The R18 value of the PDB reference. Defaults to 1.008751,
+from Coplen et al., 1983.}
+
 \item{R17_PDBCO2}{The R17 value of PDB (g). Defaults to 0.0003931, from
 Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 

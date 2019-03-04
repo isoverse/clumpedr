@@ -5,9 +5,16 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package].
 #' @param i44 Name of mass 44 column.
-#' @param i45 Name of mass 45 column. Same for intensities 46 through 49.
-#' @param R45 Desired new name of the calculated ratio for mass 45. Same for
-#'   intensities 46 through 49.
+#' @param i45 Name of mass 45 column.
+#' @param i46 Name of mass 46 column.
+#' @param i47 Name of mass 47 column.
+#' @param i48 Name of mass 48 column.
+#' @param i49 Name of mass 49 column.
+#' @param R45 Desired new name of the calculated ratio for mass 45.
+#' @param R46 Desired new name of the calculated ratio for mass 46.
+#' @param R47 Desired new name of the calculated ratio for mass 47.
+#' @param R48 Desired new name of the calculated ratio for mass 48.
+#' @param R49 Desired new name of the calculated ratio for mass 49.
 #' @export
 abundance_ratios <- function(.data,
                              i44 = s44, i45 = s45,
@@ -15,12 +22,17 @@ abundance_ratios <- function(.data,
                              i49 = s49,
                              R45 = R45, R46 = R46, R47 = R47,
                              R48 = R48, R49 = R49) {
+  # global variables and defaults
+  s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- R47 <- NULL
+  # TODO: are the defaults of R45 still global?
+
   i44 <- enquo(i44)
   i45 <- enquo(i45)
   i46 <- enquo(i46)
   i47 <- enquo(i47)
   i48 <- enquo(i48)
   i49 <- enquo(i49)
+
   R45 <- enquo(R45)
   R46 <- enquo(R46)
   R47 <- enquo(R47)

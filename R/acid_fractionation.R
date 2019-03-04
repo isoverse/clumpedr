@@ -31,8 +31,12 @@
 acid_fractionation <- function(.data, aff = 0.062, D47 = D47_etf,
                                D47_out = D47_final,
                                quiet = default(quiet)) {
+  # global variables and defaults
+  D47_etf <- D47_final <- NULL
+
   D47 <- enquo(D47)
   D47_out <- enquo(D47_out)
+
   if (!quiet)
     glue("Info: adding temperature-dependent acid fractionation factor of {aff}.") %>%
       message()

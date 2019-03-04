@@ -2,14 +2,17 @@
 #' time.
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from [temperature_calculation()].
-# TODO: inherit aesthetics from geom_point
-#' @inheritParams ggplot2::geom_point
+#' @param x What to put on the x axis.
+#' @param y What to put on the y axis.
 #' @param ... Additional aesthetics to pass to [plot_base()].
 #' @export
-plot_delta <- function(dat, x = file_datetime, y = D47_final, ...) {
+plot_delta <- function(.data, x = file_datetime, y = D47_final, ...) {
+  # global variables and defaults
+  file_datetime <- D47_final <- NULL
+
   x <- enquo(x)
   y <- enquo(y)
-  dat %>%
+  .data %>%
     plot_base(x = !! x, y = !! y, ...) +
     geom_point()
 }

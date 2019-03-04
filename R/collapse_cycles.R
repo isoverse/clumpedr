@@ -9,6 +9,15 @@
 #'   before the computation proceeds.
 #' @export
 collapse_cycles <- function(.data, na.rm = TRUE, quiet = default(quiet)) {
+  # global variables and defaults
+  d45_mean <- d45_sd <- d46_mean <- d46_sd <- d47_mean <- d47_sd <-
+    d48_mean <- d48_sd <- d49_mean <- d49_sd <- d18O_PDBCO2_mean <-
+      d18O_PDBCO2_sd <- d18O_PDB_mean <- d18O_PDB_sd <- d13C_PDB_mean <-
+        d13C_PDB_sd <- d45 <- d46 <- d47 <- d48 <- d49 <- d18O_PDBCO2 <-
+          d18O_PDB <-d13C_PDB <- D47_raw_mean <- D47_raw_sd <- D48_raw_mean <-
+            D48_raw_sd <- D49_raw_mean <- D49_raw_sd <- N <- D47_raw <-
+              D48_raw <- D49_raw <- NULL
+
   if (!quiet)
     message("Info: collapsing cycles, calculating sample means and standard deviations.")
   .data %>%

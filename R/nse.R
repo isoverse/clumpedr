@@ -14,7 +14,7 @@ quos_to_text <- function(lquos, check_for_validity = TRUE, variable = "variable"
         params <-
             str_c(names(lquos)[!ok] %>% { ifelse(nchar(.) > 0, str_c(., " = "), .) },
                   map_chr(lquos[!ok], quo_text)) %>%
-            collapse("', '", last = "' and '")
+            glue_collapse("', '", last = "' and '")
     if (sum(!ok) > 1)
         glue("parameters '{params}' do not refer to valid {variable} names") %>% stop(call. = FALSE)
     else

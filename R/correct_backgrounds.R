@@ -11,6 +11,9 @@
 correct_backgrounds  <- function(.data, factor,
                                  i47 = m47.mV, i54 = m54.mV,
                                  quiet = default(quiet)) {
+  # global variables and defaults
+  m47.mV <- m54.mV <- NULL
+
   i47 <- enquo(i47)
   i54 <- enquo(i54)
 

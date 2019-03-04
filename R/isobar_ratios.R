@@ -6,11 +6,15 @@
 #' Daëron et al., 2016.
 #'
 #' @param .data A tibble with columns R13 and R18.
-#' @inheritParams default.params
 # TODO: figure out how to also inherit references from default.params
 #' @param R13 The column name for R13.
 #' @param R18 The column name for R18.
-#' @param R45 the output column name for R45.
+#' @param R45 The output column name for R45.
+#' @param R46 The output column name for R46.
+#' @param R47 The output column name for R47.
+#' @param R48 The output column name for R48.
+#' @param R49 The output column name for R49.
+#' @inheritParams default.params
 #'
 #' @references Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
@@ -32,6 +36,10 @@ isobar_ratios <- function(.data,
                           D47 = default(D47),
                           D48 = default(D48),
                           D49 = default(D49)) {
+  # global variables and defaults
+  R17 <- C12 <- C13 <- C16 <- C17 <- C18 <- C626 <- C627 <- C628 <- C636 <-
+    C637 <- C638 <- C727 <- C728 <- C737 <- C738 <- C828 <- C838 <- NULL
+
   R13 <- enquo(R13)
   R18 <- enquo(R18)
   R45 <- enquo(R45)

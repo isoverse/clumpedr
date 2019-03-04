@@ -12,6 +12,8 @@ plot_raw_delta(.data, .info, y = D47_raw, raw_points = FALSE,
 
 \item{.info}{The metadata of the raw cycles, used to get the \code{file_datetime}.}
 
+\item{y}{Column to put on the y ayis.}
+
 \item{raw_points}{Logical, whether to include individual cycle estimates (defaults to \code{FALSE}).}
 
 \item{point_alpha}{The alpha value of the raw points if they are plotted.}

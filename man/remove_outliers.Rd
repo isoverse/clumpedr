@@ -22,13 +22,12 @@ Preparation of the standards.}
 
 \item{std_names}{Names of the standards used for the correction.}
 
-\item{session}{Column name that defines correction session.}
+\item{plot_x}{The column to use for plotting the x axis.}
 
-\item{info}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{\link[=clean_did_info]{clean_did_info()}}.}
-
-\item{plot_col}{The column to use for plotting. Defaults to
+\item{plot_y}{The column to use for plotting the y axis. Defaults to
 \code{D47_raw_mean}.}
+
+\item{session}{Column name that defines correction session.}
 }
 \description{
 Remove outliers

@@ -4,10 +4,14 @@
 \alias{plot_stds}
 \title{Plot standards}
 \usage{
-plot_stds(dat, x = d47_mean, y = D47_final, ...)
+plot_stds(.data, x = d47_mean, y = D47_final, ...)
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}}
+
+\item{x}{Column to put on the x axis.}
+
+\item{y}{Column to put on the y ayis.}
 }
 \description{
 Plot the standards in the familiar \eqn{\delta}{δ} vs \eqn{\Delta}{Δ} plot.

@@ -26,6 +26,9 @@ tempcal <- function(Tc,
                     slope = 0.0449, intercept = 0.167,
                     slpcnf = 0.001, intcnf = 0.01,
                     ignorecnf = FALSE) {
+  # global variables and defaults
+  lwr <- upr <- D47 <- NULL
+
   kkelvin <- 273.15 # 0 °C
   if (!is.numeric(Tc)) stop("Tc has to be a numeric")
   # the calibration for one input temperature
@@ -70,8 +73,13 @@ revcal <- function(D47,
                    slope = 0.0449, intercept = 0.167,
                    slpcnf = 0.001, intcnf = 0.01,
                    ignorecnf = FALSE) {
+  # global variables and defaults
+  lwr <- upr <- NULL
+
   kkelvin <- 273.15 # 0 °C
+
   if (!is.numeric(D47)) stop("D47 has to be a numeric")
+
   # the calibration for one input D47
   cal <- function(D47 = D47, slp = slope, int = intercept) {
     sqrt((slp * 1e6) / (D47 - int)) - kkelvin

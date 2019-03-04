@@ -15,6 +15,9 @@ disable_cycles  <- function(.data, min = 1500, max = 50000, fac = 1.5,
                             v44 = v44.mV, cycle = cycle,
                             relative_to = "init",
                             genplot = default(genplot), quiet = default(quiet)) {
+  # global variables and defaults
+  v44.mV <- cycle_dis <- NULL
+
   v44 <- enquo(v44)
   cycle <- enquo(cycle)
 

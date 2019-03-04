@@ -6,6 +6,10 @@
 #' @family cycle functions
 #' @export
 plot_disabled_cycles  <- function(.data, min = 1500, max = 50000, quiet = default(quiet)) {
+  # global variables and defaults
+  grp <- linegrps <- file_id <- hasdrop <- cycle_dis <- cycle <- v44.mV <-
+    type <- NULL
+
   if (!quiet)
     glue("Info: generating plot of {length(unique(.data$file_id))} data files, of which {length(unique(pull(filter(.data, cycle_dis), file_id)))} have a drop in pressure.") %>%
             message()

@@ -17,6 +17,10 @@ delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
                          method = "normal",
                          genplot = default(genplot), quiet = default(quiet),
                          plot_info = NULL, plot_column = D47_raw) {
+  # global variables and defaults
+  D47_raw <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- r44 <- r45 <-
+    r46 <- r47 <- r48 <- r49 <- NULL
+
   plot_column <- enquo(plot_column)
 
   if (genplot & is.null(plot_info))
@@ -41,7 +45,8 @@ delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
                      i49 = r49, R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
                      R48 = R48_wg, R49 = R49_wg) %>%
     little_deltas(quiet = quiet) %>%
-    bulk_and_clumping_deltas(d13C_PDB_wg = d13C_PDB_wg, d18O_PDBCO2_wg = d18O_PDBCO2_wg)
+    bulk_and_clumping_deltas(d13C_PDB_wg = d13C_PDB_wg,
+                             d18O_PDBCO2_wg = d18O_PDBCO2_wg)
 
   if (genplot)
     pipe_plot(out, plot_raw_delta, .info = plot_info, y = !! plot_column,

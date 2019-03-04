@@ -10,6 +10,10 @@
 #'     conventional bracketing of sample gas.
 #' @export
 match_intensities <- function(.data, method = "normal", quiet = default(quiet)) {
+  # global variables and defaults
+  r44 <- r45 <- r46 <- r47 <- r48 <- r49 <- s44 <- s45 <- s46 <- s47 <- s48 <-
+    s49 <- target_cycle_44 <- cycle <- NULL
+
   if (! method %in% c("normal", "linterp"))
     stop("Method '", method, "' should be either 'normal' or 'linterp'")
   if (!quiet)

@@ -11,11 +11,14 @@
 #'   gasses side-by-side.
 #' @export
 spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = default(quiet)) {
+  # global variables and defaults
+  file_id <- mass <- intensity <- type <- cycle <- mir <- NULL
+
   if (!quiet)
     message("Info: reshaping data into wide format.")
 
   if (!"type" %in% colnames(.data))
-    stop(glue("Column 'type' not found in {paste(colnames(.data))}")
+    stop(glue("Column 'type' not found in {paste(colnames(.data))}"))
 
   if (is.null(ids)) {
     ids <- c("file_id", "cycle")
@@ -37,6 +40,7 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
     tidyr::unite(mir, type, mass, sep = "") %>%
     # spread them back out into format file_id, cycle, s44, s45, ..., r44, r45
     spread(mir, intensity)
+
   .data %>%
     ungroup() %>%
     select(-one_of(our_cols)) %>%

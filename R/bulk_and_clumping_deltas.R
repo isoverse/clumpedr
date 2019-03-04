@@ -7,7 +7,13 @@
 #' @param .data A [tibble][tibble::tibble-package] containing delta values 45 through 49.
 #' @param d13C_PDB_wg Reference gas \eqn{\delta^{13}}{δ13}C value.
 #' @param d18O_PDBCO2_wg Reference gas \eqn{\delta^{13}}{δ13}C gas value.
+#' @param d45 Column name of d45.
+#' @param d46 Column name of d46.
+#' @param d47 Column name of d47.
+#' @param d48 Column name of d48.
+#' @param d49 Column name of d49.
 #' @inheritParams isobar_ratios
+#' @inheritParams default.params
 #' @export
 bulk_and_clumping_deltas  <- function(.data, d13C_PDB_wg, d18O_PDBCO2_wg,
                                       # make the column names a bit flexible
@@ -20,8 +26,17 @@ bulk_and_clumping_deltas  <- function(.data, d13C_PDB_wg, d18O_PDBCO2_wg,
                                       R18_PDBCO2 = default(R18_PDBCO2),
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = default(quiet)) {
+  # global variables and defaults
+  K <- A <- B <- C <- D <- aa <- bb <- cc <- R18 <- R18_wg <- R17 <- R13 <-
+    R13_wg <- R45_flag <- R46_flag <- D47_raw <- D48_raw <- D49_raw <- R45 <-
+      R46 <- R47 <- R48 <- R48 <- d13C_PDB_wg <- d18O_PDBCO2_wg <-
+        d18O_PDBCO2 <- d18O_PDB <- R45 <- R46 <- R47 <- R48 <- R49 <-
+          R45_stoch <- R46_stoch <- R47_stoch <- R48_stoch <- R49_stoch <-
+            R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <-NULL
+
   if (!quiet)
-    message("Info: calculating \u03b413C, \u03b418O, and \u0394's.")
+    # d13C and d18O with nice UTF-8 glyphs
+    message("Info: calculating \u03b4\u00b9\u00b3C, \u03b4\u00b9\u2078O, and \u0394's.")
 
   d45 <- enquo(d45)
   d46 <- enquo(d46)

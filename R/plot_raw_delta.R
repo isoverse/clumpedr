@@ -9,11 +9,15 @@
 #'
 #' @param .data The input tibble, result of [bulk_and_clumping_deltas()].
 #' @param .info The metadata of the raw cycles, used to get the `file_datetime`.
+#' @param y Column to put on the y ayis.
 #' @param raw_points Logical, whether to include individual cycle estimates (defaults to `FALSE`).
 #' @param point_alpha The alpha value of the raw points if they are plotted.
 #' @export
 plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
                            point_alpha = .5, quiet = default(quiet)) {
+  # global variables and defaults
+  D47_raw <- file_id <- file_datetime <- NULL
+
   y <- enquo(y)
 
   if (!quiet)

@@ -9,6 +9,9 @@
 #' @seealso revcal tempcal
 #' @export
 temperature_calculation <- function(.data, D47 = D47_final, quiet = default(quiet)) {
+  # global variables and defaults
+  D47_final <- temperature <- NULL
+
   D47 <- enquo(D47)
 
   if (!quiet)

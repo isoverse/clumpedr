@@ -11,6 +11,9 @@
 #' @param lambda Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 #'   from Barkan and Luz, 2005.
 #' @param D17O TODO: look up in Daëron 2016 what this does again.
+#' @param D47 TODO: look up
+#' @param D48 TODO: look up
+#' @param D49 TODO: look up
 #' @references
 #'
 #' TODO: add all the references here!

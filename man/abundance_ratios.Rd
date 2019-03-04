@@ -13,10 +13,25 @@ abundance_ratios(.data, i44 = s44, i45 = s45, i46 = s46, i47 = s47,
 
 \item{i44}{Name of mass 44 column.}
 
-\item{i45}{Name of mass 45 column. Same for intensities 46 through 49.}
+\item{i45}{Name of mass 45 column.}
 
-\item{R45}{Desired new name of the calculated ratio for mass 45. Same for
-intensities 46 through 49.}
+\item{i46}{Name of mass 46 column.}
+
+\item{i47}{Name of mass 47 column.}
+
+\item{i48}{Name of mass 48 column.}
+
+\item{i49}{Name of mass 49 column.}
+
+\item{R45}{Desired new name of the calculated ratio for mass 45.}
+
+\item{R46}{Desired new name of the calculated ratio for mass 46.}
+
+\item{R47}{Desired new name of the calculated ratio for mass 47.}
+
+\item{R48}{Desired new name of the calculated ratio for mass 48.}
+
+\item{R49}{Desired new name of the calculated ratio for mass 49.}
 }
 \description{
 Calculate abundance ratios by dividing input mass column \eqn{i} over mass

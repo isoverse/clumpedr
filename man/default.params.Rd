@@ -26,6 +26,12 @@ from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+
+\item{D47}{TODO: look up}
+
+\item{D48}{TODO: look up}
+
+\item{D49}{TODO: look up}
 }
 \description{
 Default parameters

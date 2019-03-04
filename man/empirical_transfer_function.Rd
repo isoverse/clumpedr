@@ -21,6 +21,8 @@ al., 2017.}
 25 °C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
 
+\item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
+
 \item{exp}{Name of the new column that will hold expected values.}
 
 \item{session}{The column name to group analyses by. Defaults to

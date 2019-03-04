@@ -10,8 +10,14 @@
 #' @param ... Additional aesthetics to pass to ggplot.
 #' @export
 plot_base <- function(.data, ...) {
-  .data %>%
-    ggplot(aes(colour = broadid, # the rest are fake aesthetics for plotly
+  # global variables and defaults
+  broadid <- file_id <- file_path <- file_subpath <- file_datetime <- Row <-
+    `Peak Center` <- Background <- Pressadjust <- `Reference Refill` <-
+      Line <- Sample <- `Weight [mg]` <- `Identifier 1` <- Analysis <-
+        Comment <- Preparation <- Method <- measurement_info <-
+          MS_integration_time.s <- masspec <- s44_init <- r44_init <- NULL
+
+  .data %>% ggplot(aes(colour = broadid, # the rest are fake aesthetics for plotly
                file_id = file_id, file_path = file_path,
                file_subpath = file_subpath, file_datetime = file_datetime,
                row = Row, peak_center = `Peak Center`, background = Background,

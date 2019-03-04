@@ -7,15 +7,14 @@
 #'   away from the preparation mean.
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from
-#'     [collapse_cycles()].
-#' @param info A [tibble][tibble::tibble-package], resulting from
-#'     [clean_did_info()].
+#'   [collapse_cycles()].
 #' @param init The minimum initial intensity of mass 44.
 #' @param diff The maximum initial difference in intensity of mass 44.
 #' @param nsd_off The number of standard deviations away from the median
-#'     Preparation of the standards.
-#' @param plot_col The column to use for plotting. Defaults to
-#'     `D47_raw_mean`.
+#'   Preparation of the standards.
+#' @param plot_x The column to use for plotting the x axis.
+#' @param plot_y The column to use for plotting the y axis. Defaults to
+#'   `D47_raw_mean`.
 #' @inheritParams find_outliers
 #' @export
 remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
@@ -23,6 +22,9 @@ remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
                             plot_x = file_datetime, plot_y = D47_raw_mean,
                             session = Preparation,
                             quiet = default(quiet), genplot = default(genplot)) {
+  # global variables and defaults
+  file_datetime <- D47_raw_mean <- Preparation <- outlier <- NULL
+
   session <- enquo(session)
 
   if (!quiet)
