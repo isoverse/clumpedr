@@ -118,8 +118,7 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
 
   etf <- .data %>%
     group_by(!! session) %>%
-    # TODO: pass quosures as expression to lm? For now I've hard-coded it.
-    do(model = broom::tidy(pos_lm(D47_raw_mean ~ expected_D47,
+    do(model = broom::tidy(pos_lm(stats::formula(paste(!! raw, "~", !! exp)),
                                   data = ., na.action = na.omit))) %>%
     unnest() %>%
     select(!! session, term, estimate) %>%

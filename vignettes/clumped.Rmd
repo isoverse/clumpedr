@@ -88,12 +88,14 @@ pipe.
 
 First we filter out the measurements we want, based on the Method name.
 
+We use a regular expression, or `regexp`. They are very useful ways of looking
+for patterns in strings.
+
 ```{r}
 filt <- dids %>%
   # we can subset to some files of interest (e.g., based on a regular expression)
-  # iso_filter_files(grepl("[0-9]{6}_129|[0-9]{6}_130", file_id)) %>%
-  # all clumped runs
-  filter_clumped()
+  # in this case we subset to all the runs that have a "Clumped" method.
+  iso_filter_files(grepl("Clumped.*met", Method))
 ```
 
 ### extract raw data
@@ -129,6 +131,11 @@ ones---interactively using `ggplotly`:
 library(plotly)
 ggplotly(dynamicTicks = TRUE)
 ```
+
+This creates an interactive version of the last plot in your browser. The
+`plot_base()` function assigns a lot of redundant aesthetics to the ggplot
+object. They won't show in regular plots, but when you create an interactive
+version and you hover over a datapoint, all of the metadata is displayed.
 
 ### background correction
 

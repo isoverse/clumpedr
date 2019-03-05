@@ -48,7 +48,6 @@ Collate:
     'delta_values.R'
     'disable_cycles.R'
     'empirical_transfer_function.R'
-    'filter_clumped.R'
     'find_bad_cycles.R'
     'find_outliers.R'
     'isobar_ratios.R'

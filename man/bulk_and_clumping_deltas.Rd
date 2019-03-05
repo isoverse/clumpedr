@@ -50,3 +50,9 @@ from Barkan and Luz, 2005.}
 Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
 \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
 }
+\references{
+Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
+  measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
+\url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
+}
