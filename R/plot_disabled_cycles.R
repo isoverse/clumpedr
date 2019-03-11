@@ -5,13 +5,16 @@
 #' @param max Maximum intensity cutoff.
 #' @family cycle functions
 #' @export
-plot_disabled_cycles  <- function(.data, min = 1500, max = 50000, quiet = default(quiet)) {
+plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, quiet = default(quiet)) {
   # global variables and defaults
-  grp <- file_id <- type <- cycle <- v44.mV <- grp <- cycle_dis <- type <- NULL
+  grp <- file_id <- type <- cycle <- v44.mV <- expected_D47 <- grp <- cycle_dis <- has_drop <-
+    `Identifier 1` <- Preparation <- type <- NULL
+
+  y <- enquo(y)
 
   .data  %>%
     mutate(grp = paste(file_id, type)) %>%
-    ggplot(aes(x = cycle, y = v44.mV)) +
+    ggplot(aes(x = cycle, y = !! y)) +
     geom_line(aes(colour = has_drop, group = grp), show.legend = FALSE) +
     geom_point(aes(colour = factor(cycle_dis), shape = factor(cycle_dis))) +
     ## scale_shape_manual(values = c(16, 16, 16, NA, 5)) +

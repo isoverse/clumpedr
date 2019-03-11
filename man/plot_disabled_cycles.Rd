@@ -4,7 +4,7 @@
 \alias{plot_disabled_cycles}
 \title{Plot disabled cycles}
 \usage{
-plot_disabled_cycles(.data, min = 1500, max = 50000,
+plot_disabled_cycles(.data, y = v44.mV, min = 1500, max = 50000,
   quiet = default(quiet))
 }
 \arguments{

@@ -20,8 +20,8 @@ empirical_transfer_function <- function(.data,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
-# global variables and defaults
-  ## D47_raw_mean <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
+  # global variables and defaults
+  D47_raw_mean <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
 
   raw <- enquo(raw)
   exp <- enquo(exp)
