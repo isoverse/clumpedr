@@ -7,33 +7,18 @@
 #' @export
 plot_disabled_cycles  <- function(.data, min = 1500, max = 50000, quiet = default(quiet)) {
   # global variables and defaults
-  grp <- linegrps <- file_id <- hasdrop <- cycle_dis <- cycle <- v44.mV <-
-    type <- NULL
+  grp <- file_id <- type <- cycle <- v44.mV <- grp <- cycle_dis <- type <- NULL
 
-  if (!quiet)
-    glue("Info: generating plot of {length(unique(.data$file_id))} data files, of which {length(unique(pull(filter(.data, cycle_dis), file_id)))} have a drop in pressure.") %>%
-            message()
-  # we need a weird group for the lines
-  pld <- .data %>%
-    mutate(grp = paste(file_id, type, sep = "_"),
-           linegrps = ifelse(hasdrop,
-                             ifelse(cycle_dis, "disabled", "has a drop"),
-                             "no bad cycles"))
-  # TODO: convert linegrps to factor with desired order?
+  .data  %>%
+    mutate(grp = paste(file_id, type)) %>%
+    ggplot(aes(x = cycle, y = v44.mV)) +
+    geom_line(aes(colour = has_drop, group = grp), show.legend = FALSE) +
+    geom_point(aes(colour = factor(cycle_dis), shape = factor(cycle_dis))) +
+    ## scale_shape_manual(values = c(16, 16, 16, NA, 5)) +
+    ## scale_alpha_manual(values = c(.4, .4, .4, .1, 1)) +
+    ## scale_size_manual(values = c(3, 2, 2, 1, 3)) +
+    ## scale_colour_manual(values = c("orange", "gray", "blue", "blue", "gray", "yellow", "black")) +
 
-  pld %>%
-    ggplot(aes(x = cycle,
-               y = v44.mV,
-               group = grp,
-               colour = linegrps,
-               alpha = linegrps,
-               size = linegrps)) +
-    # cleanly
-    geom_line() +
-    geom_point() +
-    scale_colour_manual(values = c("red", "orange", "gray")) +
-    scale_alpha_manual(values = c(.6, .2, .1)) +
-    scale_size_manual(values = c(3, 2, 1)) +
-    geom_hline(yintercept = range(min, max), col = "indianred", size = 2) +
+    geom_hline(yintercept = range(min, max), col = "indianred") +
     facet_grid(cols = vars(type))
 }

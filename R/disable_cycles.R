@@ -21,13 +21,13 @@ disable_cycles  <- function(.data, min = 1500, max = 50000, fac = 1.5,
   v44 <- enquo(v44)
   cycle <- enquo(cycle)
 
-  bad_dat <- find_bad_cycles(.data, min = min, max = max, fac = fac,
+  tmp <- find_bad_cycles(.data, min = min, max = max, fac = fac,
                              v44 = !! v44, cycle = !! cycle,
                              relative_to = relative_to)
 
-  if (genplot) pipe_plot(bad_dat, plot_disabled_cycles, min = min, max = max)
+  if (genplot) pipe_plot(tmp, plot_disabled_cycles, min = min, max = max)
 
-  out <- filter(bad_dat, ! cycle_dis)
+  out <- filter(tmp, cycle_dis == "no_drop")
 
   if (!quiet)
     glue("Info: Applying bad cycle filter, keeping {nrow(out)} out of {nrow(.data)} cycles.") %>%
