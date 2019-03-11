@@ -5,8 +5,8 @@
 \title{Remove outliers}
 \usage{
 remove_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  std_names = paste0("ETH-", 1:3), plot_x = file_datetime,
-  plot_y = D47_raw_mean, session = Preparation,
+  std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
+  plot_x = file_datetime, session = Preparation,
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
@@ -22,10 +22,9 @@ Preparation of the standards.}
 
 \item{std_names}{Names of the standards used for the correction.}
 
-\item{plot_x}{The column to use for plotting the x axis.}
+\item{D47}{The column with Δ47 values. Defaults to \code{D47_raw_mean}.}
 
-\item{plot_y}{The column to use for plotting the y axis. Defaults to
-\code{D47_raw_mean}.}
+\item{plot_x}{The column to use for plotting the x axis.}
 
 \item{session}{Column name that defines correction session.}
 }

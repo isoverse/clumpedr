@@ -5,8 +5,8 @@
 \title{Find outliers}
 \usage{
 find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  n_id1 = 5, std_names = paste0("ETH-", 1:3), session = Preparation,
-  id1 = `Identifier 1`)
+  n_id1 = 5, D47 = D47_raw_mean, std_names = paste0("ETH-", 1:3),
+  session = Preparation, id1 = `Identifier 1`)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
@@ -18,6 +18,8 @@ find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
 \item{nsd_off}{Number of standard deviations away from the mean threshold.}
 
 \item{n_id1}{Minimum number of aliquots within session to calculate threshold within group.}
+
+\item{D47}{The column with Δ47 values.}
 
 \item{std_names}{Names of the standards used for the correction.}
 

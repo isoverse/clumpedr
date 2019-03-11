@@ -43,7 +43,7 @@ clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-"
 parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other",
                        ms_name = masspec, broadid_name = broadid, id1 = `Identifier 1`) {
   # global variables and defaults
-  masspec <- broadid <- `Identifier 1` <- Row <- `Peak Center` <-
+  broadid <- `Identifier 1` <- Row <- `Peak Center` <-
     Background <- Pressadjust <- `Reference Refill` <- Line <- Sample <-
       `Weight [mg]` <- Analysis <- Preparation <- NULL
 

@@ -118,8 +118,7 @@ which cycles have been disabled.
 
 ```{r}
 disc <- rawd %>%
-  # get rid of bad cycles
-  disable_cycles(fac = 2, genplot = TRUE)
+  disable_cycles(fac = 1.5, relative_to = "init", genplot = TRUE)
 ```
 
 ### HINT: look at plots interactively
