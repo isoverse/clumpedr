@@ -15,9 +15,6 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
   raw <- enquo(raw)
   exp <- enquo(exp)
 
-  if (quo_name(raw) != "D47_raw_mean" | quo_name(exp) != "expected_D47")
-    warning("Currently ignoring `raw` and `exp`, lm call cannot process quosure.")
-
   session <- enquo(session)
 
   # this makes it continue even if lm fails.
@@ -25,11 +22,13 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
 
   etf <- .data %>%
     group_by(!! session) %>%
-    do(model = broom::tidy(pos_lm(stats::formula(paste(!! raw, "~", !! exp)),
+    do(model = broom::tidy(pos_lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
                                   data = ., na.action = na.omit))) %>%
     unnest() %>%
     select(!! session, term, estimate) %>%
     spread(term, estimate) %>%
     select(!! session, intercept = `(Intercept)`, slope = expected_D47) %>%
     right_join(.data, by = quo_name(session))
+
+  etf
 }

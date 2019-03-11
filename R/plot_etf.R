@@ -17,7 +17,7 @@ plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
                      exp = expected_D47,
                      session = Preparation) {
   # global variables and defaults
-  D47_etf <- expected_D47 <- D47_raw_mean <- Preparation <- broadid <- NULL
+  expected_D47 <- D47_raw_mean <- Preparation <- broadid <- NULL
 
   session <- enquo(session)
   D47_etf <- enquo(D47_etf)
