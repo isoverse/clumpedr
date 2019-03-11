@@ -12,19 +12,19 @@
 #' @param diff The maximum initial difference in intensity of mass 44.
 #' @param nsd_off The number of standard deviations away from the median
 #'   Preparation of the standards.
+#' @param D47 The column with Δ47 values. Defaults to `D47_raw_mean`.
 #' @param plot_x The column to use for plotting the x axis.
-#' @param plot_y The column to use for plotting the y axis. Defaults to
-#'   `D47_raw_mean`.
 #' @inheritParams find_outliers
 #' @export
 remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
-                            std_names = paste0("ETH-", 1:3),
-                            plot_x = file_datetime, plot_y = D47_raw_mean,
+                            std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
+                            plot_x = file_datetime,
                             session = Preparation,
                             quiet = default(quiet), genplot = default(genplot)) {
   # global variables and defaults
   file_datetime <- D47_raw_mean <- Preparation <- outlier <- NULL
 
+  D47 <- enquo(D47)
   session <- enquo(session)
 
   if (!quiet)
@@ -34,12 +34,11 @@ remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
 
   out <- .data %>%
     find_outliers(init = init, diff = diff, nsd_off = nsd_off,
-                  std_names = std_names, session = !! session)
+                  D47 = !! D47, std_names = std_names, session = !! session)
 
   if (genplot) {
     plot_x <- enquo(plot_x)
-    plot_y <- enquo(plot_y)
-    pipe_plot(out, plot_outliers, x = !! plot_x, y = !! plot_y)
+    pipe_plot(out, plot_outliers, x = !! plot_x, y = !! D47)
   }
 
   # TODO: remove actual removal and still include them, but not in ETF calculations?
