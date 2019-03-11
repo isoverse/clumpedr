@@ -15,14 +15,17 @@ empirical_transfer_function <- function(.data,
                                         std_names = paste0("ETH-", 1:3),
                                         D47 = c(0.258, 0.256, 0.691), #0.507),
                                         aff = 0.062,
+                                        cycle_dis = cycle_dis, outlier = outlier,
                                         raw = D47_raw_mean, exp = expected_D47,
                                         id1 = `Identifier 1`,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
   # global variables and defaults
-  D47_raw_mean <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
+  cycle_dis <- outlier <- D47_raw_mean <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
 
+  cycle_dis <- enquo(cycle_dis)
+  outlier <- enquo(outlier)
   raw <- enquo(raw)
   exp <- enquo(exp)
   id1 <- enquo(id1)
@@ -34,7 +37,8 @@ empirical_transfer_function <- function(.data,
   out <- .data %>%
     append_expected_values(std_names = std_names, D47 = D47, aff = aff,
                            id1 = !! id1, exp = !! exp) %>%
-    calculate_etf(raw = !! raw, exp = !! exp, session = !! session, quiet = quiet) %>%
+    calculate_etf(cycle_dis = !! cycle_dis, outlier == !! outlier,
+                  raw = !! raw, exp = !! exp, session = !! session, quiet = quiet) %>%
     apply_etf(D47 = !! raw)
   if (genplot)
     out %>%

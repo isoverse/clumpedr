@@ -19,7 +19,7 @@ find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
 
 \item{n_id1}{Minimum number of aliquots within session to calculate threshold within group.}
 
-\item{D47}{The column with Δ47 values.}
+\item{D47}{The column with \eqn{\Delta_{47}}{Δ47} values.}
 
 \item{std_names}{Names of the standards used for the correction.}
 

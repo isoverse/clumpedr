@@ -12,7 +12,7 @@
 #' @param diff Maximum initial difference in mass 44 threshold between standard and sample gas.
 #' @param nsd_off Number of standard deviations away from the mean threshold.
 #' @param n_id1 Minimum number of aliquots within session to calculate threshold within group.
-#' @param D47 The column with Δ47 values.
+#' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values.
 #' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.

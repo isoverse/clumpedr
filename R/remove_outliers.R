@@ -28,7 +28,7 @@ remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
   session <- enquo(session)
 
   if (!quiet)
-    glue("Info: Removing aliquots with initial intensity < {init}, difference in initial
+    glue("Info: identifying aliquots with initial intensity < {init}, difference in initial
                       intensity > {diff}, or {nsd_off} SD's away from the {quo_name(session)} mean.") %>%
       message()
 
@@ -41,9 +41,8 @@ remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
     pipe_plot(out, plot_outliers, x = !! plot_x, y = !! D47)
   }
 
-  # TODO: remove actual removal and still include them, but not in ETF calculations?
   if (!quiet)
-    glue("Info: removing {nrow(filter(out, outlier != 'no_outlier'))} outliers out of {nrow(out)} samples.") %>%
+    glue("Info: found {nrow(filter(out, outlier != 'no_outlier'))} outliers out of {nrow(out)} samples.") %>%
       message()
-  out %>% filter(outlier == "no_outlier")
+  out
 }
