@@ -13,15 +13,17 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
   y <- enquo(y)
 
   .data  %>%
-    mutate(grp = paste(file_id, type)) %>%
-    ggplot(aes(x = cycle, y = !! y)) +
-    geom_line(aes(colour = has_drop, group = grp), show.legend = FALSE) +
-    geom_point(aes(colour = factor(cycle_dis), shape = factor(cycle_dis))) +
-    ## scale_shape_manual(values = c(16, 16, 16, NA, 5)) +
-    ## scale_alpha_manual(values = c(.4, .4, .4, .1, 1)) +
-    ## scale_size_manual(values = c(3, 2, 2, 1, 3)) +
-    ## scale_colour_manual(values = c("orange", "gray", "blue", "blue", "gray", "yellow", "black")) +
-
-    geom_hline(yintercept = range(min, max), col = "indianred") +
+    mutate(grp = paste(file_id, type),
+           has_drop = ifelse(has_drop, "ali_drop", "ali_nodrop")) %>%
+    unite("cycle_meta", cycle_dis, has_drop, sep = " ") %>%
+    ggplot(aes(x = cycle, y = !! y, colour = factor(cycle_meta), shape = factor(cycle_meta),
+           alpha = factor(cycle_meta))) +
+    geom_line(aes(group = grp), show.legend = FALSE) +
+    geom_point() +
+    scale_shape_manual(values = c(16, 16, 16, NA, 5)) +
+    scale_alpha_manual(values = c(1, 1, 1, .3, 1)) +
+    scale_size_manual(values = c(1, 4, 2, 1, 5)) +
+    scale_colour_manual(values = c("orange", "red", "darkgreen", "gray", "red")) +
+    geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
     facet_grid(cols = vars(type))
 }

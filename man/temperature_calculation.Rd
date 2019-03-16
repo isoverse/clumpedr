@@ -4,12 +4,15 @@
 \alias{temperature_calculation}
 \title{Calculate the temperatures}
 \usage{
-temperature_calculation(.data, D47 = D47_final, quiet = default(quiet))
+temperature_calculation(.data, D47 = D47_final, T = temperature,
+  quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}
 
 \item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
+
+\item{T}{The column name of the output temperature.}
 }
 \description{
 This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from

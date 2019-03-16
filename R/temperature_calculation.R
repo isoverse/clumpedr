@@ -6,16 +6,20 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from [acid_fractionation()].
 #' @param D47 The column name of the \eqn{\Delta_47} values to use as input.
+#' @param T The column name of the output temperature.
 #' @seealso revcal tempcal
 #' @export
-temperature_calculation <- function(.data, D47 = D47_final, quiet = default(quiet)) {
+temperature_calculation <- function(.data, D47 = D47_final,
+                                    T = temperature,
+                                    quiet = default(quiet)) {
   # global variables and defaults
   D47_final <- temperature <- NULL
 
   D47 <- enquo(D47)
+  T <- enquo(T)
 
   if (!quiet)
     message("Info: calculating temperature using default calibration, ignoring uncertainty in the calibration.")
   .data %>%
-    mutate(temperature = revcal(D47 = !! D47, ignorecnf = TRUE))
+    mutate(!! T := revcal(!! D47, ignorecnf = TRUE))
 }

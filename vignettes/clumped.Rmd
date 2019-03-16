@@ -218,8 +218,6 @@ rout <- dati %>%
 
 ```{r}
 detf <- rout %>%
-  # TODO: this currently throws an error due to something in append_expected_values()
-  # Error: Column `exp` must be length 5180 (the number of rows) or one, not 0
   empirical_transfer_function(session = Preparation, genplot = TRUE)
 ```
 
