@@ -25,10 +25,14 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
     ggplot(aes(x = cycle, y = !! y, colour = cycle_meta, shape = cycle_meta, alpha = cycle_meta)) +
     geom_line(aes(group = file_id), alpha = .5) +
     geom_point() +
-    scale_shape_manual(values = c(NA, 16, 16, 16, 16, 5)) +
-    scale_alpha_manual(values = c(.2, 1, 1, 1, 1, 1)) +
-    scale_size_manual(values = c(1, 1, 2, 3, 4, 5)) +
-    scale_colour_manual(values = c("gray", "steelblue", "indianred", "darkgreen", "orange", "red")) +
+    scale_shape_manual(values = c(NA, 16, 16, 16, 16, 5),
+                       drop = FALSE) +
+    scale_alpha_manual(values = c(.2, 1, 1, 1, 1, 1),
+                       drop = FALSE) +
+    scale_size_manual(values = c(1, 1, 2, 3, 4, 5),
+                      drop = FALSE) +
+    scale_colour_manual(values = c("gray", "steelblue", "indianred", "darkgreen", "orange", "red"),
+                        drop = FALSE) +
     geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
     facet_grid(cols = vars(type))
 }
