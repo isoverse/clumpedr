@@ -24,6 +24,8 @@ calculate_etf <- function(.data, cycle_dis = cycle_dis, outlier = outlier, raw =
 
   etf <- .data %>%
     # filter out bad cycles and outliers
+    # TODO: make this procedure operate on nested tibbles! <3
+    # http://stat545.com/block024_group-nest-split-map.html
     filter(cycle_dis == "no_drop",
            outlier == "no_outlier") %>%
     group_by(!! session) %>%

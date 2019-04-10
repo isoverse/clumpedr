@@ -22,33 +22,31 @@ collapse_cycles <- function(.data, na.rm = TRUE, quiet = default(quiet)) {
     message("Info: collapsing cycles, calculating sample means and standard deviations.")
   .data %>%
     group_by(file_id) %>%
-    summarise(
-      d45_mean = mean(d45, na.rm = na.rm),
-      d45_sd = sd(d45, na.rm = na.rm),
-      d46_mean = mean(d46, na.rm = na.rm),
-      d46_sd = sd(d46, na.rm = na.rm),
-      d47_mean = mean(d47, na.rm = na.rm),
-      d47_sd = sd(d47, na.rm = na.rm),
-      d48_mean = mean(d48, na.rm = na.rm),
-      d48_sd = sd(d48, na.rm = na.rm),
-      d49_mean = mean(d49, na.rm = na.rm),
-      d49_sd = sd(d49, na.rm = na.rm),
+    nest() %>%
+    mutate(d45_mean = map_dbl(data, ~ mean(.x$d45, na.rm = na.rm)),
+           d45_sd = map_dbl(data, ~ sd(.x$d45, na.rm = na.rm)),
+           d46_mean = map_dbl(data, ~ mean(.x$d45, na.rm = na.rm)),
+           d46_sd = map_dbl(data, ~ sd(.x$d45, na.rm = na.rm)),
+           d47_mean = map_dbl(data, ~ mean(.x$d45, na.rm = na.rm)),
+           d47_sd = map_dbl(data, ~ sd(.x$d45, na.rm = na.rm)),
+           d48_mean = map_dbl(data, ~ mean(.x$d45, na.rm = na.rm)),
+           d48_sd = map_dbl(data, ~ sd(.x$d45, na.rm = na.rm)),
+           d49_mean = map_dbl(data, ~ mean(.x$d45, na.rm = na.rm)),
+           d49_sd = map_dbl(data, ~ sd(.x$d45, na.rm = na.rm)),
 
-      d18O_PDBCO2_mean = mean(d18O_PDBCO2, na.rm = na.rm),
-      d18O_PDBCO2_sd = sd(d18O_PDBCO2, na.rm = na.rm),
-      d18O_PDB_mean = mean(d18O_PDB, na.rm = na.rm),
-      d18O_PDB_sd = sd(d18O_PDB, na.rm = na.rm),
-      d13C_PDB_mean = mean(d13C_PDB, na.rm = na.rm),
-      d13C_PDB_sd = sd(d13C_PDB, na.rm = na.rm),
+      d18O_PDBCO2_mean = map_dbl(data, ~ mean(.x$d18O_PDBCO2, na.rm = na.rm)),
+      d18O_PDBCO2_sd = map_dbl(data, ~ sd(.x$d18O_PDBCO2, na.rm = na.rm)),
+      d18O_PDB_mean = map_dbl(data, ~ mean(.x$d18O_PDB, na.rm = na.rm)),
+      d18O_PDB_sd = map_dbl(data, ~ sd(.x$d18O_PDB, na.rm = na.rm)),
+      d13C_PDB_mean = map_dbl(data, ~ mean(.$d13C_PDB, na.rm = na.rm)),
+      d13C_PDB_sd = map_dbl(data, ~ sd(.x$d13C_PDB, na.rm = na.rm)),
 
-      D47_raw_mean = mean(D47_raw, na.rm = na.rm),
-      D47_raw_sd = sd(D47_raw, na.rm = na.rm),
-      D48_raw_mean = mean(D48_raw, na.rm = na.rm),
-      D48_raw_sd = sd(D48_raw, na.rm = na.rm),
-      D49_raw_mean = mean(D49_raw, na.rm = na.rm),
-      D49_raw_sd = sd(D49_raw, na.rm = na.rm),
-
-      # TODO: this n is not calculated correctly now! It should first filter?
-      N = n()
+      D47_raw_mean = map_dbl(data, ~ mean(.$D47_raw, na.rm = na.rm)),
+      D47_raw_sd = map_dbl(data, ~ sd(.x$D47_raw, na.rm = na.rm)),
+      D48_raw_mean = map_dbl(data, ~ mean(.$D48_raw, na.rm = na.rm)),
+      D48_raw_sd = map_dbl(data, ~ sd(.x$D48_raw, na.rm = na.rm)),
+      D49_raw_mean = map_dbl(data, ~ mean(.$D49_raw, na.rm = na.rm)),
+      D49_raw_sd = map_dbl(data, ~ sd(.x$D49_raw, na.rm = na.rm)),
+      N = map_int(data, ~ nrow(.x))
     )
 }
