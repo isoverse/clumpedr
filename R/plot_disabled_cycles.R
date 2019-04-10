@@ -13,17 +13,22 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
   y <- enquo(y)
 
   .data  %>%
-    mutate(grp = paste(file_id, type),
-           has_drop = ifelse(has_drop, "ali_drop", "ali_nodrop")) %>%
+    mutate(has_drop = ifelse(has_drop, "ali_drop", "ali_nodrop")) %>%
     unite("cycle_meta", cycle_dis, has_drop, sep = " ") %>%
-    ggplot(aes(x = cycle, y = !! y, colour = factor(cycle_meta), shape = factor(cycle_meta),
-           alpha = factor(cycle_meta))) +
-    geom_line(aes(group = grp), show.legend = FALSE) +
+    mutate(cycle_meta = factor(cycle_meta,
+                               levels = c("no_drop ali_nodrop",
+                                          "low_v44 NA",
+                                          "high_v44 NA",
+                                          "no_drop ali_drop",
+                                          "drop_before ali_drop",
+                                          "pressure_drop ali_drop"))) %>%
+    ggplot(aes(x = cycle, y = !! y, colour = cycle_meta, shape = cycle_meta, alpha = cycle_meta)) +
+    geom_line(aes(group = file_id), alpha = .5) +
     geom_point() +
-    scale_shape_manual(values = c(16, 16, 16, NA, 5)) +
-    scale_alpha_manual(values = c(1, 1, 1, .3, 1)) +
-    scale_size_manual(values = c(1, 4, 2, 1, 5)) +
-    scale_colour_manual(values = c("orange", "red", "darkgreen", "gray", "red")) +
+    scale_shape_manual(values = c(NA, 16, 16, 16, 16, 5)) +
+    scale_alpha_manual(values = c(.2, 1, 1, 1, 1, 1)) +
+    scale_size_manual(values = c(1, 1, 2, 3, 4, 5)) +
+    scale_colour_manual(values = c("gray", "steelblue", "indianred", "darkgreen", "orange", "red")) +
     geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
     facet_grid(cols = vars(type))
 }
