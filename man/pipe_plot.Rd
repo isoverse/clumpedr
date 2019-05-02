@@ -7,8 +7,6 @@
 pipe_plot(.data, plotfun, ...)
 }
 \arguments{
-\item{.data}{Tibble in the pipe.}
-
 \item{plotfun}{Function to use for plotting.}
 
 \item{...}{Additional arguments to the plotting function.}

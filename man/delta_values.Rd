@@ -2,12 +2,11 @@
 % Please edit documentation in R/delta_values.R
 \name{delta_values}
 \alias{delta_values}
-\title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O,
-\eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
+\title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
 \usage{
 delta_values(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
-  method = "normal", genplot = default(genplot),
-  quiet = default(quiet), plot_info = NULL, plot_column = D47_raw)
+  method = "normal", plot_info = NULL, plot_column = D47_raw,
+  genplot = default(genplot), quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -26,5 +25,5 @@ delta_values(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 \item{d18O_PBDCO2_wg}{Working gas \eqn{\delta^{18}}{δ18}O value.}
 }
 \description{
-This is a wrapper function that calculates all delta values.
+Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
 }

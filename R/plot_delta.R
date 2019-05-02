@@ -14,5 +14,6 @@ plot_delta <- function(.data, x = file_datetime, y = D47_final, ...) {
   y <- enquo(y)
   .data %>%
     plot_base(x = !! x, y = !! y, ...) +
-    geom_point()
+    geom_violin(aes(group = file_id, fill = broadid), alpha = .5) +
+    geom_point(alpha = .5, shape = 1)
 }

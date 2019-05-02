@@ -13,11 +13,11 @@
 #' @export
 plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
                      D47_etf = D47_etf,
-                     raw = D47_raw_mean,
+                     raw = D47_raw,
                      exp = expected_D47,
                      session = Preparation) {
   # global variables and defaults
-  expected_D47 <- D47_raw_mean <- Preparation <- broadid <- NULL
+  expected_D47 <- D47_raw <- Preparation <- broadid <- NULL
 
   session <- enquo(session)
   D47_etf <- enquo(D47_etf)

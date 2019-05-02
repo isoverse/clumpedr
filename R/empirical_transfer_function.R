@@ -16,13 +16,13 @@ empirical_transfer_function <- function(.data,
                                         D47 = c(0.258, 0.256, 0.691), #0.507),
                                         aff = 0.062,
                                         cycle_dis = cycle_dis, outlier = outlier,
-                                        raw = D47_raw_mean, exp = expected_D47,
+                                        raw = D47_raw, exp = expected_D47,
                                         id1 = `Identifier 1`,
                                         session = Preparation,
                                         quiet = default(quiet),
                                         genplot = default(genplot)) {
   # global variables and defaults
-  cycle_dis <- outlier <- D47_raw_mean <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
+  D47_raw <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
 
   cycle_dis <- enquo(cycle_dis)
   outlier <- enquo(outlier)

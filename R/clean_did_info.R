@@ -68,23 +68,20 @@ parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name
       !! broadid_name := ifelse(!! id1 %in% std_names, !! id1, oth_name))
 }
 
-#' Add initial intensities
+#' Get initial intensities of specified mass
 #'
-#' @param .did the did data resulting from [isoreader::iso_read_dual_inlet()].
+#' @param .did The did data resulting from [isoreader::iso_read_dual_inlet()].
 #'
 #' @family metadata cleaning functions
 #' @export
 get_inits <- function(.did) {
-  # TODO: document this function better.
   # global variables and defaults
-  type <- cycle <- file_id <- v44.mV <- sample <- standard <- NULL
+  type <- cycle <- file_id <- value <- sample <- standard <- v44.mV <- NULL
 
-  # TODO: check if all the columns are present, otherwise stop?
   .did %>%
     isoreader::iso_get_raw_data(quiet = TRUE) %>%
     # filter first standard and first sample cycles
     filter(type == "standard" & cycle == 0 | type == "sample" & cycle == 1) %>%
-    # TODO: check if v44.mV is present
     select(file_id, type, v44.mV) %>%
     spread(type, v44.mV) %>%
     select(file_id, s44_init = sample, r44_init = standard)

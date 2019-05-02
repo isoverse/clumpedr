@@ -13,9 +13,9 @@
 #' @param D47_out The new column name.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(.data, D47 = D47_raw_mean, D47_out = D47_etf) {
+apply_etf <- function(.data, D47 = D47_raw, D47_out = D47_etf) {
   # global variables and defaults
-  D47_raw_mean <- intercept <- slope <- D47_etf <- NULL
+  D47_raw <- intercept <- slope <- D47_etf <- NULL
 
   D47 <- enquo(D47)
   D47_out <- enquo(D47_out)

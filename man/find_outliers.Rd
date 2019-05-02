@@ -5,12 +5,10 @@
 \title{Find outliers}
 \usage{
 find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  n_id1 = 5, D47 = D47_raw_mean, std_names = paste0("ETH-", 1:3),
+  n_id1 = 5, D47 = D47_raw, std_names = paste0("ETH-", 1:3),
   session = Preparation, id1 = `Identifier 1`)
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}.}
-
 \item{init}{Initial intensity threshold for mass 44.}
 
 \item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}

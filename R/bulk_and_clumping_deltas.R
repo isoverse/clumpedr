@@ -35,8 +35,9 @@ bulk_and_clumping_deltas  <- function(.data, d13C_PDB_wg, d18O_PDBCO2_wg,
   K <- A <- B <- C <- D <- aa <- bb <- cc <- R18 <- R18_wg <- R17 <- R13 <-
     R13_wg <- R45_flag <- R46_flag <- D47_raw <- D48_raw <- D49_raw <- R45 <-
       R46 <- R47 <- R48 <- R48 <- d18O_PDBCO2 <- d18O_PDB <- R45 <- R46 <-
-        R47 <- R48 <- R49 <- R45_stoch <- R46_stoch <- R47_stoch <- R48_stoch <-
-          R49_stoch <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <-NULL
+        R47 <- R48 <- R49 <- R45_stoch <- R46_stoch <- R47_stoch <-
+          R48_stoch <- R49_stoch <- R45_wg <- R46_wg <- R47_wg <- R48_wg <-
+            R49_wg <- s49 <- s44 <- r49 <- r44 <- NULL
 
   if (!quiet)
     # d13C and d18O with nice UTF-8 glyphs
@@ -125,8 +126,9 @@ bulk_and_clumping_deltas  <- function(.data, d13C_PDB_wg, d18O_PDBCO2_wg,
            D48_raw = 1000 * (R48 / R48_stoch - 1),
            D49_raw = 1000 * (R49 / R49_stoch - 1))
 
-  # omit taylor polynomial coefficients ?
-  ## out %>%
-    ## select(-c(K, A, B, C, D, aa, bb, cc))
+  # add param 49
+  out <- out %>%
+    mutate(param_49 = (s49 / s44 - r49 / r44) * 1000)
+
   out
 }

@@ -2,15 +2,15 @@
 % Please edit documentation in R/clean_did_info.R
 \name{get_inits}
 \alias{get_inits}
-\title{Add initial intensities}
+\title{Get initial intensities of specified mass}
 \usage{
 get_inits(.did)
 }
 \arguments{
-\item{.did}{the did data resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.did}{The did data resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 }
 \description{
-Add initial intensities
+Get initial intensities of specified mass
 }
 \seealso{
 Other metadata cleaning functions: \code{\link{add_info}},

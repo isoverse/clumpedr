@@ -1,9 +1,17 @@
-# Taken from isoreader!
+# Taken from isoreader/isoprocessor
+# https://github.com/isoverse/isoprocessor/R/settings.R
+#' @export
+isoreader::iso_turn_info_messages_on
+
+#' @export
+isoreader::iso_turn_info_messages_off
 
 # retrieve package settings, internal function, not exported
 default <- function(name, allow_null = FALSE) {
   name <- enquo(name) %>% quos_to_text(variable = "setting")
-  value <- getOption(str_c("clumpedr.", name))
+  value <- isoreader:::default(!!sym(name), allow_null = TRUE)
+  if (is.null(value)) # not in isoreader settings
+      value <- getOption(str_c("clumpedr.", name))
   if (!allow_null && is.null(value))
     stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
   return(value)

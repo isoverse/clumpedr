@@ -7,7 +7,6 @@
 #' @details This is equivalent to running the [magrittr::%T>%] operator with
 #'   curly braces and a print command, but this is much cleaner.
 #'
-#' @param .data Tibble in the pipe.
 #' @param plotfun Function to use for plotting.
 #' @param ... Additional arguments to the plotting function.
 #'
@@ -46,6 +45,9 @@ pipe_plot <- function(.data, plotfun, ...) {
 #' @param slope The slope of the calibration.
 #' @param intercept The intercept of the calibration.
 #' @examples
+#' # load libraries
+#' library(ggplot2)
+#' library(tibble)
 #' # create an empty plot
 #' dat <- tibble(age = 1:10, D47 = rnorm(10, 0.7, .1))
 #' ggplot(dat, aes(x = age, y = D47)) +
@@ -54,6 +56,7 @@ pipe_plot <- function(.data, plotfun, ...) {
 #'   scale_y_continuous(sec.axis = sec_axis(temperature_axis()))
 #' @seealso revcal
 #' @seealso tempcal
+#' @export
 temperature_axis <- function(slope = 0.0449, intercept = 0.167) {
       ~ sqrt((slope * 1e6) / (. - intercept)) - 273.15
 }

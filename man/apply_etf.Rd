@@ -4,7 +4,7 @@
 \alias{apply_etf}
 \title{Apply the ETF}
 \usage{
-apply_etf(.data, D47 = D47_raw_mean, D47_out = D47_etf)
+apply_etf(.data, D47 = D47_raw, D47_out = D47_etf)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing column D47.}

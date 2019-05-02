@@ -14,12 +14,12 @@ Licence: GPL-3 + file LICENCE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
+    tidyr (>= 0.8.3.9000),
     magrittr,
     rlang,
     readr,
     glue (>= 1.2.0),
     dplyr,
-    tidyr (>= 0.8.2),
     ggplot2,
     isoreader (>= 0.9.29.9000),
     purrr,

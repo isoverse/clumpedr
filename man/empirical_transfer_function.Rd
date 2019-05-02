@@ -6,7 +6,7 @@
 \usage{
 empirical_transfer_function(.data, std_names = paste0("ETH-", 1:3),
   D47 = c(0.258, 0.256, 0.691), aff = 0.062, cycle_dis = cycle_dis,
-  outlier = outlier, raw = D47_raw_mean, exp = expected_D47,
+  outlier = outlier, raw = D47_raw, exp = expected_D47,
   id1 = `Identifier 1`, session = Preparation,
   quiet = default(quiet), genplot = default(genplot))
 }

@@ -1,7 +1,4 @@
-#' Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O,
-#' \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
-#'
-#' This is a wrapper function that calculates all delta values.
+#' Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [correct_backgrounds()].
@@ -14,9 +11,9 @@
 #' @param plot_column The column that will be plotted. Defaults to `D47_raw`.
 #' @export
 delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
-                         method = "normal",
-                         genplot = default(genplot), quiet = default(quiet),
-                         plot_info = NULL, plot_column = D47_raw) {
+                         method = "normal", plot_info = NULL,
+                         plot_column = D47_raw, genplot = default(genplot),
+                         quiet = default(quiet)) {
   # global variables and defaults
   D47_raw <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- r44 <- r45 <-
     r46 <- r47 <- r48 <- r49 <- NULL
@@ -28,11 +25,13 @@ delta_values <- function(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 
   # defaults for d13c and d18o of working gas
   if (is.null(d13C_PDB_wg)) {
+    # TODO: get d13c ref from raw data file
     d13C_PDB_wg <- -2.820
     if (!quiet)
       glue("Warning: no d13C_PDB_wg value specified, using UU-default of {d13C_PDB_wg}") %>% message()
   }
   if (is.null(d18O_PDBCO2_wg)) {
+    # TODO: get d18o ref from raw data file
     d18O_PDBCO2_wg <- -4.670
     if (!quiet)
       glue("Warning: no d18O_PDBCO2_wg value specified, using UU-default of {d18O_PDBCO2_wg}") %>% message()

@@ -25,7 +25,7 @@ match_intensities <- function(.data, method = "normal", quiet = default(quiet)) 
         (.) %>%
         # target cycle brackets sample cycle
         mutate_at(vars(r44:r49),
-                  funs((. + lead(.)) / 2)),
+                  funs((. + lag(.)) / 2)),
         # mutate(target_cycle_44 = cycle + .5),
       method == "linterp" ~
         (.) %>%

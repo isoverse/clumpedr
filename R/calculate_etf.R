@@ -12,7 +12,7 @@ calculate_etf <- function(.data, cycle_dis = cycle_dis, outlier = outlier, raw =
                           session = Preparation, quiet = default(quiet)) {
   # global variables and defaults
   cycle_dis <- outlier <- D47_raw_mean <- expected_D47 <- Preparation <- `(Intercept)` <-
-    term <- estimate <- intercept <- slope <- NULL
+    term <- estimate <- intercept <- slope <- etf <- etf_coefs <- data <- NULL
 
   raw <- enquo(raw)
   exp <- enquo(exp)
@@ -22,20 +22,16 @@ calculate_etf <- function(.data, cycle_dis = cycle_dis, outlier = outlier, raw =
   # this makes it continue even if lm fails.
   pos_lm <- purrr::possibly(lm, otherwise = NA, quiet = quiet)
 
-  etf <- .data %>%
-    # filter out bad cycles and outliers
-    # TODO: make this procedure operate on nested tibbles! <3
-    # http://stat545.com/block024_group-nest-split-map.html
-    filter(cycle_dis == "no_drop",
-           outlier == "no_outlier") %>%
+  .data %>%
     group_by(!! session) %>%
-    do(model = broom::tidy(pos_lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
-                                  data = ., na.action = na.omit))) %>%
-    unnest() %>%
-    select(!! session, term, estimate) %>%
-    spread(term, estimate) %>%
-    select(!! session, intercept = `(Intercept)`, slope = expected_D47) %>%
-    right_join(.data, by = quo_name(session))
-
-  etf
+    nest() %>%
+    mutate(etf = map(data, ~ .x %>%
+                             filter(outlier == "no_outlier") %>%
+                             pos_lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
+                                    data = ., na.action = na.omit)),
+           etf_coefs = map(etf, broom::tidy),
+           slope = map_dbl(etf_coefs, ~ filter(.x, term == "(Intercept)")$estimate),
+           intercept = map_dbl(etf_coefs, ~ filter(.x, term == quo_name(exp))$estimate)) %>%
+    select(-etf_coefs) %>%
+    unnest(cols = data)
 }

@@ -1,6 +1,7 @@
 #' Plot disabled cycles
 #'
 #' @param .data A [tibble][tibble::tibble-package] with output from [disable_cycles()].
+#' @param y Variable to put on the y-axis.
 #' @param min Minimum intensity cutoff.
 #' @param max Maximum intensity cutoff.
 #' @family cycle functions
@@ -8,7 +9,7 @@
 plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, quiet = default(quiet)) {
   # global variables and defaults
   grp <- file_id <- type <- cycle <- v44.mV <- expected_D47 <- grp <- cycle_dis <- has_drop <-
-    `Identifier 1` <- Preparation <- type <- NULL
+    `Identifier 1` <- Preparation <- type <- cycle_meta <- NULL
 
   y <- enquo(y)
 
