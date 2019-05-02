@@ -2,27 +2,28 @@
 % Please edit documentation in R/delta_values.R
 \name{delta_values}
 \alias{delta_values}
-\title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O,
-\eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
+\title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
 \usage{
-delta_values(dat, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
-  method = "linterp", genplot = default(genplot),
-  quiet = default(quiet), plot_info = NULL,
-  plot_column = quo(D47raw))
+delta_values(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
+  method = "normal", plot_info = NULL, plot_column = D47_raw,
+  genplot = default(genplot), quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
 
-\item{method}{Method for matching reference gas to sample gas. Defaults to \code{"linterp"}.}
+\item{method}{Method for matching reference gas to sample gas. Either
+\code{"normal"} (default) or \code{"linterp"}.}
 
-\item{plot_info}{The needed metadata for plotting. Result of \code{\link[=clean_did_info]{clean_did_info()}}.}
+\item{plot_info}{The needed metadata for plotting. Result of
+\code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{plot_column}{The quoted column that will be plotted. Defaults to \code{quo(D47raw)}.}
+\item{plot_column}{The column that will be plotted. Defaults to \code{D47_raw}.}
 
 \item{d13C_PBD_wg}{Working gas \eqn{\delta^{13}}{δ13}C value.}
 
 \item{d18O_PBDCO2_wg}{Working gas \eqn{\delta^{18}}{δ18}O value.}
 }
 \description{
-This is a wrapper function that calculates all delta values.
+Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
 }

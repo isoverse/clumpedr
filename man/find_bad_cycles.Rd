@@ -4,13 +4,13 @@
 \alias{find_bad_cycles}
 \title{Find bad cycles based on several criteria.}
 \usage{
-find_bad_cycles(dat, min = 1500, max = 50000, fac = 1.5,
-  m44.mV = quo(v44.mV), cycle = quo(cycle), relative_to = "init",
+find_bad_cycles(.data, min = 1500, max = 50000, fac = 1.5,
+  v44 = v44.mV, cycle = cycle, relative_to = "init",
   quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{isoreader::iso_get_raw_data()}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 
 \item{min}{Minimum intensity level for good cycles. Defaults to 1,500 mV.}
 
@@ -19,13 +19,12 @@ find_bad_cycles(dat, min = 1500, max = 50000, fac = 1.5,
 \item{fac}{Factor for how much larger the current drop should be than the
 one specified in \code{relative_to}.}
 
-\item{cycle}{quoted column name of the column with the measurement cycle
-number.}
+\item{v44}{Column name of mass 44.}
+
+\item{cycle}{Column name of the column with the measurement cycle number.}
 
 \item{relative_to}{cycle Drop detection occurs relative to either the first
 cycle ("init", default) or to the previous cycle ("prev").}
-
-\item{m44.mv}{quoted column name of mass 44.}
 }
 \description{
 This filters out any cycles that:

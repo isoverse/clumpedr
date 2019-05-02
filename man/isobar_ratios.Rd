@@ -4,20 +4,28 @@
 \alias{isobar_ratios}
 \title{Compute isotopic ratios}
 \usage{
-isobar_ratios(dat, R13 = quo(R13), R18 = quo(R18), R45 = quo(R45),
-  R46 = quo(R46), R47 = quo(R47), R48 = quo(R48), R49 = quo(R49),
+isobar_ratios(.data, R13 = R13, R18 = R18, R45 = R45, R46 = R46,
+  R47 = R47, R48 = R48, R49 = R49,
   R17_PDBCO2 = default(R17_PDBCO2), R18_PDBCO2 = default(R18_PDBCO2),
   lambda = default(lambda), D17O = default(D17O), D47 = default(D47),
   D48 = default(D48), D49 = default(D49))
 }
 \arguments{
-\item{dat}{A tibble with columns R13 and R18.}
+\item{.data}{A tibble with columns R13 and R18.}
 
-\item{R13}{The quoted column name for R13 (default \code{quo(R13)}).}
+\item{R13}{The column name for R13.}
 
-\item{R18}{The quoted column name for R18 (default \code{quo(R18)}).}
+\item{R18}{The column name for R18.}
 
-\item{R45}{the quoted output column name for R45 (default \code{quo(R45)})}
+\item{R45}{The output column name for R45.}
+
+\item{R46}{The output column name for R46.}
+
+\item{R47}{The output column name for R47.}
+
+\item{R48}{The output column name for R48.}
+
+\item{R49}{The output column name for R49.}
 
 \item{R17_PDBCO2}{The R17 value of PDB (g). Defaults to 0.0003931, from
 Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
@@ -25,10 +33,16 @@ Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 \item{R18_PDBCO2}{The R18 value of PDB (g). Defaults to 0.00208839, derrived
 from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 
-\item{lambda}{Isotopic fractionation of \eqn{{}^17}O. Defaults to 0.528,
+\item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+
+\item{D47}{TODO: look up}
+
+\item{D48}{TODO: look up}
+
+\item{D49}{TODO: look up}
 }
 \description{
 Compute isotopic ratios for a sample with isotopic ratios R13 and R18,

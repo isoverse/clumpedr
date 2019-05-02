@@ -4,11 +4,12 @@
 \alias{parse_info}
 \title{Parse info into appropriate types.}
 \usage{
-parse_info(dat, masspec, std_names = paste0("ETH-", 1:4),
-  oth_name = "other")
+parse_info(.data, masspec, std_names = paste0("ETH-", 1:4),
+  oth_name = "other", ms_name = masspec, broadid_name = broadid,
+  id1 = `Identifier 1`)
 }
 \arguments{
-\item{dat}{The result of \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
@@ -16,6 +17,12 @@ parse_info(dat, masspec, std_names = paste0("ETH-", 1:4),
 'Identifier 1'.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
+
+\item{ms_name}{The name of the new masspec column.}
+
+\item{broadid_name}{The name of the new broadid column.}
+
+\item{id1}{The column with sample/standard names.}
 }
 \description{
 Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}} into the

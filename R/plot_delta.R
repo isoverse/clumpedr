@@ -1,9 +1,19 @@
-#' Create a plot of column `col` as a function of `file_datetime`.
+#' Create a plot of \eqn{\Delta_{47}}{Δ47} values as a function of measurement
+#' time.
 #'
-#' @param dat A [tibble][tibble::tibble-package], resulting from `temperature_calculation`
-#' @param col Target column.
+#' @param .data A [tibble][tibble::tibble-package], resulting from [temperature_calculation()].
+#' @param x What to put on the x axis.
+#' @param y What to put on the y axis.
+#' @param ... Additional aesthetics to pass to [plot_base()].
 #' @export
-plot_delta <- function(dat, col = quo(D47_final)) {
-  dat %>%
-      plot_base() + geom_point(aes(x = file_datetime, y = !!col))
+plot_delta <- function(.data, x = file_datetime, y = D47_final, ...) {
+  # global variables and defaults
+  file_datetime <- D47_final <- NULL
+
+  x <- enquo(x)
+  y <- enquo(y)
+  .data %>%
+    plot_base(x = !! x, y = !! y, ...) +
+    geom_violin(aes(group = file_id, fill = broadid), alpha = .5) +
+    geom_point(alpha = .5, shape = 1)
 }

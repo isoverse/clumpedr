@@ -5,19 +5,35 @@
 \title{Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
 \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values}
 \usage{
-bulk_and_clumping_deltas(dat, d13C_PDB_wg, d18O_PDBCO2_wg,
-  d45 = quo(d45), d46 = quo(d46), d47 = quo(d47), d48 = quo(d48),
-  d49 = quo(d49), R13_PDB = default(R13_PDB),
-  R18_PDB = default(R18_PDB), R17_PDBCO2 = default(R17_PDBCO2),
-  R18_PDBCO2 = default(R18_PDBCO2), lambda = default(lambda),
-  D17O = default(D17O), quiet = default(quiet))
+bulk_and_clumping_deltas(.data, d13C_PDB_wg, d18O_PDBCO2_wg, d45 = d45,
+  d46 = d46, d47 = d47, d48 = d48, d49 = d49,
+  R13_PDB = default(R13_PDB), R18_PDB = default(R18_PDB),
+  R17_PDBCO2 = default(R17_PDBCO2), R18_PDBCO2 = default(R18_PDBCO2),
+  lambda = default(lambda), D17O = default(D17O),
+  quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A tibble containing delta values 45 through 49.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
 
 \item{d13C_PDB_wg}{Reference gas \eqn{\delta^{13}}{δ13}C value.}
 
 \item{d18O_PDBCO2_wg}{Reference gas \eqn{\delta^{13}}{δ13}C gas value.}
+
+\item{d45}{Column name of d45.}
+
+\item{d46}{Column name of d46.}
+
+\item{d47}{Column name of d47.}
+
+\item{d48}{Column name of d48.}
+
+\item{d49}{Column name of d49.}
+
+\item{R13_PDB}{The R13 value of the PDB reference. Defaults to 0.01118, from
+Chang and Li, 1990.}
+
+\item{R18_PDB}{The R18 value of the PDB reference. Defaults to 1.008751,
+from Coplen et al., 1983.}
 
 \item{R17_PDBCO2}{The R17 value of PDB (g). Defaults to 0.0003931, from
 Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
@@ -25,7 +41,7 @@ Assonov and Brenninkmeijer 2003, re-scaled by Brand, 2010.}
 \item{R18_PDBCO2}{The R18 value of PDB (g). Defaults to 0.00208839, derrived
 from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 
-\item{lambda}{Isotopic fractionation of \eqn{{}^17}O. Defaults to 0.528,
+\item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
 \item{D17O}{TODO: look up in Daëron 2016 what this does again.}
@@ -33,4 +49,10 @@ from Barkan and Luz, 2005.}
 \description{
 Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
 \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
+}
+\references{
+Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
+  measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
+\url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
 }

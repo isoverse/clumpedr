@@ -4,36 +4,45 @@
 #'   initial intensity of both sample and reference gas is above 8 V. 2) The
 #'   difference in intensity between sample and reference gas is less than 1.2
 #'   V. 3) The sample or reference raw \eqn{\Delta_47} value is less than 4 SD
-#'   away from the run mean.
+#'   away from the preparation mean.
 #'
-#' @param dat A [tibble][tibble::tibble-package], resulting from
-#'     `collapse_cycles()`.
-#' @param info A [tibble][tibble::tibble-package], resulting from
-#'     `clean_did_info()`.
+#' @param .data A [tibble][tibble::tibble-package], resulting from
+#'   [collapse_cycles()].
 #' @param init The minimum initial intensity of mass 44.
 #' @param diff The maximum initial difference in intensity of mass 44.
 #' @param nsd_off The number of standard deviations away from the median
-#'     Preparation of the standards.
-#' @param plot_col The column to use for plotting. Defaults to
-#'     `quo(D47raw_mean)`.
+#'   Preparation of the standards.
+#' @param D47 The column with Δ47 values. Defaults to `D47_raw_mean`.
+#' @param plot_x The column to use for plotting the x axis.
 #' @inheritParams find_outliers
 #' @export
-remove_outliers <- function(dat, init = 8000, diff = 1200, nsd_off = 4,
-                            std_names = paste0("ETH-", 1:3),
-                            plot_col = quo(D47raw_mean),
+remove_outliers <- function(.data, init = 8000, diff = 1200, nsd_off = 4,
+                            std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
+                            plot_x = file_datetime,
+                            session = Preparation,
                             quiet = default(quiet), genplot = default(genplot)) {
-    if (!quiet)
-        glue("Info: Removing aliquots with initial intensity < {init}, difference in initial
-                      intensity > {diff}, or {nsd_off} SD's away from the Preparation mean.") %>%
-            message()
-    out <- dat %>%
-        find_outliers(init = init, diff = diff, nsd_off = nsd_off,
-                      std_names = std_names)
-    if (genplot) {
-        pipe_plot(out, plot_outliers, col = plot_col)
-    }
-    if (!quiet)
-        glue("Info: removing {sum(out$outlier)} outliers out of {nrow(out)} samples.") %>%
-            message()
-    out %>% filter(!outlier)
+  # global variables and defaults
+  file_datetime <- D47_raw_mean <- Preparation <- outlier <- NULL
+
+  D47 <- enquo(D47)
+  session <- enquo(session)
+
+  if (!quiet)
+    glue("Info: identifying aliquots with initial intensity < {init}, difference in initial
+                      intensity > {diff}, or {nsd_off} SD's away from the {quo_name(session)} mean.") %>%
+      message()
+
+  out <- .data %>%
+    find_outliers(init = init, diff = diff, nsd_off = nsd_off,
+                  D47 = !! D47, std_names = std_names, session = !! session)
+
+  if (genplot) {
+    plot_x <- enquo(plot_x)
+    pipe_plot(out, plot_outliers, x = !! plot_x, y = !! D47)
+  }
+
+  if (!quiet)
+    glue("Info: found {nrow(filter(out, outlier != 'no_outlier'))} outliers out of {nrow(out)} samples.") %>%
+      message()
+  out
 }

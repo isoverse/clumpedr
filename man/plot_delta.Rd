@@ -2,15 +2,21 @@
 % Please edit documentation in R/plot_delta.R
 \name{plot_delta}
 \alias{plot_delta}
-\title{Create a plot of column \code{col} as a function of \code{file_datetime}.}
+\title{Create a plot of \eqn{\Delta_{47}}{Δ47} values as a function of measurement
+time.}
 \usage{
-plot_delta(dat, col = quo(D47_final))
+plot_delta(.data, x = file_datetime, y = D47_final, ...)
 }
 \arguments{
-\item{dat}{A \link[tibble:tibble-package]{tibble}, resulting from \code{temperature_calculation}}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=temperature_calculation]{temperature_calculation()}}.}
 
-\item{col}{Target column.}
+\item{x}{What to put on the x axis.}
+
+\item{y}{What to put on the y axis.}
+
+\item{...}{Additional aesthetics to pass to \code{\link[=plot_base]{plot_base()}}.}
 }
 \description{
-Create a plot of column \code{col} as a function of \code{file_datetime}.
+Create a plot of \eqn{\Delta_{47}}{Δ47} values as a function of measurement
+time.
 }

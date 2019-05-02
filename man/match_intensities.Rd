@@ -4,11 +4,11 @@
 \alias{match_intensities}
 \title{Match the reference gas intensity to that of the sample gas}
 \usage{
-match_intensities(dat, method = "normal", quiet = default(quiet))
+match_intensities(.data, method = "normal", quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A dataframe with s44--s49 and r44--r49, output of
-\code{spread_intensities()}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
+\code{\link[=spread_intensities]{spread_intensities()}}.}
 
 \item{method}{"linterp" for linear interpolation, or "normal" for
 conventional bracketing of sample gas.}

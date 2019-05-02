@@ -3,23 +3,45 @@
 #' Calculate abundance ratios by dividing input mass column \eqn{i} over mass
 #' 44. \deqn{R_i = mass_i / mass_{44}}
 #'
-#' @param dat Input dataframe.
-#' @param i44 Quoted name of mass 44 column.
-#' @param i45 Quoted name of mass 45 column. Same for intensities 46 through
-#'   49.
-#' @param R45 Desired quoted new name of the calculated ratio for mass 45. Same
-#'   for intensities 46 through 49.
+#' @param .data A [tibble][tibble::tibble-package].
+#' @param i44 Name of mass 44 column.
+#' @param i45 Name of mass 45 column.
+#' @param i46 Name of mass 46 column.
+#' @param i47 Name of mass 47 column.
+#' @param i48 Name of mass 48 column.
+#' @param i49 Name of mass 49 column.
+#' @param R45 Desired new name of the calculated ratio for mass 45.
+#' @param R46 Desired new name of the calculated ratio for mass 46.
+#' @param R47 Desired new name of the calculated ratio for mass 47.
+#' @param R48 Desired new name of the calculated ratio for mass 48.
+#' @param R49 Desired new name of the calculated ratio for mass 49.
 #' @export
-abundance_ratios <- function(dat,
-                             i44 = quo(s44), i45 = quo(s45),
-                             i46 = quo(s46), i47 = quo(s47), i48 = quo(s48),
-                             i49 = quo(s49),
-                             R45 = quo(R45), R46 = quo(R46), R47 = quo(R47),
-                             R48 = quo(R48), R49 = quo(R49)) {
-    dat %>%
-        mutate(!!R45 := !!i45 / !!i44,
-               !!R46 := !!i46 / !!i44,
-               !!R47 := !!i47 / !!i44,
-               !!R48 := !!i48 / !!i44,
-               !!R49 := !!i49 / !!i44)
+abundance_ratios <- function(.data,
+                             i44 = s44, i45 = s45,
+                             i46 = s46, i47 = s47, i48 = s48,
+                             i49 = s49,
+                             R45 = R45, R46 = R46, R47 = R47,
+                             R48 = R48, R49 = R49) {
+  # global variables and defaults
+  s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
+
+  i44 <- enquo(i44)
+  i45 <- enquo(i45)
+  i46 <- enquo(i46)
+  i47 <- enquo(i47)
+  i48 <- enquo(i48)
+  i49 <- enquo(i49)
+
+  R45 <- enquo(R45)
+  R46 <- enquo(R46)
+  R47 <- enquo(R47)
+  R48 <- enquo(R48)
+  R49 <- enquo(R49)
+
+  .data %>%
+    mutate(!! R45 := !! i45 / !! i44,
+           !! R46 := !! i46 / !! i44,
+           !! R47 := !! i47 / !! i44,
+           !! R48 := !! i48 / !! i44,
+           !! R49 := !! i49 / !! i44)
 }

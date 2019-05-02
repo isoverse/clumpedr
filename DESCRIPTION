@@ -1,12 +1,12 @@
 Package: clumpedr
-Title: A package for clumped isotope analysis in R
-Version: 0.0.0.9000
+Title: Clumped isotope analysis in R
+Version: 0.0.1
 Authors@R:
     person(given = "Ilja",
            family = "Kocken",
            role = c("aut", "cre"),
            email = "i.j.kocken@uu.nl")
-Description: This package makes analyzing clumped isotope data as easy as possible.
+Description: Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final Δ47 values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -14,11 +14,12 @@ Licence: GPL-3 + file LICENCE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
+    tidyr (>= 0.8.3.9000),
     magrittr,
     rlang,
-    glue,
+    readr,
+    glue (>= 1.2.0),
     dplyr,
-    tidyr,
     ggplot2,
     isoreader (>= 0.9.29.9000),
     purrr,
@@ -34,21 +35,22 @@ Suggests:
 Remotes:
     isoverse/isoreader
 Collate:
+    'clumpedr-package.R'
+    'defaults.R'
+    'clean_did_info.R'
+    'add_info.R'
+    'correct_backgrounds.R'
     'abundance_ratios.R'
     'acid_fractionation.R'
-    'add_info.R'
-    'append_ms_info.R'
     'bulk_and_clumping_deltas.R'
     'calibration.R'
-    'clean_did_info.R'
-    'clumpedr-package.R'
     'collapse_cycles.R'
-    'correct_backgrounds.R'
-    'defaults.R'
     'delta_values.R'
     'disable_cycles.R'
     'empirical_transfer_function.R'
-    'filter_clumped.R'
+    'append_expected_values.R'
+    'calculate_etf.R'
+    'apply_etf.R'
     'find_bad_cycles.R'
     'find_outliers.R'
     'isobar_ratios.R'
@@ -61,6 +63,7 @@ Collate:
     'plot_outliers.R'
     'plot_raw_delta.R'
     'plot_stds.R'
+    'plot_etf.R'
     'remove_outliers.R'
     'settings.R'
     'utils.R'

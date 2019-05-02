@@ -8,3 +8,7 @@
 ^README-.*\.png$
 ^README\.Rmd$
 ^logo\.png$
+^.travis.yml$
+^LICENSE.md$
+^appveyor.yml$
+^revdep$

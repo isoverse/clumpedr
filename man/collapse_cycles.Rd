@@ -4,14 +4,23 @@
 \alias{collapse_cycles}
 \title{Collapse the cycles of the raw measurements}
 \usage{
-collapse_cycles(dat, na.rm = TRUE, quiet = default(quiet))
+collapse_cycles(.data, cycle_dis_ok = "no_drop",
+  collapse_key = "cycle_data", na.rm = TRUE, quiet = default(quiet))
 }
 \arguments{
-\item{dat}{A tibble resulting from \code{bulk_and_clumping_deltas()}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from
+\code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
-\item{na.rm}{Logical. Whether or not to remove NA values.}
+\item{cycle_dis_ok}{String of \code{cycle_dis} column that are filtered
+exclusively for calculation.}
+
+\item{collapse_key}{The .key argument that is passed to the nest function. Defaults
+to "cycle".}
+
+\item{na.rm}{a logical value indicating wheter NA values should be stripped
+before the computation proceeds.}
 }
 \description{
-This collapses the (filtered) cycles of the raw measurements and calculates
-averages and standard deviations.
+This collapses the cycles of the raw measurements and calculates averages
+and standard deviations per aliquot.
 }

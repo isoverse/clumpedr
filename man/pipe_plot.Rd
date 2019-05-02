@@ -4,21 +4,19 @@
 \alias{pipe_plot}
 \title{Plot as a side-effect of a pipe}
 \usage{
-pipe_plot(dat, plotfun, ...)
+pipe_plot(.data, plotfun, ...)
 }
 \arguments{
-\item{dat}{Tibble in the pipe.}
-
 \item{plotfun}{Function to use for plotting.}
 
 \item{...}{Additional arguments to the plotting function.}
 }
 \description{
 This function takes a tibble, applies a plotting function with additional
-arguments, makes sure to print it, and then returns the original dataframe
-unaffected.
+arguments, makes sure to print it, and then returns the original
+\link[tibble:tibble-package]{tibble} unaffected.
 }
 \details{
-This is equivalent to running the \code{magrittr::\%T>\%} operator with
+This is equivalent to running the \link[magrittr:\%T>\%]{magrittr::\%T>\%} operator with
 curly braces and a print command, but this is much cleaner.
 }
