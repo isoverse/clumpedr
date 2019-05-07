@@ -20,15 +20,19 @@ calculate_etf <- function(.data, cycle_dis = cycle_dis, outlier = outlier, raw =
   session <- enquo(session)
 
   # this makes it continue even if lm fails.
-  pos_lm <- purrr::possibly(lm, otherwise = NA, quiet = quiet)
+  pos_lm <- purrr::possibly(
+    function(x) {
+      x %>%
+      filter(outlier == "no_outlier") %>%
+      lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
+         data = ., na.action = na.omit)
+    },
+    otherwise = NA, quiet = quiet)
 
   .data %>%
     group_by(!! session) %>%
     nest() %>%
-    mutate(etf = map(data, ~ .x %>%
-                             filter(outlier == "no_outlier") %>%
-                             pos_lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
-                                    data = ., na.action = na.omit)),
+    mutate(etf = map(data, pos_lm),
            etf_coefs = map(etf, broom::tidy),
            slope = map_dbl(etf_coefs, ~ filter(.x, term == "(Intercept)")$estimate),
            intercept = map_dbl(etf_coefs, ~ filter(.x, term == quo_name(exp))$estimate)) %>%
