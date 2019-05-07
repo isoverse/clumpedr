@@ -2,8 +2,8 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [correct_backgrounds()].
-#' @param d13C_PBD_wg Working gas \eqn{\delta^{13}}{δ13}C value.
-#' @param d18O_PBDCO2_wg Working gas \eqn{\delta^{18}}{δ18}O value.
+#' @param d13C_PDB_wg Working gas \eqn{\delta^{13}}{δ13}C value.
+#' @param d18O_PDBCO2_wg Working gas \eqn{\delta^{18}}{δ18}O value.
 #' @param method Method for matching reference gas to sample gas. Either
 #'   `"normal"` (default) or `"linterp"`.
 #' @param plot_info The needed metadata for plotting. Result of

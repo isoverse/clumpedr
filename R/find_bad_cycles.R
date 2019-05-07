@@ -13,10 +13,10 @@
 #' @param max Maximum intensity level for good cycles. Defaults to 50,000 mV.
 #' @param fac Factor for how much larger the current drop should be than the
 #'   one specified in `relative_to`.
-#' @param relative_to cycle Drop detection occurs relative to either the first
-#'   cycle ("init", default) or to the previous cycle ("prev").
 #' @param v44 Column name of mass 44.
 #' @param cycle Column name of the column with the measurement cycle number.
+#' @param relative_to cycle Drop detection occurs relative to either the first
+#'   cycle ("init", default) or to the previous cycle ("prev").
 #' @family cycle functions
 #' @export
 find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
