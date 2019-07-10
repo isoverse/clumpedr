@@ -12,6 +12,10 @@ delta_values(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
 
+\item{d13C_PDB_wg}{Working gas \eqn{\delta^{13}}{δ13}C value.}
+
+\item{d18O_PDBCO2_wg}{Working gas \eqn{\delta^{18}}{δ18}O value.}
+
 \item{method}{Method for matching reference gas to sample gas. Either
 \code{"normal"} (default) or \code{"linterp"}.}
 
@@ -19,10 +23,6 @@ delta_values(.data, d13C_PDB_wg = NULL, d18O_PDBCO2_wg = NULL,
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
 \item{plot_column}{The column that will be plotted. Defaults to \code{D47_raw}.}
-
-\item{d13C_PBD_wg}{Working gas \eqn{\delta^{13}}{δ13}C value.}
-
-\item{d18O_PBDCO2_wg}{Working gas \eqn{\delta^{18}}{δ18}O value.}
 }
 \description{
 Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values

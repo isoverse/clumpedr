@@ -4,7 +4,7 @@
 \alias{temperature_calculation}
 \title{Calculate the temperatures}
 \usage{
-temperature_calculation(.data, D47 = D47_final, T = temperature,
+temperature_calculation(.data, D47 = D47_final, temp = temperature,
   quiet = default(quiet))
 }
 \arguments{
@@ -12,7 +12,7 @@ temperature_calculation(.data, D47 = D47_final, T = temperature,
 
 \item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
 
-\item{T}{The column name of the output temperature.}
+\item{temp}{The column name of the output temperature.}
 }
 \description{
 This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from

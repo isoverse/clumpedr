@@ -20,7 +20,7 @@
 
 #' @encoding UTF-8
 #' @importFrom stats lm median sd C D cycle na.omit setNames
-#' @importFrom rlang enquo quo quos UQ !! !! := get_expr quo_expr quo_name quo_text quo_is_null quo_is_symbol quo_is_lang is_quosure is_empty is_integerish eval_tidy sym lang_head new_formula f_lhs f_rhs
+#' @importFrom rlang enquo quo quos UQ !! := get_expr quo_squash quo_name quo_text quo_is_null quo_is_symbol quo_is_lang is_quosure is_empty is_integerish eval_tidy sym lang_head new_formula f_lhs f_rhs
 # #' @importFrom tidyselect everything starts_with ends_with matches vars_select
 #' @importFrom tibble tibble
 #' @importFrom readr parse_double parse_integer parse_logical
@@ -31,7 +31,7 @@
 # #' @importFrom lubridate interval duration as_datetime
 #' @importFrom stringr str_c str_detect str_to_title str_replace str_replace_all str_replace_na str_match str_match_all str_interp str_subset str_extract str_sub fixed
 #' @importFrom ggplot2 ggplot aes geom_line geom_point scale_x_continuous scale_y_continuous expand_limits facet_grid facet_wrap labs theme_bw theme %+% is.ggplot aes_ stat_summary geom_smooth geom_hline scale_size_manual scale_alpha_manual scale_colour_manual geom_violin scale_shape_manual
-#' @importFrom utils data
+#' @importFrom utils data getFromNamespace
 #' @importFrom isoreader iso_turn_info_messages_on iso_turn_info_messages_off
 NULL
 

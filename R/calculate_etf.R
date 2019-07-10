@@ -25,17 +25,20 @@ calculate_etf <- function(.data, cycle_dis = cycle_dis, outlier = outlier, raw =
       x %>%
       filter(outlier == "no_outlier") %>%
       lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
-         data = ., na.action = na.omit)
+         data = ., na.action = na.exclude)
     },
-    otherwise = NA, quiet = quiet)
+    otherwise = NA_real_, quiet = quiet)
+
+  pos_tidy <- purrr::possibly(broom::tidy, otherwise=NA_real_, quiet=quiet)
+  pos_map_dbl <- purrr::possibly(map_dbl, otherwise=NA_real_, quiet=quiet)
 
   .data %>%
     group_by(!! session) %>%
     nest() %>%
     mutate(etf = map(data, pos_lm),
-           etf_coefs = map(etf, broom::tidy),
-           slope = map_dbl(etf_coefs, ~ filter(.x, term == "(Intercept)")$estimate),
-           intercept = map_dbl(etf_coefs, ~ filter(.x, term == quo_name(exp))$estimate)) %>%
-    select(-etf_coefs) %>%
+           etf_coefs=map(etf, "coefficients"),
+           intercept=map_dbl(etf_coefs, 1),
+           slope=map_dbl(etf_coefs, 2)) %>%
+    ## select(-etf_coefs) %>%
     unnest(cols = data)
 }
