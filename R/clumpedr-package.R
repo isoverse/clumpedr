@@ -24,7 +24,7 @@
 # #' @importFrom tidyselect everything starts_with ends_with matches vars_select
 #' @importFrom tibble tibble
 #' @importFrom readr parse_double parse_integer parse_logical
-#' @importFrom tidyr gather spread pivot_longer pivot_wider nest unnest extract unite
+#' @importFrom tidyr pivot_longer pivot_wider nest unnest
 #' @importFrom glue glue glue_collapse
 #' @importFrom purrr map map_lgl map_chr map_df map_dfr map_int map_dbl map2 map2_chr map2_lgl map2_dbl map2_int safely is_empty when
 #' @importFrom dplyr vars n select select_ rename rename_ arrange desc mutate mutate_ mutate_at mutate_if filter filter_ distinct as_data_frame left_join right_join full_join data_frame bind_rows bind_cols group_by group_by_ ungroup tally summarize summarise do case_when lead one_of summarise_all

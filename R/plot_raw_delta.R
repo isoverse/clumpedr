@@ -16,7 +16,7 @@
 plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
                            point_alpha = .5, quiet = default(quiet)) {
   # global variables and defaults
-  D47_raw <- file_id <- file_datetime <- NULL
+  D47_raw <- file_id <- file_datetime <- outlier <- NULL
 
   y <- enquo(y)
 
@@ -24,11 +24,13 @@ plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
     glue("Info: generating a plot of raw delta value {quo_name(y)} as a function of measurement time.") %>%
       message()
 
-  pl <- .data %>%
-    select(file_id, !! y) %>%
+  plotdat <- .data %>%
+    ## select(file_id, !! y) %>%
     left_join(.info, by = "file_id") %>%
-    group_by(file_id) %>%
-    plot_base(x = file_datetime, y = !! y) +
+    group_by(file_id)
+
+  pl <- plotdat %>%
+    plot_base(x = file_datetime, y = !! y, shape=measurement_error) +
     stat_summary(fun.y = mean,
                  fun.ymin = function(x) mean(x) - sd(x),
                  fun.ymax = function(x) mean(x) + sd(x),

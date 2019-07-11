@@ -13,12 +13,12 @@
 clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-", 1:4),
                             oth_name = "other", quiet = default(quiet)) {
   if (!quiet) {
-    message("Info: appending and parsing file info for {length(.did)} data file(s)")
+    message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
   }
 
   parsed_info <- .did %>%
     parse_info(masspec, std_names, oth_name) %>%
-    iso_get_file_info(.did, quiet = TRUE)
+    iso_get_file_info(quiet = TRUE)
 
   inits <- get_inits(.did)
 
@@ -88,8 +88,8 @@ get_inits <- function(.did) {
     # filter first standard and first sample cycles
     filter(type == "standard" & cycle == 0 | type == "sample" & cycle == 1) %>%
     select(file_id, type, v44.mV) %>%
-    spread(type, v44.mV) %>%
-    select(file_id, s44_init = sample, r44_init = standard)
+    pivot_wider(id_cols=file_id, names_from=type, values_from=v44.mV) %>%
+    select(file_id, s44_init = v44.mV_sample, r44_init = v44.mV_standard)
 }
 
 # import from isororeader for use in my parsing function

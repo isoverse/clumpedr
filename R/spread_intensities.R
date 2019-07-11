@@ -30,8 +30,7 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
                   ## "v44_diff", "v44_drop", "has_drop", "cycle_drop")
   }
 
-  out <-
-    .data %>%
+  out <- .data %>%
     group_by(file_id) %>%
     # first lengthen it so that each row is one mass / unit / intensity
     pivot_longer(cols = our_cols,
@@ -47,21 +46,13 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
   # NOTE: this is neat, but gets rid of all the extra info in cycle_dis etc.
 
   # so we add cycle_dis info back, in a very simplified form
-  cycle_dis <-
-    .data %>%
+  cycle_dis_dfr <- .data %>%
     ungroup() %>%
     select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = ids,
                 names_from = "type",
-                values_from = "cycle_dis") %>%
-    group_by(file_id) %>%
-    mutate(
-      cycle_dis = case_when(standard == "no_drop" & sample == "no_drop" ~ "no_drop",
-                            standard == "no_drop" & sample != "no_drop" ~ paste0("s_", sample),
-                            standard != "no_drop" & sample == "no_drop" ~ paste0("r_", standard),
-                            TRUE ~ paste0("s_", sample, "_r_", standard)),
-      has_drop = any(standard != "no_drop", na.rm = TRUE) | any(sample != "no_drop", na.rm = TRUE)) %>%
-    select(file_id, cycle, cycle_dis, has_drop)
+                values_from = c(v44_low, v44_high, v44_drop, drop_before, has_drop)) %>%
+    group_by(file_id)
 
-    left_join(out, cycle_dis, by = c("file_id", "cycle"))
+    left_join(out, cycle_dis_dfr, by = c("file_id", "cycle"))
 }
