@@ -4,12 +4,12 @@
 \alias{parse_info}
 \title{Parse info into appropriate types.}
 \usage{
-parse_info(.data, masspec, std_names = paste0("ETH-", 1:4),
+parse_info(.did, masspec, std_names = paste0("ETH-", 1:4),
   oth_name = "other", ms_name = masspec, broadid_name = broadid,
   id1 = `Identifier 1`)
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}.}
+\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
@@ -26,7 +26,7 @@ parse_info(.data, masspec, std_names = paste0("ETH-", 1:4),
 }
 \description{
 Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}} into the
-appropriate types.
+appropriate types and appends new columns with masspec name and broadid.
 }
 \seealso{
 Other metadata cleaning functions: \code{\link{add_info}},
