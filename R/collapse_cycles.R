@@ -30,7 +30,7 @@ collapse_cycles <- function(.data, cycle_dis_ok = "no_drop",
   # this creates a nice summary for one of the samples
   summarize_mean <- function(.data) {
     .data %>%
-      filter(cycle_dis ==  "no_drop") %>%
+      filter(!measurement_error) %>%
       select(d45:d49, d18O_PDBCO2, d18O_PDB, d13C_PDB, D47_raw:param_49) %>%
       summarise_all(.funs = list(~ mean(., na.rm = TRUE),
                                  ~ sd(., na.rm = TRUE),
