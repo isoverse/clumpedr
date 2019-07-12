@@ -7,7 +7,10 @@
 get_inits(.did)
 }
 \arguments{
-\item{.did}{The did data resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+}
+\value{
+A tibble with columns file_id, s44_init, and r44_init
 }
 \description{
 Get initial intensities of specified mass

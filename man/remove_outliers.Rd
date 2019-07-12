@@ -4,18 +4,20 @@
 \alias{remove_outliers}
 \title{Remove outliers}
 \usage{
-remove_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
-  plot_x = file_datetime, session = Preparation,
+remove_outliers(.data, init_low = 8000, init_high = 40000,
+  diff = 1200, nsd_off = 4, std_names = paste0("ETH-", 1:3),
+  D47 = D47_raw_mean, plot_x = file_datetime, session = Preparation,
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
-\item{init}{The minimum initial intensity of mass 44.}
+\item{init_low}{Minimum initial intensity threshold for mass 44.}
 
-\item{diff}{The maximum initial difference in intensity of mass 44.}
+\item{init_high}{Maximum initial intensity threshold for mass 44.}
+
+\item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
 
 \item{nsd_off}{The number of standard deviations away from the median
 Preparation of the standards.}

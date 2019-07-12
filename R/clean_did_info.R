@@ -4,85 +4,70 @@
 #' initial intensity of mass 44.
 #'
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
-#' @param ... Additional options to pass to [isoreader::iso_get_file_info()].
 #' @inheritParams parse_info
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
 #' @family metadata cleaning functions
 #' @export
-clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-", 1:4),
+clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4),
                             oth_name = "other", quiet = default(quiet)) {
   if (!quiet) {
-    message("Info: appending and parsing file info")
-    # TODO: include parameters  with std_names = {stringr::str_c(std_names)} and oth_name = {oth_name}
+    message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
   }
-  parsedinfo <- .did %>%
-    isoreader::iso_get_file_info(...) %>%
-    parse_info(masspec, std_names, oth_name)
 
   inits <- get_inits(.did)
 
-  full_join(parsedinfo, inits, by = "file_id")
+  .did %>%
+    parse_info(masspec=masspec, std_names=std_names, oth_name=oth_name) %>%
+    isoreader::iso_mutate_file_info(s44_init=inits$s44_init,
+                                    r44_init=inits$r44_init)
 }
 
 #' Parse info into appropriate types.
 #'
 #' Converts the information from [isoreader::iso_get_file_info()] into the
-#' appropriate types.
+#' appropriate types and appends new columns with masspec name and broadid.
 #'
-#' @param .data A [tibble][tibble::tibble-package] resulting from [isoreader::iso_get_file_info()].
+#' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @param masspec The name of the mass spectrometer to append.
-#' @param std_names Character vector of the standard names to find in
-#'     'Identifier 1'.
+#' @param std_names Character vector of the standard names to find in 'Identifier 1'.
 #' @param oth_name Single general name to assign to non-standard "other" measurements.
-#' @param ms_name The name of the new masspec column.
 #' @param broadid_name The name of the new broadid column.
 #' @param id1 The column with sample/standard names.
 #' @export
 #' @family metadata cleaning functions
-parse_info <- function(.data, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other",
-                       ms_name = masspec, broadid_name = broadid, id1 = `Identifier 1`) {
+parse_info <- function(.did, masspec=NA_character_, std_names = paste0("ETH-", 1:4), oth_name = "other",
+                       broadid_name = broadid, id1 = `Identifier 1`) {
   # global variables and defaults
-  broadid <- `Identifier 1` <- Row <- `Peak Center` <-
-    Background <- Pressadjust <- `Reference Refill` <- Line <- Sample <-
-      `Weight [mg]` <- Analysis <- Preparation <- NULL
+  broadid <- `Identifier 1` <- NULL
 
-  ms_name <- enquo(ms_name)
-  broadid_name <- enquo(broadid_name)
-  id1 <- enquo(id1)
-
-  .data %>%
-    mutate(
-      Row = parse_integer(Row),
-      `Peak Center` = parse_logical(`Peak Center`),
-      Background = parse_double(Background),
-      Pressadjust = parse_logical(Pressadjust),
-      `Reference Refill` = parse_logical(`Reference Refill`),
-      Line = parse_integer(Line),
-      Sample = parse_integer(Sample),
-      `Weight [mg]` = parse_double(`Weight [mg]`),
-      Analysis = parse_integer(Analysis),
-      Preparation = parse_integer(Preparation),
+  .did %>%
+    isoreader::iso_parse_file_info(double=c(.data$Background, .data$`Weight [mg]`),
+                        integer=c(.data$Row, .data$Line, .data$Sample, .data$Analysis, .data$Preparation),
+                        logical=c(.data$`Peak Center`, .data$Pressadjust, .data$`Reference Refill`), quiet=TRUE) %>%
+    isoreader::iso_mutate_file_info(
       # append new column infos
-      !! ms_name := ifelse(!is.null(masspec), masspec, ""),
-      !! broadid_name := ifelse(!! id1 %in% std_names, !! id1, oth_name))
+      masspec=masspec,
+      {{ broadid_name }} := ifelse({{ id1 }} %in% std_names, {{ id1 }}, oth_name),
+      quiet=TRUE)
 }
 
 #' Get initial intensities of specified mass
 #'
-#' @param .did The did data resulting from [isoreader::iso_read_dual_inlet()].
+#' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #'
 #' @family metadata cleaning functions
+#' @return A tibble with columns file_id, s44_init, and r44_init
 #' @export
 get_inits <- function(.did) {
-  # global variables and defaults
-  type <- cycle <- file_id <- value <- sample <- standard <- v44.mV <- NULL
-
   .did %>%
     isoreader::iso_get_raw_data(quiet = TRUE) %>%
     # filter first standard and first sample cycles
-    filter(type == "standard" & cycle == 0 | type == "sample" & cycle == 1) %>%
-    select(file_id, type, v44.mV) %>%
-    spread(type, v44.mV) %>%
-    select(file_id, s44_init = sample, r44_init = standard)
+    filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
+    pivot_wider(id_cols=.data$file_id, names_from=.data$type, values_from=.data$v44.mV) %>%
+    select(.data$file_id, s44_init = .data$sample, r44_init = .data$standard) %>%
+    tibble::as_tibble()
 }
+
+# import from isororeader for use in my parsing function
+ensure_data_frame_list_columns <- utils::getFromNamespace("ensure_data_frame_list_columns", "isoreader")

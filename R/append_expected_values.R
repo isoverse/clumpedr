@@ -37,13 +37,10 @@ append_expected_values <- function(.data,
   # global variables and defaults
   `Identifier 1` <- expected_D47 <- NULL
 
-  id1 <- enquo(id1)
-  exp <- enquo(exp)
-
   # TODO: vectorize this, so you can add as many standards as desired?
   .data %>%
-    mutate(!! exp := case_when(!! id1 == std_names[1] ~ D47[1] - aff,
-                               !! id1 == std_names[2] ~ D47[2] - aff,
-                               !! id1 == std_names[3] ~ D47[3] - aff,
+    mutate({{ exp }} := case_when({{ id1 }} == std_names[1] ~ D47[1] - aff,
+                               {{ id1 }} == std_names[2] ~ D47[2] - aff,
+                               {{ id1 }} == std_names[3] ~ D47[3] - aff,
                                TRUE ~ NA_real_))
 }

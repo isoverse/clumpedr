@@ -4,18 +4,15 @@
 \alias{clean_did_info}
 \title{Clean up the did file info}
 \usage{
-clean_did_info(.did, ..., masspec = NULL, std_names = paste0("ETH-",
-  1:4), oth_name = "other", quiet = default(quiet))
+clean_did_info(.did, masspec = NULL, std_names = paste0("ETH-", 1:4),
+  oth_name = "other", quiet = default(quiet))
 }
 \arguments{
 \item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
-\item{...}{Additional options to pass to \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}.}
-
 \item{masspec}{The name of the mass spectrometer to append.}
 
-\item{std_names}{Character vector of the standard names to find in
-'Identifier 1'.}
+\item{std_names}{Character vector of the standard names to find in 'Identifier 1'.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 }

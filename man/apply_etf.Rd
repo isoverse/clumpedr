@@ -4,10 +4,15 @@
 \alias{apply_etf}
 \title{Apply the ETF}
 \usage{
-apply_etf(.data, D47 = D47_raw, D47_out = D47_etf)
+apply_etf(.data, intercept = intercept, slope = slope, D47 = D47_raw,
+  D47_out = D47_etf)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing column D47.}
+
+\item{intercept}{The column name with the ETF intercept.}
+
+\item{slope}{The column name with the ETF slope.}
 
 \item{D47}{The column with \eqn{\Delta_{47}}{Δ47} values to use.}
 

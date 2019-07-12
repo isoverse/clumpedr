@@ -7,6 +7,8 @@
 pipe_plot(.data, plotfun, ...)
 }
 \arguments{
+\item{.data}{The data to use for plotting.}
+
 \item{plotfun}{Function to use for plotting.}
 
 \item{...}{Additional arguments to the plotting function.}

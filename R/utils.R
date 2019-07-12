@@ -7,6 +7,7 @@
 #' @details This is equivalent to running the [magrittr::%T>%] operator with
 #'   curly braces and a print command, but this is much cleaner.
 #'
+#' @param .data The data to use for plotting.
 #' @param plotfun Function to use for plotting.
 #' @param ... Additional arguments to the plotting function.
 #'

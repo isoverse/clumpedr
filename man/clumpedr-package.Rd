@@ -22,6 +22,14 @@ The functions in this package listen to the \code{genplot} and
 \code{quiet} options, which can be set using
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/isoverse/clumpedr}
+  \item Report bugs at \url{https://github.com/isoverse/clumpedr/issues}
+}
+
+}
 \author{
 Ilja J. Kocken, \email{i.j.kocken@uu.nl}
 }

@@ -8,32 +8,28 @@
 #' @export
 plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, quiet = default(quiet)) {
   # global variables and defaults
-  grp <- file_id <- type <- cycle <- v44.mV <- expected_D47 <- grp <- cycle_dis <- has_drop <-
-    `Identifier 1` <- Preparation <- type <- cycle_meta <- NULL
-
-  y <- enquo(y)
+  v44.mV <- NULL
 
   .data  %>%
-    mutate(has_drop = ifelse(has_drop, "ali_drop", "ali_nodrop")) %>%
-    unite("cycle_meta", cycle_dis, has_drop, sep = " ") %>%
-    mutate(cycle_meta = factor(cycle_meta,
-                               levels = c("no_drop ali_nodrop",
-                                          "low_v44 NA",
-                                          "high_v44 NA",
-                                          "no_drop ali_drop",
-                                          "drop_before ali_drop",
-                                          "pressure_drop ali_drop"))) %>%
-    ggplot(aes(x = cycle, y = !! y, colour = cycle_meta, shape = cycle_meta, alpha = cycle_meta)) +
-    geom_line(aes(group = file_id), alpha = .5) +
+    mutate(cycle_meta = case_when(.data$v44_low ~ "v44_low",
+                                  .data$v44_high ~ "v44_high",
+                                  .data$v44_drop ~ "v44_drop",
+                                  .data$drop_before ~ "drop_before",
+                                  .data$has_drop ~ "has_drop",
+                                  TRUE ~ "no_drop",
+                                  ) %>%
+             factor(levels=c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop"))) %>%
+    ggplot(aes(x=.data$cycle, y={{ y }}, colour=.data$cycle_meta, shape=.data$cycle_meta, alpha=.data$cycle_meta, size=.data$cycle_meta)) +
+    geom_line(aes(group=.data$file_id), alpha = .5) +
     geom_point() +
-    scale_shape_manual(values = c(NA, 16, 16, 16, 16, 5),
+    scale_shape_manual(values = c(16, 16, 15, 16, 16, NA),
                        drop = FALSE) +
-    scale_alpha_manual(values = c(.2, 1, 1, 1, 1, 1),
+    scale_alpha_manual(values = c(1, 1, 1, 1, 1, .1),
                        drop = FALSE) +
-    scale_size_manual(values = c(1, 1, 2, 3, 4, 5),
+    scale_size_manual(values = c(2, 2, 5, 2, 1, .5),
                       drop = FALSE) +
-    scale_colour_manual(values = c("gray", "steelblue", "indianred", "darkgreen", "orange", "red"),
+    scale_colour_manual(values = c("steelblue", "indianred", "red", "orange", "darkgreen", "gray"),
                         drop = FALSE) +
     geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
-    facet_grid(cols = vars(type))
+    facet_grid(cols = vars(.data$type))
 }

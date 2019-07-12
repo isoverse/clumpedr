@@ -2,10 +2,11 @@
 #'
 #' This function plots raw delta values that are outliers, based on several criteria.
 #'
-#' @param dat A [tibble][tibble::tibble-package], resulting from [add_info()]
+#' @param dat A [tibble][tibble::tibble-package] resulting from [find_outliers()].
 #' @param x Column to put on the x axis.
 #' @param y Column to put on the y ayis.
 #' @export
+#' @seealso find_outliers
 plot_outliers <- function(dat, x = file_datetime, y = D47_raw_mean) {
   # global variables and defaults
   file_datetime <- D47_raw_mean <- outlier <- sess_id1_mean <- sess_id1_med <-

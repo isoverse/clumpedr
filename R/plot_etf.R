@@ -17,20 +17,15 @@ plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
                      exp = expected_D47,
                      session = Preparation) {
   # global variables and defaults
-  expected_D47 <- D47_raw <- Preparation <- broadid <- NULL
-
-  session <- enquo(session)
-  D47_etf <- enquo(D47_etf)
-  exp <- enquo(exp)
-  raw <- enquo(raw)
+  expected_D47 <- D47_raw <- Preparation <- NULL
 
   pld <- .data %>%
-    mutate(!! exp := ifelse(is.na(!! exp), !! D47_etf, !! exp))
+    mutate({{ exp }} := ifelse(is.na({{ exp }}), {{ D47_etf }}, {{ exp }}))
 
   pld %>%
     plot_base() +
-    geom_point(aes(x = !! exp, y = !! raw)) +
-    geom_smooth(aes(x = !! exp, y = !! raw, group = "yes"), method = "lm",
+    geom_point(aes(x = {{ exp }}, y = {{ raw }})) +
+    geom_smooth(aes(x = {{ exp }}, y = {{ raw }}, group = "yes"), method = "lm",
                 data = filter(pld, broadid %in% std_names)) +
-    facet_grid(rows = vars(!! session))
+    facet_grid(rows = vars({{ session }}))
 }

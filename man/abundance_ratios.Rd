@@ -6,7 +6,7 @@
 \usage{
 abundance_ratios(.data, i44 = s44, i45 = s45, i46 = s46, i47 = s47,
   i48 = s48, i49 = s49, R45 = R45, R46 = R46, R47 = R47,
-  R48 = R48, R49 = R49)
+  R48 = R48, R49 = R49, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}

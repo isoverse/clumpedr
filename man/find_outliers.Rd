@@ -4,12 +4,16 @@
 \alias{find_outliers}
 \title{Find outliers}
 \usage{
-find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  n_id1 = 5, D47 = D47_raw, std_names = paste0("ETH-", 1:3),
-  session = Preparation, id1 = `Identifier 1`)
+find_outliers(.data, init_low = 8000, init_high = 40000, diff = 1200,
+  nsd_off = 4, n_id1 = 5, D47 = D47_raw, std_names = paste0("ETH-",
+  1:3), session = Preparation, id1 = `Identifier 1`)
 }
 \arguments{
-\item{init}{Initial intensity threshold for mass 44.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
+
+\item{init_low}{Minimum initial intensity threshold for mass 44.}
+
+\item{init_high}{Maximum initial intensity threshold for mass 44.}
 
 \item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
 
@@ -31,8 +35,9 @@ This function finds outliers based on several criteria.
 \details{
 Here, we define an outlier as a measurement that has:
 \itemize{
-\item an initial mass 44 intensity below \code{init}.
-\item an imbalance between sample and reference gas of more than \code{diff}.
+\item an initial mass 44 intensity below \code{init_low}.
+\item an initial mass 44 intensity above \code{init_high}.
+\item an imbalance between sample and reference gas mass 44 intensities of more than \code{diff}.
 \item a clumped value that is more than \code{nsd_off} standard deviations away from the mean.
 }
 }
