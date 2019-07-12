@@ -40,6 +40,7 @@ Collate:
     'clumpedr-package.R'
     'defaults.R'
     'clean_did_info.R'
+    'add_info.R'
     'correct_backgrounds.R'
     'abundance_ratios.R'
     'acid_fractionation.R'

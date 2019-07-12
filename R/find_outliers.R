@@ -3,20 +3,21 @@
 #' This function finds outliers based on several criteria.
 #'
 #' Here, we define an outlier as a measurement that has:
-#' - an initial mass 44 intensity below `init`.
-#' - an imbalance between sample and reference gas of more than `diff`.
+#' - an initial mass 44 intensity below `init_low`.
+#' - an initial mass 44 intensity above `init_high`.
+#' - an imbalance between sample and reference gas mass 44 intensities of more than `diff`.
 #' - a clumped value that is more than `nsd_off` standard deviations away from the mean.
 #'
 #' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 #' @param init_low Minimum initial intensity threshold for mass 44.
 #' @param init_high Maximum initial intensity threshold for mass 44.
+#' @param diff Maximum initial difference in mass 44 threshold between standard and sample gas.
 #' @param nsd_off Number of standard deviations away from the mean threshold.
 #' @param n_id1 Minimum number of aliquots within session to calculate threshold within group.
 #' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values.
 #' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
-#' @param diff Maximum initial difference in mass 44 threshold between standard and sample gas.
 #' @export
 find_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, nsd_off = 4,
                           n_id1 = 5, D47 = D47_raw, #D47_raw_mean,
@@ -67,7 +68,8 @@ find_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, 
       out_sess_id1_sd=sess_id1_n > n_id1 & abs(sess_id1_med - !! D47) > nsd_off * sess_id1_sd,
       out_sess_sd=sess_n > n_id1 & abs(sess_med - !! D47) > nsd_off * sess_sd,
       outlier_session=out_sess_id1_sd | out_sess_sd,
-      outlier=outlier_cycle | outlier_init | outlier_session)
+      outlier=outlier_cycle | outlier_init | outlier_session) %>%
+    as_tibble()
   # TODO: include outlier filtering based on:
   # filter too large internal SD -> set D47 to D47_raw in stead of D47_raw_mean
   # filter d13C or d18O off

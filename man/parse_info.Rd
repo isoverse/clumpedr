@@ -29,7 +29,7 @@ Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader
 appropriate types and appends new columns with masspec name and broadid.
 }
 \seealso{
-Other metadata cleaning functions: \code{\link{clean_did_info}},
-  \code{\link{get_inits}}
+Other metadata cleaning functions: \code{\link{add_info}},
+  \code{\link{clean_did_info}}, \code{\link{get_inits}}
 }
 \concept{metadata cleaning functions}

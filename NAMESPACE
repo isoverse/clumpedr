@@ -3,6 +3,7 @@
 export("%>%")
 export(abundance_ratios)
 export(acid_fractionation)
+export(add_info)
 export(append_expected_values)
 export(append_ref_deltas)
 export(apply_etf)

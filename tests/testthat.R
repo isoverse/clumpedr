@@ -1,3 +1,6 @@
 library(testthat)
 library(clumpedr)
+library(isoreader)
+library(dplyr)
+library(purrr)
 test_check("clumpedr")

@@ -35,8 +35,9 @@ This function finds outliers based on several criteria.
 \details{
 Here, we define an outlier as a measurement that has:
 \itemize{
-\item an initial mass 44 intensity below \code{init}.
-\item an imbalance between sample and reference gas of more than \code{diff}.
+\item an initial mass 44 intensity below \code{init_low}.
+\item an initial mass 44 intensity above \code{init_high}.
+\item an imbalance between sample and reference gas mass 44 intensities of more than \code{diff}.
 \item a clumped value that is more than \code{nsd_off} standard deviations away from the mean.
 }
 }

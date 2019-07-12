@@ -50,5 +50,6 @@ collapse_cycles <- function(.data,
     ) %>%
     # I now want to get a subset of the nested data once,
     # so filter by no bad cycle
-    bind_cols(map_dfr(.$cycle_data, summarize_mean))
+    bind_cols(map_dfr(.$cycle_data, summarize_mean)) %>%
+    as_tibble()
 }

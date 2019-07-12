@@ -36,5 +36,6 @@ get_ref_delta <- function(.did) {
 
   iso_get_standards_info(.did, quiet=TRUE) %>%
     pivot_wider(id_cols=file_id, names_from=delta_name, values_from=delta_value) %>%
-    select(file_id, d13C_PDB_wg=`d 13C/12C`, d18O_PDBCO2_wg=`d 18O/16O`)
+    select(file_id, d13C_PDB_wg=`d 13C/12C`, d18O_PDBCO2_wg=`d 18O/16O`) %>%
+    as_tibble()
 }

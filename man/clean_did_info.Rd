@@ -26,7 +26,7 @@ initial intensity of mass 44.
 
 \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}}
 
-Other metadata cleaning functions: \code{\link{get_inits}},
-  \code{\link{parse_info}}
+Other metadata cleaning functions: \code{\link{add_info}},
+  \code{\link{get_inits}}, \code{\link{parse_info}}
 }
 \concept{metadata cleaning functions}

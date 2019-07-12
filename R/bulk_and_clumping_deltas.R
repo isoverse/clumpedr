@@ -117,5 +117,6 @@ bulk_and_clumping_deltas  <- function(.data,
   ##             mutate(wrong = 1e6 * (R46 / R46_stoch - 1)))
   ## }
 
-  out
+  out %>%
+    as_tibble()
 }

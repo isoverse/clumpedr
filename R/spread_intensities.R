@@ -54,5 +54,6 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
                 values_from = c(v44_low, v44_high, v44_drop, drop_before, has_drop)) %>%
     group_by(file_id)
 
-    left_join(out, cycle_dis_dfr, by = c("file_id", "cycle"))
+  left_join(out, cycle_dis_dfr, by = c("file_id", "cycle")) %>%
+    as_tibble()
 }
