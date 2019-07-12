@@ -1,6 +1,8 @@
-test_that("spreading intensities", {
+context("Spreading and Matching")
+
+test_that("spread_intensities works", {
   spread_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_intensities()
   # it's a tibble
@@ -33,9 +35,9 @@ test_that("spreading intensities", {
   # for now, I'll just believe that they're the right type.
 })
 
-test_that("matching intensities", {
+test_that("match_intensities works", {
   match_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_intensities() %>%
     match_intensities()
@@ -47,9 +49,9 @@ test_that("matching intensities", {
   expect_is(match_test %>% pluck("outlier_cycle"), "logical")
 })
 
-test_that("spread_match wrapper", {
+test_that("spread_match wrapper works", {
   expect_is(standards %>%
-              iso_get_raw_data() %>%
+              isoreader::iso_get_raw_data() %>%
               find_bad_cycles() %>%
               spread_match(), "tbl_df")
 })

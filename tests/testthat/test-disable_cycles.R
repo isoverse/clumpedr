@@ -1,5 +1,7 @@
-test_that("bad cycles are found correctly", {
-  bad_cyc <- find_bad_cycles(iso_get_raw_data(standards))
+context("Disabled Cycles")
+
+test_that("find_bad_cycles works", {
+  bad_cyc <- find_bad_cycles(isoreader::iso_get_raw_data(standards))
    # is it a tibble?
   expect_is(bad_cyc, "tbl_df")
   # do all the new column names exist?
@@ -19,6 +21,6 @@ test_that("bad cycles are found correctly", {
   expect_is(bad_cyc %>% pluck("drop_before"), "logical")
 })
 
-test_that("disabled cycle plots work", {
-  expect_is(plot_disabled_cycles(find_bad_cycles(iso_get_raw_data(standards))), "ggplot")
+test_that("plot_disabled_cycles works", {
+  expect_is(plot_disabled_cycles(find_bad_cycles(isoreader::iso_get_raw_data(standards))), "ggplot")
 })

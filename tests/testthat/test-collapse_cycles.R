@@ -1,6 +1,7 @@
+context("Collapsing cycles")
 test_that("collapsing the cycles", {
   collapse_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%

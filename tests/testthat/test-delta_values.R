@@ -1,6 +1,8 @@
+context("Delta Value Calculation")
+
 test_that("abundance_ratios works", {
   abundance_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
@@ -15,7 +17,7 @@ test_that("abundance_ratios works", {
 
 test_that("little_deltas works", {
   deltas_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
@@ -34,7 +36,7 @@ test_that("little_deltas works", {
 
 test_that("bulk_and_clumping_deltas works", {
   bulk_clump_test <- standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
@@ -51,9 +53,9 @@ test_that("bulk_and_clumping_deltas works", {
   expect_true("param_49" %in% colnames(bulk_clump_test))
 })
 
-test_that("delta_values wrapper", {
+test_that("delta_values wrapper works", {
   expect_is(standards %>%
-    iso_get_raw_data() %>%
+    isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%

@@ -34,7 +34,7 @@ get_ref_delta <- function(.did) {
   # assumed columns
   file_id <- delta_name <- delta_value <- NULL
 
-  iso_get_standards_info(.did, quiet=TRUE) %>%
+  isoreader::iso_get_standards_info(.did, quiet=TRUE) %>%
     pivot_wider(id_cols=file_id, names_from=delta_name, values_from=delta_value) %>%
     select(file_id, d13C_PDB_wg=`d 13C/12C`, d18O_PDBCO2_wg=`d 18O/16O`) %>%
     as_tibble()

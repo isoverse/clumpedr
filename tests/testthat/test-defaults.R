@@ -1,4 +1,4 @@
-context("test-defaults")
+context("Default Isotopic Parameters")
 
 # probably, I should just check if they're doubles/numerics?
 test_that("defaults are set correctly", {

@@ -1,60 +1,11 @@
-library(dplyr)
-library(purrr)
-library(isoreader)
+context("Parsing and Appending File Information")
 
-test_that("parsing file info works", {
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Background"), "numeric")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Weight [mg]"), "numeric")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Row"), "integer")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Line"), "integer")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Sample"), "integer")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Analysis"), "integer")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Preparation"), "integer")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Peak Center"), "logical")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Pressadjust"), "logical")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("Reference Refill"), "logical")
-})
-
-test_that("appending file info works", {
+test_that("parse_info works", {
   # does parse_info output an isofile?
   expect_is(parse_info(eth3), "iso_file")
-  # do the new columns exist?
-  expect_true("masspec" %in% (parse_info(eth3) %>%
-                                iso_get_file_info() %>%
-                                colnames()))
-  expect_true("broadid" %in% (parse_info(eth3) %>%
-                                iso_get_file_info() %>%
-                                colnames()))
-  # do the new columns consist of character vectors?
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("masspec"), "character")
-  expect_is(parse_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("broadid"), "character")
 })
 
-test_that("getting inits works", {
+test_that("get_inits works", {
   # it's a tibble
   expect_is(get_inits(eth3), "tbl_df")
   # it contains the desired columns
@@ -66,31 +17,43 @@ test_that("getting inits works", {
   expect_is(get_inits(eth3) %>% pluck("r44_init"), "numeric")
 })
 
-test_that("wrapper works", {
-  # new columns are made
+test_that("clean_did_info works", {
   expect_is(clean_did_info(eth3), "iso_file")
   expect_is(clean_did_info(standards), "iso_file_list")
-  ## expect_true("masspec" %in% colnames(iso_get_file_info(clean_did_info(eth3))))
-  expect_true("broadid" %in% (clean_did_info(eth3) %>%
-                                iso_get_file_info() %>%
-                                colnames()))
-  expect_true("s44_init" %in% (clean_did_info(eth3) %>%
-                                 iso_get_file_info() %>%
-                                 colnames()))
-  expect_true("r44_init" %in% (clean_did_info(eth3) %>%
-                                 iso_get_file_info() %>%
-                                 colnames()))
+  inf <- clean_did_info(eth3, "MOTU") %>% iso_get_file_info()
+
+  expect_is(inf %>% pluck("Background"), "numeric")
+  expect_is(inf %>% pluck("Weight [mg]"), "numeric")
+  expect_is(inf %>% pluck("Row"), "integer")
+  expect_is(inf %>% pluck("Line"), "integer")
+  expect_is(inf %>% pluck("Sample"), "integer")
+  expect_is(inf %>% pluck("Analysis"), "integer")
+  expect_is(inf %>% pluck("Preparation"), "integer")
+  expect_is(inf %>% pluck("Peak Center"), "logical")
+  expect_is(inf %>% pluck("Pressadjust"), "logical")
+  expect_is(inf %>% pluck("Reference Refill"), "logical")
+
+  cln <- clean_did_info(eth3, "MOTU") %>% iso_get_file_info() %>% colnames()
+  expect_true("masspec" %in% cln)
+  expect_true("broadid" %in% cln)
+  expect_true("s44_init" %in% cln)
+  expect_true("r44_init" %in% cln)
   ## # they are the right type
-  expect_is(clean_did_info(eth3, "MOTU") %>%
-              iso_get_file_info() %>%
-              pluck("masspec"), "character")
-  expect_is(clean_did_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("broadid"), "character")
-  expect_is(clean_did_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("s44_init"), "numeric")
-  expect_is(clean_did_info(eth3) %>%
-              iso_get_file_info() %>%
-              pluck("r44_init"), "numeric")
+# do the new columns consist of character vectors?
+  expect_is(inf %>% pluck("masspec"), "character")
+  expect_is(inf %>% pluck("broadid"), "character")
+  expect_is(inf %>% pluck("s44_init"), "numeric")
+  expect_is(inf %>% pluck("r44_init"), "numeric")
+})
+
+
+test_that("adding file information works", {
+  expect_is(standards %>%
+    isoreader::iso_get_raw_data() %>%
+    find_bad_cycles() %>%
+    spread_match() %>%
+    append_ref_deltas(standards) %>%
+    delta_values(genplot=FALSE) %>%
+      collapse_cycles() %>%
+      add_info(isoreader::iso_get_file_info(standards)), "tbl_df")
 })

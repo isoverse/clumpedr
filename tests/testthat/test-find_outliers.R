@@ -1,3 +1,4 @@
+context("Finding Outliers")
 test_that("finding outliers works", {
   outliers_test <- standards %>%
     clean_did_info("MOTU") %>%
