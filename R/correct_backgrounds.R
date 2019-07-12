@@ -14,13 +14,10 @@ correct_backgrounds  <- function(.data, factor,
   # global variables and defaults
   v47.mV <- v54.mV <- NULL
 
-  i47 <- enquo(i47)
-  i54 <- enquo(i54)
-
   if (!quiet)
     glue("Info: adding background based on half-mass with factor {factor}") %>%
       message()
 
   .data %>%
-    mutate(!! i47 := !! i47 - (factor * !! i54))
+    mutate({{ i47 }} := {{ i47 }} - (factor * {{ i54 }}))
 }

@@ -12,18 +12,19 @@ Description: Data processing in clumped isotopes is an involved, evolving field.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Licence: GPL-3 + file LICENCE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
-    tidyr (>= 0.8.3.9000),
+    tidyr (>= 0.8.3),
     magrittr,
-    rlang (>= 0.4.0.9000),
+    rlang (>= 0.4.0),
     readr,
     glue (>= 1.2.0),
     dplyr,
     ggplot2,
-    isoreader (>= 0.9.29.9000),
+    isoreader (>= 0.9.29),
     purrr,
     stringr,
     tibble
@@ -38,6 +39,7 @@ Remotes:
     isoverse/isoreader
 Collate:
     'clumpedr-package.R'
+    'data.R'
     'defaults.R'
     'clean_did_info.R'
     'add_info.R'

@@ -11,11 +11,8 @@ plot_stds <- function(.data, x = d47_mean, y = D47_final, ...) {
   # global variables and defaults
   d47_mean <- D47_final <- NULL
 
-  x <- enquo(x)
-  y <- enquo(y)
-
   .data %>%
-    plot_base(x = !! x, y = !! y, ...) +
+    plot_base(x = {{ x }}, y = {{ y }}, ...) +
     geom_point()# +
     ## labs(x = delta[47]~"(\u2030)", y = Delta[47]~"(\u2030)")
     # currently excluded because it throws errors in plotly::ggplotly()

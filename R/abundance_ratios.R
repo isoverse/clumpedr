@@ -39,7 +39,7 @@ abundance_ratios <- function(.data,
   R49 <- enquo(R49)
 
   if (!quiet)
-    message("Calculating abundance ratios for mass i with R[i] = i / 44")
+    message("Calculating abundance ratios R[i] = i / 44")
 
   .data %>%
     mutate(!! R45 := !! i45 / !! i44,

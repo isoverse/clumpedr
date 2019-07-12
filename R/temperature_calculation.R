@@ -9,17 +9,13 @@
 #' @param temp The column name of the output temperature.
 #' @seealso revcal tempcal
 #' @export
-temperature_calculation <- function(.data, D47 = D47_final,
-                                    temp = temperature,
+temperature_calculation <- function(.data, D47 = D47_final, temp = temperature,
                                     quiet = default(quiet)) {
   # global variables and defaults
   D47_final <- temperature <- NULL
 
-  D47 <- enquo(D47)
-  temp <- enquo(temp)
-
   if (!quiet)
     message("Info: calculating temperature using default calibration, ignoring uncertainty in the calibration.")
   .data %>%
-    mutate(!! temp := revcal(!! D47, ignorecnf = TRUE))
+    mutate({{ temp }} := revcal({{ D47 }}, ignorecnf = TRUE))
 }

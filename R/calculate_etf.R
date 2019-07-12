@@ -11,20 +11,14 @@
 calculate_etf <- function(.data, outlier = outlier, raw = D47_raw_mean, exp = expected_D47,
                           session = Preparation, quiet = default(quiet)) {
   # global variables and defaults
-  outlier <- D47_raw_mean <- expected_D47 <- Preparation <- `(Intercept)` <-
-    term <- estimate <- intercept <- slope <- etf <- etf_coefs <- data <- NULL
-
-  raw <- enquo(raw)
-  exp <- enquo(exp)
-
-  session <- enquo(session)
+  outlier <- D47_raw_mean <- expected_D47 <- Preparation <- NULL
 
   # this makes it continue even if lm fails.
   pos_lm <- purrr::possibly(
     function(x) {
       x %>%
-      filter(!outlier & !is.na(outlier)) %>%
-      lm(stats::formula(paste(quo_name(raw), "~", quo_name(exp))),
+      filter(!.data$outlier & !is.na(.data$outlier)) %>%
+      lm(stats::formula(paste(quo_name(enquo(raw)), "~", quo_name(enquo(exp)))),
          data = ., na.action = na.exclude)
     },
     otherwise = NA_real_, quiet = quiet)
@@ -33,12 +27,12 @@ calculate_etf <- function(.data, outlier = outlier, raw = D47_raw_mean, exp = ex
   pos_map_dbl <- purrr::possibly(map_dbl, otherwise=NA_real_, quiet=quiet)
 
   .data %>%
-    group_by(!! session) %>%
+    group_by({{ session }}) %>%
     nest() %>%
     mutate(etf = map(data, pos_lm),
-           etf_coefs=map(etf, "coefficients"),
-           intercept=map_dbl(etf_coefs, 1),
-           slope=map_dbl(etf_coefs, 2)) %>%
+           etf_coefs=map(.data$etf, "coefficients"),
+           intercept=map_dbl(.data$etf_coefs, 1),
+           slope=map_dbl(.data$etf_coefs, 2)) %>%
     ## select(-etf_coefs) %>%
-    unnest(cols = data)
+    unnest(cols = .data$data)
 }

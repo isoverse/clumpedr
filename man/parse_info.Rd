@@ -5,20 +5,17 @@
 \title{Parse info into appropriate types.}
 \usage{
 parse_info(.did, masspec = NA_character_, std_names = paste0("ETH-",
-  1:4), oth_name = "other", ms_name = masspec,
-  broadid_name = broadid, id1 = `Identifier 1`)
+  1:4), oth_name = "other", broadid_name = broadid, id1 = `Identifier
+  1`)
 }
 \arguments{
 \item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
-\item{std_names}{Character vector of the standard names to find in
-'Identifier 1'.}
+\item{std_names}{Character vector of the standard names to find in 'Identifier 1'.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
-
-\item{ms_name}{The name of the new masspec column.}
 
 \item{broadid_name}{The name of the new broadid column.}
 

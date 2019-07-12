@@ -2,8 +2,8 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package] to append the delta values to.
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
-#' @param d13C_PDB_wg \eqn{\delta^{13}C}{δ13C} value to overwrite.
-#' @param d18O_PDBCO2_wg \eqn{\delta^{18}O}{δ18O} value to overwrite.
+#' @param d13C_PDB_wg \eqn{\delta^{13}C}{δ13C} reference gas value to overwrite.
+#' @param d18O_PDBCO2_wg \eqn{\delta^{18}O}{δ18O} reference gas value to overwrite.
 #' @export
 append_ref_deltas <- function(.data, .did,
                               d13C_PDB_wg=NULL,
@@ -31,11 +31,8 @@ append_ref_deltas <- function(.data, .did,
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @export
 get_ref_delta <- function(.did) {
-  # assumed columns
-  file_id <- delta_name <- delta_value <- NULL
-
   isoreader::iso_get_standards_info(.did, quiet=TRUE) %>%
-    pivot_wider(id_cols=file_id, names_from=delta_name, values_from=delta_value) %>%
-    select(file_id, d13C_PDB_wg=`d 13C/12C`, d18O_PDBCO2_wg=`d 18O/16O`) %>%
+    pivot_wider(id_cols=.data$file_id, names_from=.data$delta_name, values_from=.data$delta_value) %>%
+    select(.data$file_id, d13C_PDB_wg=.data$`d 13C/12C`, d18O_PDBCO2_wg=.data$`d 18O/16O`) %>%
     as_tibble()
 }

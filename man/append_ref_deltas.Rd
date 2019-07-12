@@ -12,9 +12,9 @@ append_ref_deltas(.data, .did, d13C_PDB_wg = NULL,
 
 \item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
-\item{d13C_PDB_wg}{\eqn{\delta^{13}C}{δ13C} value to overwrite.}
+\item{d13C_PDB_wg}{\eqn{\delta^{13}C}{δ13C} reference gas value to overwrite.}
 
-\item{d18O_PDBCO2_wg}{\eqn{\delta^{18}O}{δ18O} value to overwrite.}
+\item{d18O_PDBCO2_wg}{\eqn{\delta^{18}O}{δ18O} reference gas value to overwrite.}
 }
 \description{
 Append reference gas delta values

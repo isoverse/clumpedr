@@ -13,3 +13,4 @@
 ^appveyor.yml$
 ^revdep$
 ^data-raw$
+^clumpedr.org$

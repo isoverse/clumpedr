@@ -36,53 +36,41 @@ isobar_ratios <- function(.data,
                           D47 = default(D47),
                           D48 = default(D48),
                           D49 = default(D49)) {
-  # global variables and defaults
-  R17 <- C12 <- C13 <- C16 <- C17 <- C18 <- C626 <- C627 <- C628 <- C636 <-
-    C637 <- C638 <- C727 <- C728 <- C737 <- C738 <- C828 <- C838 <- NULL
-
-  R13 <- enquo(R13)
-  R18 <- enquo(R18)
-  R45 <- enquo(R45)
-  R46 <- enquo(R46)
-  R47 <- enquo(R47)
-  R48 <- enquo(R48)
-  R49 <- enquo(R49)
-
   .data %>%
     mutate(
       # Compute R17
-      R17 = R17_PDBCO2 * exp(D17O / 1000) * (!! R18 / R18_PDBCO2) ^ lambda,
+      R17 = R17_PDBCO2 * exp(D17O / 1000) * ({{ R18 }} / R18_PDBCO2) ^ lambda,
 
       # Compute isotope concentrations
-      C12 = (1 + !! R13) ^ -1,
-      C13 = C12 * !! R13,
-      C16 = (1 + R17 + !! R18) ^ -1,
-      C17 = C16 * R17,
-      C18 = C16 * !! R18,
+      C12 = (1 + {{ R13 }}) ^ -1,
+      C13 = .data$C12 * {{ R13 }},
+      C16 = (1 + .data$R17 + {{ R18 }}) ^ -1,
+      C17 = .data$C16 * .data$R17,
+      C18 = .data$C16 * {{ R18 }},
 
       # Compute stochastic isotopologue concentrations
-      C626 = C16 * C12 * C16,
-      C627 = C16 * C12 * C17 * 2,
-      C628 = C16 * C12 * C18 * 2,
-      C636 = C16 * C13 * C16,
-      C637 = C16 * C13 * C17 * 2,
-      C638 = C16 * C13 * C18 * 2,
-      C727 = C17 * C12 * C17,
-      C728 = C17 * C12 * C18 * 2,
-      C737 = C17 * C13 * C17,
-      C738 = C17 * C13 * C18 * 2,
-      C828 = C18 * C12 * C18,
-      C838 = C18 * C13 * C18,
+      C626 = .data$C16 * .data$C12 * .data$C16,
+      C627 = .data$C16 * .data$C12 * .data$C17 * 2,
+      C628 = .data$C16 * .data$C12 * .data$C18 * 2,
+      C636 = .data$C16 * .data$C13 * .data$C16,
+      C637 = .data$C16 * .data$C13 * .data$C17 * 2,
+      C638 = .data$C16 * .data$C13 * .data$C18 * 2,
+      C727 = .data$C17 * .data$C12 * .data$C17,
+      C728 = .data$C17 * .data$C12 * .data$C18 * 2,
+      C737 = .data$C17 * .data$C13 * .data$C17,
+      C738 = .data$C17 * .data$C13 * .data$C18 * 2,
+      C828 = .data$C18 * .data$C12 * .data$C18,
+      C838 = .data$C18 * .data$C13 * .data$C18,
 
       # Compute stochastic isobar ratios
-      !! R45 := (C636 + C627) / C626,
-      !! R46 := (C628 + C637 + C727) / C626,
-      !! R47 := (C638 + C728 + C737) / C626,
-      !! R48 := (C738 + C828) / C626,
-      !! R49 := C838 / C626,
+      {{ R45 }} := (.data$C636 + .data$C627) / .data$C626,
+      {{ R46 }} := (.data$C628 + .data$C637 + .data$C727) / .data$C626,
+      {{ R47 }} := (.data$C638 + .data$C728 + .data$C737) / .data$C626,
+      {{ R48 }} := (.data$C738 + .data$C828) / .data$C626,
+      {{ R49 }} := .data$C838 / .data$C626,
 
       # Account for stochastic anomalies
-      !! R47 := !! R47 * (1 + D47 / 1000),
-      !! R48 := !! R48 * (1 + D48 / 1000),
-      !! R49 := !! R49 * (1 + D49 / 1000))
+      {{ R47 }} := {{ R47 }} * (1 + D47 / 1000),
+      {{ R48 }} := {{ R48 }} * (1 + D48 / 1000),
+      {{ R49 }} := {{ R49 }} * (1 + D49 / 1000))
 }

@@ -16,21 +16,19 @@
 plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
                            point_alpha = .5, quiet = default(quiet)) {
   # global variables and defaults
-  D47_raw <- file_id <- file_datetime <- outlier_cycle <- NULL
-
-  y <- enquo(y)
+  D47_raw <- NULL
 
   if (!quiet)
-    glue("Info: generating a plot of raw delta value {quo_name(y)} as a function of measurement time.") %>%
+    glue("Info: generating a plot of raw delta value {quo_name(enquo(y))} as a function of measurement time.") %>%
       message()
 
   plotdat <- .data %>%
-    ## select(file_id, !! y) %>%
+    ## select(file_id, {{ y }}) %>%
     left_join(.info, by = "file_id") %>%
-    group_by(file_id)
+    group_by("file_id")
 
   pl <- plotdat %>%
-    plot_base(x = file_datetime, y = !! y, shape=outlier_cycle) +
+    plot_base(x = .data$file_datetime, y = {{ y }}, shape=.data$outlier_cycle) +
     stat_summary(fun.y = mean,
                  fun.ymin = function(x) mean(x) - sd(x),
                  fun.ymax = function(x) mean(x) + sd(x),

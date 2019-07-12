@@ -32,7 +32,7 @@ delta_values <- function(.data,
     bulk_and_clumping_deltas()
 
   if (genplot)
-    pipe_plot(out, plot_raw_delta, .info = plot_info, y = !! plot_column,
+    pipe_plot(out, plot_raw_delta, .info = plot_info, y = {{ plot_column }},
               quiet = quiet)
 
   return(out)

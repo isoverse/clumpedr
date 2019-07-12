@@ -10,10 +10,8 @@ plot_delta <- function(.data, x = file_datetime, y = D47_final, ...) {
   # global variables and defaults
   file_datetime <- D47_final <- NULL
 
-  x <- enquo(x)
-  y <- enquo(y)
   .data %>%
-    plot_base(x = !! x, y = !! y, ...) +
-    geom_violin(aes(group = file_id, fill = broadid), alpha = .5) +
+    plot_base(x = {{ x }}, y = {{ y }}, ...) +
+    geom_violin(aes(group = .data$file_id, fill = .data$broadid), alpha = .5) +
     geom_point(alpha = .5, shape = 1)
 }

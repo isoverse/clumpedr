@@ -12,9 +12,6 @@
 #' @export
 # TODO: clean up the arguments
 spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = default(quiet)) {
-  # global variables and defaults
-  file_id <- mass <- intensity <- type <- cycle <- mir <- value <- standard <- has_drop <- NULL
-
   if (!quiet)
     message("Info: reshaping data into wide format.")
 
@@ -38,8 +35,8 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
                  names_pattern = "v([4-9]{2}).(mV)") %>%
     # then widen it so that sample and ref gas are next to each other for each cycle
     pivot_wider(id_cols = ids,
-                names_from = c(type, mass),
-                values_from = value) %>%
+                names_from = c(.data$type, .data$mass),
+                values_from = .data$value) %>%
     # clean up names
     purrr::set_names(~ str_replace_all(., "standard_", "r") %>%
                        str_replace_all("sample_", "s"))
@@ -50,8 +47,8 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
     ungroup() %>%
     select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = ids,
-                names_from = "type",
-                values_from = c(v44_low, v44_high, v44_drop, drop_before, has_drop)) %>%
+                names_from = .data$type,
+                values_from = c(.data$v44_low, .data$v44_high, .data$v44_drop, .data$drop_before, .data$has_drop)) %>%
     group_by(file_id)
 
   left_join(out, cycle_dis_dfr, by = c("file_id", "cycle")) %>%
