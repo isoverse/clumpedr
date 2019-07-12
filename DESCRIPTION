@@ -17,9 +17,9 @@ Licence: GPL-3 + file LICENCE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
-    tidyr (>= 0.8.3),
+    tidyr (>= 0.8.3.9000),
     magrittr,
-    rlang (>= 0.4.0),
+    rlang (>= 0.4.0.9000),
     readr,
     glue (>= 1.2.0),
     dplyr,
@@ -37,6 +37,8 @@ Suggests:
     tictoc
 Remotes:
     isoverse/isoreader
+    tidyverse/tidyr
+    tidyverse/rlang
 Collate:
     'clumpedr-package.R'
     'data.R'
