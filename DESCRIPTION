@@ -28,7 +28,7 @@ Imports:
     stringr,
     tibble
 Suggests:
-    testthat,
+    testthat (>= 2.1.0),
     broom,
     plotly,
     ggridges,
@@ -40,7 +40,6 @@ Collate:
     'clumpedr-package.R'
     'defaults.R'
     'clean_did_info.R'
-    'add_info.R'
     'correct_backgrounds.R'
     'abundance_ratios.R'
     'acid_fractionation.R'
@@ -50,6 +49,7 @@ Collate:
     'delta_values.R'
     'disable_cycles.R'
     'empirical_transfer_function.R'
+    'reference_gas_delta.R'
     'append_expected_values.R'
     'calculate_etf.R'
     'apply_etf.R'

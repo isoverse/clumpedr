@@ -9,30 +9,30 @@ isoreader::iso_turn_info_messages_off
 # retrieve package settings, internal function, not exported
 default <- function(name, allow_null = FALSE) {
   name <- enquo(name) %>% quos_to_text(variable = "setting")
-  value <- isoreader:::default(!!sym(name), allow_null = TRUE)
-  if (is.null(value)) # not in isoreader settings
-      value <- getOption(str_c("clumpedr.", name))
-  if (!allow_null && is.null(value))
-    stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
+  value <- getOption(str_c("clumpedr.", name))
+  if (!allow_null && is.null(value)) stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
   return(value)
 }
 
-# set package setting, internal function, not exported
 set_default <- function(name, value, overwrite = TRUE) {
   if (overwrite || !str_c("clumpedr.", name) %in% names(options()))
     options(list(value) %>% setNames(str_c("clumpedr.", name)))
   return(invisible(value))
 }
 
-# retrieve temp option
 get_temp <- function(name, allow_null = TRUE) {
   value <- getOption(str_c("clumpedr_temp.", name))
-  if (!allow_null && is.null(value))
-    stop("clumpedr temporary setting '", name, "' does not exist", call. = FALSE)
+  if (!allow_null && is.null(value)) stop("clumpedr temporary setting '", name, "' does not exist", call. = FALSE)
   return(value)
 }
 
-# set temp option
+#' Set temporary option
+#'
+#' Set a temporary option for parallel processing in clumpedr.
+#'
+#' @param name name of the temporary option
+#' @param value value of the temporary option
+#' @export
 set_temp <- function(name, value) {
   options(list(value) %>% setNames(str_c("clumpedr_temp.", name)))
   return(invisible(value))
@@ -67,11 +67,35 @@ clumpedr_get_default_parameters <- function() {
     }
 }
 
+#' Show the current default parameters
+#'
+#' Shows a table with the default function parameters for this package.
+#' @param data a data frame - returned invisibly as is if provided (e.g. in the
+#'   middle of a pipeline)
+#' @param func function to use for formatting the reader parameters table, e.g.
+#'   \code{\link[knitr]{kable}}. Note that if the output is in RMarkdown
+#'   chunks, the chunk option must have \code{results="asis"} for the table to
+#'   be correctly formatted.
+#' @param ... additional parameters to forward to the \code{func} function
+#' @family settings functions
+#' @export
+clumpedr_show_default_parameters <- function(data = NULL, func = NULL, ...) {
+  if (!default("quiet")) message("Info: clumpedr package current default parameters")
+
+  if (!is.null(func))
+    print(do.call(func, args = c(list(x = clumpedr_get_default_parameters()), list(...))))
+  else
+    print(clumpedr_get_default_parameters())
+
+  # for pipeline
+  return(invisible(data))
+}
+
 #' Turn information messages on/off
 #'
 #' These functions turn information messages on/off in all subsequent function
 #' calls by changing the global settings for the \code{quiet} parameter of most
-#' isoreader functions. These functions can be called stand alone or within a
+#' clumpedr functions. These functions can be called stand alone or within a
 #' pipeline to turn messages on/off at a certain point during the pipeline.
 #'
 #' @name clumpedr_info_messages

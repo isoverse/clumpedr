@@ -4,12 +4,16 @@
 \alias{find_outliers}
 \title{Find outliers}
 \usage{
-find_outliers(.data, init = 8000, diff = 1200, nsd_off = 4,
-  n_id1 = 5, D47 = D47_raw, std_names = paste0("ETH-", 1:3),
-  session = Preparation, id1 = `Identifier 1`)
+find_outliers(.data, init_low = 8000, init_high = 40000, diff = 1200,
+  nsd_off = 4, n_id1 = 5, D47 = D47_raw, std_names = paste0("ETH-",
+  1:3), session = Preparation, id1 = `Identifier 1`)
 }
 \arguments{
-\item{init}{Initial intensity threshold for mass 44.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
+
+\item{init_low}{Minimum initial intensity threshold for mass 44.}
+
+\item{init_high}{Maximum initial intensity threshold for mass 44.}
 
 \item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
 

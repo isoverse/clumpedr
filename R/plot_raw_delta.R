@@ -16,7 +16,7 @@
 plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
                            point_alpha = .5, quiet = default(quiet)) {
   # global variables and defaults
-  D47_raw <- file_id <- file_datetime <- outlier <- NULL
+  D47_raw <- file_id <- file_datetime <- outlier_cycle <- NULL
 
   y <- enquo(y)
 
@@ -30,7 +30,7 @@ plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
     group_by(file_id)
 
   pl <- plotdat %>%
-    plot_base(x = file_datetime, y = !! y, shape=measurement_error) +
+    plot_base(x = file_datetime, y = !! y, shape=outlier_cycle) +
     stat_summary(fun.y = mean,
                  fun.ymin = function(x) mean(x) - sd(x),
                  fun.ymax = function(x) mean(x) + sd(x),

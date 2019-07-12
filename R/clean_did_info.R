@@ -4,35 +4,23 @@
 #' initial intensity of mass 44.
 #'
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
-#' @param ... Additional options to pass to [isoreader::iso_get_file_info()].
 #' @inheritParams parse_info
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
 #' @family metadata cleaning functions
 #' @export
-clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-", 1:4),
+clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4),
                             oth_name = "other", quiet = default(quiet)) {
   if (!quiet) {
     message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
   }
 
-  parsed_info <- .did %>%
-    parse_info(masspec, std_names, oth_name) %>%
-    iso_get_file_info(quiet = TRUE)
-
   inits <- get_inits(.did)
 
-  outdf <- full_join(parsed_info, inits, by = "file_id")
-
-  # convert back to list format
-  file_info <-
-    outdf %>%
-    ensure_data_frame_list_columns() %>%
-    split(seq(nrow(outdf)))
-
-  # return
-  map2(.did, file_info, ~{ .x$file_info <- .y; .x }) %>%
-    iso_as_file_list()
+  .did %>%
+    parse_info(masspec=masspec, std_names=std_names, oth_name=oth_name) %>%
+    isoreader::iso_mutate_file_info(s44_init=inits$s44_init,
+                                    r44_init=inits$r44_init)
 }
 
 #' Parse info into appropriate types.
@@ -50,7 +38,7 @@ clean_did_info  <- function(.did, ..., masspec = NULL, std_names = paste0("ETH-"
 #' @param id1 The column with sample/standard names.
 #' @export
 #' @family metadata cleaning functions
-parse_info <- function(.did, masspec, std_names = paste0("ETH-", 1:4), oth_name = "other",
+parse_info <- function(.did, masspec=NA_character_, std_names = paste0("ETH-", 1:4), oth_name = "other",
                        ms_name = masspec, broadid_name = broadid, id1 = `Identifier 1`) {
   # global variables and defaults
   broadid <- `Identifier 1` <- Row <- `Peak Center` <-
@@ -62,12 +50,12 @@ parse_info <- function(.did, masspec, std_names = paste0("ETH-", 1:4), oth_name 
   id1 <- enquo(id1)
 
   .did %>%
-    iso_parse_file_info(double=c(Background, `Weight [mg]`),
+    isoreader::iso_parse_file_info(double=c(Background, `Weight [mg]`),
                         integer=c(Row, Line, Sample, Analysis, Preparation),
                         logical=c(`Peak Center`, Pressadjust, `Reference Refill`), quiet=TRUE) %>%
-    iso_mutate_file_info(
+    isoreader::iso_mutate_file_info(
       # append new column infos
-      !! ms_name := ifelse(!is.null(masspec), masspec, ""),
+      !! ms_name := masspec,
       !! broadid_name := ifelse(!! id1 %in% std_names, !! id1, oth_name),
       quiet=TRUE)
 }
@@ -87,9 +75,9 @@ get_inits <- function(.did) {
     isoreader::iso_get_raw_data(quiet = TRUE) %>%
     # filter first standard and first sample cycles
     filter(type == "standard" & cycle == 0 | type == "sample" & cycle == 1) %>%
-    select(file_id, type, v44.mV) %>%
     pivot_wider(id_cols=file_id, names_from=type, values_from=v44.mV) %>%
-    select(file_id, s44_init = v44.mV_sample, r44_init = v44.mV_standard)
+    select(file_id, s44_init = sample, r44_init = standard) %>%
+    tibble::as_tibble()
 }
 
 # import from isororeader for use in my parsing function

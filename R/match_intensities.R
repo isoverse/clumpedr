@@ -32,5 +32,8 @@ match_intensities <- function(.data, method = "normal", quiet = default(quiet)) 
         # find matching intensity of mass 44 reference to sample gas
         mutate(target_cycle_44 = approx(x = r44, y = cycle, xout = s44)$y) %>%
         mutate_at(vars(r44:r49),
-                  funs(approx(x = cycle, y = ., xout = target_cycle_44)$y)))
+                  funs(approx(x = cycle, y = ., xout = target_cycle_44)$y))) %>%
+    mutate(outlier_cycle=v44_low_standard | v44_low_sample |
+             v44_high_standard | v44_high_sample | v44_drop_standard |
+             v44_drop_sample | drop_before_standard | drop_before_sample)
 }

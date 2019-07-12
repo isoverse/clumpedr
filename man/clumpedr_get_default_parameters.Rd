@@ -17,6 +17,7 @@ compatible version of this function, see
 TODO: create show_default_reader_parameters function
 }
 \seealso{
-Other settings functions: \code{\link{clumpedr_info_messages}}
+Other settings functions: \code{\link{clumpedr_info_messages}},
+  \code{\link{clumpedr_show_default_parameters}}
 }
 \concept{settings functions}

@@ -10,6 +10,10 @@ apply_etf(.data, intercept = intercept, slope = slope, D47 = D47_raw,
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing column D47.}
 
+\item{intercept}{The column name with the ETF intercept.}
+
+\item{slope}{The column name with the ETF slope.}
+
 \item{D47}{The column with \eqn{\Delta_{47}}{Δ47} values to use.}
 
 \item{D47_out}{The new column name.}
