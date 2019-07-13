@@ -36,8 +36,8 @@ Suggests:
     naniar,
     tictoc
 Remotes:
-    isoverse/isoreader
-    tidyverse/tidyr
+    isoverse/isoreader,
+    tidyverse/tidyr,
     tidyverse/rlang
 Collate:
     'clumpedr-package.R'
