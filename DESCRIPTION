@@ -9,12 +9,13 @@ Authors@R:
 URL: https://github.com/isoverse/clumpedr
 BugReports: https://github.com/isoverse/clumpedr/issues
 Description: Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final Δ47 values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
-License: GPL-3
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-Depends: R (>= 2.10)
-Licence: GPL-3 + file LICENCE
+Depends:
+    R (>= 2.10),
+    isoreader (>= 1.0.9)
+Licence: GPL-3 | file LICENCE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
@@ -25,7 +26,6 @@ Imports:
     glue (>= 1.2.0),
     dplyr,
     ggplot2,
-    isoreader (>= 0.9.29),
     purrr,
     stringr,
     tibble
@@ -41,43 +41,3 @@ Remotes:
     isoverse/isoreader,
     tidyverse/tidyr,
     tidyverse/rlang
-Collate:
-    'clumpedr-package.R'
-    'data.R'
-    'defaults.R'
-    'clean_did_info.R'
-    'add_info.R'
-    'correct_backgrounds.R'
-    'abundance_ratios.R'
-    'acid_fractionation.R'
-    'bulk_and_clumping_deltas.R'
-    'calibration.R'
-    'collapse_cycles.R'
-    'delta_values.R'
-    'disable_cycles.R'
-    'empirical_transfer_function.R'
-    'reference_gas_delta.R'
-    'append_expected_values.R'
-    'calculate_etf.R'
-    'apply_etf.R'
-    'find_bad_cycles.R'
-    'find_outliers.R'
-    'isobar_ratios.R'
-    'little_deltas.R'
-    'match_intensities.R'
-    'nse.R'
-    'plot_base.R'
-    'plot_delta.R'
-    'plot_disabled_cycles.R'
-    'plot_outliers.R'
-    'plot_raw_delta.R'
-    'plot_stds.R'
-    'plot_etf.R'
-    'remove_outliers.R'
-    'settings.R'
-    'utils.R'
-    'spread_intensities.R'
-    'spread_match.R'
-    'temperature_calculation.R'
-    'utils-pipe.R'
-    'zzz.R'
