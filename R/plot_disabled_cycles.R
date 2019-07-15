@@ -18,9 +18,9 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
                                   .data$has_drop ~ "has_drop",
                                   TRUE ~ "no_drop",
                                   ) %>%
-             factor(levels=c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop"))) %>%
-    ggplot(aes(x=.data$cycle, y={{ y }}, colour=.data$cycle_meta, shape=.data$cycle_meta, alpha=.data$cycle_meta, size=.data$cycle_meta)) +
-    geom_line(aes(group=.data$file_id), alpha = .5) +
+             factor(levels = c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop"))) %>%
+    ggplot(aes(x = .data$cycle, y = {{ y }}, colour = .data$cycle_meta, shape = .data$cycle_meta, alpha = .data$cycle_meta, size = .data$cycle_meta)) +
+    geom_line(aes(group = .data$file_id), alpha = .5) +
     geom_point() +
     scale_shape_manual(values = c(16, 16, 15, 16, 16, NA),
                        drop = FALSE) +

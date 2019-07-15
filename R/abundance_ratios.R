@@ -21,7 +21,7 @@ abundance_ratios <- function(.data,
                              i46 = s46, i47 = s47, i48 = s48,
                              i49 = s49,
                              R45 = R45, R46 = R46, R47 = R47,
-                             R48 = R48, R49 = R49, quiet=default(quiet)) {
+                             R48 = R48, R49 = R49, quiet = default(quiet)) {
   # global variables and defaults
   s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 

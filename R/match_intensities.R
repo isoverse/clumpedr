@@ -32,7 +32,7 @@ match_intensities <- function(.data, method = "normal", quiet = default(quiet)) 
         mutate(target_cycle_44 = approx(x = .data$r44, y = .data$cycle, xout = .data$s44)$y) %>%
         mutate_at(vars(.data$r44:.data$r49),
                   funs(approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y))) %>%
-    mutate(outlier_cycle=.data$v44_low_standard | .data$v44_low_sample |
+    mutate(outlier_cycle = .data$v44_low_standard | .data$v44_low_sample |
              .data$v44_high_standard | .data$v44_high_sample | .data$v44_drop_standard |
              .data$v44_drop_sample | .data$drop_before_standard | .data$drop_before_sample)
 }

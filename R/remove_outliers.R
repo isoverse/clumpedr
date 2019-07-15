@@ -14,7 +14,7 @@
 #' @param plot_x The column to use for plotting the x axis.
 #' @inheritParams find_outliers
 #' @export
-remove_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, nsd_off = 4,
+remove_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 1200, nsd_off = 4,
                             std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
                             plot_x = file_datetime,
                             session = Preparation,
@@ -28,7 +28,7 @@ remove_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200
       message()
 
   out <- .data %>%
-    find_outliers(init_low=init_low, init_high=init_high, diff = diff, nsd_off = nsd_off,
+    find_outliers(init_low = init_low, init_high = init_high, diff = diff, nsd_off = nsd_off,
                   D47 = {{ D47 }}, std_names = std_names, session = {{ session }})
 
   if (genplot) {

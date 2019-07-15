@@ -19,7 +19,7 @@
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
 #' @export
-find_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, nsd_off = 4,
+find_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 1200, nsd_off = 4,
                           n_id1 = 5, D47 = D47_raw, #D47_raw_mean,
                           std_names = paste0("ETH-", 1:3),
                           session = Preparation, id1 = `Identifier 1`) {
@@ -29,12 +29,12 @@ find_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, 
   # filter out the ones that went very wrong
   out <- .data %>%
     mutate(
-      s44_init_low=.data$s44_init <= init_low,
-      r44_init_low=.data$r44_init <= init_low,
-      s44_init_high=.data$s44_init >= init_high,
-      r44_init_high=.data$r44_init >= init_high,
-      i44_init_diff=abs(.data$s44_init - .data$r44_init) >= diff,
-      outlier_init=.data$s44_init_low | .data$r44_init_low | .data$s44_init_high |
+      s44_init_low = .data$s44_init <= init_low,
+      r44_init_low = .data$r44_init <= init_low,
+      s44_init_high = .data$s44_init >= init_high,
+      r44_init_high = .data$r44_init >= init_high,
+      i44_init_diff = abs(.data$s44_init - .data$r44_init) >= diff,
+      outlier_init = .data$s44_init_low | .data$r44_init_low | .data$s44_init_high |
         .data$r44_init_high | .data$i44_init_diff)
 
   sess_id1 <- out %>%
@@ -59,11 +59,11 @@ find_outliers <- function(.data, init_low = 8000, init_high=40000, diff = 1200, 
     left_join(sess, by = quo_name(enquo(session))) %>%
     # now substitute the ok_so_far ones with potentiall run sd offset criterion
     mutate(
-      out_sess_id1_sd=.data$sess_id1_n > n_id1 &
+      out_sess_id1_sd = .data$sess_id1_n > n_id1 &
         abs(.data$sess_id1_med - {{ D47 }}) > nsd_off * .data$sess_id1_sd,
-      out_sess_sd=.data$sess_n > n_id1 & abs(.data$sess_med - {{ D47 }}) > nsd_off * .data$sess_sd,
-      outlier_session=.data$out_sess_id1_sd | .data$out_sess_sd,
-      outlier=.data$outlier_cycle | .data$outlier_init | .data$outlier_session) %>%
+      out_sess_sd = .data$sess_n > n_id1 & abs(.data$sess_med - {{ D47 }}) > nsd_off * .data$sess_sd,
+      outlier_session = .data$out_sess_id1_sd | .data$out_sess_sd,
+      outlier = .data$outlier_cycle | .data$outlier_init | .data$outlier_session) %>%
     as_tibble()
   # TODO: include outlier filtering based on:
   # filter too large internal SD -> set D47 to D47_raw in stead of D47_raw_mean

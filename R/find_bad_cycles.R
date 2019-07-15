@@ -32,9 +32,9 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
 
   # find the extremes
   out <- .data %>%
-    mutate(v44_low={{ v44 }} <= min,
-           v44_high={{ v44 }} >= max,
-           v44_diff=lead({{ v44 }}) - {{ v44 }}) %>%
+    mutate(v44_low = {{ v44 }} <= min,
+           v44_high = {{ v44 }} >= max,
+           v44_diff = lead({{ v44 }}) - {{ v44 }}) %>%
     when(relative_to == "init" ~
            (.) %>%
            mutate(v44_drop = .data$v44_diff < fac * first(filter(., !.data$v44_low, !.data$v44_high)$v44_diff)),
@@ -44,13 +44,13 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
     # update cycle_dis
     group_by(.data$file_id, .data$type) %>%
     # does the measurement have a pressure drop? (works within group)
-    mutate(has_drop=any(.data$v44_drop, na.rm = TRUE),
+    mutate(has_drop = any(.data$v44_drop, na.rm = TRUE),
     # get the cycle number of where the drop occurs
-           cycle_drop=ifelse(.data$v44_drop, {{ cycle }}, Inf),
+           cycle_drop = ifelse(.data$v44_drop, {{ cycle }}, Inf),
     ## disable if the cycle number is bigger than/equal to the disabled cylce number
-           drop_before=.data$has_drop & ({{ cycle }} >= .data$cycle_drop))
+           drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop))
   # add it back to cycles with high or low intensities
-           ## cycle_dis=glue("{if(v44_low|is.na(v44_low))'v44_low'}{if(v44_high|is.na(v44_high))'v44_high'}{if(v44_drop|is.na(v44_drop))'v44_drop'}{if(drop_before|is.na(drop_before))'drop_before'}"))
+           ## cycle_dis = glue("{if(v44_low|is.na(v44_low))'v44_low'}{if(v44_high|is.na(v44_high))'v44_high'}{if(v44_drop|is.na(v44_drop))'v44_drop'}{if(drop_before|is.na(drop_before))'drop_before'}"))
 
   if (!quiet)
     glue("Info: found {nrow(filter(out, .data$v44_low | .data$v44_high | .data$drop_before))}/{length(unique(pull(filter(out, .data$v44_low | .data$v44_high | .data$drop_before), .data$file_id)))} bad cycles/acquisitions out of {nrow(out)}/{length(unique(out$file_id))} total sample gas and working gas cycles/acquisitions.") %>%

@@ -6,9 +6,9 @@
 #' @param d18O_PDBCO2_wg \eqn{\delta^{18}O}{δ18O} reference gas value to overwrite.
 #' @export
 append_ref_deltas <- function(.data, .did,
-                              d13C_PDB_wg=NULL,
-                              d18O_PDBCO2_wg=NULL,
-                              quiet=default(quiet)) {
+                              d13C_PDB_wg = NULL,
+                              d18O_PDBCO2_wg = NULL,
+                              quiet = default(quiet)) {
   if (!quiet) {
     glue("Info: appending reference gas \u03b4 values from {length(.did)} data file(s)") %>%
       message()
@@ -19,8 +19,8 @@ append_ref_deltas <- function(.data, .did,
       left_join(get_ref_delta(.did), "file_id")
   } else {
     out <- .data %>%
-      mutate(d13C_PDB_wg=d13C_PDB_wg,
-             d18O_PDBCO2_wg=d18O_PDBCO2_wg)
+      mutate(d13C_PDB_wg = d13C_PDB_wg,
+             d18O_PDBCO2_wg = d18O_PDBCO2_wg)
   }
 
   out
@@ -31,8 +31,8 @@ append_ref_deltas <- function(.data, .did,
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @export
 get_ref_delta <- function(.did) {
-  isoreader::iso_get_standards_info(.did, quiet=TRUE) %>%
-    pivot_wider(id_cols=.data$file_id, names_from=.data$delta_name, values_from=.data$delta_value) %>%
-    select(.data$file_id, d13C_PDB_wg=.data$`d 13C/12C`, d18O_PDBCO2_wg=.data$`d 18O/16O`) %>%
+  isoreader::iso_get_standards_info(.did, quiet = TRUE) %>%
+    pivot_wider(id_cols = .data$file_id, names_from = .data$delta_name, values_from = .data$delta_value) %>%
+    select(.data$file_id, d13C_PDB_wg = .data$`d 13C/12C`, d18O_PDBCO2_wg = .data$`d 18O/16O`) %>%
     as_tibble()
 }

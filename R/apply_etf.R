@@ -15,7 +15,7 @@
 #' @param D47_out The new column name.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(.data, intercept=intercept, slope=slope, D47 = D47_raw, D47_out = D47_etf) {
+apply_etf <- function(.data, intercept = intercept, slope = slope, D47 = D47_raw, D47_out = D47_etf) {
   # defaults
   D47_raw <- D47_etf <- NULL
 

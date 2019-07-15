@@ -28,7 +28,7 @@ plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
     group_by("file_id")
 
   pl <- plotdat %>%
-    plot_base(x = .data$file_datetime, y = {{ y }}, shape=.data$outlier_cycle) +
+    plot_base(x = .data$file_datetime, y = {{ y }}, shape = .data$outlier_cycle) +
     stat_summary(fun.y = mean,
                  fun.ymin = function(x) mean(x) - sd(x),
                  fun.ymax = function(x) mean(x) + sd(x),
