@@ -25,26 +25,13 @@ abundance_ratios <- function(.data,
   # global variables and defaults
   s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 
-  i44 <- enquo(i44)
-  i45 <- enquo(i45)
-  i46 <- enquo(i46)
-  i47 <- enquo(i47)
-  i48 <- enquo(i48)
-  i49 <- enquo(i49)
-
-  R45 <- enquo(R45)
-  R46 <- enquo(R46)
-  R47 <- enquo(R47)
-  R48 <- enquo(R48)
-  R49 <- enquo(R49)
-
   if (!quiet)
     message("Calculating abundance ratios R[i] = i / 44")
 
   .data %>%
-    mutate(!! R45 := !! i45 / !! i44,
-           !! R46 := !! i46 / !! i44,
-           !! R47 := !! i47 / !! i44,
-           !! R48 := !! i48 / !! i44,
-           !! R49 := !! i49 / !! i44)
+    mutate({{ R45 }} := {{ i45 }} / {{ i44 }},
+           {{ R46 }} := {{ i46 }} / {{ i44 }},
+           {{ R47 }} := {{ i47 }} / {{ i44 }},
+           {{ R48 }} := {{ i48 }} / {{ i44 }},
+           {{ R49 }} := {{ i49 }} / {{ i44 }})
 }
