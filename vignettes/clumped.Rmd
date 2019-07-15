@@ -43,7 +43,7 @@ linux machine, accessing a windows samba server.
 Of course you can also just copy your files and paste them in a folder you
 desire.
 
-```{r}
+```{r, eval = FALSE}
 folderstr <- "/run/user/1000/gvfs/smb-share:server=geofile02.geo.uu.nl,share=geo-labs/@RawData"
 # read all did files
 dids <- iso_read_dual_inlet(glue("{folderstr}/253pluskiel/Raw Data/Kiel Raw Data"),
@@ -55,7 +55,7 @@ dids <- iso_read_dual_inlet(glue("{folderstr}/253pluskiel/Raw Data/Kiel Raw Data
 It's nice to save a cache/backup as an R data structure file, which we can read
 in much faster.
 
-```{r}
+```{r, eval = FALSE}
 iso_save(dids, "out/dids.di.rds")
 ```
 
@@ -64,8 +64,21 @@ iso_save(dids, "out/dids.di.rds")
 Once we have saved the r data storage (`.rds`) file, we can load it much faster
 than the raw data.
 
-```{r}
+```{r, eval = FALSE}
 dids  <- iso_read_dual_inlet("out/dids.di.rds")
+```
+
+I've made some standard data available here so as to run the tests. You can
+play around with those here:
+
+```{r}
+?standards
+```
+
+or a single did file for an ETH-3 standard
+
+```{r}
+?eth3
 ```
 
 # process the data!
@@ -74,7 +87,7 @@ Clean up the metadata and append the mass spectrometer name. This function
 parses integers, numbers, etc. so that all the types are correct.
 
 ```{r}
-didinfo  <- clean_did_info(dids, masspec = "MOTU")
+didinfo  <- clean_did_info(standards, masspec = "MOTU")
 ```
 
 ## run the processing step-by-step
@@ -128,13 +141,16 @@ ones---interactively using `ggplotly`:
 
 ```{r}
 library(plotly)
-ggplotly(dynamicTicks = TRUE)
+toWebGL(ggplotly(dynamicTicks = TRUE))
 ```
 
 This creates an interactive version of the last plot in your browser. The
 `plot_base()` function assigns a lot of redundant aesthetics to the ggplot
 object. They won't show in regular plots, but when you create an interactive
 version and you hover over a datapoint, all of the metadata is displayed.
+
+Note that we use the `toWebGL` wrapper to make it run smoother for plots with
+many points.
 
 ### background correction
 
@@ -201,7 +217,7 @@ for outlier removal etc.
 
 ```{r}
 dati <- coll %>%
-  add_info(didinfo)
+  add_info(iso_get_file_info(didinfo))
 ```
 
 ### remove outliers
