@@ -15,16 +15,16 @@
 #' @inheritParams find_outliers
 #' @export
 remove_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 1200, nsd_off = 4,
-                            std_names = paste0("ETH-", 1:3), D47 = D47_raw_mean,
+                            std_names = paste0("ETH-", 1:3), D47 = D47_raw,
                             plot_x = file_datetime,
                             session = Preparation,
                             quiet = default(quiet), genplot = default(genplot)) {
   # global variables and defaults
-  file_datetime <- D47_raw_mean <- Preparation <- NULL
+  D47_raw <- file_datetime <- Preparation <- NULL
 
   if (!quiet)
-    glue("Info: identifying aliquots with initial intensity < {init}, difference in initial
-                      intensity > {diff}, or {nsd_off} SD's away from the {quo_name(session)} mean.") %>%
+    glue("Info: identifying aliquots with initial intensity of mass 44 < {init_high}, > {init_low},
+          difference in initial intensity > {diff}, or {nsd_off} SD's away from the {quo_name(enquo(session))} mean.") %>%
       message()
 
   out <- .data %>%
@@ -36,7 +36,7 @@ remove_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 12
   }
 
   if (!quiet)
-    glue("Info: found {nrow(filter(out, outlier != 'no_outlier'))} outliers out of {nrow(out)} samples.") %>%
+    glue("Info: found {nrow(filter(out, outlier))} outliers out of {nrow(out)} samples.") %>%
       message()
   out
 }

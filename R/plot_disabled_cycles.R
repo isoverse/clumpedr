@@ -8,7 +8,7 @@
 #' @export
 plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, quiet = default(quiet)) {
   # global variables and defaults
-  v44.mV <- NULL
+  v44.mV <- type <- NULL
 
   .data  %>%
     mutate(cycle_meta = case_when(.data$v44_low ~ "v44_low",
@@ -22,14 +22,14 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
     ggplot(aes(x = .data$cycle, y = {{ y }}, colour = .data$cycle_meta, shape = .data$cycle_meta, alpha = .data$cycle_meta, size = .data$cycle_meta)) +
     geom_line(aes(group = .data$file_id), alpha = .5) +
     geom_point() +
-    scale_shape_manual(values = c(16, 16, 15, 16, 16, NA),
+    scale_shape_manual("index", values = c(16, 16, 15, 16, 16, NA),
                        drop = FALSE) +
-    scale_alpha_manual(values = c(1, 1, 1, 1, 1, .1),
+    scale_alpha_manual("index", values = c(1, 1, 1, 1, 1, .1),
                        drop = FALSE) +
-    scale_size_manual(values = c(2, 2, 5, 2, 1, .5),
+    scale_size_manual("index", values = c(2, 2, 5, 2, 1, .5),
                       drop = FALSE) +
-    scale_colour_manual(values = c("steelblue", "indianred", "red", "orange", "darkgreen", "gray"),
+    scale_colour_manual("index", values = c("steelblue", "indianred", "red", "orange", "darkgreen", "gray"),
                         drop = FALSE) +
     geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
-    facet_grid(cols = vars(.data$type))
+    facet_grid(cols = vars(type))
 }

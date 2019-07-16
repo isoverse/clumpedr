@@ -4,15 +4,20 @@
 \alias{plot_raw_delta}
 \title{Plot raw delta values as a function of measurement time.}
 \usage{
-plot_raw_delta(.data, .info, y = D47_raw, raw_points = FALSE,
-  point_alpha = 0.5, quiet = default(quiet))
+plot_raw_delta(.data, .info, x = file_datetime, y = D47_raw,
+  shape = outlier_cycle, raw_points = FALSE, point_alpha = 0.5,
+  quiet = default(quiet))
 }
 \arguments{
 \item{.data}{The input tibble, result of \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
 \item{.info}{The metadata of the raw cycles, used to get the \code{file_datetime}.}
 
-\item{y}{Column to put on the y ayis.}
+\item{x}{X aesthetic. Defaults to file_datetime.}
+
+\item{y}{Y aesthetic. Defaults to D47_raw.}
+
+\item{shape}{Shape aesthetic. Defaults to \code{outlier_cycle}.}
 
 \item{raw_points}{Logical, whether to include individual cycle estimates (defaults to \code{FALSE}).}
 

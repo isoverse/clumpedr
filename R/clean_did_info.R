@@ -30,10 +30,10 @@ clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4
 #'
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @param masspec The name of the mass spectrometer to append.
-#' @param std_names Character vector of the standard names to find in 'Identifier 1'.
+#' @param std_names Character vector of the standard names to find in `Identifier 1`.
 #' @param oth_name Single general name to assign to non-standard "other" measurements.
 #' @param broadid_name The name of the new broadid column.
-#' @param id1 The column with sample/standard names.
+#' @param id1 The column with sample and standard names.
 #' @export
 #' @family metadata cleaning functions
 parse_info <- function(.did, masspec = NA_character_, std_names = paste0("ETH-", 1:4), oth_name = "other",

@@ -9,6 +9,7 @@
 #'   after the application of the empirical transfer function.
 #' @param raw The column name with raw \eqn{\Delta_{47}}{Δ47} values.
 #' @param exp The column name with expected \eqn{\Delta_{47}}{Δ47} values.
+#' @param session The session to facet by. Defaults to `Preparation`.
 #' @family empirical transfer functions
 #' @export
 plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
@@ -20,12 +21,12 @@ plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
   expected_D47 <- D47_raw <- Preparation <- NULL
 
   pld <- .data %>%
-    mutate({{ exp }} := ifelse(is.na({{ exp }}), {{ D47_etf }}, {{ exp }}))
+    mutate({{ exp }} := ifelse(is.na({{ exp }} & !.data$broadid %in% std_names), {{ D47_etf }}, {{ exp }}))
 
   pld %>%
-    plot_base() +
-    geom_point(aes(x = {{ exp }}, y = {{ raw }})) +
-    geom_smooth(aes(x = {{ exp }}, y = {{ raw }}, group = "yes"), method = "lm",
-                data = filter(pld, broadid %in% std_names)) +
+    plot_base(x = {{ exp }}, y = {{ raw }}) +
+    geom_point() +
+    geom_smooth(aes(group = "yes"), method = "lm",
+                data = filter(pld, .data$broadid %in% std_names, .data$outlier == FALSE)) +
     facet_grid(rows = vars({{ session }}))
 }

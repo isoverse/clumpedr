@@ -3,22 +3,16 @@
 #' This function plots raw delta values that are outliers, based on several criteria.
 #'
 #' @param dat A [tibble][tibble::tibble-package] resulting from [find_outliers()].
-#' @param x Column to put on the x axis.
-#' @param y Column to put on the y ayis.
+#' @param x X aesthetic. Defaults to `file_datetime`.
+#' @param y Y aesthetic. Defaults to `D47_raw`.
+#' @param shape Shape aesthetic. Defaults to `outlier`.
 #' @export
 #' @seealso find_outliers
-plot_outliers <- function(dat, x = file_datetime, y = D47_raw_mean) {
+plot_outliers <- function(dat, x = file_datetime, y = D47_raw, shape = outlier) {
   # global variables and defaults
-  file_datetime <- D47_raw_mean <- outlier <- sess_id1_mean <- sess_id1_med <-
-    sess_id1_sd <- sess_id1_n <- sess_mean <- sess_sd <- sess_n <- NULL
+  file_datetime <- D47_raw <- outlier <- NULL
 
-  x <- enquo(x)
-  y <- enquo(y)
-
-  dat %>%
-    plot_base(x = !! x, y = !! y, shape = outlier,
-              sess_id1_mean = sess_id1_mean, sess_id1_med = sess_id1_med,
-              sess_id1_sd = sess_id1_sd, sess_id1_n = sess_id1_n,
-              sess_mean = sess_mean, sess_sd = sess_sd, sess_n = sess_n) +
-    geom_point()
+  plot_base(dat, x = {{ x }}, y = {{ y }}, shape = {{ shape }}) +
+    geom_point(alpha = .2) +
+    stat_summary(geom = "pointrange", fun.data = mean_cl_normal)
 }

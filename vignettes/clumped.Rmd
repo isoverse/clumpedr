@@ -27,6 +27,7 @@ Once you have `clumpedr` installed (see the README), you can first load the libr
   # library(tidyverse)  # a few of the below and many more
   library(glue)      # optional, if you want to glue strings together
   library(dplyr)     # for pipes, mutate, summarise, etc.
+  library(tidyr)     # for nesting/unnesting
   library(ggplot2)   # for plots!
 
   library(isoreader) # read in raw data
@@ -37,8 +38,10 @@ Once you have `clumpedr` installed (see the README), you can first load the libr
 
 ## load data from a remote
 
-First locate where you have your raw data files stored. This example uses a
-linux machine, accessing a windows samba server.
+First locate where you have your raw data files stored.
+
+Here I show how I load data from a remote Windows samba server on my GNU/Linux
+machine.
 
 Of course you can also just copy your files and paste them in a folder you
 desire.
@@ -47,7 +50,7 @@ desire.
 folderstr <- "/run/user/1000/gvfs/smb-share:server=geofile02.geo.uu.nl,share=geo-labs/@RawData"
 # read all did files
 dids <- iso_read_dual_inlet(glue("{folderstr}/253pluskiel/Raw Data/Kiel Raw Data"),
-                            cache = TRUE,
+                            cache = FALSE,
                             discard_duplicates = FALSE,
                             parallel = TRUE)
 ```
@@ -68,16 +71,12 @@ than the raw data.
 dids  <- iso_read_dual_inlet("out/dids.di.rds")
 ```
 
-I've made some standard data available here so as to run the tests. You can
-play around with those here:
+I've made some standard data available here so as to run the tests, or a single
+did file for an ETH-3 standard.
 
-```{r}
+See their documentation with the following code:
+```{r, eval = FALSE}
 ?standards
-```
-
-or a single did file for an ETH-3 standard
-
-```{r}
 ?eth3
 ```
 
@@ -87,8 +86,18 @@ Clean up the metadata and append the mass spectrometer name. This function
 parses integers, numbers, etc. so that all the types are correct.
 
 ```{r}
-didinfo  <- clean_did_info(standards, masspec = "MOTU")
+didinfo  <- standards %>%
+  clean_did_info(masspec = "MOTU")
 ```
+
+We save the file info separately, since we'll have to refer to it for some plots.
+
+```{r}
+stdinfo <- iso_get_file_info(didinfo)
+```
+
+This would also be the place to add potential fixes to typos in the file info
+using `isoreader::iso_mutate_file_info()`.
 
 ## run the processing step-by-step
 
@@ -105,7 +114,7 @@ We use a regular expression, or `regexp`. They are very useful ways of looking
 for patterns in strings.
 
 ```{r}
-filt <- dids %>%
+filt <- didinfo %>%
   # we can subset to some files of interest (e.g., based on a regular expression)
   # in this case we subset to all the runs that have a "Clumped" method.
   iso_filter_files(grepl("Clumped.*met", Method))
@@ -139,9 +148,8 @@ disc <- rawd %>%
 Note that it is very nice to look at this plot---or any of the future
 ones---interactively using `ggplotly`:
 
-```{r}
-library(plotly)
-toWebGL(ggplotly(dynamicTicks = TRUE))
+```{r, eval = FALSE}
+plotly::toWebGL(plotly::ggplotly(dynamicTicks = TRUE))
 ```
 
 This creates an interactive version of the last plot in your browser. The
@@ -158,15 +166,14 @@ Do a very simple background correction.
 
 ```{r}
 bgds <- disc %>%
-  # do a very simple background correction
   correct_backgrounds(factor = 0.82)
 ```
 
 ### spread match
 
-Spread and match intensities. First we re-order the data into a wide format,
-where sample and reference gas intensities are listed next to each other as
-separate columns using the gather-unite-spread approach.
+First we re-order the data into a wide format, where sample and reference gas
+intensities are listed next to each other as separate columns using the
+gather-unite-spread approach.
 
 Then we compare reference gas to sample gas. With the `method="normal"`, this
 would calculate the average of first and second cycles for the reference gas.
@@ -193,14 +200,19 @@ to the following output:
 sprd <- bgds %>%
   spread_match(method = "normal") # "linterp")
 ```
+### extract reference gas d13C and d18O values
 
+```{r}
+refd <- sprd %>%
+  append_ref_deltas(didinfo)
+```
 ### calculate little delta's and clumped values
 
 Now we can go to the bread and butter of clumpedr, delta calculations!
 
 ```{r}
-dlts <- sprd %>%
-  delta_values(plot_info = didinfo, genplot = TRUE)
+dlts <- refd %>%
+  delta_values(plot_info = stdinfo, genplot = TRUE)
 ```
 
 ### collapse cycles: calculate averages and standard deviations
@@ -217,7 +229,7 @@ for outlier removal etc.
 
 ```{r}
 dati <- coll %>%
-  add_info(iso_get_file_info(didinfo))
+  add_info(stdinfo)
 ```
 
 ### remove outliers
@@ -227,6 +239,7 @@ before the Empirical Reference Frame is calculated and applied.
 
 ```{r}
 rout <- dati %>%
+  unnest(cols = cycle_data) %>%
   remove_outliers(genplot = TRUE)
 ```
 
@@ -272,3 +285,26 @@ If you don't understand any of the steps, look at the function documentation
 function name without parentheses into the command line).
 
 Enjoy!
+
+Here are all the steps in one pipeline:
+
+```{r}
+stdinfo <- iso_get_file_info(clean_did_info(standards, "MOTU"))
+
+standards %>%
+  clean_did_info("MOTU") %>%
+  iso_filter_files(grepl("Clumped.*met", Method)) %>%
+  iso_get_raw_data() %>%
+  disable_cycles(genplot = F) %>%
+  correct_backgrounds(0.82) %>%
+  spread_match() %>%
+  append_ref_deltas(standards) %>%
+  delta_values(plot_info = stdinfo, genplot = F) %>%
+  collapse_cycles() %>%
+  add_info(stdinfo, genplot = F) %>%
+  unnest(cols = cycle_data) %>%
+  remove_outliers(genplot = F) %>%
+  empirical_transfer_function(genplot = F) %>%
+  acid_fractionation() %>%
+  temperature_calculation()
+```

@@ -19,8 +19,7 @@ after the application of the empirical transfer function.}
 
 \item{exp}{The column name with expected \eqn{\Delta_{47}}{Δ47} values.}
 
-\item{session}{The column name to group analyses by. Defaults to
-\code{Preparation}.}
+\item{session}{The session to facet by. Defaults to \code{Preparation}.}
 }
 \description{
 Create a plot with the expected \eqn{\Delta_{47}}{Δ47} value on the x-axis

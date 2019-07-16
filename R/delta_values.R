@@ -16,10 +16,8 @@ delta_values <- function(.data,
   D47_raw <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- r44 <- r45 <-
     r46 <- r47 <- r48 <- r49 <- NULL
 
-  plot_column <- enquo(plot_column)
-
   if (genplot & is.null(plot_info))
-    stop("Supply plotting information, generated with `clean_did_info()`")
+    stop("Supply plotting information from `isoreader::iso_get_file_info()`")
 
   out <- .data %>%
     # sample gas

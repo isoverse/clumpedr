@@ -4,14 +4,16 @@
 \alias{plot_outliers}
 \title{Plot outliers}
 \usage{
-plot_outliers(dat, x = file_datetime, y = D47_raw_mean)
+plot_outliers(dat, x = file_datetime, y = D47_raw, shape = outlier)
 }
 \arguments{
 \item{dat}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=find_outliers]{find_outliers()}}.}
 
-\item{x}{Column to put on the x axis.}
+\item{x}{X aesthetic. Defaults to \code{file_datetime}.}
 
-\item{y}{Column to put on the y ayis.}
+\item{y}{Y aesthetic. Defaults to \code{D47_raw}.}
+
+\item{shape}{Shape aesthetic. Defaults to \code{outlier}.}
 }
 \description{
 This function plots raw delta values that are outliers, based on several criteria.

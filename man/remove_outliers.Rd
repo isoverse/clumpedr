@@ -6,7 +6,7 @@
 \usage{
 remove_outliers(.data, init_low = 8000, init_high = 40000,
   diff = 1200, nsd_off = 4, std_names = paste0("ETH-", 1:3),
-  D47 = D47_raw_mean, plot_x = file_datetime, session = Preparation,
+  D47 = D47_raw, plot_x = file_datetime, session = Preparation,
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{

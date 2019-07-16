@@ -13,13 +13,13 @@ parse_info(.did, masspec = NA_character_, std_names = paste0("ETH-",
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
-\item{std_names}{Character vector of the standard names to find in 'Identifier 1'.}
+\item{std_names}{Character vector of the standard names to find in \code{Identifier 1}.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 
 \item{broadid_name}{The name of the new broadid column.}
 
-\item{id1}{The column with sample/standard names.}
+\item{id1}{The column with sample and standard names.}
 }
 \description{
 Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader::iso_get_file_info()}} into the

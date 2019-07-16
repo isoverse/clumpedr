@@ -5,8 +5,7 @@
 \title{Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
 \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values}
 \usage{
-bulk_and_clumping_deltas(.data, d13C_PDB_wg = d13C_PDB_wg,
-  d18O_PDBCO2_wg = d18O_PDBCO2_wg, d45 = d45, d46 = d46, d47 = d47,
+bulk_and_clumping_deltas(.data, d45 = d45, d46 = d46, d47 = d47,
   d48 = d48, d49 = d49, R13_PDB = default(R13_PDB),
   R18_PDB = default(R18_PDB), R17_PDBCO2 = default(R17_PDBCO2),
   R18_PDBCO2 = default(R18_PDBCO2), lambda = default(lambda),
@@ -14,10 +13,6 @@ bulk_and_clumping_deltas(.data, d13C_PDB_wg = d13C_PDB_wg,
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
-
-\item{d13C_PDB_wg}{Column name of reference gas \eqn{\delta^{13}}{δ13}C value.}
-
-\item{d18O_PDBCO2_wg}{Column name of reference gas \eqn{\delta^{13}}{δ13}C gas value.}
 
 \item{d45}{Column name of d45.}
 

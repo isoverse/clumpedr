@@ -9,17 +9,19 @@
 #'
 #' @param .data The input tibble, result of [bulk_and_clumping_deltas()].
 #' @param .info The metadata of the raw cycles, used to get the `file_datetime`.
-#' @param y Column to put on the y ayis.
+#' @param x X aesthetic. Defaults to file_datetime.
+#' @param y Y aesthetic. Defaults to D47_raw.
+#' @param shape Shape aesthetic. Defaults to `outlier_cycle`.
 #' @param raw_points Logical, whether to include individual cycle estimates (defaults to `FALSE`).
 #' @param point_alpha The alpha value of the raw points if they are plotted.
 #' @export
-plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
+plot_raw_delta <- function(.data, .info, x = file_datetime, y = D47_raw, shape = outlier_cycle, raw_points = FALSE,
                            point_alpha = .5, quiet = default(quiet)) {
   # global variables and defaults
-  D47_raw <- NULL
+  file_datetime <- D47_raw <- outlier_cycle <- NULL
 
   if (!quiet)
-    glue("Info: generating a plot of raw delta value {quo_name(enquo(y))} as a function of measurement time.") %>%
+    glue("Info: generating a plot of raw delta value {quo_name(enquo(y))} as a function of {quo_name(enquo(x))}.") %>%
       message()
 
   plotdat <- .data %>%
@@ -28,10 +30,10 @@ plot_raw_delta <- function(.data, .info, y = D47_raw, raw_points = FALSE,
     group_by("file_id")
 
   pl <- plotdat %>%
-    plot_base(x = .data$file_datetime, y = {{ y }}, shape = .data$outlier_cycle) +
-    stat_summary(fun.y = mean,
-                 fun.ymin = function(x) mean(x) - sd(x),
-                 fun.ymax = function(x) mean(x) + sd(x),
+    plot_base(x = {{ x }}, y = {{ y }}, shape = {{ shape }}) +
+    stat_summary(fun.data = mean_cl_normal,
+                 ## fun.ymin = function(x) mean(x) - sd(x),
+                 ## fun.ymax = function(x) mean(x) + sd(x),
                  geom = "pointrange")
 
   if (raw_points) {

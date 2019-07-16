@@ -12,7 +12,7 @@ clean_did_info(.did, masspec = NULL, std_names = paste0("ETH-", 1:4),
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
-\item{std_names}{Character vector of the standard names to find in 'Identifier 1'.}
+\item{std_names}{Character vector of the standard names to find in \code{Identifier 1}.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 }

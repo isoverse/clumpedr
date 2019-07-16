@@ -5,8 +5,8 @@
 #' \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
 #'
 #' @param .data A [tibble][tibble::tibble-package] containing delta values 45 through 49.
-#' @param d13C_PDB_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C value.
-#' @param d18O_PDBCO2_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C gas value.
+# # ' @param d13C_PDB_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C value.
+# #' @param d18O_PDBCO2_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C gas value.
 #' @param d45 Column name of d45.
 #' @param d46 Column name of d46.
 #' @param d47 Column name of d47.
@@ -21,8 +21,8 @@
 #'   \url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
 bulk_and_clumping_deltas  <- function(.data,
                                       # make the column names a bit flexible
-                                      d13C_PDB_wg=d13C_PDB_wg,
-                                      d18O_PDBCO2_wg=d18O_PDBCO2_wg,
+                                      ## d13C_PDB_wg=d13C_PDB_wg,
+                                      ## d18O_PDBCO2_wg=d18O_PDBCO2_wg,
                                       d45 = d45, d46 = d46, d47 = d47,
                                       d48 = d48, d49 = d49,
                                       # "global" constants
@@ -42,8 +42,8 @@ bulk_and_clumping_deltas  <- function(.data,
 
   out <- .data %>%
     # scramble the working gas
-    mutate(R13_wg  = R13_PDB * (1 + {{ d13C_PDB_wg }} / 1000),
-           R18_wg  = R18_PDBCO2 * (1 + {{ d18O_PDBCO2_wg }} / 1000)) %>%
+    mutate(R13_wg  = R13_PDB * (1 + .data$d13C_PDB_wg / 1000),
+           R18_wg  = R18_PDBCO2 * (1 + .data$d18O_PDBCO2_wg / 1000)) %>%
     isobar_ratios(R13 = R13_wg, R18 = R18_wg,
                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
                   R48 = R48_wg, R49 = R49_wg) %>%

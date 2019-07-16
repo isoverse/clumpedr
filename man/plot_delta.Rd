@@ -5,14 +5,22 @@
 \title{Create a plot of \eqn{\Delta_{47}}{Δ47} values as a function of measurement
 time.}
 \usage{
-plot_delta(.data, x = file_datetime, y = D47_final, ...)
+plot_delta(.data, x = file_datetime, y = D47_final, fill = broadid,
+  shape = outlier, ...)
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=temperature_calculation]{temperature_calculation()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[=temperature_calculation]{temperature_calculation()}}.}
 
 \item{x}{What to put on the x axis.}
 
 \item{y}{What to put on the y axis.}
+
+\item{fill}{The fill aesthetic for the violin plots, defaults to broadid;
+same as colour.}
+
+\item{shape}{The shape aesthetic for the violin plots, defaults to outlier.
+Also filters based on this for violin.}
 
 \item{...}{Additional aesthetics to pass to \code{\link[=plot_base]{plot_base()}}.}
 }

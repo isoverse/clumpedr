@@ -4,13 +4,11 @@
 \alias{calculate_etf}
 \title{Calculate the Empirical Transfer Function}
 \usage{
-calculate_etf(.data, outlier = outlier, raw = D47_raw_mean,
-  exp = expected_D47, session = Preparation, quiet = default(quiet))
+calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
+  session = Preparation, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
-
-\item{outlier}{Column with sample outlier information. Looks up string \code{"no_outlier"}.}
 
 \item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
 
