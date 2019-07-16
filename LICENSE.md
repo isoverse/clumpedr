@@ -1,7 +1,7 @@
 GNU General Public License
 ==========================
 
-_Version 3, 29 June 2007_  
+_Version 3, 29 June 2007_
 _Copyright © 2007 Free Software Foundation, Inc. &lt;<http://fsf.org/>&gt;_
 
 Everyone is permitted to copy and distribute verbatim copies of this license
@@ -552,7 +552,7 @@ to the start of each source file to most effectively state the exclusion of warr
 and each file should have at least the “copyright” line and a pointer to
 where the full notice is found.
 
-    <one line to give the program's name and a brief idea of what it does.>
+	clumpedr: clumped isotope analysis in R
     Copyright (C) 2018 Ilja Kocken
 
     This program is free software: you can redistribute it and/or modify

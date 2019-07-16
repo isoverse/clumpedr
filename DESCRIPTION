@@ -15,7 +15,7 @@ VignetteBuilder: knitr
 Depends:
     R (>= 2.10),
     isoreader (>= 1.0.9)
-Licence: GPL-3 | file LICENCE
+License: GPL-3 + file LICENSE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports:
