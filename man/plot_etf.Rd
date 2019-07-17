@@ -5,7 +5,8 @@
 \title{Plot the Empirical Transfer Function}
 \usage{
 plot_etf(.data, std_names = paste0("ETH-", 1:3), D47_etf = D47_etf,
-  raw = D47_raw, exp = expected_D47, session = Preparation)
+  raw = D47_raw, exp = expected_D47, shape = outlier,
+  session = Preparation)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}

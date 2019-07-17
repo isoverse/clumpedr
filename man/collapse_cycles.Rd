@@ -4,14 +4,25 @@
 \alias{collapse_cycles}
 \title{Collapse the cycles of the raw measurements}
 \usage{
-collapse_cycles(.data, na.rm = TRUE, quiet = default(quiet))
+collapse_cycles(.data, ..., id = c(file_id), outlier = outlier_cycle,
+  alpha = 0.05, na.rm = TRUE, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from
 \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
+\item{...}{Columns for the summary report.}
+
+\item{id}{Index columns that will be excluded from nesting. Defaults to \code{file_id}.}
+
+\item{outlier}{The column containing outlier information.}
+
+\item{alpha}{The confidence level for the summary functions.}
+
 \item{na.rm}{a logical value indicating wheter NA values should be stripped
 before the computation proceeds.}
+
+\item{confidence}{Alpha, the confidence level for summary functions.}
 }
 \description{
 This collapses the cycles of the raw measurements and calculates averages

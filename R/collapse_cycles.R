@@ -5,37 +5,37 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package] resulting from
 #'   [bulk_and_clumping_deltas()].
+#' @param ... Columns for the summary report.
+#' @param id Index columns that will be excluded from nesting. Defaults to `file_id`.
+#' @param outlier The column containing outlier information.
+#' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
+#' @param quiet
+#' @param confidence Alpha, the confidence level for summary functions.
 #' @export
-collapse_cycles <- function(.data, na.rm = TRUE, quiet = default(quiet)) {
+collapse_cycles <- function(.data, ..., id = c(file_id), outlier = outlier_cycle, alpha = 0.05, na.rm = TRUE, quiet = default(quiet)) {
+  outlier_cycle <- NULL
+
   if (!quiet)
     message("Info: collapsing cycles, calculating sample means and standard deviations.")
 
   # this creates a nice summary for one of the samples
   summarize_mean <- function(.data) {
     .data %>%
-      filter(.data$outlier_cycle %in% FALSE) %>%
-      select(.data$d45:.data$d49, .data$d18O_PDBCO2, .data$d18O_PDB,
-             .data$d13C_PDB, .data$D47_raw:.data$param_49) %>%
+      filter({{ outlier }} %in% FALSE) %>%
+      select(...) %>%
       summarise_all(.funs = list(~ mean(., na.rm = na.rm),
                                  ~ sd(., na.rm = na.rm),
                                  n = length,
-                                 sem = ~ sd(., na.rm = na.rm) / sqrt(length(.))))
+                                 sem = ~ sd(., na.rm = na.rm) / sqrt(length(.) - 1),
+                                 cl = ~ qt((1 - alpha), length(.) - 1) *
+                                   sd(., na.rm = na.rm) / sqrt(length(.) - 1)))
   }
 
   .data %>%
-    nest(cycle_data = -.data$file_id
-      # TODO: or do I want really explicit groups?
-      ## cycle_intensities = c(r44:s54),
-      ## cycle_R = c(R45:R49_wg, R18:R13, R45_stoch:R49_stoch),
-      ## cycle_components = C12:C838,
-      ## cycle_taylor = K:cc,
-      ## cycle_flags = c(R45_flag, R46_flag),
-      ## cycle_output = c(d45:d49, d18O_PDBCO2, d18O_PDB, d13C_PDB, D47_raw:param_49)
-    ) %>%
-    # I now want to get a subset of the nested data once,
-    # so filter by no bad cycle
+    # TODO: add an id argument so that I can select multiple columns that aren't nested (i.e. )
+    nest(cycle_data = -{{ id }}) %>%
     bind_cols(map_dfr(.$cycle_data, summarize_mean)) %>%
     as_tibble()
 }

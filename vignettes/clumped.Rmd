@@ -219,7 +219,7 @@ dlts <- refd %>%
 
 ```{r}
 coll <- dlts %>%
-  collapse_cycles()
+  collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw)
 ```
 
 ### append metadata
@@ -300,7 +300,7 @@ standards %>%
   spread_match() %>%
   append_ref_deltas(standards) %>%
   delta_values(plot_info = stdinfo, genplot = F) %>%
-  collapse_cycles() %>%
+  collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
   add_info(stdinfo, genplot = F) %>%
   unnest(cols = cycle_data) %>%
   remove_outliers(genplot = F) %>%
