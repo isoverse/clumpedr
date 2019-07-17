@@ -36,8 +36,12 @@ clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4
 #' @param id1 The column with sample and standard names.
 #' @export
 #' @family metadata cleaning functions
-parse_info <- function(.did, masspec = NA_character_, std_names = paste0("ETH-", 1:4), oth_name = "other",
-                       broadid_name = broadid, id1 = `Identifier 1`) {
+parse_info <- function(.did,
+                       masspec = NA_character_,
+                       std_names = paste0("ETH-", 1:4),
+                       oth_name = "other",
+                       broadid_name = broadid,
+                       id1 = `Identifier 1`) {
   # global variables and defaults
   broadid <- `Identifier 1` <- NULL
 

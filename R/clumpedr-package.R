@@ -1,14 +1,8 @@
-#' A package for clumped isotope analysis in R
+#' Clumped isotope analysis in R
 #'
 #' @author Ilja J. Kocken, \email{i.j.kocken@uu.nl}
 #'
-#' @details
-#' This package incorporates functions to optimize the distribution of
-#' (carbonate) standards and the optimal proportion of standards versus the
-#' number of sample replicates. In the future, the package will include further
-#' scripts for clumped isotope analysis.
-#'
-#' TODO: include vignettes
+#' @details See the vignette `vignette(clumped)` for an elaborate use-case example.
 #'
 #' @section Package options:
 #' The functions in this package listen to the \code{genplot} and
@@ -36,4 +30,4 @@ NULL
 
 # quiets concerns of R CMD check about . that appears in pipelines
 # and some very commonly used variable names used in NSE commands
-utils::globalVariables(c(".", "file_id", "mass", "broadid", "masspec", "quiet", "genplot"))
+utils::globalVariables(c(".", ".data", "file_id", "mass", "broadid", "masspec", "quiet", "genplot"))

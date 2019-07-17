@@ -21,8 +21,6 @@ collapse_cycles(.data, ..., id = c(file_id), outlier = outlier_cycle,
 
 \item{na.rm}{a logical value indicating wheter NA values should be stripped
 before the computation proceeds.}
-
-\item{confidence}{Alpha, the confidence level for summary functions.}
 }
 \description{
 This collapses the cycles of the raw measurements and calculates averages

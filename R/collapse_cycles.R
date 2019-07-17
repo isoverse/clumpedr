@@ -11,8 +11,6 @@
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
-#' @param quiet
-#' @param confidence Alpha, the confidence level for summary functions.
 #' @export
 collapse_cycles <- function(.data, ..., id = c(file_id), outlier = outlier_cycle, alpha = 0.05, na.rm = TRUE, quiet = default(quiet)) {
   outlier_cycle <- NULL
