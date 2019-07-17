@@ -6,7 +6,7 @@
 \alias{clumpedr-package}
 \title{A package for clumped isotope analysis in R}
 \description{
-Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final Δ47 values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
+Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final \eqn{\Delta_{47}}{Δ47} values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
 }
 \details{
 This package incorporates functions to optimize the distribution of
