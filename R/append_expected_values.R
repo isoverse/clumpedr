@@ -5,9 +5,8 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package].
 #' @param std_names Names of the standards.
-#' @param D47 Expected values of the standards at 25 °C. Defaults to Müller et
-#'   al., 2017.
-#' @inheritParams acid_fractionation
+#' @param D47 Expected values of the standards. Defaults to Müller et al., 2017
+#'   at 70 °C acid digestion.
 #' @param id1 Name of the standard/sample identifier column.
 #' @param exp Name of the new column that will hold expected values.
 #'
@@ -30,17 +29,17 @@
 #' @export
 append_expected_values <- function(.data,
                                    std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!
-                                   D47 = c(0.258, 0.256, 0.691), #, 0.507),
-                                   aff = 0.062,
+                                   D47 = c(0.258, 0.256, 0.691) - 0.062, #, 0.507),
                                    id1 = `Identifier 1`,
                                    exp = expected_D47) {
   # global variables and defaults
   `Identifier 1` <- expected_D47 <- NULL
 
-  # TODO: vectorize this, so you can add as many standards as desired?
+  if (length(std_names) != length(D47))
+    stop("std_names should be of equal length to D47.")
+
+  expected_standard_values <- tibble({{ id1 }} := std_names, {{ exp }} := D47)
+
   .data %>%
-    mutate({{ exp }} := case_when({{ id1 }} == std_names[[1]] ~ D47[[1]] - aff,
-                               {{ id1 }} == std_names[[2]] ~ D47[[2]] - aff,
-                               {{ id1 }} == std_names[[3]] ~ D47[[3]] - aff,
-                               TRUE ~ NA_real_))
+    left_join(expected_standard_values, by = {{ id1 }})
 }

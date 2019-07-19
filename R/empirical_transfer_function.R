@@ -13,8 +13,7 @@
 #' @export
 empirical_transfer_function <- function(.data,
                                         std_names = paste0("ETH-", 1:3),
-                                        D47 = c(0.258, 0.256, 0.691), #0.507),
-                                        aff = 0.062,
+                                        D47 = c(0.258, 0.256, 0.691) - 0.62, #0.507),
                                         ## outlier = outlier,
                                         raw = D47_raw, exp = expected_D47,
                                         id1 = `Identifier 1`,
@@ -28,7 +27,7 @@ empirical_transfer_function <- function(.data,
     glue("Info: calculating and applying Emperical Transfer Function, by {quo_name(enquo(session))}.") %>%
       message()
   out <- .data %>%
-    append_expected_values(std_names = std_names, D47 = D47, aff = aff,
+    append_expected_values(std_names = std_names, D47 = D47,
                            id1 = {{ id1 }}, exp = {{ exp }}) %>%
     calculate_etf(raw = {{ raw }}, exp = {{ exp }}, session = {{ session }}, quiet = quiet) %>%
     apply_etf(D47 = {{ raw }})

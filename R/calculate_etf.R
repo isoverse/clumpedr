@@ -2,14 +2,20 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package].
 # #' @param outlier Column with sample outlier information. Looks up string `"no_outlier"`.
-#' @param raw Column name of raw \eqn{\Delta_{47}}{Δ47} values.
+#' @param raw Column name of the raw data.
 #' @param exp Column name of expected \eqn{\Delta_{47}}{Δ47} values.
 #' @param session The column name to group analyses by. Defaults to
 #'   `Preparation`.
+#' @param etf The column name of the new model.
+#' @param etf_coefs The column name holding the coefficients of the model.
+#' @param slope The column name of the new slope.
+#' @param intercept The column name of the new intercept.
 #' @export
 #' @importFrom stats na.exclude
 calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
-                          session = Preparation, quiet = default(quiet)) {
+                          session = Preparation, etf = etf,
+                          etf_coefs = etf_coefs, slope = slope,
+                          intercept = intercept, quiet = default(quiet)) {
   # global variables and defaults
   outlier <- D47_raw_mean <- expected_D47 <- Preparation <- NULL
 
@@ -27,12 +33,10 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
   pos_map_dbl <- purrr::possibly(map_dbl, otherwise=NA_real_, quiet=quiet)
 
   .data %>%
-    group_by({{ session }}) %>%
-    nest() %>%
-    mutate(etf = map(data, pos_lm),
-           etf_coefs=map(.data$etf, "coefficients"),
-           intercept=map_dbl(.data$etf_coefs, 1),
-           slope=map_dbl(.data$etf_coefs, 2)) %>%
-    ## select(-etf_coefs) %>%
-    unnest(cols = .data$data)
+    nest(session_nested = -{{ session }}) %>%
+    mutate({{ etf }} := map(session_nested, pos_lm),
+           {{ etf_coefs }} := map({{ etf }}, "coefficients"),
+           {{ intercept }} := map_dbl({{ etf_coefs }}, 1),
+           {{ slope }} := map_dbl({{ etf_coefs }}, 2)) %>%
+    unnest(cols = .data$session_nested)
 }

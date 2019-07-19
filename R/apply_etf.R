@@ -20,5 +20,5 @@ apply_etf <- function(.data, intercept = intercept, slope = slope, D47 = D47_raw
   D47_raw <- D47_etf <- NULL
 
   .data %>%
-    mutate({{D47_out}} := - (.data$intercept / .data$slope) + (1 / .data$slope) * {{D47}})
+    mutate({{D47_out}} := - ({{ intercept }} / {{ slope }}) + (1 / {{ slope }}) * {{D47}})
 }

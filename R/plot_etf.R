@@ -27,7 +27,7 @@ plot_etf <- function(.data, std_names = paste0("ETH-", 1:3),
   pld %>%
     plot_base(x = {{ exp }}, y = {{ raw }}, shape = {{ shape }}) +
     geom_point() +
-    geom_smooth(aes(group = "yes"), method = "lm",
-                data = filter(pld, .data$broadid %in% std_names, {{ shape }} == FALSE)) +
-    facet_grid(rows = vars({{ session }}))
+    geom_smooth(aes(group = {{ session }}, colour = NULL), method = "lm",
+                data = filter(pld, .data$broadid %in% std_names, {{ shape }} == FALSE)) #+
+    ## facet_grid(rows = vars({{ session }}))
 }

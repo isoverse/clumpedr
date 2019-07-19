@@ -36,7 +36,7 @@ remove_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 12
   }
 
   if (!quiet)
-    glue("Info: found {nrow(filter(out, outlier))} outliers out of {nrow(out)} samples.") %>%
+    glue("Info: found {nrow(filter(out, outlier | is.na(outlier)))} outliers out of {nrow(out)} samples.") %>%
       message()
   out
 }
