@@ -26,7 +26,7 @@ abundance_ratios <- function(.data,
   s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 
   if (!quiet)
-    message("Calculating abundance ratios R[i] = i / 44")
+    message("Info: Calculating abundance ratios R[i] = i / 44")
 
   .data %>%
     mutate({{ R45 }} := {{ i45 }} / {{ i44 }},
