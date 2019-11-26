@@ -14,7 +14,7 @@ See the vignette \code{vignette(clumped)} for an elaborate use-case example.
 \section{Package options}{
 
 The functions in this package listen to the \code{genplot} and
-\code{quiet} options, which can be set using
+\code{quiet} options.
 }
 
 \seealso{

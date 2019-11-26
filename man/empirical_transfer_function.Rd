@@ -5,26 +5,39 @@
 \title{Empirical Transfer Function}
 \usage{
 empirical_transfer_function(.data, std_names = paste0("ETH-", 1:3),
-  D47 = c(0.258, 0.256, 0.691) - 0.62, raw = D47_raw,
-  exp = expected_D47, id1 = `Identifier 1`, session = Preparation,
-  quiet = default(quiet), genplot = default(genplot))
+  std_values = c(0.258, 0.256, 0.691) - 0.062, raw = D47_raw,
+  exp = expected_D47, session = Preparation, id1 = `Identifier 1`,
+  etf = etf, etf_coefs = etf_coefs, slope = slope,
+  intercept = intercept, out = D47_etf, outlier = outlier,
+  quiet = default(quiet), parallel = FALSE,
+  genplot = default(genplot))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
 \item{std_names}{Names of the standards.}
 
-\item{D47}{Expected values of the standards. Defaults to Müller et al., 2017
-at 70 °C acid digestion.}
+\item{std_values}{Expected values of the standards. Defaults to Müller et
+al., 2017 at 70 °C acid digestion.}
 
-\item{raw}{Column name of the raw data.}
+\item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
 
 \item{exp}{Name of the new column that will hold expected values.}
 
-\item{id1}{Name of the standard/sample identifier column.}
-
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}
+
+\item{id1}{Name of the standard/sample identifier column.}
+
+\item{etf}{The column name of the new model.}
+
+\item{etf_coefs}{The column name with the coefficients of the model.}
+
+\item{slope}{The column name of the new slope.}
+
+\item{intercept}{The column name of the new intercept.}
+
+\item{parallel}{Whether or not (default) to process this in parallel, using package \code{furrr}.}
 }
 \description{
 Calculate and apply the empirical transfer function (ETF). First append the

@@ -6,7 +6,7 @@
 #'
 #' @section Package options:
 #' The functions in this package listen to the \code{genplot} and
-#'   \code{quiet} options, which can be set using
+#'   \code{quiet} options.
 #'
 #' @docType package
 #' @keywords internal

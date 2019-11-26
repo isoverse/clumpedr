@@ -5,8 +5,9 @@
 \title{Remove outliers}
 \usage{
 remove_outliers(.data, init_low = 8000, init_high = 40000,
-  diff = 1200, nsd_off = 4, std_names = paste0("ETH-", 1:3),
-  D47 = D47_raw, plot_x = file_datetime, session = Preparation,
+  init_diff = 1200, param49_off = 1, internal_sd = 0.15, n_min = 5,
+  n_id1 = 5, nsd_off = 4, D47 = D47_raw, session = Preparation,
+  id1 = `Identifier 1`, plot_x = file_datetime,
   quiet = default(quiet), genplot = default(genplot))
 }
 \arguments{
@@ -17,18 +18,26 @@ remove_outliers(.data, init_low = 8000, init_high = 40000,
 
 \item{init_high}{Maximum initial intensity threshold for mass 44.}
 
-\item{diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
+\item{init_diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
+
+\item{param49_off}{Where param_49 > this value is considered an outlier.}
+
+\item{internal_sd}{The internal standard deviation outlier cutoff.}
+
+\item{n_min}{Minimum number of aliquots within session to calculate threshold.}
+
+\item{n_id1}{Minimum number of aliquots within session to calculate threshold within group.}
 
 \item{nsd_off}{The number of standard deviations away from the median
 Preparation of the standards.}
 
-\item{std_names}{Names of the standards used for the correction.}
-
 \item{D47}{The column with \eqn{\Delta_47}{Δ47} values. Defaults to \code{D47_raw_mean}.}
 
-\item{plot_x}{The column to use for plotting the x axis.}
-
 \item{session}{Column name that defines correction session.}
+
+\item{id1}{Column name of the sample/standard identifier.}
+
+\item{plot_x}{The column to use for plotting the x axis.}
 }
 \description{
 Remove outliers

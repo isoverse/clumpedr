@@ -1,8 +1,8 @@
 context("Empirical Transfer Function")
 
 test_that("append_expected_values works", {
-  expect_error(append_expected_values(standards, std_names = "hoi", D47 = c(5, 4)),
-               "std_names should be of equal length to D47.")
+  expect_error(append_expected_values(standards, std_names = "hoi", std_values = c(5, 4)),
+               "std_names should be of equal length to std_values.")
   expected_test <- standards %>%
     clean_did_info("MOTU") %>%
     iso_get_raw_data() %>%

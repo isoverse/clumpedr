@@ -36,7 +36,8 @@ Suggests:
     ggridges,
     naniar,
     tictoc,
-    knitr
+    knitr,
+    future
 Remotes:
     isoverse/isoreader,
     tidyverse/tidyr,

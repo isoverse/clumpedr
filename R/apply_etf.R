@@ -11,14 +11,18 @@
 #' @param .data A [tibble][tibble::tibble-package] containing column D47.
 #' @param intercept The column name with the ETF intercept.
 #' @param slope The column name with the ETF slope.
-#' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values to use.
-#' @param D47_out The new column name.
+#' @param raw The column with raw values to apply the ETF to.
+#' @param out The new column name.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(.data, intercept = intercept, slope = slope, D47 = D47_raw, D47_out = D47_etf) {
+apply_etf <- function(.data, intercept = intercept, slope = slope, raw = D47_raw, out = D47_etf, quiet = default(quiet)) {
   # defaults
   D47_raw <- D47_etf <- NULL
 
+  if (!quiet)
+    glue("Info: Applying ETF to {quo_name(enquo(raw))} using \u03b1 = {quo_name(enquo(slope))} and \u03b2 = {quo_name(enquo(intercept))}.") %>%
+      message()
+
   .data %>%
-    mutate({{D47_out}} := - ({{ intercept }} / {{ slope }}) + (1 / {{ slope }}) * {{D47}})
+    mutate({{ out }} := - ({{ intercept }} / {{ slope }}) + (1 / {{ slope }}) * {{ raw }})
 }

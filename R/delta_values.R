@@ -16,18 +16,18 @@ delta_values <- function(.data,
   D47_raw <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- r44 <- r45 <-
     r46 <- r47 <- r48 <- r49 <- NULL
 
-  if (genplot & is.null(plot_info))
+  if (!is.null(.data) & genplot & is.null(plot_info))
     stop("Supply plotting information from `isoreader::iso_get_file_info()`")
 
   out <- .data %>%
     # sample gas
-    abundance_ratios() %>%
+    abundance_ratios(quiet = quiet) %>%
     # working gas
     abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48,
                      i49 = r49, R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
-                     R48 = R48_wg, R49 = R49_wg) %>%
+                     R48 = R48_wg, R49 = R49_wg, quiet = TRUE) %>%
     little_deltas(quiet = quiet) %>%
-    bulk_and_clumping_deltas()
+    bulk_and_clumping_deltas(quiet = quiet)
 
   if (genplot)
     pipe_plot(out, plot_raw_delta, .info = plot_info, y = {{ plot_column }},

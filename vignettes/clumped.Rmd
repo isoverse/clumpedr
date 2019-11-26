@@ -1,7 +1,7 @@
 ---
 title: "Using clumpedr: basic data analysis"
 author: "Ilja J. Kocken"
-date: 2019-01-31
+date: 2019-11-13
 output:
   rmarkdown::html_vignette:
     self_contained: no
@@ -168,6 +168,31 @@ Do a very simple background correction.
 bgds <- disc %>%
   correct_backgrounds(factor = 0.82)
 ```
+
+For a background correction based on background scans performed before each run
+we have to get the raw scan data into R. Isoreader currently does not support
+reading in the `.scn` files directly, so we import excel files with multiple
+sheets using the packages `readxl` and `purrr`, with something like:
+
+```{r, eval=FALSE}
+    files <- c("file1.xlsx", "file2.xlsx", "file3.xlsx")
+    tibble(filepath = files) %>%
+      mutate(file = basename(files)) %>%
+                                          # append sheet names
+      mutate(sheet = map(filepath,
+                         ~ excel_sheets(.x))) %>%
+      unnest(cols = c(sheet)) %>%
+      mutate(bg = map2(.x = filepath, .y = sheet,
+                           .f = ~ read_excel(path = .x, sheet = .y,
+                                             # specify these in advance for faster reading
+                                             col_types = bgs_types,
+                                             col_names = bgs_names,
+                                             range = "A1:AR525")))
+```
+
+Processing the background scan files in this way is beyond the scope of this
+vignette for now, since the functions that do the work are not generalized
+enough to work for other set-ups.
 
 ### spread match
 

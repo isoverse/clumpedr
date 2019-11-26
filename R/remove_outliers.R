@@ -14,29 +14,36 @@
 #' @param plot_x The column to use for plotting the x axis.
 #' @inheritParams find_outliers
 #' @export
-remove_outliers <- function(.data, init_low = 8000, init_high = 40000, diff = 1200, nsd_off = 4,
-                            std_names = paste0("ETH-", 1:3), D47 = D47_raw,
-                            plot_x = file_datetime,
+remove_outliers <- function(.data,
+                            init_low = 8000, init_high = 40000, init_diff = 1200,
+                            param49_off = 1,
+                            internal_sd = 0.15,
+                            n_min = 5,
+                            n_id1 = 5,
+                            nsd_off = 4,
+                            D47 = D47_raw, #D47_raw_mean,
                             session = Preparation,
+                            id1 = `Identifier 1`,
+                            plot_x = file_datetime,
                             quiet = default(quiet), genplot = default(genplot)) {
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- NULL
 
-  if (!quiet)
-    glue("Info: identifying aliquots with initial intensity of mass 44 < {init_high}, > {init_low},
-          difference in initial intensity > {diff}, or {nsd_off} SD's away from the {quo_name(enquo(session))} mean.") %>%
-      message()
-
   out <- .data %>%
-    find_outliers(init_low = init_low, init_high = init_high, diff = diff, nsd_off = nsd_off,
-                  D47 = {{ D47 }}, std_names = std_names, session = {{ session }})
+    find_outliers(init_low, init_high, init_diff, param49_off, internal_sd,
+                            n_min,
+                            n_id1,
+                            nsd_off,
+                            {{ D47 }}, #D47_raw_mean,
+                            {{ session }},
+                            {{ id1 }}, quiet = quiet)
 
   if (genplot) {
     pipe_plot(out, plot_outliers, x = {{ plot_x }}, y = {{ D47 }})
   }
 
   if (!quiet)
-    glue("Info: found {nrow(filter(out, outlier | is.na(outlier)))} outliers out of {nrow(out)} samples.") %>%
+    glue("Info: found {nrow(filter(out, outlier | is.na(outlier)) %>% select(file_id) %>% distinct())} outliers out of {out %>% select(file_id) %>% distinct() %>% nrow()} measurements.") %>%
       message()
   out
 }

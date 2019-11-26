@@ -4,23 +4,27 @@
 \alias{plot_etf}
 \title{Plot the Empirical Transfer Function}
 \usage{
-plot_etf(.data, std_names = paste0("ETH-", 1:3), D47_etf = D47_etf,
-  raw = D47_raw, exp = expected_D47, shape = outlier,
-  session = Preparation)
+plot_etf(.data, std_names = paste0("ETH-", 1:3), out = D47_etf,
+  raw = D47_raw, exp = expected_D47, outlier = outlier,
+  point_alpha = 0.5, session = Preparation)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{std_names}{The names of the standards.}
 
-\item{D47_etf}{The column name that holds the \eqn{\Delta_{47}}{Δ47} values
-after the application of the empirical transfer function.}
+\item{out}{The column name that holds the transformed values.}
 
-\item{raw}{The column name with raw \eqn{\Delta_{47}}{Δ47} values.}
+\item{raw}{The column name with raw data.}
 
-\item{exp}{The column name with expected \eqn{\Delta_{47}}{Δ47} values.}
+\item{exp}{The column name with expected data.}
 
-\item{session}{The session to facet by. Defaults to \code{Preparation}.}
+\item{point_alpha}{The alpha of the points to plot.}
+
+\item{session}{The session to facet by. Defaults to \code{Preparation}. after the
+application of the empirical transfer function.}
+
+\item{shape}{The column of outliers, mapped to the shape aesthetic.}
 }
 \description{
 Create a plot with the expected \eqn{\Delta_{47}}{Δ47} value on the x-axis

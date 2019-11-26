@@ -85,10 +85,15 @@ bulk_and_clumping_deltas  <- function(.data,
     R45_flag = (.data$R45 / .data$R45_stoch - 1),
     R46_flag = (.data$R46 / .data$R46_stoch - 1),
     # Compute raw clumped isotope anomalies
+    D45_raw = 1000 * (.data$R45 / .data$R45_stoch - 1),
+    D46_raw = 1000 * (.data$R46 / .data$R46_stoch - 1),
     D47_raw = 1000 * (.data$R47 / .data$R47_stoch - 1),
     D48_raw = 1000 * (.data$R48 /.data$R48_stoch - 1),
     D49_raw = 1000 * (.data$R49 / .data$R49_stoch - 1),
-    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000)
+    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000,
+    # EXPERIMENTAL NEW STEP!
+    D47_raw = D47_raw - D46_raw - D45_raw,
+    D48_raw = D48_raw - D46_raw * 2)
 
   ## # raise a warning if the corresponding anomalies exceed 0.02 ppm.
   ## # TODO: append warning to specific value!

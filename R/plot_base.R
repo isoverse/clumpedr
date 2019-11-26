@@ -22,7 +22,7 @@ plot_base <- function(.data, ...) {
                sample = .data$Sample, weight = .data$`Weight [mg]`,
                id1 = .data$`Identifier 1`, analysis = .data$Analysis,
                comment = .data$Comment, prep = .data$Preparation,
-               meth = .data$Method, meas_info = .data$measurement_info,
+               meth = .data$Method, #meas_info = .data$measurement_info,
                ms_int_time = .data$MS_integration_time.s, ## id2 = .data$`Identifier 2`,
                masspec = .data$masspec, broadid = .data$broadid,
                s44_init = .data$s44_init, r44_init = .data$r44_init, ...)) +

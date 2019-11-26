@@ -6,12 +6,13 @@
 \usage{
 calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
   session = Preparation, etf = etf, etf_coefs = etf_coefs,
-  slope = slope, intercept = intercept, quiet = default(quiet))
+  slope = slope, intercept = intercept, parallel = FALSE,
+  quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
-\item{raw}{Column name of the raw data.}
+\item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
 
 \item{exp}{Column name of expected \eqn{\Delta_{47}}{Δ47} values.}
 
@@ -20,11 +21,13 @@ calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
 
 \item{etf}{The column name of the new model.}
 
-\item{etf_coefs}{The column name holding the coefficients of the model.}
+\item{etf_coefs}{The column name with the coefficients of the model.}
 
 \item{slope}{The column name of the new slope.}
 
 \item{intercept}{The column name of the new intercept.}
+
+\item{parallel}{Whether or not (default) to process this in parallel, using package \code{furrr}.}
 }
 \description{
 Calculate the Empirical Transfer Function

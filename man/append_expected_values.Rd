@@ -5,20 +5,20 @@
 \title{Append expected values}
 \usage{
 append_expected_values(.data, std_names = paste0("ETH-", 1:3),
-  D47 = c(0.258, 0.256, 0.691) - 0.062, id1 = `Identifier 1`,
-  exp = expected_D47)
+  std_values = c(0.258, 0.256, 0.691) - 0.062, exp = expected_D47,
+  id1 = `Identifier 1`, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{std_names}{Names of the standards.}
 
-\item{D47}{Expected values of the standards. Defaults to Müller et al., 2017
-at 70 °C acid digestion.}
-
-\item{id1}{Name of the standard/sample identifier column.}
+\item{std_values}{Expected values of the standards. Defaults to Müller et
+al., 2017 at 70 °C acid digestion.}
 
 \item{exp}{Name of the new column that will hold expected values.}
+
+\item{id1}{Name of the standard/sample identifier column.}
 }
 \description{
 Append the expected values for the standards. Defaults to using
