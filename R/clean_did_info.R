@@ -8,7 +8,6 @@
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
 #' @family metadata cleaning functions
-#' @export
 clean_did_info  <- function(.did, masspec = NULL,
                             std_names = c(paste0("ETH-", 1:4), "IAEA-C2", "Merck"),
                             oth_name = "other", quiet = default(quiet)) {

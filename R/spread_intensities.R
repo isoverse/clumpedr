@@ -9,8 +9,6 @@
 #' @param our_cols Columns with data values that need to be reshaped.
 #' @return A [tibble][tibble::tibble-package] with the sample and reference
 #'   gasses side-by-side.
-#' @export
-# TODO: clean up the arguments
 spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = default(quiet)) {
   if (!quiet)
     message("Info: reshaping data into wide format.")
@@ -34,7 +32,7 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
                  names_to = c("mass", "unit"),
                  names_pattern = "v([4-9]{2}).(mV)") %>%
     # then widen it so that sample and ref gas are next to each other for each cycle
-    pivot_wider(id_cols = ids,
+    pivot_wider(id_cols = c("file_id", "cycle"),
                 names_from = c(.data$type, .data$mass),
                 values_from = .data$value) %>%
     # clean up names
@@ -48,7 +46,8 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL, quiet = defa
     select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = ids,
                 names_from = .data$type,
-                values_from = c(.data$v44_low, .data$v44_high, .data$v44_drop, .data$drop_before, .data$has_drop)) %>%
+                values_from = c(.data$v44_low, .data$v44_high, .data$v44_drop,
+                                .data$drop_before, .data$has_drop)) %>%
     group_by(file_id)
 
   left_join(out, cycle_dis_dfr, by = c("file_id", "cycle")) %>%

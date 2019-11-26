@@ -8,18 +8,15 @@ collapse_cycles(.data, ..., id = c(file_id), outlier = outlier_cycle,
   funs = NULL, alpha = 0.05, na.rm = TRUE, quiet = default(quiet))
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from
-\code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
 \item{...}{Columns for the summary report.}
 
-\item{id}{Index columns that will be excluded from nesting. Defaults to
-\code{file_id}.}
+\item{id}{Index columns that will be excluded from nesting. Defaults to\code{file_id}.}
 
 \item{outlier}{The column containing outlier information.}
 
-\item{funs}{List of summary functions to apply. Defaults to mean, sd, n,
-sem, 95% cl.}
+\item{funs}{List of summary functions to apply. Defaults to mean, sd, n, sem, 95% cl.}
 
 \item{alpha}{The confidence level for the summary functions.}
 

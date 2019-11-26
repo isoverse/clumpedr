@@ -38,8 +38,6 @@ find_outliers(.data, init_low = 8000, init_high = 40000,
 }
 \description{
 This function finds outliers based on several criteria.
-}
-\details{
 Here, we define an outlier as a measurement that has:
 \itemize{
 \item an initial mass 44 intensity below \code{init_low}.

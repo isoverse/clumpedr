@@ -19,6 +19,8 @@ test_that("find_bad_cycles works", {
   expect_is(bad_cyc %>% pluck("v44_drop"), "logical")
   expect_is(bad_cyc %>% pluck("has_drop"), "logical")
   expect_is(bad_cyc %>% pluck("drop_before"), "logical")
+  ## expect_equal(bad_cyc %>%
+  ##                filter(file_id == "180814_75_IAM_2_ETH-3.did", cycle == ))
 })
 
 test_that("plot_disabled_cycles works", {

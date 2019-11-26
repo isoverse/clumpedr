@@ -14,7 +14,6 @@
 #' @param raw The column with raw values to apply the ETF to.
 #' @param out The new column name.
 #' @family empirical transfer functions
-#' @export
 apply_etf <- function(.data, intercept = intercept, slope = slope, raw = D47_raw, out = D47_etf, quiet = default(quiet)) {
   # defaults
   D47_raw <- D47_etf <- NULL

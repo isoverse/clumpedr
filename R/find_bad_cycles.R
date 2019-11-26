@@ -18,7 +18,6 @@
 #' @param relative_to cycle Drop detection occurs relative to either the first
 #'   cycle ("init", default) or to the previous cycle ("prev").
 #' @family cycle functions
-#' @export
 find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
                             v44 = v44.mV, cycle = cycle,
                             relative_to = "init",
@@ -48,7 +47,8 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
     # get the cycle number of where the drop occurs
            cycle_drop = ifelse(.data$v44_drop, {{ cycle }}, Inf),
     ## disable if the cycle number is bigger than/equal to the disabled cylce number
-           drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop))
+           drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop)) %>%
+    ungroup(.date$file_id, .data$type)
   # add it back to cycles with high or low intensities
            ## cycle_dis = glue("{if(v44_low|is.na(v44_low))'v44_low'}{if(v44_high|is.na(v44_high))'v44_high'}{if(v44_drop|is.na(v44_drop))'v44_drop'}{if(drop_before|is.na(drop_before))'drop_before'}"))
 

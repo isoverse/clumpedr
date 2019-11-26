@@ -15,7 +15,6 @@
 #' @param R47 Desired new name of the calculated ratio for mass 47.
 #' @param R48 Desired new name of the calculated ratio for mass 48.
 #' @param R49 Desired new name of the calculated ratio for mass 49.
-#' @export
 abundance_ratios <- function(.data,
                              i44 = s44, i45 = s45,
                              i46 = s46, i47 = s47, i48 = s48,

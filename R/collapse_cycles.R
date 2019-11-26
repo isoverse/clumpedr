@@ -3,18 +3,14 @@
 #' This collapses the cycles of the raw measurements and calculates averages
 #' and standard deviations per aliquot.
 #'
-#' @param .data A [tibble][tibble::tibble-package] resulting from
-#'   [bulk_and_clumping_deltas()].
+#' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
 #' @param ... Columns for the summary report.
-#' @param id Index columns that will be excluded from nesting. Defaults to
-#'   `file_id`.
+#' @param id Index columns that will be excluded from nesting. Defaults to`file_id`.
 #' @param outlier The column containing outlier information.
-#' @param funs List of summary functions to apply. Defaults to mean, sd, n,
-#'   sem, 95% cl.
+#' @param funs List of summary functions to apply. Defaults to mean, sd, n, sem, 95% cl.
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
-#' @export
 collapse_cycles <- function(.data,
                             ...,
                             id = c(file_id),

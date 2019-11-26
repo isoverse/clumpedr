@@ -8,7 +8,6 @@
 #'     [spread_intensities()].
 #' @param method "linterp" for linear interpolation, or "normal" for
 #'     conventional bracketing of sample gas.
-#' @export
 match_intensities <- function(.data, method = "normal", quiet = default(quiet)) {
   # global variables and defaults
   if (! method %in% c("normal", "linterp"))

@@ -1,7 +1,6 @@
 #' Find outliers
 #'
 #' This function finds outliers based on several criteria.
-#'
 #' Here, we define an outlier as a measurement that has:
 #' - an initial mass 44 intensity below `init_low`.
 #' - an initial mass 44 intensity above `init_high`.
@@ -18,11 +17,9 @@
 #' @param n_id1 Minimum number of aliquots within session to calculate threshold within group.
 #' @param nsd_off Number of standard deviations away from the mean threshold.
 #' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values.
-#' @param quiet
 #' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
-#' @export
 find_outliers <- function(.data,
                           init_low = 8000, init_high = 40000, init_diff = 1200,
                           param49_off = 1,
@@ -64,7 +61,6 @@ find_outliers <- function(.data,
 ##' @param init_low Minimum initial intensity threshold for mass 44.
 ##' @param init_high Maximum initial intensity threshold for mass 44.
 ##' @param init_diff Maximum initial difference in mass 44 threshold between standard and sample gas.
-##' @export
 find_init_outliers <- function(.data,
                                init_low = 8000, init_high = 40000, init_diff = 1200,
                                quiet = default(quiet)) {
@@ -87,7 +83,6 @@ find_init_outliers <- function(.data,
 ##' Find measurements with a param49 value that is greater than \code{param49_off}.
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param param49_off The cutoff value for the parameter 49 value
-##' @export
 find_param49_outliers <- function(.data, param49_off = 1, quiet = default(quiet)) {
   if (!quiet)
     glue("Info: identifying rows with `param_49` > {param49_off}.") %>%
@@ -103,7 +98,6 @@ find_param49_outliers <- function(.data, param49_off = 1, quiet = default(quiet)
 ##' If (R45 / R45_stoch - 1) > 2e-8, we flag it as an outlier.
 ##'
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-##' @export
 find_R_flags <- function(.data, quiet = default(quiet)) {
   if (!quiet)
     glue("Info: identifying rows with Di/Di_stoch - 1 > 2e-8 for i = 45 and 46.") %>%
@@ -121,7 +115,6 @@ find_R_flags <- function(.data, quiet = default(quiet)) {
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param internal_sd The internal standard deviation cutoff value.
 ##' @param D47 The column to calculate the internal sd value for.
-##' @export
 find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
                                      quiet = default(quiet)) {
   if (!quiet)
@@ -146,7 +139,6 @@ find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
 ##' @param nsd_off The number of standard deviations away from the median.
 ##' @param D47 The column to calculate the internal sd value for.
 ##' @param session The session for which to calculate the standard deviation and median values.
-##' @export
 find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, quiet = default(quiet)) {
   if (!quiet)
@@ -177,7 +169,6 @@ find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw,
 ##' @param D47 The column to calculate the internal sd value for.
 ##' @param session The session for which to calculate the standard deviation and median values.
 ##' @param id1 The column that defines the sample/standard name.
-##' @export
 find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, id1 = `Identifier 1`, quiet = default(quiet)) {
   if (!quiet)
@@ -202,7 +193,6 @@ find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_ra
 ##'
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param out_column The name of the outlier column.
-##' @export
 summarise_outlier <- function(.data, out_column = outlier, quiet = default(quiet)) {
   if (!quiet)
     glue("Info: creating a single `outlier` column, based on all \"outlier_\" columns.") %>%
