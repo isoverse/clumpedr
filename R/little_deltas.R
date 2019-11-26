@@ -17,6 +17,5 @@ little_deltas <- function(.data, quiet = default(quiet)) {
       d46 = (R46 / R46_wg - 1) * 1000,
       d47 = (R47 / R47_wg - 1) * 1000,
       d48 = (R48 / R48_wg - 1) * 1000,
-      d48 = (R48 / R48_wg - 1) * 1000,
       d49 = (R49 / R49_wg - 1) * 1000)
 }
