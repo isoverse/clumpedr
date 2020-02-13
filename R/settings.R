@@ -7,13 +7,29 @@ isoreader::iso_turn_info_messages_on
 isoreader::iso_turn_info_messages_off
 
 # retrieve package settings, internal function, not exported
-default <- function(name, allow_null = FALSE) {
-  name <- enquo(name) %>% quos_to_text(variable = "setting")
-  value <- getOption(str_c("clumpedr.", name))
-  if (!allow_null && is.null(value)) stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
+# first checks if the setting exists in the isoreader space, then in the isoprocessor
+# @note: consider providing an option that indicates whether to return the expression or a default value
+# e.g. default(x) that returns expr(x) if x is not set vs. default(x, NULL) that returns expr(NULL) if x is not set
+# @CONSIDER: alternatively set ALL available parameters in the initialize_options and force parameters to exist
+default <- function(name) {
+  name_exp <- rlang::enexpr(name)
+  value <- isoreader:::default(!!name_exp, allow_null = TRUE)
+  if (is.null(value)) { # not in isoreader settings
+    name <- if (rlang::is_symbol(name_exp)) rlang::as_name(name_exp) else name_exp
+    value <- getOption(str_c("clumpedr.", name))
+  }
+  if (is.null(value)) { # not in normal isoprocessor settings
+    func_params <- get_process_parameters()
+    if (name %in% names(func_params))
+      value <- func_params[[name]]
+    else
+      value <- name_exp
+  }
   return(value)
 }
 
+# set package setting, internal function, not exported
+# @note essetially same function as in isoreader except with the isoprocessor. prefix
 set_default <- function(name, value, overwrite = TRUE) {
   if (overwrite || !str_c("clumpedr.", name) %in% names(options()))
     options(list(value) %>% setNames(str_c("clumpedr.", name)))
