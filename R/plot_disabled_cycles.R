@@ -11,6 +11,7 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
   v44.mV <- type <- NULL
 
   .data  %>%
+    group_by(.data$file_id, .data$type) %>%
     mutate(cycle_meta = case_when(.data$v44_low ~ "v44_low",
                                   .data$v44_high ~ "v44_high",
                                   .data$v44_drop ~ "v44_drop",
@@ -18,18 +19,20 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
                                   .data$has_drop ~ "has_drop",
                                   TRUE ~ "no_drop",
                                   ) %>%
-             factor(levels = c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop"))) %>%
+             factor(levels = c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop")),
+           n_cyc_group = cut(n(), breaks = c(-1, 9, 41, 61))) %>%
+    ungroup(.data$file_id, .data$type) %>%
     ggplot(aes(x = .data$cycle, y = {{ y }}, colour = .data$cycle_meta, shape = .data$cycle_meta, alpha = .data$cycle_meta, size = .data$cycle_meta)) +
     geom_line(aes(group = .data$file_id), alpha = .5) +
     geom_point() +
     scale_shape_manual("index", values = c(16, 16, 15, 16, 16, NA),
                        drop = FALSE) +
-    scale_alpha_manual("index", values = c(1, 1, 1, 1, 1, .1),
+    scale_alpha_manual("index", values = c(1, 1, 1, 1, 1, .05),
                        drop = FALSE) +
     scale_size_manual("index", values = c(2, 2, 5, 2, 1, .5),
                       drop = FALSE) +
     scale_colour_manual("index", values = c("steelblue", "indianred", "red", "orange", "darkgreen", "gray"),
                         drop = FALSE) +
     geom_hline(yintercept = range(min, max), col = "indianred", linetype = 2) +
-    facet_grid(cols = vars(type))
+    facet_grid(cols = vars(n_cyc_group), rows = vars(type), scales = "free_x", space = "free_x")
 }
