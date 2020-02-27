@@ -31,29 +31,41 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
 
   # find the extremes
   out <- .data %>%
+    # first group by file_id and type so that the diffs are calculated only within a single line
+    group_by(.data$file_id, .data$type) %>%
     mutate(v44_low = {{ v44 }} <= min,
            v44_high = {{ v44 }} >= max,
-           v44_diff = lead({{ v44 }}) - {{ v44 }}) %>%
+           v44_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) #%>%
+
+  # this needs to be done separately so that we can first filter out the high and low intensities
+  drop <- out %>%
+    # TODO: come up with a different way of selecting the first value that
+    # isn't high or low without filtering within many groups
+    filter(!.data$v44_low, !.data$v44_high) %>%
     when(relative_to == "init" ~
            (.) %>%
-           mutate(v44_drop = .data$v44_diff < fac * first(filter(., !.data$v44_low, !.data$v44_high)$v44_diff)),
+           mutate(v44_drop = .data$v44_diff < fac * first(.$v44_diff)),
          relative_to == "prev" ~
            (.) %>%
            mutate(v44_drop = .data$v44_diff < fac * lead(.data$v44_diff))) %>%
-    # update cycle_dis
-    group_by(.data$file_id, .data$type) %>%
+        mutate(v44_drop = .data$v44_diff < fac * first(.$v44_diff)) %>%
+    select(.data$file_id, .data$type, v44_drop, .data$cycle) %>%
+    ungroup(.date$file_id, .data$type)
+
+  out <- out %>%
+    # add it so that we have all
+    left_join(drop, by = c("file_id", "type", "cycle")) %>%
     # does the measurement have a pressure drop? (works within group)
-    mutate(has_drop = any(.data$v44_drop, na.rm = TRUE),
+    mutate(has_drop = any(.data$v44_low | .data$v44_high | .data$v44_drop, na.rm = TRUE),
     # get the cycle number of where the drop occurs
            cycle_drop = ifelse(.data$v44_drop, {{ cycle }}, Inf),
     ## disable if the cycle number is bigger than/equal to the disabled cylce number
            drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop)) %>%
+    mutate(outlier_cycle = v44_low | v44_high | v44_drop | drop_before) %>%
     ungroup(.date$file_id, .data$type)
-  # add it back to cycles with high or low intensities
-           ## cycle_dis = glue("{if(v44_low|is.na(v44_low))'v44_low'}{if(v44_high|is.na(v44_high))'v44_high'}{if(v44_drop|is.na(v44_drop))'v44_drop'}{if(drop_before|is.na(drop_before))'drop_before'}"))
 
   if (!quiet)
-    glue("Info: found {nrow(filter(out, .data$v44_low | .data$v44_high | .data$drop_before))}/{length(unique(pull(filter(out, .data$v44_low | .data$v44_high | .data$drop_before), .data$file_id)))} bad cycles/acquisitions out of {nrow(out)}/{length(unique(out$file_id))} total sample gas and working gas cycles/acquisitions.") %>%
+    glue("Info: found {length(unique(pull(filter(out, .data$has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
       message()
 
   out
