@@ -4,7 +4,7 @@
 #' and standard deviations per aliquot.
 #'
 #' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
-#' @param ... Columns for the summary report.
+#' @param cols Columns to calculate summaries for.
 #' @param id Index columns that will be excluded from nesting. Defaults to`file_id`.
 #' @param outlier The column containing outlier information.
 #' @param funs List of summary functions to apply. Defaults to mean, sd, n, sem, 95% cl.
@@ -12,7 +12,7 @@
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
 collapse_cycles <- function(.data,
-                            ...,
+                            cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
                             id = c(file_id),
                             outlier = outlier_cycle,
                             funs = NULL,
@@ -38,7 +38,7 @@ collapse_cycles <- function(.data,
   summarize_mean <- function(.data) {
     .data %>%
       filter({{ outlier }} %in% FALSE) %>%
-      select(...) %>%
+      select({{ cols }}) %>%
       summarise_all(.funs = funs)
   }
 
