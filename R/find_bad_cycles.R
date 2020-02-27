@@ -29,39 +29,26 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
   if (!relative_to %in% c("init", "prev"))
     stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
 
-  # find the extremes
   out <- .data %>%
     # first group by file_id and type so that the diffs are calculated only within a single line
     group_by(.data$file_id, .data$type) %>%
+  # find the extremes
     mutate(v44_low = {{ v44 }} <= min,
            v44_high = {{ v44 }} >= max,
-           v44_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) #%>%
-
-  # this needs to be done separately so that we can first filter out the high and low intensities
-  drop <- out %>%
-    # TODO: come up with a different way of selecting the first value that
-    # isn't high or low without filtering within many groups
-    filter(!.data$v44_low, !.data$v44_high) %>%
+           v44_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
     when(relative_to == "init" ~
            (.) %>%
-           mutate(v44_drop = .data$v44_diff < fac * first(.$v44_diff)),
+           mutate(v44_drop = .data$v44_diff < fac * first(.data$v44_diff[!(.data$v44_low | .data$v44_high)])),
          relative_to == "prev" ~
            (.) %>%
            mutate(v44_drop = .data$v44_diff < fac * lead(.data$v44_diff))) %>%
-        mutate(v44_drop = .data$v44_diff < fac * first(.$v44_diff)) %>%
-    select(.data$file_id, .data$type, v44_drop, .data$cycle) %>%
-    ungroup(.date$file_id, .data$type)
-
-  out <- out %>%
-    # add it so that we have all
-    left_join(drop, by = c("file_id", "type", "cycle")) %>%
-    # does the measurement have a pressure drop? (works within group)
+      # does the measurement have a pressure drop? (works within group)
     mutate(has_drop = any(.data$v44_low | .data$v44_high | .data$v44_drop, na.rm = TRUE),
-    # get the cycle number of where the drop occurs
+           # get the cycle number of where the drop occurs
            cycle_drop = ifelse(.data$v44_drop, {{ cycle }}, Inf),
-    ## disable if the cycle number is bigger than/equal to the disabled cylce number
+           ## disable if the cycle number is bigger than/equal to the disabled cylce number
            drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop)) %>%
-    mutate(outlier_cycle = v44_low | v44_high | v44_drop | drop_before) %>%
+    mutate(outlier_cycle = .data$v44_low | .data$v44_high | .data$v44_drop | .data$drop_before) %>%
     ungroup(.date$file_id, .data$type)
 
   if (!quiet)
