@@ -8,7 +8,10 @@
 #'     [spread_intensities()].
 #' @param method "linterp" for linear interpolation, or "normal" for
 #'     conventional bracketing of sample gas.
-match_intensities <- function(.data, method = "normal", quiet = default(quiet)) {
+#' @param masses The masses to generate r and s columns from.
+match_intensities <- function(.data, method = "normal", masses = c(44:49, 54), quiet = default(quiet)) {
+  our_cols <- c(paste0("s", masses), paste0("r", masses))
+
   # global variables and defaults
   if (! method %in% c("normal", "linterp"))
     stop("Method '", method, "' should be either 'normal' or 'linterp'")
@@ -21,17 +24,14 @@ match_intensities <- function(.data, method = "normal", quiet = default(quiet)) 
     when(
       method == "normal" ~
         (.) %>%
-        # target cycle brackets sample cycle
-        mutate_at(vars(.data$r44:.data$r49),
-                  funs((. + lag(.)) / 2)),
+        # reference gas cycles bracket sample cycles
+        mutate_at(vars(one_of(str_subset(our_cols, "^r"))),
+                  list(~ (. + lag(.)) / 2)),
         # mutate(target_cycle_44 = cycle + .5),
       method == "linterp" ~
         (.) %>%
         # find matching intensity of mass 44 reference to sample gas
         mutate(target_cycle_44 = approx(x = .data$r44, y = .data$cycle, xout = .data$s44)$y) %>%
-        mutate_at(vars(.data$r44:.data$r49),
-                  funs(approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y))) %>%
-    mutate(outlier_cycle = .data$v44_low_standard | .data$v44_low_sample |
-             .data$v44_high_standard | .data$v44_high_sample | .data$v44_drop_standard |
-             .data$v44_drop_sample | .data$drop_before_standard | .data$drop_before_sample)
+        mutate_at(vars(one_of(str_subset(our_cols, "^r"))),
+                  list(~ approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y)))
 }
