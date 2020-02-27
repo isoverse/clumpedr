@@ -4,7 +4,12 @@
 \alias{match_intensities}
 \title{Match the reference gas intensity to that of the sample gas}
 \usage{
-match_intensities(.data, method = "normal", quiet = default(quiet))
+match_intensities(
+  .data,
+  method = "normal",
+  masses = c(44:49, 54),
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
@@ -12,6 +17,8 @@ match_intensities(.data, method = "normal", quiet = default(quiet))
 
 \item{method}{"linterp" for linear interpolation, or "normal" for
 conventional bracketing of sample gas.}
+
+\item{masses}{The masses to generate r and s columns from.}
 }
 \description{
 This matches the reference gas intensity of mass 44 to the sample gas

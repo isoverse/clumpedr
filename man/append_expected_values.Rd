@@ -4,9 +4,14 @@
 \alias{append_expected_values}
 \title{Append expected values}
 \usage{
-append_expected_values(.data, std_names = paste0("ETH-", 1:3),
-  std_values = c(0.258, 0.256, 0.691) - 0.062, exp = expected_D47,
-  id1 = `Identifier 1`, quiet = default(quiet))
+append_expected_values(
+  .data,
+  std_names = paste0("ETH-", 1:3),
+  std_values = c(0.258, 0.256, 0.691) - 0.062,
+  exp = expected_D47,
+  id1 = `Identifier 1`,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
@@ -41,8 +46,9 @@ weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
 1057--1066.
 }
 \seealso{
-Other empirical transfer functions: \code{\link{apply_etf}},
-  \code{\link{empirical_transfer_function}},
-  \code{\link{plot_etf}}
+Other empirical transfer functions: 
+\code{\link{apply_etf}()},
+\code{\link{empirical_transfer_function}()},
+\code{\link{plot_etf}()}
 }
 \concept{empirical transfer functions}

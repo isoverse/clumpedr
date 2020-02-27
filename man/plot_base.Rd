@@ -8,7 +8,7 @@ plot_base(.data, ...)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from any of the
-processing functions that returns the metadata.}
+processing functions that returns the iso_file_info.}
 
 \item{...}{Additional aesthetics to pass to ggplot.}
 }

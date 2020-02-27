@@ -4,8 +4,12 @@
 \alias{find_internal_sd_outlier}
 \title{Find internal standard deviation outliers.}
 \usage{
-find_internal_sd_outlier(.data, internal_sd = 0.15, D47 = D47_raw,
-  quiet = default(quiet))
+find_internal_sd_outlier(
+  .data,
+  internal_sd = 0.15,
+  D47 = D47_raw,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

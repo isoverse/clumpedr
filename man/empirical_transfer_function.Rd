@@ -4,13 +4,24 @@
 \alias{empirical_transfer_function}
 \title{Empirical Transfer Function}
 \usage{
-empirical_transfer_function(.data, std_names = paste0("ETH-", 1:3),
-  std_values = c(0.258, 0.256, 0.691) - 0.062, raw = D47_raw,
-  exp = expected_D47, session = Preparation, id1 = `Identifier 1`,
-  etf = etf, etf_coefs = etf_coefs, slope = slope,
-  intercept = intercept, out = D47_etf, outlier = outlier,
-  quiet = default(quiet), parallel = FALSE,
-  genplot = default(genplot))
+empirical_transfer_function(
+  .data,
+  std_names = paste0("ETH-", 1:3),
+  std_values = c(0.258, 0.256, 0.691) - 0.062,
+  raw = D47_raw,
+  exp = expected_D47,
+  session = Preparation,
+  id1 = `Identifier 1`,
+  etf = etf,
+  etf_coefs = etf_coefs,
+  slope = slope,
+  intercept = intercept,
+  out = D47_etf,
+  outlier = outlier,
+  quiet = default(quiet),
+  parallel = FALSE,
+  genplot = default(genplot)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
@@ -45,7 +56,9 @@ expected values for the standards, then calculate the ETF per Preparation,
 then apply the ETF to all the samples and standards.
 }
 \seealso{
-Other empirical transfer functions: \code{\link{append_expected_values}},
-  \code{\link{apply_etf}}, \code{\link{plot_etf}}
+Other empirical transfer functions: 
+\code{\link{append_expected_values}()},
+\code{\link{apply_etf}()},
+\code{\link{plot_etf}()}
 }
 \concept{empirical transfer functions}

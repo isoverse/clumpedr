@@ -4,8 +4,13 @@
 \alias{append_ref_deltas}
 \title{Append reference gas delta values}
 \usage{
-append_ref_deltas(.data, .did, d13C_PDB_wg = NULL,
-  d18O_PDBCO2_wg = NULL, quiet = default(quiet))
+append_ref_deltas(
+  .data,
+  .did = NULL,
+  d13C_PDB_wg = NULL,
+  d18O_PDBCO2_wg = NULL,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} to append the delta values to.}

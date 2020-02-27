@@ -4,11 +4,23 @@
 \alias{isobar_ratios}
 \title{Compute isotopic ratios}
 \usage{
-isobar_ratios(.data, R13 = R13, R18 = R18, R45 = R45, R46 = R46,
-  R47 = R47, R48 = R48, R49 = R49,
-  R17_PDBCO2 = default(R17_PDBCO2), R18_PDBCO2 = default(R18_PDBCO2),
-  lambda = default(lambda), D17O = default(D17O), D47 = default(D47),
-  D48 = default(D48), D49 = default(D49))
+isobar_ratios(
+  .data,
+  R13 = R13,
+  R18 = R18,
+  R45 = R45,
+  R46 = R46,
+  R47 = R47,
+  R48 = R48,
+  R49 = R49,
+  R17_PDBCO2 = default(R17_PDBCO2),
+  R18_PDBCO2 = default(R18_PDBCO2),
+  lambda = default(lambda),
+  D17O = default(D17O),
+  D47 = default(D47),
+  D48 = default(D48),
+  D49 = default(D49)
+)
 }
 \arguments{
 \item{.data}{A tibble with columns R13 and R18.}

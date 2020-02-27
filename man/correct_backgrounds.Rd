@@ -4,8 +4,13 @@
 \alias{correct_backgrounds}
 \title{Background corrections}
 \usage{
-correct_backgrounds(.data, factor, i47 = v47.mV, i54 = v54.mV,
-  quiet = default(quiet))
+correct_backgrounds(
+  .data,
+  factor,
+  i47 = v47.mV,
+  i54 = v54.mV,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{The dataframe with raw iso files.}

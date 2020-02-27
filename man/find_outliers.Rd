@@ -4,10 +4,21 @@
 \alias{find_outliers}
 \title{Find outliers}
 \usage{
-find_outliers(.data, init_low = 8000, init_high = 40000,
-  init_diff = 1200, param49_off = 1, internal_sd = 0.15, n_min = 5,
-  n_id1 = 5, nsd_off = 4, D47 = D47_raw, session = Preparation,
-  id1 = `Identifier 1`, quiet = default(quiet))
+find_outliers(
+  .data,
+  init_low = 8000,
+  init_high = 40000,
+  init_diff = 1200,
+  param49_off = 1,
+  internal_sd = 0.15,
+  n_min = 5,
+  n_id1 = 5,
+  nsd_off = 4,
+  D47 = D47_raw,
+  session = Preparation,
+  id1 = `Identifier 1`,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

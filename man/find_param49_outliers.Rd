@@ -9,7 +9,7 @@ find_param49_outliers(.data, param49_off = 1, quiet = default(quiet))
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
-\item{param49_off}{The cutoff value for the parameter 49 value}
+\item{param49_off}{The absolute cutoff value for the parameter 49 value.}
 }
 \description{
 Find measurements with a param49 value that is greater than \code{param49_off}.

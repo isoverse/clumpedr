@@ -4,8 +4,13 @@
 \alias{find_init_outliers}
 \title{Find measurements that have wrong initial intensities.}
 \usage{
-find_init_outliers(.data, init_low = 8000, init_high = 40000,
-  init_diff = 1200, quiet = default(quiet))
+find_init_outliers(
+  .data,
+  init_low = 8000,
+  init_high = 40000,
+  init_diff = 1200,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

@@ -4,8 +4,14 @@
 \alias{apply_etf}
 \title{Apply the ETF}
 \usage{
-apply_etf(.data, intercept = intercept, slope = slope, raw = D47_raw,
-  out = D47_etf, quiet = default(quiet))
+apply_etf(
+  .data,
+  intercept = intercept,
+  slope = slope,
+  raw = D47_raw,
+  out = D47_etf,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing column D47.}
@@ -29,8 +35,9 @@ them here. i.e.: \deqn{\Delta_{47etf} = - (\alpha / \beta) + (1 / \beta)
   \times \Delta_{47_raw}}{Δ47[etf] = - (α / β) + (1 / β) * Δ[47_raw]}
 }
 \seealso{
-Other empirical transfer functions: \code{\link{append_expected_values}},
-  \code{\link{empirical_transfer_function}},
-  \code{\link{plot_etf}}
+Other empirical transfer functions: 
+\code{\link{append_expected_values}()},
+\code{\link{empirical_transfer_function}()},
+\code{\link{plot_etf}()}
 }
 \concept{empirical transfer functions}

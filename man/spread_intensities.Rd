@@ -4,15 +4,20 @@
 \alias{spread_intensities}
 \title{Spread intensities from iso_read format into wide format.}
 \usage{
-spread_intensities(.data, ids = NULL, our_cols = NULL,
-  quiet = default(quiet))
+spread_intensities(
+  .data,
+  ids = NULL,
+  our_cols = NULL,
+  names_pattern = "v([4-9]{2}).(mV)",
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
 
 \item{ids}{Identifying columns that we'll group by.}
 
-\item{our_cols}{Columns with data values that need to be reshaped.}
+\item{our_cols}{Columns with data values that need to be reshaped. Defaults to v44.mV to v54.mV.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the sample and reference

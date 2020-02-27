@@ -4,9 +4,16 @@
 \alias{plot_etf}
 \title{Plot the Empirical Transfer Function}
 \usage{
-plot_etf(.data, std_names = paste0("ETH-", 1:3), out = D47_etf,
-  raw = D47_raw, exp = expected_D47, outlier = outlier,
-  point_alpha = 0.5, session = Preparation)
+plot_etf(
+  .data,
+  std_names = paste0("ETH-", 1:3),
+  out = D47_etf,
+  raw = D47_raw,
+  exp = expected_D47,
+  outlier = outlier,
+  point_alpha = 0.5,
+  session = Preparation
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
@@ -31,8 +38,9 @@ Create a plot with the expected \eqn{\Delta_{47}}{Δ47} value on the x-axis
 and the \eqn{\Delta_{47}}{Δ47} derrived from the ETF on the y-axis.
 }
 \seealso{
-Other empirical transfer functions: \code{\link{append_expected_values}},
-  \code{\link{apply_etf}},
-  \code{\link{empirical_transfer_function}}
+Other empirical transfer functions: 
+\code{\link{append_expected_values}()},
+\code{\link{apply_etf}()},
+\code{\link{empirical_transfer_function}()}
 }
 \concept{empirical transfer functions}

@@ -4,8 +4,14 @@
 \alias{revcal}
 \title{Reverse temperature calibration}
 \usage{
-revcal(D47, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
-  intcnf = 0.01, ignorecnf = FALSE)
+revcal(
+  D47,
+  slope = 0.0449,
+  intercept = 0.167,
+  slpcnf = 0.001,
+  intcnf = 0.01,
+  ignorecnf = FALSE
+)
 }
 \arguments{
 \item{D47}{The \eqn{\Delta_{47}}{Δ47} value.}

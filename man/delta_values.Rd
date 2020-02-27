@@ -4,9 +4,14 @@
 \alias{delta_values}
 \title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
 \usage{
-delta_values(.data, method = "normal", plot_info = NULL,
-  plot_column = D47_raw, genplot = default(genplot),
-  quiet = default(quiet))
+delta_values(
+  .data,
+  method = "normal",
+  plot_info = NULL,
+  plot_column = D47_raw,
+  genplot = default(genplot),
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from

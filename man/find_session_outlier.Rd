@@ -4,8 +4,15 @@
 \alias{find_session_outlier}
 \title{Find session outliers.}
 \usage{
-find_session_outlier(.data, n = 5, nsd_off = 4, D47 = D47_raw,
-  session = Preparation, quiet = default(quiet))
+find_session_outlier(
+  .data,
+  n = 5,
+  nsd_off = 4,
+  D47 = D47_raw,
+  outlier_session = outlier_session_D47,
+  session = Preparation,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

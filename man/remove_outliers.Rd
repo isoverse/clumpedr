@@ -4,11 +4,23 @@
 \alias{remove_outliers}
 \title{Remove outliers}
 \usage{
-remove_outliers(.data, init_low = 8000, init_high = 40000,
-  init_diff = 1200, param49_off = 1, internal_sd = 0.15, n_min = 5,
-  n_id1 = 5, nsd_off = 4, D47 = D47_raw, session = Preparation,
-  id1 = `Identifier 1`, plot_x = file_datetime,
-  quiet = default(quiet), genplot = default(genplot))
+remove_outliers(
+  .data,
+  init_low = 8000,
+  init_high = 40000,
+  init_diff = 1200,
+  param49_off = 1,
+  internal_sd = 0.15,
+  n_min = 5,
+  n_id1 = 5,
+  nsd_off = 4,
+  D47 = D47_raw,
+  session = Preparation,
+  id1 = `Identifier 1`,
+  plot_x = file_datetime,
+  quiet = default(quiet),
+  genplot = default(genplot)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from

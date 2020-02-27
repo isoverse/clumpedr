@@ -4,19 +4,27 @@
 \alias{collapse_cycles}
 \title{Collapse the cycles of the raw measurements}
 \usage{
-collapse_cycles(.data, ..., id = c(file_id), outlier = outlier_cycle,
-  funs = NULL, alpha = 0.05, na.rm = TRUE, quiet = default(quiet))
+collapse_cycles(
+  .data,
+  cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
+  id = c(file_id),
+  outlier = outlier_cycle,
+  funs = NULL,
+  alpha = 0.05,
+  na.rm = TRUE,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
-\item{...}{Columns for the summary report.}
+\item{cols}{Columns to calculate summaries for.}
 
 \item{id}{Index columns that will be excluded from nesting. Defaults to\code{file_id}.}
 
 \item{outlier}{The column containing outlier information.}
 
-\item{funs}{List of summary functions to apply. Defaults to mean, sd, n, sem, 95% cl.}
+\item{funs}{List of summary functions to apply. Defaults to mean, sd, n, sem, 95\% cl.}
 
 \item{alpha}{The confidence level for the summary functions.}
 

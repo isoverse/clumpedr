@@ -4,9 +4,17 @@
 \alias{disable_cycles}
 \title{Disable cycles that failed}
 \usage{
-disable_cycles(.data, min = 1500, max = 50000, fac = 1.5,
-  v44 = v44.mV, cycle = cycle, relative_to = "init",
-  genplot = default(genplot), quiet = default(quiet))
+disable_cycles(
+  .data,
+  min = 1500,
+  max = 50000,
+  fac = 1.5,
+  v44 = v44.mV,
+  cycle = cycle,
+  relative_to = "init",
+  genplot = default(genplot),
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -33,11 +41,12 @@ Based on several criteria, filter out cycles that show a sudden pressure drop.
 This function tries to identify cycles in which the pressure has dropped
 fast. It first disables all the cycles above or below certain thresholds
 (\code{min}, \code{max}), and then calculates whether the next cycle has dropped by
-more than \code{fac} times either the initial (\code{relative to = "init"}, default)
+more than \code{fac} times either the initial (\verb{relative to = "init"}, default)
 or the previous (\code{relative_to = "prev"}) cycle.
 }
 \seealso{
-Other cycle functions: \code{\link{find_bad_cycles}},
-  \code{\link{plot_disabled_cycles}}
+Other cycle functions: 
+\code{\link{find_bad_cycles}()},
+\code{\link{plot_disabled_cycles}()}
 }
 \concept{cycle functions}

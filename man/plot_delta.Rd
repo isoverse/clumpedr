@@ -5,8 +5,14 @@
 \title{Create a plot of \eqn{\Delta_{47}}{Δ47} values as a function of measurement
 time.}
 \usage{
-plot_delta(.data, x = file_datetime, y = D47_final, fill = broadid,
-  shape = outlier, ...)
+plot_delta(
+  .data,
+  x = file_datetime,
+  y = D47_final,
+  fill = broadid,
+  shape = outlier,
+  ...
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from

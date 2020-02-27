@@ -4,9 +4,16 @@
 \alias{find_bad_cycles}
 \title{Find bad cycles based on several criteria.}
 \usage{
-find_bad_cycles(.data, min = 1500, max = 50000, fac = 1.5,
-  v44 = v44.mV, cycle = cycle, relative_to = "init",
-  quiet = default(quiet))
+find_bad_cycles(
+  .data,
+  min = 1500,
+  max = 50000,
+  fac = 1.5,
+  v44 = v44.mV,
+  cycle = cycle,
+  relative_to = "init",
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -39,7 +46,8 @@ The drop in intensity can be defined relative to the first change
 in intensity (default), or to the previous cycle.
 }
 \seealso{
-Other cycle functions: \code{\link{disable_cycles}},
-  \code{\link{plot_disabled_cycles}}
+Other cycle functions: 
+\code{\link{disable_cycles}()},
+\code{\link{plot_disabled_cycles}()}
 }
 \concept{cycle functions}

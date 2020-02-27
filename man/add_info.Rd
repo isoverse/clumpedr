@@ -20,7 +20,9 @@ call.}
 Append mass spectrometer metadata to the raw data.
 }
 \seealso{
-Other metadata cleaning functions: \code{\link{clean_did_info}},
-  \code{\link{get_inits}}, \code{\link{parse_info}}
+Other metadata cleaning functions: 
+\code{\link{clean_did_info}()},
+\code{\link{get_inits}()},
+\code{\link{parse_info}()}
 }
 \concept{metadata cleaning functions}

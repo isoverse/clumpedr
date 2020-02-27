@@ -4,10 +4,18 @@
 \alias{calculate_etf}
 \title{Calculate the Empirical Transfer Function}
 \usage{
-calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
-  session = Preparation, etf = etf, etf_coefs = etf_coefs,
-  slope = slope, intercept = intercept, parallel = FALSE,
-  quiet = default(quiet))
+calculate_etf(
+  .data,
+  raw = D47_raw_mean,
+  exp = expected_D47,
+  session = Preparation,
+  etf = etf,
+  etf_coefs = etf_coefs,
+  slope = slope,
+  intercept = intercept,
+  parallel = FALSE,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}

@@ -4,9 +4,16 @@
 \alias{plot_raw_delta}
 \title{Plot raw delta values as a function of measurement time.}
 \usage{
-plot_raw_delta(.data, .info, x = file_datetime, y = D47_raw,
-  shape = outlier_cycle, raw_points = FALSE, point_alpha = 0.5,
-  quiet = default(quiet))
+plot_raw_delta(
+  .data,
+  .info,
+  x = file_datetime,
+  y = D47_raw,
+  shape = outlier_cycle,
+  raw_points = FALSE,
+  point_alpha = 0.5,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{The input tibble, result of \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
