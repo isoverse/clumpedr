@@ -5,6 +5,7 @@ Authors@R:
     person(given = "Ilja",
            family = "Kocken",
            role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-2196-8718"),
            email = "i.j.kocken@uu.nl")
 URL: https://github.com/isoverse/clumpedr
 BugReports: https://github.com/isoverse/clumpedr/issues
