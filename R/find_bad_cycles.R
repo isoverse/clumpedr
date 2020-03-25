@@ -33,26 +33,26 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
     # first group by file_id and type so that the diffs are calculated only within a single line
     group_by(.data$file_id, .data$type) %>%
   # find the extremes
-    mutate(v44_low = {{ v44 }} <= min,
-           v44_high = {{ v44 }} >= max,
-           v44_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
+    mutate(outlier_cycle_low = {{ v44 }} <= min,
+           outlier_cycle_high = {{ v44 }} >= max,
+           outlier_cycle_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
     when(relative_to == "init" ~
            (.) %>%
-           mutate(v44_drop = .data$v44_diff < fac * first(.data$v44_diff[!(.data$v44_low | .data$v44_high)])),
+           mutate(outlier_cycle_drop = .data$outlier_cycle_diff < fac * first(.data$outlier_cycle_diff[!(.data$outlier_cycle_low | .data$outlier_cycle_high)])),
          relative_to == "prev" ~
            (.) %>%
-           mutate(v44_drop = .data$v44_diff < fac * lead(.data$v44_diff))) %>%
+           mutate(outlier_cycle_drop = .data$outlier_cycle_diff < fac * lead(.data$outlier_cycle_diff))) %>%
       # does the measurement have a pressure drop? (works within group)
-    mutate(has_drop = any(.data$v44_low | .data$v44_high | .data$v44_drop, na.rm = TRUE),
+    mutate(outlier_cycle_has_drop = any(.data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop, na.rm = TRUE),
            # get the cycle number of where the drop occurs
-           cycle_drop = ifelse(.data$v44_drop, {{ cycle }}, Inf),
+           outlier_cycle_num = ifelse(.data$outlier_cycle_drop, {{ cycle }}, Inf),
            ## disable if the cycle number is bigger than/equal to the disabled cylce number
-           drop_before = .data$has_drop & ({{ cycle }} >= .data$cycle_drop)) %>%
-    mutate(outlier_cycle = .data$v44_low | .data$v44_high | .data$v44_drop | .data$drop_before) %>%
+           outlier_cycle_drop_before = .data$outlier_cycle_has_drop & ({{ cycle }} >= .data$outlier_cycle_num)) %>%
+    mutate(outlier_cycle = .data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop | .data$outlier_cycle_drop_before) %>%
     ungroup(.date$file_id, .data$type)
 
   if (!quiet)
-    glue("Info: found {length(unique(pull(filter(out, .data$has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
+    glue("Info: found {length(unique(pull(filter(out, .data$outlier_cycle_has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
       message()
 
   out

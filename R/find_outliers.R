@@ -36,7 +36,8 @@ find_outliers <- function(.data,
 
   .data %>%
     ## NOTE: cycle outliers are handled elsewhere!
-    find_init_outliers(init_low, init_high, init_diff, quiet) %>%
+    ## NOTE: init outliers should be computed once the cycles have been collapsed
+    ## find_init_outliers(init_low, init_high, init_diff, quiet) %>%
     find_param49_outliers(param49_off, quiet) %>%
     find_R_flags(quiet) %>%
     summarise_outlier(quiet = TRUE) %>% ## this adds the column outlier based on all outlier_ columns
@@ -71,13 +72,14 @@ find_init_outliers <- function(.data,
       message()
 
   .data %>%
-    mutate(s44_init_low = .data$s44_init <= init_low,
-           r44_init_low = .data$r44_init <= init_low,
-           s44_init_high = .data$s44_init >= init_high,
-           r44_init_high = .data$r44_init >= init_high,
-           i44_init_diff = abs(.data$s44_init - .data$r44_init) >= init_diff,
-           outlier_init = .data$s44_init_low | .data$r44_init_low | .data$s44_init_high |
-             .data$r44_init_high | .data$i44_init_diff)
+    mutate(outlier_s44_init_low = .data$s44_init <= init_low,
+           outlier_r44_init_low = .data$r44_init <= init_low,
+           outlier_s44_init_high = .data$s44_init >= init_high,
+           outlier_r44_init_high = .data$r44_init >= init_high,
+           outlier_i44_init_diff = abs(.data$s44_init - .data$r44_init) >= init_diff,
+           outlier_init = .data$outlier_s44_init_low | .data$outlier_r44_init_low |
+             .data$ outlier_s44_init_high | .data$outlier_r44_init_high |
+             .data$outlier_i44_init_diff)
 }
 
 ##' Find param 49 outliers.
