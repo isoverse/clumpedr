@@ -4,7 +4,9 @@
 \name{standards}
 \alias{standards}
 \title{Several standard did files}
-\format{An object of class \code{iso_file_list} of length 27.}
+\format{
+An object of class \code{iso_file_list} of length 27.
+}
 \usage{
 standards
 }

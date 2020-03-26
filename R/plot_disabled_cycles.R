@@ -14,9 +14,9 @@ plot_disabled_cycles  <- function(.data, y = v44.mV, min = 1500, max = 50000, qu
     group_by(.data$file_id, .data$type) %>%
     mutate(cycle_meta = case_when(.data$outlier_cycle_low ~ "v44_low",
                                   .data$outlier_cycle_high ~ "v44_high",
-                                  .data$outlier_cycle_drop ~ "v44_drop",
-                                  .data$outlier_cycle_drop_before ~ "drop_before",
-                                  .data$outlier_cycle_has_drop ~ "has_drop",
+                                  .data$cycle_drop ~ "v44_drop",
+                                  .data$outlier_cycle_drop ~ "drop_before",
+                                  .data$cycle_has_drop ~ "has_drop",
                                   TRUE ~ "no_drop",
                                   ) %>%
              factor(levels = c("v44_low", "v44_high", "v44_drop", "drop_before", "has_drop", "no_drop")),

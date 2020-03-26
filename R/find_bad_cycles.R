@@ -30,29 +30,28 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
     stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
 
   out <- .data %>%
-    # first group by file_id and type so that the diffs are calculated only within a single line
-    group_by(.data$file_id, .data$type) %>%
-  # find the extremes
+    group_by(.data$file_id, .data$type) %>% # so that diffs are only calculated within one column of sample gas/ref gas
     mutate(outlier_cycle_low = {{ v44 }} <= min,
            outlier_cycle_high = {{ v44 }} >= max,
-           outlier_cycle_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
+           cycle_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
     when(relative_to == "init" ~
-           (.) %>%
-           mutate(outlier_cycle_drop = .data$outlier_cycle_diff < fac * first(.data$outlier_cycle_diff[!(.data$outlier_cycle_low | .data$outlier_cycle_high)])),
+           mutate((.),
+                  first_diff_fac = fac * first(.data$cycle_diff[!(.data$outlier_cycle_low | .data$outlier_cycle_high)]),
+                  cycle_drop = .data$cycle_diff < first_diff_fac),
+          # cycle drop is currently NA if the whole  sample was  too low.
          relative_to == "prev" ~
-           (.) %>%
-           mutate(outlier_cycle_drop = .data$outlier_cycle_diff < fac * lead(.data$outlier_cycle_diff))) %>%
-      # does the measurement have a pressure drop? (works within group)
-    mutate(outlier_cycle_has_drop = any(.data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop, na.rm = TRUE),
-           # get the cycle number of where the drop occurs
-           outlier_cycle_num = ifelse(.data$outlier_cycle_drop, {{ cycle }}, Inf),
-           ## disable if the cycle number is bigger than/equal to the disabled cylce number
-           outlier_cycle_drop_before = .data$outlier_cycle_has_drop & ({{ cycle }} >= .data$outlier_cycle_num)) %>%
-    mutate(outlier_cycle = .data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop | .data$outlier_cycle_drop_before) %>%
+           mutate((.), cycle_drop = .data$cycle_diff < fac * lead(.data$cycle_diff))) %>%
+    # does the measurement have a pressure drop? (works within group)
+    mutate(cycle_has_drop = any(.data$outlier_cycle_low | .data$outlier_cycle_high | .data$cycle_drop, na.rm = TRUE),
+           # get the first cycle number where the drop occurs, otherwise return Inf
+           cycle_drop_num = {{ cycle }}[.data$cycle_drop][1],
+           ## disable if the cycle number is bigger than/equal to the cycle drop number
+           outlier_cycle_drop = .data$cycle_has_drop & !.data$outlier_cycle_low & !.data$outlier_cycle_high & !is.na(.data$cycle_drop_num) & ({{ cycle }} >= .data$cycle_drop_num)) %>%
+    mutate(outlier_cycle = .data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop) %>%
     ungroup(.date$file_id, .data$type)
 
   if (!quiet)
-    glue("Info: found {length(unique(pull(filter(out, .data$outlier_cycle_has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
+    glue("Info: found {length(unique(pull(filter(out, .data$cycle_has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
       message()
 
   out

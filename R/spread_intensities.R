@@ -48,10 +48,16 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL,
                 names_from = .data$type,
                 ## NOTE: these are now hardcoded here, and are strictly related
                 ## to what's happening in the internals of find_bad_cycles!!
-                values_from = c(.data$outlier_cycle_v44_low, .data$outlier_cycle_v44_high, .data$outlier_cycle_v44_diff, .data$outlier_cycle_v44_drop,
-                                .data$outlier_cycle_has_drop, .data$outlier_cycle_drop, .data$outlier_cycle_drop_before, .data$outlier_cycle)) %>%
-    purrr::set_names( ~ str_replace_all(., "^(.*)(v44_)?(.*)_standard", "\\1_r44") %>%
-                        str_replace_all("^(.*)(v44_)?(.*)_sample", "\\1_s44"))
+                values_from = c(.data$outlier_cycle_low,
+                                .data$outlier_cycle_high,
+                                .data$cycle_diff,
+                                .data$cycle_drop,
+                                .data$cycle_drop_num,
+                                .data$outlier_cycle_drop,
+                                .data$cycle_has_drop,
+                                .data$outlier_cycle)) %>%
+    purrr::set_names( ~ str_replace_all(., "^(.*)_standard", "\\1_r44") %>%
+                        str_replace_all("^(.*)_sample", "\\1_s44"))
 
   left_join(out, cycle_dis_dfr, by = ids) %>%
     as_tibble()
