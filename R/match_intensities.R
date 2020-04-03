@@ -36,5 +36,6 @@ match_intensities <- function(.data, method = "normal", masses = c(44:49, 54), q
                   list(~ approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y))) %>%
     filter(cycle != 0) %>% # cycle 0 of the ref gas is no longer needed
     # create the summary outlier column
-    mutate(outlier_cycle = outlier_cycle_s44 | outlier_cycle_r44)
+    mutate(cycle_has_drop = cycle_has_drop_s44 | cycle_has_drop_r44,
+           outlier_cycle = outlier_cycle_s44 | outlier_cycle_r44)
 }
