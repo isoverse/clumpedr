@@ -19,8 +19,7 @@ clean_did_info  <- function(.did, masspec = NULL,
 
   .did %>%
     parse_info(masspec = masspec, std_names = std_names, oth_name = oth_name) %>%
-    isoreader::iso_mutate_file_info(s44_init = inits$s44_init,
-                                    r44_init = inits$r44_init)
+    isoreader::iso_add_file_info(inits, "file_id")
 }
 
 #' Parse info into appropriate types.
