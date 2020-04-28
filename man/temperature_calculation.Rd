@@ -8,6 +8,8 @@ temperature_calculation(
   .data,
   D47 = D47_final,
   temp = temperature,
+  slope = 0.0449,
+  intercept = 0.167,
   quiet = default(quiet)
 )
 }

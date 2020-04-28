@@ -68,7 +68,7 @@ find_init_outliers <- function(.data,
                                init_low = 8000, init_high = 40000, init_diff = 1200,
                                quiet = default(quiet)) {
   if (!quiet)
-    glue("Info: identifying aliquots with {init_low} > s44_init | r44_init < {init_high}, s44 - r44 > {init_diff}.") %>%
+    glue("Info: identifying aliquots with {init_low} > i44_init & i44_init < {init_high}, s44 - r44 > {init_diff}.") %>%
       message()
 
   .data %>%
@@ -89,7 +89,7 @@ find_init_outliers <- function(.data,
 ##' @param param49_off The absolute cutoff value for the parameter 49 value.
 find_param49_outliers <- function(.data, param49_off = 1, quiet = default(quiet)) {
   if (!quiet)
-    glue("Info: identifying rows with `param_49` >= {param49_off} | <= {param49_off}.") %>%
+    glue("Info: identifying rows with `param_49` >= -{param49_off} | <= {param49_off}.") %>%
       message()
 
   .data %>%

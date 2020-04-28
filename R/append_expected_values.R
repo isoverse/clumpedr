@@ -38,8 +38,13 @@ append_expected_values <- function(.data,
   if (length(std_names) != length(std_values))
     stop("std_names should be of equal length to std_values.")
 
+  if (anyNA(std_values)) {
+    std_names <- std_names[!is.na(std_values)]
+    std_values <- std_values[!is.na(std_values)]
+  }
+
   if (!quiet)
-    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards") %>%
+    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(std_names, sep = ' ')}") %>%
       # TODO: figure out how to add a character vector in one spot in glue
       message()
 
