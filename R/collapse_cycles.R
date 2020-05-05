@@ -101,7 +101,7 @@ nest_cycle_data <- function(.data,
                             Rs = c("R45", "R46", "R47", "R48", "R49",
                                    "R45_wg", "R46_wg", "R47_wg", "R48_wg", "R49_wg",
                                    "R13_wg", "R18_wg", "R17", "R18", "R13"),
-                            deltas = c("d13C_PDB_wg", "d18O_PDBCO2_wg",
+                            deltas = c(#"d13C_PDB_wg", "d18O_PDBCO2_wg", # these should be the same and thus metadata!
                                        "d13C_PDB", "d18O_PDBCO2", "d18O_PDB",
                                        "d45", "d46", "d47", "d48", "d49"),
                             isotopes = c("C12", "C13", "C16", "C17", "C18",
