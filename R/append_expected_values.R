@@ -44,8 +44,7 @@ append_expected_values <- function(.data,
   }
 
   if (!quiet)
-    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(std_names, sep = ' ')}") %>%
-      # TODO: figure out how to add a character vector in one spot in glue
+    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(std_names, sep = ' ', last = ' and ')}") %>%
       message()
 
   expected_standard_values <- tibble({{ id1 }} := std_names, {{ exp }} := std_values)
