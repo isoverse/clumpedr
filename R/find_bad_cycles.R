@@ -48,7 +48,7 @@ find_bad_cycles <- function(.data, min = 1500, max = 50000, fac = 1.5,
            ## disable if the cycle number is bigger than/equal to the cycle drop number
            outlier_cycle_drop = .data$cycle_has_drop & !.data$outlier_cycle_low & !.data$outlier_cycle_high & !is.na(.data$cycle_drop_num) & ({{ cycle }} >= .data$cycle_drop_num)) %>%
     mutate(outlier_cycle = .data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop) %>%
-    ungroup(.date$file_id, .data$type)
+    ungroup(.data$file_id, .data$type)
 
   if (!quiet)
     glue("Info: found {length(unique(pull(filter(out, .data$cycle_has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
