@@ -122,7 +122,7 @@ find_R_flags <- function(.data, quiet = default(quiet)) {
 find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
                                      quiet = default(quiet)) {
   if (!quiet)
-    glue("Info: identifying aliquots with internal standard deviation of {rlang::as_name(enquo(D47))} > {internal_sd}.") %>%
+    glue("Info: identifying aliquots with internal standard deviation of {quo_name(enquo(D47))} > {internal_sd}.") %>%
       message()
 
   `Identifier 1` <- D47_raw <- NULL
@@ -148,7 +148,7 @@ find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw, outli
   D47_raw <- Preparation <- outlier_session_D47 <- NULL
 
   if (!quiet)
-    glue("Info: identifying rows that are >{nsd_off} sd of {rlang::as_name(enquo(D47))} away from the median by {rlang::as_name(enquo(session))}.") %>%
+    glue("Info: identifying rows that are >{nsd_off} sd of {quo_name(enquo(D47))} away from the median by {quo_name(enquo(session))}.") %>%
       message()
 
   .data %>%
@@ -174,7 +174,7 @@ find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw, outli
 find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, id1 = `Identifier 1`, quiet = default(quiet)) {
   if (!quiet)
-    glue("Info: identifying rows that are >{nsd_off} sd of {rlang::as_name(enquo(D47))} away from the median by {rlang::as_name(enquo(session))} and {rlang::as_name(enquo(id1))}.") %>%
+    glue("Info: identifying rows that are >{nsd_off} sd of {quo_name(enquo(D47))} away from the median by {quo_name(enquo(session))} and {quo_name(enquo(id1))}.") %>%
       message()
   D47_raw <- Preparation <- `Identifier 1` <- NULL
 
