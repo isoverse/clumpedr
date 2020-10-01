@@ -174,7 +174,7 @@ find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw, outli
 find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, id1 = `Identifier 1`, quiet = default(quiet)) {
   if (!quiet)
-    glue("Info: identifying rows that are >{nsd_off} sd of {quos_to_text(enquo(D47))} away from the median by {quos_to_text(enquo(session))} and {quos_to_text(enquo(id1))}.") %>%
+    glue("Info: identifying rows that are >{nsd_off} sd of {rlang::as_name(enquo(D47))} away from the median by {rlang::as_name(enquo(session))} and {rlang::as_name(enquo(id1))}.") %>%
       message()
   D47_raw <- Preparation <- `Identifier 1` <- NULL
 
