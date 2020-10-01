@@ -11,8 +11,8 @@
 #' @export
 plot_base <- function(.data, ...) {
   .data %>%
-    ggplot(aes(Analysis = Analysis, file_id = file_id, file_path = file_path,
-               file_subpath = file_subpath,
+    ggplot(aes(Analysis = Analysis, file_id = file_id, ##file_path = file_path,
+               ## file_subpath = file_subpath,
                file_datetime = file_datetime, row = Row,
                peak_center = `Peak Center`,
                background = Background, press_adj = Pressadjust,
@@ -24,4 +24,20 @@ plot_base <- function(.data, ...) {
                ms_int_time = MS_integration_time.s,
                masspec = masspec, broadid = broadid,
                s44_init = s44_init, r44_init = r44_init, ...))
+}
+
+base_aes <- function() {
+  aes(Analysis = Analysis, file_id = file_id, ##file_path = file_path,
+               ## file_subpath = file_subpath,
+               file_datetime = file_datetime, row = Row,
+               peak_center = `Peak Center`,
+               background = Background, press_adj = Pressadjust,
+               ref_refill = `Reference Refill`, line = Line,
+               sample = Sample, weight = `Weight [mg]`,
+               id1 = `Identifier 1`, id2 = `Identifier 2`,
+               comment = Comment, prep = Preparation,
+               meth = Method,
+               ms_int_time = MS_integration_time.s,
+               masspec = masspec, broadid = broadid,
+               s44_init = s44_init, r44_init = r44_init)
 }

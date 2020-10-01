@@ -13,7 +13,7 @@ add_info(.data, .info, ..., quiet = default(quiet))
 \item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{...}{Optional additional arguments to pass to the \code{\link[dplyr:left_join]{dplyr::left_join()}}
+\item{...}{Optional additional arguments to pass to the \code{\link[dplyr:mutate-joins]{dplyr::left_join()}}
 call.}
 }
 \description{

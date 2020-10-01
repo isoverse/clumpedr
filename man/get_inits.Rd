@@ -7,7 +7,7 @@
 get_inits(.did)
 }
 \arguments{
-\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.data}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 }
 \value{
 A tibble with columns file_id, s44_init, and r44_init

@@ -11,8 +11,8 @@ append_ref_deltas <- function(.data, .did = NULL,
   if (!any(class(.data) %in% c("data.frame", "tbl_df", "tbl")))
     stop(".data must be a data.frame or tibble", call. = FALSE)
 
-  if (!is.null(.did) & !any(c("iso_file_list", "iso_file") %in% class(.did)))
-    stop(".did must be an 'iso_file' or 'iso_file_list'.", call. = FALSE)
+  ## if (!is.null(.did) & !any(c("iso_file_list", "iso_file") %in% class(.did)))
+  ##   stop(".did must be an 'iso_file' or 'iso_file_list'.", call. = FALSE)
 
   if (!((is.null(.did) & !is.null(d13C_PDB_wg) & !is.null(d18O_PDBCO2_wg)) |
           (!is.null(.did) & is.null(d13C_PDB_wg) & is.null(d18O_PDBCO2_wg))))

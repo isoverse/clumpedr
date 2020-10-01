@@ -57,14 +57,13 @@ parse_info <- function(.did,
 
 #' Get initial intensities of specified mass
 #'
-#' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
+#' @param .data The raw data, resulting from [isoreader::iso_get_raw_data()].
 #'
 #' @family metadata cleaning functions
 #' @return A tibble with columns file_id, s44_init, and r44_init
 #' @export
 get_inits <- function(.did) {
   .did %>%
-    isoreader::iso_get_raw_data(quiet = TRUE) %>%
     # filter first standard and first sample cycles
     filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
     pivot_wider(id_cols = .data$file_id, names_from = .data$type, values_from = .data$v44.mV) %>%
