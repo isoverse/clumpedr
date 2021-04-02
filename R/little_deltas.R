@@ -5,6 +5,10 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package] with abundance ratios.
 little_deltas <- function(.data, quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   # global variables and defaults
   d45 <- d46 <- d47 <- d48 <- d48 <- d49 <- R45 <- R46 <- R47 <- R48 <- R48 <-
     R49 <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R48_wg <- R49_wg <- NULL

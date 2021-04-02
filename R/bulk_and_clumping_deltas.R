@@ -31,6 +31,10 @@ bulk_and_clumping_deltas  <- function(.data,
                                       R18_PDBCO2 = default(R18_PDBCO2),
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   # global variables and defaults
   R18_wg <- R13_wg <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- R45_stoch <-
     R46_stoch <- R47_stoch <- R48_stoch <- R49_stoch <- NULL
@@ -89,10 +93,11 @@ bulk_and_clumping_deltas  <- function(.data,
     D47_raw = 1000 * (.data$R47 / .data$R47_stoch - 1),
     D48_raw = 1000 * (.data$R48 /.data$R48_stoch - 1),
     D49_raw = 1000 * (.data$R49 / .data$R49_stoch - 1),
-    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000,
-    # EXPERIMENTAL NEW STEP!
-    D47_raw = D47_raw - D46_raw - D45_raw,
-    D48_raw = D48_raw - D46_raw * 2)
+    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000#,
+    # EXPERIMENTAL NEW STEP! -> undo on [2021-02-12], nobody knows why we do this
+    ## D47_raw = D47_raw - D46_raw - D45_raw,
+    ## D48_raw = D48_raw - D46_raw * 2
+    )
 
   ## # raise a warning if the corresponding anomalies exceed 0.02 ppm.
   ## # TODO: append warning to specific value!

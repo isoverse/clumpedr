@@ -19,8 +19,7 @@ empirical_transfer_function(
   out = D47_etf,
   outlier = outlier,
   quiet = default(quiet),
-  parallel = FALSE,
-  genplot = default(genplot)
+  parallel = FALSE
 )
 }
 \arguments{
@@ -38,8 +37,6 @@ al., 2017 at 70 °C acid digestion.}
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}
 
-\item{id1}{Name of the standard/sample identifier column.}
-
 \item{etf}{The column name of the new model.}
 
 \item{etf_coefs}{The column name with the coefficients of the model.}
@@ -55,10 +52,13 @@ Calculate and apply the empirical transfer function (ETF). First append the
 expected values for the standards, then calculate the ETF per Preparation,
 then apply the ETF to all the samples and standards.
 }
+\details{
+This function is a wrapper for \code{\link[=append_expected_values]{append_expected_values()}},
+\code{\link[=calculate_etf]{calculate_etf()}}, and \code{\link[=apply_etf]{apply_etf()}}.
+}
 \seealso{
 Other empirical transfer functions: 
 \code{\link{append_expected_values}()},
-\code{\link{apply_etf}()},
-\code{\link{plot_etf}()}
+\code{\link{apply_etf}()}
 }
 \concept{empirical transfer functions}

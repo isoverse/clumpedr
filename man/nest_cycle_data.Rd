@@ -10,7 +10,7 @@ nest_cycle_data(
   ratios = c(paste0("s", masses), paste0("r", masses)),
   outlier_cycles = c(paste0("outlier_cycle_", c("low_s44", "low_r44", "high_s44",
     "high_r44", "drop_s44", "drop_r44", "s44", "r44")), "outlier_cycle"),
-  outliers = c(paste0("outlier_", c("param49", "flagged")), "outlier"),
+  outliers = "outlier",
   cycle_drop = paste0("cycle_", c("diff_s44", "diff_r44", "drop_s44", "drop_r44",
     "drop_num_s44", "drop_num_r44", "has_drop_s44", "has_drop_r44")),
   bgs = c(paste0("s44_bg", masses[!masses \%in\% c(44, 54)]), paste0("r44_bg",

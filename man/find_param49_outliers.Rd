@@ -4,7 +4,7 @@
 \alias{find_param49_outliers}
 \title{Find param 49 outliers.}
 \usage{
-find_param49_outliers(.data, param49_off = 1, quiet = default(quiet))
+find_param49_outliers(.data, param49_off, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

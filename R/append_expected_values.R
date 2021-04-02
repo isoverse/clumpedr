@@ -8,7 +8,7 @@
 #' @param std_values Expected values of the standards. Defaults to Müller et
 #'   al., 2017 at 70 °C acid digestion.
 #' @param exp Name of the new column that will hold expected values.
-#' @param id1 Name of the standard/sample identifier column.
+#' @param by Name of the standard/sample identifier column.
 #'
 #' @references
 #' W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature
@@ -30,7 +30,7 @@ append_expected_values <- function(.data,
                                    std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!
                                    std_values = c(0.258, 0.256, 0.691) - 0.062, #, 0.507),
                                    exp = expected_D47,
-                                   id1 = `Identifier 1`,
+                                   by = `Identifier 1`,
                                    quiet = default(quiet)) {
   # global variables and defaults
   `Identifier 1` <- expected_D47 <- NULL
@@ -44,12 +44,13 @@ append_expected_values <- function(.data,
   }
 
   if (!quiet)
-    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(std_names, sep = ' ', last = ' and ')}") %>%
+    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(unique(std_names), sep = ' ', last = ' and ', width = 30)}") %>%
       message()
 
-  expected_standard_values <- tibble({{ id1 }} := std_names, {{ exp }} := std_values)
+  expected_standard_values <- tibble({{ by }} := std_names,
+                                     {{ exp }} := std_values)
 
-  by_quo_name <- quo_name(enquo(id1))
+  by_quo_name <- quo_name(enquo(by))
 
   .data %>%
     left_join(expected_standard_values, by = by_quo_name)

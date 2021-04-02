@@ -4,27 +4,16 @@
 \alias{delta_values}
 \title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
 \usage{
-delta_values(
-  .data,
-  method = "normal",
-  plot_info = NULL,
-  plot_column = D47_raw,
-  genplot = default(genplot),
-  quiet = default(quiet)
-)
+delta_values(.data, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
-
-\item{method}{Method for matching reference gas to sample gas. Either
-\code{"normal"} (default) or \code{"linterp"}.}
-
-\item{plot_info}{The needed metadata for plotting. Result of
-\code{\link[=clean_did_info]{clean_did_info()}}.}
-
-\item{plot_column}{The column that will be plotted. Defaults to \code{D47_raw}.}
 }
 \description{
 Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
+}
+\details{
+This function is a wrapper for the \code{\link[=abundance_ratios]{abundance_ratios()}},
+\code{\link[=little_deltas]{little_deltas()}}, and \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}} functions.
 }

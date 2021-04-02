@@ -4,10 +4,15 @@
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @param d13C_PDB_wg \eqn{\delta^{13}C}{δ13C} reference gas value to overwrite.
 #' @param d18O_PDBCO2_wg \eqn{\delta^{18}O}{δ18O} reference gas value to overwrite.
+#' @export
 append_ref_deltas <- function(.data, .did = NULL,
                               d13C_PDB_wg = NULL,
                               d18O_PDBCO2_wg = NULL,
                               quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   if (!any(class(.data) %in% c("data.frame", "tbl_df", "tbl")))
     stop(".data must be a data.frame or tibble", call. = FALSE)
 

@@ -63,13 +63,18 @@ parse_info <- function(.did,
 #' @return A tibble with columns file_id, s44_init, and r44_init
 #' @export
 get_inits <- function(.did) {
+  # what to do if .did is an empty dataframe?
+  if (is.data.frame(.did) && nrow(.did) == 0L) {
+    return(
+      tibble(file_id = character())#, #Analysis = character(),
+             ## s44_init = double(), r44_init = double())
+    )
+  }
+
   .did %>%
     # filter first standard and first sample cycles
     filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
-    pivot_wider(id_cols = .data$file_id, names_from = .data$type, values_from = .data$v44.mV) %>%
-    select(.data$file_id, s44_init = .data$sample, r44_init = .data$standard) %>%
+    pivot_wider(id_cols = c(.data$file_id, .data$Analysis), names_from = .data$type, values_from = .data$v44.mV) %>%
+    select(.data$file_id, .data$Analysis, s44_init = .data$sample, r44_init = .data$standard) %>%
     tibble::as_tibble()
 }
-
-# import from isororeader for use in my parsing function
-ensure_data_frame_list_columns <- utils::getFromNamespace("ensure_data_frame_list_columns", "isoreader")

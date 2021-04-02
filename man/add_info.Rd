@@ -4,7 +4,7 @@
 \alias{add_info}
 \title{Add the information from the did files}
 \usage{
-add_info(.data, .info, ..., quiet = default(quiet))
+add_info(.data, .info, cols, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -12,6 +12,8 @@ add_info(.data, .info, ..., quiet = default(quiet))
 
 \item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
+
+\item{cols}{A character vector with column names in info to add to the data.}
 
 \item{...}{Optional additional arguments to pass to the \code{\link[dplyr:mutate-joins]{dplyr::left_join()}}
 call.}

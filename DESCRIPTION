@@ -1,10 +1,15 @@
 Package: clumpedr
 Title: Clumped isotope analysis in R
 Version: 0.0.2
-Authors@R: person("Ilja", "Kocken", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-2196-8718"), email = "iljakocken at gmail.com")
+Authors@R:
+    person(
+        given = "Ilja", family = "Kocken",
+        email = "iljakocken@gmail.com",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0003-2196-8718"))
 URL: https://github.com/isoverse/clumpedr
 BugReports: https://github.com/isoverse/clumpedr/issues
-Description: Data processing in clumped isotopes is an involved, evolving field. This package aims facilitate the processing of raw data to final \eqn{\Delta_{47}}{Δ47} values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
+Description: Data processing in clumped isotopes is an involved, evolving field. This package aims to facilitate the processing of raw data to final \eqn{\Delta_{47}}{Δ47} values and temperatures, step-by-step, with good documentation, so that the full process is easier to understand and tweak, more reproducible, and fully transparent.
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr

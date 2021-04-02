@@ -9,7 +9,7 @@ append_expected_values(
   std_names = paste0("ETH-", 1:3),
   std_values = c(0.258, 0.256, 0.691) - 0.062,
   exp = expected_D47,
-  id1 = `Identifier 1`,
+  by = `Identifier 1`,
   quiet = default(quiet)
 )
 }
@@ -23,7 +23,7 @@ al., 2017 at 70 °C acid digestion.}
 
 \item{exp}{Name of the new column that will hold expected values.}
 
-\item{id1}{Name of the standard/sample identifier column.}
+\item{by}{Name of the standard/sample identifier column.}
 }
 \description{
 Append the expected values for the standards. Defaults to using
@@ -48,7 +48,6 @@ weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
 \seealso{
 Other empirical transfer functions: 
 \code{\link{apply_etf}()},
-\code{\link{empirical_transfer_function}()},
-\code{\link{plot_etf}()}
+\code{\link{empirical_transfer_function}()}
 }
 \concept{empirical transfer functions}

@@ -6,20 +6,20 @@
 \usage{
 find_init_outliers(
   .data,
-  init_low = 8000,
-  init_high = 40000,
-  init_diff = 1200,
+  init_low,
+  init_high,
+  init_diff,
   quiet = default(quiet)
 )
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
-\item{init_low}{Minimum initial intensity threshold for mass 44.}
+\item{init_low}{Column in .data with minimum initial intensity threshold for mass 44.}
 
-\item{init_high}{Maximum initial intensity threshold for mass 44.}
+\item{init_high}{Column in .data with maximum initial intensity threshold for mass 44.}
 
-\item{init_diff}{Maximum initial difference in mass 44 threshold between standard and sample gas.}
+\item{init_diff}{Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.}
 }
 \description{
 Finds values of \code{s44_init} and \code{r44_init} that fall outside of

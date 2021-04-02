@@ -25,7 +25,9 @@ from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 \item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
-\item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+\item{D17O}{The difference between the expected \eqn{\delta^{17}}{\u03b417}O
+(\eqn{\delta^{18}}{\u03b418}O\eqn{-\lambda*\delta^{18}}{- lambda *\u03b418}O)
+and the actual \eqn{\delta^{17}}{\u03b417}O value.}
 
 \item{D47}{TODO: look up}
 

@@ -38,8 +38,9 @@ find_outliers <- function(.data,
     ## NOTE: cycle outliers are handled elsewhere!
     ## NOTE: init outliers should be computed once the cycles have been collapsed
     ## find_init_outliers(init_low, init_high, init_diff, quiet) %>%
-    find_param49_outliers(param49_off, quiet) %>%
-    find_R_flags(quiet) %>%
+    ## NOTE: param_49 outliers should be computed based on average param_49, once the cycles have been collapsed
+    ## find_param49_outliers(param49_off, quiet) %>%
+    ## find_R_flags(quiet) %>%
     summarise_outlier(quiet = TRUE) %>% ## this adds the column outlier based on all outlier_ columns
     find_internal_sd_outlier(internal_sd, {{ D47 }}, quiet) %>%
     summarise_outlier(quiet = TRUE) %>%
@@ -61,22 +62,25 @@ find_outliers <- function(.data,
 ##' than \code{init_diff}.
 ##'
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-##' @param init_low Minimum initial intensity threshold for mass 44.
-##' @param init_high Maximum initial intensity threshold for mass 44.
-##' @param init_diff Maximum initial difference in mass 44 threshold between standard and sample gas.
-find_init_outliers <- function(.data,
-                               init_low = 8000, init_high = 40000, init_diff = 1200,
+##' @param init_low Column in .data with minimum initial intensity threshold for mass 44.
+##' @param init_high Column in .data with maximum initial intensity threshold for mass 44.
+##' @param init_diff Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.
+find_init_outliers <- function(.data, init_low, init_high, init_diff,
                                quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   if (!quiet)
-    glue("Info: identifying aliquots with {init_low} > i44_init & i44_init < {init_high}, s44 - r44 > {init_diff}.") %>%
+    glue("Info: identifying aliquots with {glue_collapse(distinct(.data, {{init_low}}), sep = ', ', last = ' and ')} > i44_init & i44_init < {glue_collapse(distinct(.data, {{init_high}}), sep = ', ', last = ' and ')}, s44 - r44 > {glue_collapse(distinct(.data, {{init_diff}}), sep = ', ', last = ' and ')}.") %>%
       message()
 
   .data %>%
-    mutate(outlier_s44_init_low = .data$s44_init <= init_low,
-           outlier_r44_init_low = .data$r44_init <= init_low,
-           outlier_s44_init_high = .data$s44_init >= init_high,
-           outlier_r44_init_high = .data$r44_init >= init_high,
-           outlier_i44_init_diff = abs(.data$s44_init - .data$r44_init) >= init_diff,
+    mutate(outlier_s44_init_low = s44_init <= ifelse(is.na({{init_low}}), 8000, {{init_low}}),
+           outlier_r44_init_low = r44_init <= ifelse(is.na({{init_low}}), 8000, {{init_low}}),
+           outlier_s44_init_high = s44_init >= ifelse(is.na({{init_high}}), 40000, {{init_high}}),
+           outlier_r44_init_high = r44_init >= ifelse(is.na({{init_high}}), 40000, {{init_high}}),
+           outlier_i44_init_diff = abs(s44_init - r44_init) >= ifelse(is.na({{init_diff}}), 3000, {{init_diff}}),
            outlier_init = .data$outlier_s44_init_low | .data$outlier_r44_init_low |
              .data$ outlier_s44_init_high | .data$outlier_r44_init_high |
              .data$outlier_i44_init_diff)
@@ -87,28 +91,17 @@ find_init_outliers <- function(.data,
 ##' Find measurements with a param49 value that is greater than \code{param49_off}.
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param param49_off The absolute cutoff value for the parameter 49 value.
-find_param49_outliers <- function(.data, param49_off = 1, quiet = default(quiet)) {
+find_param49_outliers <- function(.data, param49_off, quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   if (!quiet)
     glue("Info: identifying rows with `param_49` >= -{param49_off} | <= {param49_off}.") %>%
       message()
 
   .data %>%
-    mutate(outlier_param49 = .data$param_49 >= param49_off | .data$param_49 <= -param49_off)
-}
-
-
-##' Find R45 and R46 outliers.
-##'
-##' If (R45 / R45_stoch - 1) > 2e-8, we flag it as an outlier.
-##'
-##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-find_R_flags <- function(.data, quiet = default(quiet)) {
-  if (!quiet)
-    glue("Info: identifying rows with Di/Di_stoch - 1 > 2e-8 for i = 45 and 46.") %>%
-      message()
-
-  .data %>%
-    mutate(outlier_flagged = .data$R45_flag > 2e-8 | .data$R46_flag > 2e-8)
+    mutate(outlier_param49 = .data$param_49 >= {{param49_off}} | .data$param_49 <= -{{param49_off}})
 }
 
 ##' Find internal standard deviation outliers.
@@ -198,6 +191,10 @@ find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_ra
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param out_column The name of the outlier column.
 summarise_outlier <- function(.data, out_column = outlier, quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   if (!quiet)
     glue("Info: creating a single `outlier` column, based on all \"outlier_\" columns.") %>%
       message()

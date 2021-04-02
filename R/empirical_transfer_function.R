@@ -7,6 +7,10 @@
 #' @param .data A [tibble][tibble::tibble-package] resulting from [collapse_cycles()].
 #' @inheritParams append_expected_values
 #' @inheritParams calculate_etf
+#'
+#' @details This function is a wrapper for [append_expected_values()],
+#'   [calculate_etf()], and [apply_etf()].
+#'
 #' @family empirical transfer functions
 # http://r-pkgs.had.co.nz/man.html#dry2
 # TODO: use @describeIn or @rdname to also include the references in the wrapper.
@@ -29,28 +33,21 @@ empirical_transfer_function <- function(.data,
                                         out = D47_etf,
                                         outlier = outlier,
                                         quiet = default(quiet),
-                                        parallel = FALSE,
-                                        genplot = default(genplot)) {
-  # global variables and defaults
+                                        parallel = FALSE) {
+  # defaults from above
   D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
 
   if (!quiet)
     glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") %>%
       message()
 
-  out <- .data %>%
+  .data %>%
     append_expected_values(std_names = std_names, std_values = std_values,
-                           exp = {{ exp }}, id1 = {{ id1 }}, quiet = TRUE) %>%
+                           exp = {{ exp }}, by = {{ id1 }}, quiet = TRUE) %>%
     calculate_etf(raw = {{ raw }}, exp = {{ exp }}, session = {{ session }},
                   etf = {{ etf }}, etf_coefs = {{ etf_coefs }},
                   slope = {{ slope }}, intercept = {{ intercept }},
                   parallel = parallel, quiet = TRUE) %>%
     apply_etf(intercept = {{ intercept }}, slope = {{ slope }},
               raw = {{ raw }}, out = {{ out }}, quiet = TRUE)
-  if (genplot)
-    out %>%
-      pipe_plot(plot_etf, std_names = std_names, out = {{ out }},
-                raw = {{ raw }}, exp = {{ exp }}, outlier = {{ outlier }},
-                session = {{ session }})
-  out
 }
