@@ -59,3 +59,4 @@ Contributions to improving the clumped data processing package are more than wel
 - Use [`isoreader`](https://github.com/isoverse/isoreader) to read in raw measurement
 - [`seasonalclumped`](https://github.com/nielsjdewinter/seasonalclumped) can be used to reconstruct temperature and salinity variations from seasonal oxygen and clumped isotope records.
 - [`isogeochem`](https://github.com/davidbajnai/isogeochem) can be used to calculate equilibrium Δ₄₇ and Δ₄₈ values, carbonate growth temperatures, isotopic fractionation factors and more.
+- [`D47crunch`](https://github.com/mdaeron/D47crunch) is the Python processing code to process clumped data from δ₄₇ values. It features a pooled regression for the empirical transfer function and many other features.
