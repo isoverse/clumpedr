@@ -19,6 +19,7 @@
 #' @param cycle Column name of the column with the measurement cycle number.
 #' @param relative_to cycle Drop detection occurs relative to either the first
 #'   cycle ("init", default) or to the previous cycle ("prev").
+#' @export
 #' @family cycle functions
 find_bad_cycles <- function(.data, min, max, fac,
                             v44 = v44.mV, cycle = cycle,

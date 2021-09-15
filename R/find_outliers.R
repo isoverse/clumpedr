@@ -20,6 +20,7 @@
 #' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
+#' @export
 find_outliers <- function(.data,
                           init_low = 8000, init_high = 40000, init_diff = 1200,
                           param49_off = 1,
@@ -65,6 +66,7 @@ find_outliers <- function(.data,
 ##' @param init_low Column in .data with minimum initial intensity threshold for mass 44.
 ##' @param init_high Column in .data with maximum initial intensity threshold for mass 44.
 ##' @param init_diff Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.
+##' @export
 find_init_outliers <- function(.data, init_low, init_high, init_diff,
                                quiet = default(quiet)) {
   if (nrow(.data) == 0L) {
@@ -112,6 +114,7 @@ find_param49_outliers <- function(.data, param49_off, quiet = default(quiet)) {
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param internal_sd The internal standard deviation cutoff value.
 ##' @param D47 The column to calculate the internal sd value for.
+##' @export
 find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
                                      quiet = default(quiet)) {
   if (!quiet)
@@ -136,6 +139,7 @@ find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
 ##' @param nsd_off The number of standard deviations away from the median.
 ##' @param D47 The column to calculate the internal sd value for.
 ##' @param session The session for which to calculate the standard deviation and median values.
+##' @export
 find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw, outlier_session = outlier_session_D47,
                                  session = Preparation, quiet = default(quiet)) {
   D47_raw <- Preparation <- outlier_session_D47 <- NULL
@@ -164,6 +168,7 @@ find_session_outlier <- function(.data, n = 5, nsd_off = 4, D47 = D47_raw, outli
 ##' @param D47 The column to calculate the internal sd value for.
 ##' @param session The session for which to calculate the standard deviation and median values.
 ##' @param id1 The column that defines the sample/standard name.
+##' @export
 find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, id1 = `Identifier 1`, quiet = default(quiet)) {
   if (!quiet)
@@ -190,6 +195,7 @@ find_session_id1_outlier <- function(.data, n_id1 = 5, nsd_off = 4, D47 = D47_ra
 ##'
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param out_column The name of the outlier column.
+##' @export
 summarise_outlier <- function(.data, out_column = outlier, quiet = default(quiet)) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))

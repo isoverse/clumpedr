@@ -25,6 +25,8 @@
 #' long-integration dual-inlet (LIDI) workflow: scratching at the lower sample
 #' weight boundaries. _Rapid Commun. Mass Spectrom._ **2017**, _31_,
 #' 1057--1066.
+#'
+#' @export
 #' @family empirical transfer functions
 append_expected_values <- function(.data,
                                    std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!

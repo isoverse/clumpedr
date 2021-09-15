@@ -72,6 +72,7 @@ collapse_cycles <- function(.data,
 #' @param flags Flag columns.
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
+#' @export
 nest_cycle_data <- function(.data,
                             masses = c(44:49, 54),
                             ratios = c(paste0("s", masses), paste0("r", masses)),
