@@ -7,33 +7,47 @@
 #' @param .data A [tibble][tibble::tibble-package] resulting from [collapse_cycles()].
 #' @inheritParams append_expected_values
 #' @inheritParams calculate_etf
+#'
+#' @details This function is a wrapper for [append_expected_values()],
+#'   [calculate_etf()], and [apply_etf()].
+#'
 #' @family empirical transfer functions
 # http://r-pkgs.had.co.nz/man.html#dry2
 # TODO: use @describeIn or @rdname to also include the references in the wrapper.
 #' @export
 empirical_transfer_function <- function(.data,
+                                        # columns for append_expected_values
                                         std_names = paste0("ETH-", 1:3),
-                                        D47 = c(0.258, 0.256, 0.691), #0.507),
-                                        aff = 0.062,
+                                        std_values = c(0.258, 0.256, 0.691) - 0.062, #0.507),
                                         ## outlier = outlier,
-                                        raw = D47_raw, exp = expected_D47,
-                                        id1 = `Identifier 1`,
+                                        raw = D47_raw,
+                                        exp = expected_D47,
                                         session = Preparation,
+                                        id1 = `Identifier 1`,
+                                        # output columns for calculate_etf
+                                        etf = etf,
+                                        etf_coefs = etf_coefs,
+                                        slope = slope,
+                                        intercept = intercept,
+                                        # for apply_etf
+                                        out = D47_etf,
+                                        outlier = outlier,
                                         quiet = default(quiet),
-                                        genplot = default(genplot)) {
-  # global variables and defaults
-  D47_raw <- expected_D47 <- `Identifier 1` <- Preparation <- NULL
+                                        parallel = FALSE) {
+  # defaults from above
+  D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
 
   if (!quiet)
-    glue("Info: calculating and applying Emperical Transfer Function, by {quo_name(enquo(session))}.") %>%
+    glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") %>%
       message()
-  out <- .data %>%
-    append_expected_values(std_names = std_names, D47 = D47, aff = aff,
-                           id1 = {{ id1 }}, exp = {{ exp }}) %>%
-    calculate_etf(raw = {{ raw }}, exp = {{ exp }}, session = {{ session }}, quiet = quiet) %>%
-    apply_etf(D47 = {{ raw }})
-  if (genplot)
-    out %>%
-      pipe_plot(plot_etf, std_names = std_names, session = {{ session }})
-  out
+
+  .data %>%
+    append_expected_values(std_names = std_names, std_values = std_values,
+                           exp = {{ exp }}, by = {{ id1 }}, quiet = TRUE) %>%
+    calculate_etf(raw = {{ raw }}, exp = {{ exp }}, session = {{ session }},
+                  etf = {{ etf }}, etf_coefs = {{ etf_coefs }},
+                  slope = {{ slope }}, intercept = {{ intercept }},
+                  parallel = parallel, quiet = TRUE) %>%
+    apply_etf(intercept = {{ intercept }}, slope = {{ slope }},
+              raw = {{ raw }}, out = {{ out }}, quiet = TRUE)
 }

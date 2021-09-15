@@ -4,8 +4,18 @@
 \alias{calculate_etf}
 \title{Calculate the Empirical Transfer Function}
 \usage{
-calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
-  session = Preparation, quiet = default(quiet))
+calculate_etf(
+  .data,
+  raw = D47_raw_mean,
+  exp = expected_D47,
+  session = Preparation,
+  etf = etf,
+  etf_coefs = etf_coefs,
+  slope = slope,
+  intercept = intercept,
+  parallel = FALSE,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
@@ -16,6 +26,16 @@ calculate_etf(.data, raw = D47_raw_mean, exp = expected_D47,
 
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}
+
+\item{etf}{The column name of the new model.}
+
+\item{etf_coefs}{The column name with the coefficients of the model.}
+
+\item{slope}{The column name of the new slope.}
+
+\item{intercept}{The column name of the new intercept.}
+
+\item{parallel}{Whether or not (default) to process this in parallel, using package \code{furrr}.}
 }
 \description{
 Calculate the Empirical Transfer Function

@@ -4,7 +4,9 @@
 \name{eth3}
 \alias{eth3}
 \title{Single ETH-3 standard did file}
-\format{An object of class \code{dual_inlet} (inherits from \code{iso_file}) of length 7.}
+\format{
+An object of class \code{dual_inlet} (inherits from \code{iso_file}) of length 7.
+}
 \usage{
 eth3
 }

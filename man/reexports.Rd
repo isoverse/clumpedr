@@ -12,6 +12,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{isoreader}{\code{\link[isoreader]{iso_turn_info_messages_on}}, \code{\link[isoreader]{iso_turn_info_messages_off}}}
+  \item{isoreader}{\code{\link[isoreader:iso_info_messages]{iso_turn_info_messages_off}}, \code{\link[isoreader:iso_info_messages]{iso_turn_info_messages_on}}}
 }}
 

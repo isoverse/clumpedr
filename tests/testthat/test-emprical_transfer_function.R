@@ -1,17 +1,12 @@
 context("Empirical Transfer Function")
 
 test_that("append_expected_values works", {
+  expect_error(append_expected_values(standards, std_names = "hoi", std_values = c(5, 4)),
+               "std_names should be of equal length to std_values.")
   expected_test <- standards %>%
     clean_did_info("MOTU") %>%
     iso_get_raw_data() %>%
-    find_bad_cycles() %>%
-    spread_match() %>%
-    append_ref_deltas(standards) %>%
-    delta_values(genplot=FALSE) %>%
-    collapse_cycles() %>%
     add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
-    unnest(cycle_data) %>%
-    find_outliers() %>%
     append_expected_values()
   expect_is(expected_test, "tbl_df")
   expect_true("expected_D47" %in% colnames(expected_test))
@@ -25,7 +20,7 @@ test_that("calculate_etf works", {
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values(genplot=FALSE) %>%
-    collapse_cycles() %>%
+    collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
     add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
     unnest(cycle_data) %>%
     find_outliers() %>%
@@ -47,7 +42,7 @@ test_that("apply_etf works", {
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values(genplot=FALSE) %>%
-    collapse_cycles() %>%
+    collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
     add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
     unnest(cycle_data) %>%
     find_outliers() %>%
@@ -67,7 +62,7 @@ test_that("plot_etf works", {
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values(genplot=FALSE) %>%
-    collapse_cycles() %>%
+    collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
     add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
     unnest(cycle_data) %>%
     find_outliers() %>%
@@ -87,7 +82,7 @@ test_that("empirical transfer function wrapper works", {
               spread_match() %>%
               append_ref_deltas(standards) %>%
               delta_values(genplot=FALSE) %>%
-              collapse_cycles() %>%
+              collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
               add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
               unnest(cycle_data) %>%
               find_outliers() %>%

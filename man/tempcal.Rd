@@ -4,8 +4,14 @@
 \alias{tempcal}
 \title{Temperature calibration}
 \usage{
-tempcal(Tc, slope = 0.0449, intercept = 0.167, slpcnf = 0.001,
-  intcnf = 0.01, ignorecnf = FALSE)
+tempcal(
+  Tc,
+  slope = 0.0449,
+  intercept = 0.167,
+  slpcnf = 0.001,
+  intcnf = 0.01,
+  ignorecnf = FALSE
+)
 }
 \arguments{
 \item{Tc}{The temperature in °C.}

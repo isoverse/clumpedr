@@ -7,7 +7,7 @@
 get_inits(.did)
 }
 \arguments{
-\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.data}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 }
 \value{
 A tibble with columns file_id, s44_init, and r44_init
@@ -16,7 +16,9 @@ A tibble with columns file_id, s44_init, and r44_init
 Get initial intensities of specified mass
 }
 \seealso{
-Other metadata cleaning functions: \code{\link{add_info}},
-  \code{\link{clean_did_info}}, \code{\link{parse_info}}
+Other metadata cleaning functions: 
+\code{\link{add_info}()},
+\code{\link{clean_did_info}()},
+\code{\link{parse_info}()}
 }
 \concept{metadata cleaning functions}

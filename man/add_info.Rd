@@ -4,7 +4,7 @@
 \alias{add_info}
 \title{Add the information from the did files}
 \usage{
-add_info(.data, .info, ..., quiet = default(quiet))
+add_info(.data, .info, cols, quiet = default(quiet))
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -13,14 +13,18 @@ add_info(.data, .info, ..., quiet = default(quiet))
 \item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{...}{Optional additional arguments to pass to the \code{\link[dplyr:left_join]{dplyr::left_join()}}
+\item{cols}{A character vector with column names in info to add to the data.}
+
+\item{...}{Optional additional arguments to pass to the \code{\link[dplyr:mutate-joins]{dplyr::left_join()}}
 call.}
 }
 \description{
 Append mass spectrometer metadata to the raw data.
 }
 \seealso{
-Other metadata cleaning functions: \code{\link{clean_did_info}},
-  \code{\link{get_inits}}, \code{\link{parse_info}}
+Other metadata cleaning functions: 
+\code{\link{clean_did_info}()},
+\code{\link{get_inits}()},
+\code{\link{parse_info}()}
 }
 \concept{metadata cleaning functions}

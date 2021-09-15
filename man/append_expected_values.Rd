@@ -4,25 +4,26 @@
 \alias{append_expected_values}
 \title{Append expected values}
 \usage{
-append_expected_values(.data, std_names = paste0("ETH-", 1:3),
-  D47 = c(0.258, 0.256, 0.691), aff = 0.062, id1 = `Identifier 1`,
-  exp = expected_D47)
+append_expected_values(
+  .data,
+  std_names = paste0("ETH-", 1:3),
+  std_values = c(0.258, 0.256, 0.691) - 0.062,
+  exp = expected_D47,
+  by = `Identifier 1`,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{std_names}{Names of the standards.}
 
-\item{D47}{Expected values of the standards at 25 °C. Defaults to Müller et
-al., 2017.}
-
-\item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
-25 °C. Defaults to 0.062, which is the average of the values obtained by
-De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
-
-\item{id1}{Name of the standard/sample identifier column.}
+\item{std_values}{Expected values of the standards. Defaults to Müller et
+al., 2017 at 70 °C acid digestion.}
 
 \item{exp}{Name of the new column that will hold expected values.}
+
+\item{by}{Name of the standard/sample identifier column.}
 }
 \description{
 Append the expected values for the standards. Defaults to using
@@ -45,8 +46,8 @@ weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
 1057--1066.
 }
 \seealso{
-Other empirical transfer functions: \code{\link{apply_etf}},
-  \code{\link{empirical_transfer_function}},
-  \code{\link{plot_etf}}
+Other empirical transfer functions: 
+\code{\link{apply_etf}()},
+\code{\link{empirical_transfer_function}()}
 }
 \concept{empirical transfer functions}

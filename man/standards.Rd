@@ -3,12 +3,14 @@
 \docType{data}
 \name{standards}
 \alias{standards}
-\title{Several standard did files}
-\format{An object of class \code{iso_file_list} of length 27.}
+\title{27 Dual Inlet did files}
+\format{
+A "dual_inlet_list" "iso_file_list", resulting from isoreader::iso_read_dual_inlet()
+}
 \usage{
 standards
 }
 \description{
-Several standard did files
+The standards of 27 dual inlet files measured on 2018-08-14.
 }
 \keyword{datasets}

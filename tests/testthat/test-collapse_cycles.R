@@ -2,58 +2,32 @@ context("Collapsing cycles")
 test_that("collapsing the cycles", {
   collapse_test <- standards %>%
     isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+    disable_cycles(genplot = FALSE) %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values(genplot=FALSE) %>%
-    collapse_cycles()
+    collapse_cycles(cols = c(d18O_PDB, d13C_PDB))
   expect_is(collapse_test, "tbl_df")
-  expect_true("d45_mean" %in% colnames(collapse_test))
-  expect_true("d46_mean" %in% colnames(collapse_test))
-  expect_true("d47_mean" %in% colnames(collapse_test))
-  expect_true("d48_mean" %in% colnames(collapse_test))
-  expect_true("d49_mean" %in% colnames(collapse_test))
-  expect_true("d18O_PDBCO2_mean" %in% colnames(collapse_test))
-  expect_true("d18O_PDB_mean" %in% colnames(collapse_test))
-  expect_true("d13C_PDB_mean" %in% colnames(collapse_test))
-  expect_true("D47_raw_mean" %in% colnames(collapse_test))
-  expect_true("D48_raw_mean" %in% colnames(collapse_test))
-  expect_true("D49_raw_mean" %in% colnames(collapse_test))
-  expect_true("param_49_mean" %in% colnames(collapse_test))
-  expect_true("d45_sd" %in% colnames(collapse_test))
-  expect_true("d46_sd" %in% colnames(collapse_test))
-  expect_true("d47_sd" %in% colnames(collapse_test))
-  expect_true("d48_sd" %in% colnames(collapse_test))
-  expect_true("d49_sd" %in% colnames(collapse_test))
-  expect_true("d18O_PDBCO2_sd" %in% colnames(collapse_test))
-  expect_true("d18O_PDB_sd" %in% colnames(collapse_test))
-  expect_true("d13C_PDB_sd" %in% colnames(collapse_test))
-  expect_true("D47_raw_sd" %in% colnames(collapse_test))
-  expect_true("D48_raw_sd" %in% colnames(collapse_test))
-  expect_true("D49_raw_sd" %in% colnames(collapse_test))
-  expect_true("param_49_sd" %in% colnames(collapse_test))
-  expect_true("d45_n" %in% colnames(collapse_test))
-  expect_true("d46_n" %in% colnames(collapse_test))
-  expect_true("d47_n" %in% colnames(collapse_test))
-  expect_true("d48_n" %in% colnames(collapse_test))
-  expect_true("d49_n" %in% colnames(collapse_test))
-  expect_true("d18O_PDBCO2_n" %in% colnames(collapse_test))
-  expect_true("d18O_PDB_n" %in% colnames(collapse_test))
-  expect_true("d13C_PDB_n" %in% colnames(collapse_test))
-  expect_true("D47_raw_n" %in% colnames(collapse_test))
-  expect_true("D48_raw_n" %in% colnames(collapse_test))
-  expect_true("D49_raw_n" %in% colnames(collapse_test))
-  expect_true("param_49_n" %in% colnames(collapse_test))
-  expect_true("d45_sem" %in% colnames(collapse_test))
-  expect_true("d46_sem" %in% colnames(collapse_test))
-  expect_true("d47_sem" %in% colnames(collapse_test))
-  expect_true("d48_sem" %in% colnames(collapse_test))
-  expect_true("d49_sem" %in% colnames(collapse_test))
-  expect_true("d18O_PDBCO2_sem" %in% colnames(collapse_test))
-  expect_true("d18O_PDB_sem" %in% colnames(collapse_test))
-  expect_true("d13C_PDB_sem" %in% colnames(collapse_test))
-  expect_true("D47_raw_sem" %in% colnames(collapse_test))
-  expect_true("D48_raw_sem" %in% colnames(collapse_test))
-  expect_true("D49_raw_sem" %in% colnames(collapse_test))
-  expect_true("param_49_sem" %in% colnames(collapse_test))
+  # do the summary columns exist?
+  expect_true(all(expand.grid(c("d18O_PDB", "d13C_PDB"),
+                              c("mean", "sd", "sem", "cl")) %>%
+                    tidyr::unite(col = "new") %>%
+                    pull(new) %in% colnames(collapse_test)))
+})
+
+test_that("nest_cycle_data works", {
+  ## nest_test <- standards %>%
+  ##   isoreader::iso_get_raw_data() %>%
+  ##   disable_cycles(genplot = FALSE) %>%
+  ##   spread_match() %>%
+  ##   # correct backgrounds
+  ##   append_ref_deltas(standards) %>%
+  ##   delta_values(genplot=FALSE) %>%
+  ##   abundance_ratios(s44, s45_bg, s46_bg, s47_bg, s48_bg, s49_bg) %>%
+  ##   abundance_ratios(r44, r45_bg, r46_bg, r47_bg, r48_bg, r49_bg,
+  ##                                  R45_wg, R46_wg, R47_wg, R48_wg, R49_wg) %>%
+  ##   little_deltas() %>%
+  ##   bulk_and_clumping_deltas() %>%
+  ##   nest_cycle_data()
+  ## expect_is(nest_test, "tbl_df")
 })

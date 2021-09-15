@@ -14,11 +14,11 @@
 #' @param d49 Column name of d49.
 #' @inheritParams isobar_ratios
 #' @inheritParams default.params
-#' @export
 #' @references Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
 #'   measurements, _Chemical Geology_ **2016**, _442_, 83–96.
 #'   \url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
+#' @export
 bulk_and_clumping_deltas  <- function(.data,
                                       # make the column names a bit flexible
                                       ## d13C_PDB_wg=d13C_PDB_wg,
@@ -32,6 +32,10 @@ bulk_and_clumping_deltas  <- function(.data,
                                       R18_PDBCO2 = default(R18_PDBCO2),
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   # global variables and defaults
   R18_wg <- R13_wg <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- R45_stoch <-
     R46_stoch <- R47_stoch <- R48_stoch <- R49_stoch <- NULL
@@ -85,10 +89,16 @@ bulk_and_clumping_deltas  <- function(.data,
     R45_flag = (.data$R45 / .data$R45_stoch - 1),
     R46_flag = (.data$R46 / .data$R46_stoch - 1),
     # Compute raw clumped isotope anomalies
+    D45_raw = 1000 * (.data$R45 / .data$R45_stoch - 1),
+    D46_raw = 1000 * (.data$R46 / .data$R46_stoch - 1),
     D47_raw = 1000 * (.data$R47 / .data$R47_stoch - 1),
     D48_raw = 1000 * (.data$R48 /.data$R48_stoch - 1),
     D49_raw = 1000 * (.data$R49 / .data$R49_stoch - 1),
-    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000)
+    param_49 = (.data$s49 / .data$s44 - .data$r49 / .data$r44) * 1000#,
+    # EXPERIMENTAL NEW STEP! -> undo on [2021-02-12], nobody knows why we do this
+    ## D47_raw = D47_raw - D46_raw - D45_raw,
+    ## D48_raw = D48_raw - D46_raw * 2
+    )
 
   ## # raise a warning if the corresponding anomalies exceed 0.02 ppm.
   ## # TODO: append warning to specific value!

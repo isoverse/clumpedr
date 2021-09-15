@@ -5,11 +5,21 @@
 \title{Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
 \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values}
 \usage{
-bulk_and_clumping_deltas(.data, d45 = d45, d46 = d46, d47 = d47,
-  d48 = d48, d49 = d49, R13_PDB = default(R13_PDB),
-  R18_PDB = default(R18_PDB), R17_PDBCO2 = default(R17_PDBCO2),
-  R18_PDBCO2 = default(R18_PDBCO2), lambda = default(lambda),
-  D17O = default(D17O), quiet = default(quiet))
+bulk_and_clumping_deltas(
+  .data,
+  d45 = d45,
+  d46 = d46,
+  d47 = d47,
+  d48 = d48,
+  d49 = d49,
+  R13_PDB = default(R13_PDB),
+  R18_PDB = default(R18_PDB),
+  R17_PDBCO2 = default(R17_PDBCO2),
+  R18_PDBCO2 = default(R18_PDBCO2),
+  lambda = default(lambda),
+  D17O = default(D17O),
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
@@ -39,7 +49,9 @@ from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 \item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
-\item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+\item{D17O}{The difference between the expected \eqn{\delta^{17}}{\u03b417}O
+(\eqn{\delta^{18}}{\u03b418}O\eqn{-\lambda*\delta^{18}}{- lambda *\u03b418}O)
+and the actual \eqn{\delta^{17}}{\u03b417}O value.}
 }
 \description{
 Requires a dataframe with little \eqn{\delta}{δ} values, and working gas

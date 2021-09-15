@@ -21,7 +21,8 @@ be correctly formatted.}
 Shows a table with the default function parameters for this package.
 }
 \seealso{
-Other settings functions: \code{\link{clumpedr_get_default_parameters}},
-  \code{\link{clumpedr_info_messages}}
+Other settings functions: 
+\code{\link{clumpedr_get_default_parameters}()},
+\code{\link{clumpedr_info_messages}}
 }
 \concept{settings functions}

@@ -4,16 +4,21 @@
 \alias{parse_info}
 \title{Parse info into appropriate types.}
 \usage{
-parse_info(.did, masspec = NA_character_, std_names = paste0("ETH-",
-  1:4), oth_name = "other", broadid_name = broadid, id1 = `Identifier
-  1`)
+parse_info(
+  .did,
+  masspec = NA_character_,
+  std_names = paste0("ETH-", 1:4),
+  oth_name = "other",
+  broadid_name = broadid,
+  id1 = `Identifier 1`
+)
 }
 \arguments{
 \item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
-\item{std_names}{Character vector of the standard names to find in \code{Identifier 1}.}
+\item{std_names}{Character vector of the standard names to find in \verb{Identifier 1}.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
 
@@ -26,7 +31,9 @@ Converts the information from \code{\link[isoreader:iso_get_file_info]{isoreader
 appropriate types and appends new columns with masspec name and broadid.
 }
 \seealso{
-Other metadata cleaning functions: \code{\link{add_info}},
-  \code{\link{clean_did_info}}, \code{\link{get_inits}}
+Other metadata cleaning functions: 
+\code{\link{add_info}()},
+\code{\link{clean_did_info}()},
+\code{\link{get_inits}()}
 }
 \concept{metadata cleaning functions}

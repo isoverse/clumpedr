@@ -1,16 +1,26 @@
 #' Calculate the Empirical Transfer Function
 #'
 #' @param .data A [tibble][tibble::tibble-package].
-# #' @param outlier Column with sample outlier information. Looks up string `"no_outlier"`.
 #' @param raw Column name of raw \eqn{\Delta_{47}}{Δ47} values.
 #' @param exp Column name of expected \eqn{\Delta_{47}}{Δ47} values.
 #' @param session The column name to group analyses by. Defaults to
 #'   `Preparation`.
-#' @export
+#' @param etf The column name of the new model.
+#' @param etf_coefs The column name with the coefficients of the model.
+#' @param slope The column name of the new slope.
+#' @param intercept The column name of the new intercept.
+#' @param parallel Whether or not (default) to process this in parallel, using package `furrr`.
 #' @importFrom stats na.exclude
 calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
-                          session = Preparation, quiet = default(quiet)) {
+                          session = Preparation, etf = etf,
+                          etf_coefs = etf_coefs, slope = slope,
+                          intercept = intercept, parallel = FALSE, quiet = default(quiet)) {
   # global variables and defaults
+  if (parallel & !requireNamespace("furrr", quietly = TRUE)) {
+    stop("Package \"furrr\" is needed for this function to work. Please install it or run this with `parallel = FALSE`",
+      call. = FALSE)
+  }
+
   outlier <- D47_raw_mean <- expected_D47 <- Preparation <- NULL
 
   # this makes it continue even if lm fails.
@@ -23,16 +33,30 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
     },
     otherwise = NA_real_, quiet = quiet)
 
-  pos_tidy <- purrr::possibly(broom::tidy, otherwise=NA_real_, quiet=quiet)
-  pos_map_dbl <- purrr::possibly(map_dbl, otherwise=NA_real_, quiet=quiet)
+  if (!quiet)
+    glue("Info: Calculating ETF with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))} for each {quo_name(enquo(session))}.") %>%
+      message()
 
-  .data %>%
-    group_by({{ session }}) %>%
-    nest() %>%
-    mutate(etf = map(data, pos_lm),
-           etf_coefs=map(.data$etf, "coefficients"),
-           intercept=map_dbl(.data$etf_coefs, 1),
-           slope=map_dbl(.data$etf_coefs, 2)) %>%
-    ## select(-etf_coefs) %>%
-    unnest(cols = .data$data)
+  if (parallel) {
+    out <- .data %>%
+      nest(session_nested = -{{ session }}) %>%
+      mutate({{ etf }} := furrr::future_map(session_nested, pos_lm),
+      {{ etf_coefs }} := furrr::future_map({{ etf }}, "coefficients"),
+      {{ intercept }} := furrr::future_map_dbl({{ etf_coefs }}, 1),
+      {{ slope }} := furrr::future_map_dbl({{ etf_coefs }}, 2)) %>%
+      unnest(cols = .data$session_nested)
+  } else {
+    out <- .data %>%
+      nest(session_nested = -{{ session }}) %>%
+      mutate({{ etf }} := map(session_nested, pos_lm),
+      {{ etf_coefs }} := map({{ etf }}, "coefficients"),
+      {{ intercept }} := pos_map_dbl({{ etf_coefs }}, 1),
+      {{ slope }} := pos_map_dbl({{ etf_coefs }}, 2)) %>%
+      unnest(cols = .data$session_nested)
+  }
+
+  out
 }
+
+pos_tidy <- purrr::possibly(broom::tidy, otherwise=NA_real_, quiet=default(quiet))
+pos_map_dbl <- purrr::possibly(map_dbl, otherwise=NA_real_, quiet=default(quiet))

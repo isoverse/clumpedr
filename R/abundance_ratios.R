@@ -22,11 +22,15 @@ abundance_ratios <- function(.data,
                              i49 = s49,
                              R45 = R45, R46 = R46, R47 = R47,
                              R48 = R48, R49 = R49, quiet = default(quiet)) {
+  if (nrow(.data) == 0L) {
+    return(tibble(file_id = character()))
+  }
+
   # global variables and defaults
   s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 
   if (!quiet)
-    message("Calculating abundance ratios R[i] = i / 44")
+    message("Info: calculating abundance ratios R[i] = i / 44")
 
   .data %>%
     mutate({{ R45 }} := {{ i45 }} / {{ i44 }},

@@ -19,6 +19,6 @@ arguments, makes sure to print it, and then returns the original
 \link[tibble:tibble-package]{tibble} unaffected.
 }
 \details{
-This is equivalent to running the \link[magrittr:\%T>\%]{magrittr::\%T>\%} operator with
+This is equivalent to running the \link[magrittr:tee]{magrittr::\%T>\%} operator with
 curly braces and a print command, but this is much cleaner.
 }

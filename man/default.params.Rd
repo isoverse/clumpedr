@@ -25,7 +25,9 @@ from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 \item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
-\item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+\item{D17O}{The difference between the expected \eqn{\delta^{17}}{\u03b417}O
+(\eqn{\delta^{18}}{\u03b418}O\eqn{-\lambda*\delta^{18}}{- lambda *\u03b418}O)
+and the actual \eqn{\delta^{17}}{\u03b417}O value.}
 
 \item{D47}{TODO: look up}
 
@@ -37,12 +39,27 @@ from Barkan and Luz, 2005.}
 Default parameters
 }
 \references{
-TODO: add all the references here!
+Assonov, S., Brenninkmeijer C. On the \eqn{^{17}}{17}O correction for
+CO\eqn{_{2}}{2} mass spectrometric isotopic analysis \emph{Rapid Commun. Mass
+Spectrom.}, \strong{2003}, 17, pp. 1007-1016, 10.1002/rcm.1012
 
-Brand, W. A., Assonov, S. S., & Coplen, T. B. Correction for the 17O
-interference in \eqn{\delta^{13}}{δ13}C measurements when analyzing
-CO\eqn{_{2}}{2} with stable isotope mass spectrometry (IUPAC Technical
-Report). \emph{Pure and Applied Chemistry}, \strong{2010}, \emph{82(8)}, 1719–1733.
-\url{https://doi.org/10.1351/PAC-REP-09-01-05}
+Baertschi, P., Absolute \eqn{^{18}}{18}O content of standard mean ocean
+water \emph{Earth Planet. Sci. Lett.}, \strong{1976}, 31, pp. 341-344
+
+Barkan, E., Luz B. High-precision measurements of
+\eqn{^{17}}{17}O/\eqn{^{16}}{16}O and \eqn{^{18}}{18}O/\eqn{^{16}}{16}O
+ratios in H2O \emph{Rapid Commun. Mass Spectrom.}, \strong{2005}, 19, pp. 3737-3742
+
+Chang, T., Li W. A calibrated measurement of the atomic weight of carbon
+\emph{Chin. Sci. Bull.}, \strong{1990}, 35 (290)
+
+Coplen, T., C. Kendall, Hopple J. Comparison of stable isotope reference
+samples \emph{Nature}, \strong{1983}, 302 (5905) , pp. 236-238, 10.1038/302236a0
+
+Brand, W. A., Assonov, S. S., & Coplen, T. B. Correction for the
+\eqn{^{17}}{17}O interference in \eqn{\delta^{13}}{δ13}C measurements when
+analyzing CO\eqn{_{2}}{2} with stable isotope mass spectrometry (IUPAC
+Technical Report). \emph{Pure and Applied Chemistry}, \strong{2010}, \emph{82(8)},
+1719–1733. \url{https://doi.org/10.1351/PAC-REP-09-01-05}
 }
 \keyword{internal}

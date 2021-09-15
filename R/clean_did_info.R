@@ -8,8 +8,8 @@
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
 #' @family metadata cleaning functions
-#' @export
-clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4),
+clean_did_info  <- function(.did, masspec = NULL,
+                            std_names = c(paste0("ETH-", 1:4), "IAEA-C2", "Merck"),
                             oth_name = "other", quiet = default(quiet)) {
   if (!quiet) {
     message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
@@ -19,8 +19,7 @@ clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4
 
   .did %>%
     parse_info(masspec = masspec, std_names = std_names, oth_name = oth_name) %>%
-    isoreader::iso_mutate_file_info(s44_init = inits$s44_init,
-                                    r44_init = inits$r44_init)
+    isoreader::iso_add_file_info(inits, "file_id")
 }
 
 #' Parse info into appropriate types.
@@ -36,8 +35,12 @@ clean_did_info  <- function(.did, masspec = NULL, std_names = paste0("ETH-", 1:4
 #' @param id1 The column with sample and standard names.
 #' @export
 #' @family metadata cleaning functions
-parse_info <- function(.did, masspec = NA_character_, std_names = paste0("ETH-", 1:4), oth_name = "other",
-                       broadid_name = broadid, id1 = `Identifier 1`) {
+parse_info <- function(.did,
+                       masspec = NA_character_,
+                       std_names = paste0("ETH-", 1:4),
+                       oth_name = "other",
+                       broadid_name = broadid,
+                       id1 = `Identifier 1`) {
   # global variables and defaults
   broadid <- `Identifier 1` <- NULL
 
@@ -54,20 +57,24 @@ parse_info <- function(.did, masspec = NA_character_, std_names = paste0("ETH-",
 
 #' Get initial intensities of specified mass
 #'
-#' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
+#' @param .data The raw data, resulting from [isoreader::iso_get_raw_data()].
 #'
 #' @family metadata cleaning functions
 #' @return A tibble with columns file_id, s44_init, and r44_init
 #' @export
 get_inits <- function(.did) {
+  # what to do if .did is an empty dataframe?
+  if (is.data.frame(.did) && nrow(.did) == 0L) {
+    return(
+      tibble(file_id = character())#, #Analysis = character(),
+             ## s44_init = double(), r44_init = double())
+    )
+  }
+
   .did %>%
-    isoreader::iso_get_raw_data(quiet = TRUE) %>%
     # filter first standard and first sample cycles
     filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
-    pivot_wider(id_cols = .data$file_id, names_from = .data$type, values_from = .data$v44.mV) %>%
-    select(.data$file_id, s44_init = .data$sample, r44_init = .data$standard) %>%
+    pivot_wider(id_cols = c(.data$file_id, .data$Analysis), names_from = .data$type, values_from = .data$v44.mV) %>%
+    select(.data$file_id, .data$Analysis, s44_init = .data$sample, r44_init = .data$standard) %>%
     tibble::as_tibble()
 }
-
-# import from isororeader for use in my parsing function
-ensure_data_frame_list_columns <- utils::getFromNamespace("ensure_data_frame_list_columns", "isoreader")

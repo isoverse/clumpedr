@@ -4,9 +4,16 @@
 \alias{find_bad_cycles}
 \title{Find bad cycles based on several criteria.}
 \usage{
-find_bad_cycles(.data, min = 1500, max = 50000, fac = 1.5,
-  v44 = v44.mV, cycle = cycle, relative_to = "init",
-  quiet = default(quiet))
+find_bad_cycles(
+  .data,
+  min,
+  max,
+  fac,
+  v44 = v44.mV,
+  cycle = cycle,
+  relative_to = relative_to,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -27,19 +34,14 @@ one specified in \code{relative_to}.}
 cycle ("init", default) or to the previous cycle ("prev").}
 }
 \description{
-This filters out any cycles that:
-\itemize{
-\item have an initial intensity of mass 44 that is lower than \code{min}.
-\item have an initial intensity of mass 44 that is larger than \code{max}.
-\item has a sudden drop in intensity of mass 44
-}
+This function tries to identify cycles in which the pressure has dropped
+fast. It first disables all the cycles above or below certain thresholds
+(\code{min}, \code{max}), and then calculates whether the next cycle has dropped by
+more than \code{fac} times either the initial (\verb{relative to = "init"}, default)
+or the previous (\code{relative_to = "prev"}) cycle.
 }
 \details{
 The drop in intensity can be defined relative to the first change
 in intensity (default), or to the previous cycle.
-}
-\seealso{
-Other cycle functions: \code{\link{disable_cycles}},
-  \code{\link{plot_disabled_cycles}}
 }
 \concept{cycle functions}

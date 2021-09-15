@@ -4,8 +4,14 @@
 \alias{temperature_calculation}
 \title{Calculate the temperatures}
 \usage{
-temperature_calculation(.data, D47 = D47_final, temp = temperature,
-  quiet = default(quiet))
+temperature_calculation(
+  .data,
+  D47 = D47_final,
+  temp = temperature,
+  slope = 0.0449,
+  intercept = 0.167,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}

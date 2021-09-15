@@ -4,8 +4,13 @@
 \alias{acid_fractionation}
 \title{Add acid fractionation}
 \usage{
-acid_fractionation(.data, aff = 0.062, D47 = D47_etf,
-  D47_out = D47_final, quiet = default(quiet))
+acid_fractionation(
+  .data,
+  aff = 0.062,
+  D47 = D47_etf,
+  D47_out = D47_final,
+  quiet = default(quiet)
+)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}

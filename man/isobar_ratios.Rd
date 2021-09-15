@@ -4,11 +4,23 @@
 \alias{isobar_ratios}
 \title{Compute isotopic ratios}
 \usage{
-isobar_ratios(.data, R13 = R13, R18 = R18, R45 = R45, R46 = R46,
-  R47 = R47, R48 = R48, R49 = R49,
-  R17_PDBCO2 = default(R17_PDBCO2), R18_PDBCO2 = default(R18_PDBCO2),
-  lambda = default(lambda), D17O = default(D17O), D47 = default(D47),
-  D48 = default(D48), D49 = default(D49))
+isobar_ratios(
+  .data,
+  R13 = R13,
+  R18 = R18,
+  R45 = R45,
+  R46 = R46,
+  R47 = R47,
+  R48 = R48,
+  R49 = R49,
+  R17_PDBCO2 = default(R17_PDBCO2),
+  R18_PDBCO2 = default(R18_PDBCO2),
+  lambda = default(lambda),
+  D17O = default(D17O),
+  D47 = default(D47),
+  D48 = default(D48),
+  D49 = default(D49)
+)
 }
 \arguments{
 \item{.data}{A tibble with columns R13 and R18.}
@@ -36,7 +48,9 @@ from Baertschi, 1976, calculated by Brand 2010 eq. 2.}
 \item{lambda}{Isotopic fractionation of \eqn{^{17}}{17}O. Defaults to 0.528,
 from Barkan and Luz, 2005.}
 
-\item{D17O}{TODO: look up in Daëron 2016 what this does again.}
+\item{D17O}{The difference between the expected \eqn{\delta^{17}}{\u03b417}O
+(\eqn{\delta^{18}}{\u03b418}O\eqn{-\lambda*\delta^{18}}{- lambda *\u03b418}O)
+and the actual \eqn{\delta^{17}}{\u03b417}O value.}
 
 \item{D47}{TODO: look up}
 
