@@ -41,6 +41,7 @@ tempcal <- function(Tc,
   } else {
     # if confidence, return a fancy tibble with means, lower bounds and
     # upper bounds.
+    warning("This error gives worse-case estimates that ignore covariance between slope and intercept!")
     D47 <- tibble(
       Tc = Tc,
       D47 = map_dbl(Tc, cal, slp = slope, int = intercept),
@@ -96,6 +97,7 @@ revcal <- function(D47,
   if (ignorecnf) {
     return(cal(D47, slope, intercept))
   } else {
+    warning("This error gives worse-case estimates that ignore covariance between slope and intercept!")
     Tc <- D47 %>%
       cal(slp = slope, int = intercept) %>% # convert to temperature
       tempcal(
