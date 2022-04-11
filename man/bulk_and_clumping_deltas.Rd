@@ -61,5 +61,5 @@ Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
 Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
   measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
-\url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
+\doi{10.1016/j.chemgeo.2016.08.014}
 }

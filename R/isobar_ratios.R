@@ -19,7 +19,7 @@
 #' @references Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
 #'   measurements, _Chemical Geology_ **2016**, _442_, 83–96.
-#'   \url{http://dx.doi.org/10.1016/j.chemgeo.2016.08.014}
+#'   \doi{10.1016/j.chemgeo.2016.08.014}
 isobar_ratios <- function(.data,
                           # input columns
                           R13 = R13, R18 = R18,

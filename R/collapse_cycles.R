@@ -16,7 +16,7 @@ collapse_cycles <- function(.data,
                             id = c(file_id),
                             outlier = outlier_cycle,
                             funs = NULL,
-                            alpha = 0.05,
+                           alpha = 0.05,
                             na.rm = TRUE,
                             quiet = default(quiet)) {
   outlier_cycle <- NULL

@@ -36,3 +36,5 @@ inst/other/
 inst/doc
 # allow everything in documentation
 !docs/*
+/doc/
+/Meta/

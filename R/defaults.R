@@ -39,7 +39,7 @@
 #'   \eqn{^{17}}{17}O interference in \eqn{\delta^{13}}{δ13}C measurements when
 #'   analyzing CO\eqn{_{2}}{2} with stable isotope mass spectrometry (IUPAC
 #'   Technical Report). _Pure and Applied Chemistry_, **2010**, _82(8)_,
-#'   1719–1733. \url{https://doi.org/10.1351/PAC-REP-09-01-05}
+#'   1719–1733. \doi{10.1351/PAC-REP-09-01-05}
 #'
 #' @keywords internal
 #' @name default.params

@@ -60,6 +60,6 @@ Brand, W. A., Assonov, S. S., & Coplen, T. B. Correction for the
 \eqn{^{17}}{17}O interference in \eqn{\delta^{13}}{δ13}C measurements when
 analyzing CO\eqn{_{2}}{2} with stable isotope mass spectrometry (IUPAC
 Technical Report). \emph{Pure and Applied Chemistry}, \strong{2010}, \emph{82(8)},
-1719–1733. \url{https://doi.org/10.1351/PAC-REP-09-01-05}
+1719–1733. \doi{10.1351/PAC-REP-09-01-05}
 }
 \keyword{internal}
