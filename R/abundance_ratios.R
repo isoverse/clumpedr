@@ -32,7 +32,7 @@ abundance_ratios <- function(.data,
   if (!quiet)
     message("Info: calculating abundance ratios R[i] = i / 44")
 
-  .data %>%
+  .data |>
     mutate({{ R45 }} := {{ i45 }} / {{ i44 }},
            {{ R46 }} := {{ i46 }} / {{ i44 }},
            {{ R47 }} := {{ i47 }} / {{ i44 }},

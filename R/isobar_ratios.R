@@ -35,7 +35,7 @@ isobar_ratios <- function(.data,
                           D47 = default(D47),
                           D48 = default(D48),
                           D49 = default(D49)) {
-  .data %>%
+  .data |>
     mutate(
       # Compute R17
       R17 = R17_PDBCO2 * exp(D17O / 1000) * ({{ R18 }} / R18_PDBCO2) ^ lambda,

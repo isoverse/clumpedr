@@ -15,9 +15,9 @@ correct_backgrounds  <- function(.data, factor,
   v47.mV <- v54.mV <- NULL
 
   if (!quiet)
-    glue("Info: adding background based on half-mass with factor {factor}") %>%
+    glue("Info: adding background based on half-mass with factor {factor}") |>
       message()
 
-  .data %>%
+  .data |>
     mutate({{ i47 }} := {{ i47 }} - (factor * {{ i54 }}))
 }

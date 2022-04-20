@@ -27,5 +27,5 @@ add_info <- function(.data, .info, cols, quiet = default(quiet)) {
 
   if (!quiet)
     message("Info: appending measurement information.")
-    left_join(x = .data, y = .info %>% select(tidyselect::all_of(cols)), by = c("Analysis", "file_id"))
+    left_join(x = .data, y = .info |> select(tidyselect::all_of(cols)), by = c("Analysis", "file_id"))
 }

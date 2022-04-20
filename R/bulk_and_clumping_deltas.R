@@ -44,13 +44,13 @@ bulk_and_clumping_deltas  <- function(.data,
     # d13C and d18O with nice UTF-8 glyphs
     message("Info: calculating \u03b4\u00b9\u00b3C, \u03b4\u00b9\u2078O, and \u0394's.")
 
-  out <- .data %>%
+  out <- .data |>
     # scramble the working gas
     mutate(R13_wg  = R13_PDB * (1 + .data$d13C_PDB_wg / 1000),
-           R18_wg  = R18_PDBCO2 * (1 + .data$d18O_PDBCO2_wg / 1000)) %>%
+           R18_wg  = R18_PDBCO2 * (1 + .data$d18O_PDBCO2_wg / 1000)) |>
     isobar_ratios(R13 = R13_wg, R18 = R18_wg,
                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
-                  R48 = R48_wg, R49 = R49_wg) %>%
+                  R48 = R48_wg, R49 = R49_wg) |>
     # compute analyte isobar ratios
     mutate(R45 = (1 + {{ d45 }} / 1000) * .data$R45_wg,
            R46 = (1 + {{ d46 }} / 1000) * .data$R46_wg,
@@ -79,11 +79,11 @@ bulk_and_clumping_deltas  <- function(.data,
            R17 = .data$K * .data$R18^lambda,
            R13 = .data$R45 - 2 * .data$R17,
 
-           d13C_PDB = 1000 * (.data$R13 / R13_PDB - 1)) %>%
+           d13C_PDB = 1000 * (.data$R13 / R13_PDB - 1)) |>
   # Compute stochastic isobar ratios of the analyte
   isobar_ratios(R45 = R45_stoch, R46 = R46_stoch,
                 R47 = R47_stoch, R48 = R48_stoch,
-                R49 = R49_stoch) %>%
+                R49 = R49_stoch) |>
   mutate(
     # Check that R45/R45stoch and R46/R46stoch are indistinguishable from 1,
     R45_flag = (.data$R45 / .data$R45_stoch - 1),
@@ -104,17 +104,17 @@ bulk_and_clumping_deltas  <- function(.data,
   ## # TODO: append warning to specific value!
   ## if (any(out$R45_flag > 2e-8, na.rm = TRUE)) {
   ##   warning("Some R45 / R45_stoch - 1 are large! \n",
-  ##           out %>%
-  ##             filter(R45_flag) %>%
+  ##           out |>
+  ##             filter(R45_flag) |>
   ##             mutate(wrong = 1e6 * (R45 / R45_stoch - 1)))
   ## }
   ## if (any(out$R45_flag > 2e-8, na.rm = TRUE)) {
   ##   warning("Some R46 / R46_stoch - 1 are large! \n",
-  ##           out %>%
-  ##             filter(R46_flag) %>%
+  ##           out |>
+  ##             filter(R46_flag) |>
   ##             mutate(wrong = 1e6 * (R46 / R46_stoch - 1)))
   ## }
 
-  out %>%
+  out |>
     as_tibble()
 }

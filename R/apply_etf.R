@@ -20,9 +20,9 @@ apply_etf <- function(.data, intercept = intercept, slope = slope, raw = D47_raw
   D47_raw <- D47_etf <- NULL
 
   if (!quiet)
-    glue("Info: Applying ETF to {quo_name(enquo(raw))} using \u03b1 = {quo_name(enquo(slope))} and \u03b2 = {quo_name(enquo(intercept))}.") %>%
+    glue("Info: Applying ETF to {quo_name(enquo(raw))} using \u03b1 = {quo_name(enquo(slope))} and \u03b2 = {quo_name(enquo(intercept))}.") |>
       message()
 
-  .data %>%
+  .data |>
     mutate({{ out }} := - ({{ intercept }} / {{ slope }}) + (1 / {{ slope }}) * {{ raw }})
 }

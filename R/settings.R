@@ -42,7 +42,7 @@ default <- function(name) {
 #' Essentially the same function as in isoreader except with the isoprocessor. prefix
 set_default <- function(name, value, overwrite = TRUE) {
   if (overwrite || !str_c("clumpedr.", name) %in% names(options()))
-    options(list(value) %>% setNames(str_c("clumpedr.", name)))
+    options(list(value) |> setNames(str_c("clumpedr.", name)))
   return(invisible(value))
 }
 
@@ -60,7 +60,7 @@ get_temp <- function(name, allow_null = TRUE) {
 #' @param value value of the temporary option
 #' @export
 set_temp <- function(name, value) {
-  options(list(value) %>% setNames(str_c("clumpedr_temp.", name)))
+  options(list(value) |> setNames(str_c("clumpedr_temp.", name)))
   return(invisible(value))
 }
 
@@ -85,8 +85,8 @@ get_all_options <- function(with_temp = FALSE) {
 #' @export
 clumpedr_get_default_parameters <- function() {
   c("quiet", "genplot", "R13_PDB", "R18_PDB", "R17_PDBCO2", "R18_PDBCO2",
-    "lambda", "D47", "D48", "D49", "D18O") %>%
-    sapply(function(x) list(default(!!x))) %>%
+    "lambda", "D47", "D48", "D49", "D18O") |>
+    sapply(function(x) list(default(!!x))) |>
     {
       data_frame(parameter = names(.),
                  value = as.character(unlist(.)))

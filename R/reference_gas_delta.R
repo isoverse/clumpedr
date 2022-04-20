@@ -25,21 +25,21 @@ append_ref_deltas <- function(.data, .did = NULL,
 
   if (is.null(d13C_PDB_wg) & is.null(d18O_PDBCO2_wg) & !is.null(.did)) {
     if (!quiet) {
-      glue("Info: appending reference gas \u03b4 values from {length(.did)} data file(s)") %>%
+      glue("Info: appending reference gas \u03b4 values from {length(.did)} data file(s)") |>
         message()
     }
     if (!"file_id" %in% colnames(.data)) {
       stop(".data must contain the column 'file_id'.", call. = FALSE)
     } else {
-      out <- .data %>%
+      out <- .data |>
         left_join(get_ref_delta(.did), "file_id")
     }
   } else {
     if (!quiet) {
-      glue("Info: appending reference gas \u03b4 values: \u03b413C = {d13C_PDB_wg} and \u03b418O = {d18O_PDBCO2_wg}.") %>%
+      glue("Info: appending reference gas \u03b4 values: \u03b413C = {d13C_PDB_wg} and \u03b418O = {d18O_PDBCO2_wg}.") |>
         message()
     }
-    out <- .data %>%
+    out <- .data |>
       mutate(d13C_PDB_wg = d13C_PDB_wg,
              d18O_PDBCO2_wg = d18O_PDBCO2_wg)
   }
@@ -58,10 +58,10 @@ get_ref_delta <- function(.did) {
     return(invisible(.did))
   }
 
-  isoreader::iso_get_standards(.did, quiet = TRUE) %>%
-    filter(delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
-    distinct(file_id, delta_name, .keep_all = TRUE) %>%
-    pivot_wider(id_cols = .data$file_id, names_from = .data$delta_name, values_from = .data$delta_value) %>%
-    select(.data$file_id, d13C_PDB_wg = .data$`d 13C/12C`, d18O_PDBCO2_wg = .data$`d 18O/16O`) %>%
+  isoreader::iso_get_standards(.did, quiet = TRUE) |>
+    filter(delta_name %in% c("d 13C/12C", "d 18O/16O")) |>
+    distinct(file_id, delta_name, .keep_all = TRUE) |>
+    pivot_wider(id_cols = .data$file_id, names_from = .data$delta_name, values_from = .data$delta_value) |>
+    select(.data$file_id, d13C_PDB_wg = .data$`d 13C/12C`, d18O_PDBCO2_wg = .data$`d 18O/16O`) |>
     as_tibble()
 }

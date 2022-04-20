@@ -46,7 +46,7 @@ append_expected_values <- function(.data,
   }
 
   if (!quiet)
-    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(unique(std_names), sep = ' ', last = ' and ', width = 30)}") %>%
+    glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(unique(std_names), sep = ' ', last = ' and ', width = 30)}") |>
       message()
 
   expected_standard_values <- tibble({{ by }} := std_names,
@@ -54,6 +54,6 @@ append_expected_values <- function(.data,
 
   by_quo_name <- quo_name(enquo(by))
 
-  .data %>%
+  .data |>
     left_join(expected_standard_values, by = by_quo_name)
 }
