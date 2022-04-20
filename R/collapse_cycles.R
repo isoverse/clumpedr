@@ -36,16 +36,16 @@ collapse_cycles <- function(.data,
 
   # this creates a nice summary for one of the samples
   summarize_mean <- function(.data) {
-    .data |>
-      filter({{ outlier }} %in% FALSE) |>
-      select({{ cols }}) |>
+    .data %>%
+      filter({{ outlier }} %in% FALSE) %>%
+      select({{ cols }}) %>%
       summarise_all(.funs = funs)
   }
 
-  .data |>
+  .data %>%
     # TODO: add an id argument so that I can select multiple columns that aren't nested (i.e. )
-    nest(cycle_data = -{{ id }}) |>
-    bind_cols(map_dfr(.$cycle_data, summarize_mean)) |>
+    nest(cycle_data = -{{ id }}) %>%
+    bind_cols(map_dfr(.$cycle_data, summarize_mean)) %>%
     as_tibble()
 }
 
@@ -128,6 +128,6 @@ nest_cycle_data <- function(.data,
   if (!all(cols %in% colnames(.data)))
     stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(.data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
 
-  .data |>
+  .data %>%
     nest(cycle_data = one_of(cols))
 }

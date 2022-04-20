@@ -38,16 +38,16 @@ empirical_transfer_function <- function(.data,
   D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
 
   if (!quiet)
-    glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") |>
+    glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") %>%
       message()
 
-  .data |>
+  .data %>%
     append_expected_values(std_names = std_names, std_values = std_values,
-                           exp = {{ exp }}, by = {{ id1 }}, quiet = TRUE) |>
+                           exp = {{ exp }}, by = {{ id1 }}, quiet = TRUE) %>%
     calculate_etf(raw = {{ raw }}, exp = {{ exp }}, session = {{ session }},
                   etf = {{ etf }}, etf_coefs = {{ etf_coefs }},
                   slope = {{ slope }}, intercept = {{ intercept }},
-                  parallel = parallel, quiet = TRUE) |>
+                  parallel = parallel, quiet = TRUE) %>%
     apply_etf(intercept = {{ intercept }}, slope = {{ slope }},
               raw = {{ raw }}, out = {{ out }}, quiet = TRUE)
 }

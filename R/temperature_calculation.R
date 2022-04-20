@@ -17,6 +17,6 @@ temperature_calculation <- function(.data, D47 = D47_final, temp = temperature,
 
   if (!quiet)
     message(glue::glue("Info: calculating temperature with slope {distinct(.data, {{slope}})} and intercept {distinct(.data, {{intercept}})}, ignoring uncertainty in the calibration."))
-  .data |>
+  .data %>%
     mutate({{ temp }} := revcal({{ D47 }}, slope = {{slope}}, intercept = {{intercept}}, ignorecnf = TRUE))
 }

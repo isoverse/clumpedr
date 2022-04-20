@@ -29,7 +29,7 @@ remove_outliers <- function(.data,
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- NULL
 
-  out <- .data |>
+  out <- .data %>%
     find_outliers(init_low, init_high, init_diff, param49_off, internal_sd,
                             n_min,
                             n_id1,
@@ -43,7 +43,7 @@ remove_outliers <- function(.data,
   }
 
   if (!quiet)
-    glue("Info: found {nrow(filter(out, outlier | is.na(outlier)) |> select(file_id) |> distinct())} outliers out of {out |> select(file_id) |> distinct() |> nrow()} measurements.") |>
+    glue("Info: found {nrow(filter(out, outlier | is.na(outlier)) %>% select(file_id) %>% distinct())} outliers out of {out %>% select(file_id) %>% distinct() %>% nrow()} measurements.") %>%
       message()
   out
 }

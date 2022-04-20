@@ -20,17 +20,17 @@
 # #'   ggplot2::ggplot(.data, aes(x = x, y = y)) +
 # #'   ggplot2::geom_point(...)
 # #' }
-# #' .data |>
+# #' .data %>%
 # #'   pointplot()
 # #'   # .dataa not returned
 # #' # calling the function within the pipe now prints it and returns the input!
-# #' .data |>
-# #'   pipe_plot(pointplot) |>
+# #' .data %>%
+# #'   pipe_plot(pointplot) %>%
 # #'   glimpse()
 #' @export
 pipe_plot <- function(.data, plotfun, ...) {
-    .data |>
-        plotfun(...) |>
+    .data %>%
+        plotfun(...) %>%
         print()
     .data
 }

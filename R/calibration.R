@@ -97,13 +97,13 @@ revcal <- function(D47,
     return(cal(D47, slope, intercept))
   } else {
     warning("This error gives worse-case estimates that ignore covariance between slope and intercept!")
-    Tc <- D47 |>
-      cal(slp = slope, int = intercept) |> # convert to temperature
+    Tc <- D47 %>%
+      cal(slp = slope, int = intercept) %>% # convert to temperature
       tempcal(
         slope = slope, intercept = intercept,
         slpcnf = slpcnf, intcnf = intcnf
-      ) |> # convert to D47 with errors
-      mutate(lwr = lwr |> cal(), upr = upr |> cal()) # convert errors to T
+      ) %>% # convert to D47 with errors
+      mutate(lwr = lwr %>% cal(), upr = upr %>% cal()) # convert errors to T
     return(Tc)
   }
 }

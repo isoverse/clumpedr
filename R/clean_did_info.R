@@ -23,8 +23,8 @@ clean_did_info  <- function(.did, masspec = NULL,
 
   inits <- get_inits(.did)
 
-  .did |>
-    parse_info(masspec = masspec, std_names = std_names, oth_name = oth_name) |>
+  .did %>%
+    parse_info(masspec = masspec, std_names = std_names, oth_name = oth_name) %>%
     isoreader::iso_add_file_info(inits, "file_id")
 }
 
@@ -56,10 +56,10 @@ parse_info <- function(.did,
     return(invisible(.did))
   }
 
-  .did |>
+  .did %>%
     isoreader::iso_parse_file_info(double = c(.data$Background, .data$`Weight [mg]`),
                         integer = c(.data$Row, .data$Line, .data$Sample, .data$Analysis, .data$Preparation),
-                        logical = c(.data$`Peak Center`, .data$Pressadjust, .data$`Reference Refill`), quiet = TRUE) |>
+                        logical = c(.data$`Peak Center`, .data$Pressadjust, .data$`Reference Refill`), quiet = TRUE) %>%
     isoreader::iso_mutate_file_info(
       # append new column infos
       masspec = masspec,
@@ -83,10 +83,10 @@ get_inits <- function(.did) {
     )
   }
 
-  .did |>
+  .did %>%
     # filter first standard and first sample cycles
-    filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) |>
-    pivot_wider(id_cols = c(.data$file_id, .data$Analysis), names_from = .data$type, values_from = .data$v44.mV) |>
-    select(.data$file_id, .data$Analysis, s44_init = .data$sample, r44_init = .data$standard) |>
+    filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
+    pivot_wider(id_cols = c(.data$file_id, .data$Analysis), names_from = .data$type, values_from = .data$v44.mV) %>%
+    select(.data$file_id, .data$Analysis, s44_init = .data$sample, r44_init = .data$standard) %>%
     tibble::as_tibble()
 }

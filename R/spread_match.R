@@ -14,9 +14,9 @@ spread_match <- function(.data, method = "normal", masses = c(44:49, 54), quiet 
     return(tibble(file_id = character()))
   }
 
-  .data |>
+  .data %>%
     # TODO: add duplicate check here?
-    spread_intensities(our_cols = our_cols, quiet = quiet) |>
+    spread_intensities(our_cols = our_cols, quiet = quiet) %>%
     match_intensities(method = method, masses = masses, quiet = quiet)
 }
 
@@ -51,25 +51,25 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL,
     our_cols <- c("v44.mV", "v45.mV", "v46.mV", "v47.mV", "v48.mV", "v49.mV", "v54.mV")
   }
 
-  out <- .data |>
-    group_by(.data$file_id, .data$Analysis) |>
+  out <- .data %>%
+    group_by(.data$file_id, .data$Analysis) %>%
     # first lengthen it so that each row is one mass / unit / intensity
     pivot_longer(cols = our_cols,
                  names_to = c("mass", "unit"),
-                 names_pattern = names_pattern) |>
+                 names_pattern = names_pattern) %>%
     # then widen it so that sample and ref gas are next to each other for each cycle
     pivot_wider(id_cols = c("file_id", "cycle", "Analysis"),
                 names_from = c(.data$type, .data$mass),
-                values_from = .data$value) |>
+                values_from = .data$value) %>%
     # clean up names
-    purrr::set_names(~ str_replace_all(., "standard_", "r") |>
-                       str_replace_all("sample_", "s")) |>
+    purrr::set_names(~ str_replace_all(., "standard_", "r") %>%
+                       str_replace_all("sample_", "s")) %>%
     ungroup(file_id)
   # NOTE: this is neat, but gets rid of all the extra info in cycle_dis etc.
 
   # so we add cycle_dis info back
-  cycle_dis_dfr <- .data |>
-    select(-one_of(our_cols)) |>
+  cycle_dis_dfr <- .data %>%
+    select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = ids,
                 names_from = .data$type,
                 ## NOTE: these are now hardcoded here, and are strictly related
@@ -81,11 +81,11 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL,
                                 .data$cycle_drop_num,
                                 .data$outlier_cycle_drop,
                                 .data$cycle_has_drop,
-                                .data$outlier_cycle)) |>
-    purrr::set_names( ~ str_replace_all(., "^(.*)_standard", "\\1_r44") |>
+                                .data$outlier_cycle)) %>%
+    purrr::set_names( ~ str_replace_all(., "^(.*)_standard", "\\1_r44") %>%
                         str_replace_all("^(.*)_sample", "\\1_s44"))
 
-  left_join(out, cycle_dis_dfr, by = ids) |>
+  left_join(out, cycle_dis_dfr, by = ids) %>%
     as_tibble()
 }
 
@@ -112,24 +112,24 @@ match_intensities <- function(.data, method = "normal", masses = c(44:49, 54), q
     stop("Method '", method, "' should be either 'normal' or 'linterp'")
 
   if (!quiet)
-    glue("Info: matching working gas intensities to sample gas, using method {method}") |>
+    glue("Info: matching working gas intensities to sample gas, using method {method}") %>%
       message()
 
-  .data |>
+  .data %>%
     when(
       method == "normal" ~
-        (.) |>
+        (.) %>%
         # reference gas cycles bracket sample cycles
         mutate_at(vars(one_of(str_subset(our_cols, "^r"))),
                   list(~ (. + lag(.)) / 2)),
         # mutate(target_cycle_44 = cycle + .5),
       method == "linterp" ~
-        (.) |>
+        (.) %>%
         # find matching intensity of mass 44 reference to sample gas
-        mutate(target_cycle_44 = approx(x = .data$r44, y = .data$cycle, xout = .data$s44)$y) |>
+        mutate(target_cycle_44 = approx(x = .data$r44, y = .data$cycle, xout = .data$s44)$y) %>%
         mutate_at(vars(one_of(str_subset(our_cols, "^r"))),
-                  list(~ approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y))) |>
-    filter(cycle != 0) |> # cycle 0 of the ref gas is no longer needed
+                  list(~ approx(x = .data$cycle, y = ., xout =.data$target_cycle_44)$y))) %>%
+    filter(cycle != 0) %>% # cycle 0 of the ref gas is no longer needed
     # create the summary outlier column
     mutate(cycle_has_drop = cycle_has_drop_s44 | cycle_has_drop_r44,
            outlier_cycle = outlier_cycle_s44 | outlier_cycle_r44)
