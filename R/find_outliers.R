@@ -16,7 +16,7 @@
 #' @param n_min Minimum number of aliquots within session to calculate threshold.
 #' @param n_id1 Minimum number of aliquots within session to calculate threshold within group.
 #' @param nsd_off Number of standard deviations away from the mean threshold.
-#' @param D47 The column with \eqn{\Delta_{47}}{Δ47} values.
+#' @param D47 The column with \eqn{\Delta_{47}} values.
 #' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
@@ -210,6 +210,10 @@ summarise_outlier <- function(.data, out_column = outlier, quiet = default(quiet
     mutate({{out_column}} := rowSums(select(., starts_with("outlier_")), na.rm = TRUE) > 0)
 }
 
+##' Summarize the outlier columns.
+##'
+##' Calculate whether a sample is an outlier or not based on all the existing \code{"outlier_"} columns.
+##'
 ##' @inheritParams summarise_outlier
 ##' @export
 summarize_outlier <- summarise_outlier

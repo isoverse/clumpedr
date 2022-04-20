@@ -43,7 +43,7 @@ remove_outliers(
 \item{nsd_off}{The number of standard deviations away from the median
 Preparation of the standards.}
 
-\item{D47}{The column with \eqn{\Delta_47}{Δ47} values. Defaults to \code{D47_raw_mean}.}
+\item{D47}{The column with \eqn{\Delta_47} values. Defaults to \code{D47_raw_mean}.}
 
 \item{session}{Column name that defines correction session.}
 
@@ -58,6 +58,6 @@ Remove outliers
 This function removes outliers based on several criteria. 1) The
 initial intensity of both sample and reference gas is above 8 V. 2) The
 difference in intensity between sample and reference gas is less than 1.2
-V. 3) The sample or reference raw \eqn{\Delta_47}{Δ47} value is less than
+V. 3) The sample or reference raw \eqn{\Delta_47} value is less than
 4 SD away from the preparation mean.
 }

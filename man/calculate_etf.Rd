@@ -20,9 +20,9 @@ calculate_etf(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
-\item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
+\item{raw}{Column name of raw \eqn{\Delta_{47}} values.}
 
-\item{exp}{Column name of expected \eqn{\Delta_{47}}{Δ47} values.}
+\item{exp}{Column name of expected \eqn{\Delta_{47}} values.}
 
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}

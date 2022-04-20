@@ -22,7 +22,7 @@ temperature_calculation(
 }
 \description{
 This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from
-\eqn{\Delta_{47}}{Δ47} values. At the moment it ignores the uncertainty in
+\eqn{\Delta_{47}} values. At the moment it ignores the uncertainty in
 the regression.
 }
 \seealso{

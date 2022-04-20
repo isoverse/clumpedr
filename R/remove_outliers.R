@@ -3,14 +3,14 @@
 #' @details This function removes outliers based on several criteria. 1) The
 #'   initial intensity of both sample and reference gas is above 8 V. 2) The
 #'   difference in intensity between sample and reference gas is less than 1.2
-#'   V. 3) The sample or reference raw \eqn{\Delta_47}{Δ47} value is less than
+#'   V. 3) The sample or reference raw \eqn{\Delta_47} value is less than
 #'   4 SD away from the preparation mean.
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [collapse_cycles()].
 #' @param nsd_off The number of standard deviations away from the median
 #'   Preparation of the standards.
-#' @param D47 The column with \eqn{\Delta_47}{Δ47} values. Defaults to `D47_raw_mean`.
+#' @param D47 The column with \eqn{\Delta_47} values. Defaults to `D47_raw_mean`.
 #' @param plot_x The column to use for plotting the x axis.
 #' @inheritParams find_outliers
 #' @export

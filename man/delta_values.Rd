@@ -2,7 +2,7 @@
 % Please edit documentation in R/delta_values.R
 \name{delta_values}
 \alias{delta_values}
-\title{Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values}
+\title{Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C, \eqn{\delta}'s, and raw \eqn{\Delta} values}
 \usage{
 delta_values(.data, quiet = default(quiet))
 }
@@ -11,7 +11,7 @@ delta_values(.data, quiet = default(quiet))
 \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
 }
 \description{
-Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
+Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C, \eqn{\delta}'s, and raw \eqn{\Delta} values
 }
 \details{
 This function is a wrapper for the \code{\link[=abundance_ratios]{abundance_ratios()}},

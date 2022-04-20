@@ -14,7 +14,7 @@ tempcal(
 )
 }
 \arguments{
-\item{Tc}{The temperature in °C.}
+\item{Tc}{The temperature in \eqn{^{\circ}}C.}
 
 \item{slope}{The slope of the regression.}
 
@@ -29,7 +29,7 @@ calibration.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with input Tc and estimated
-\eqn{\Delta_47}{Δ47} value with lower and upper bounds.
+\eqn{\Delta_47} value with lower and upper bounds.
 }
 \description{
 A clumped isotope temperature calibration of the form:
@@ -37,14 +37,14 @@ A clumped isotope temperature calibration of the form:
 }
 \details{
 Defaults to Bonifacie et al. 2017
-\deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167 ± 0.01)}
+\deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 }
 \references{
 M. Bonifacie, D. Calmels, J. M. Eiler, J. Horita, C. Chaduteau,
 C. Vasconcelos, P. Agrinier, A. Katz, B. H. Passey, J. M. Ferry, J.
 Bourrand. Calibration of the dolomite clumped isotope thermometer from 25
-to 350 °C, and implications for a universal calibration for all (Ca, Mg,
-Fe)CO\eqn{{}_3}{3} carbonates. \strong{2017}, \emph{200}, 255--279.
+to 350 \eqn{^\circ}C, and implications for a universal calibration for all (Ca, Mg,
+Fe)CO\eqn{{}_3} carbonates. \strong{2017}, \emph{200}, 255--279.
 }
 \seealso{
 revcal

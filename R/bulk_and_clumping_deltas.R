@@ -1,12 +1,12 @@
-#' Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
-#' \eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values
+#' Compute \eqn{\delta^{13}}C, \eqn{\delta^{18}}O \eqn{\Delta_{47}},
+#' \eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values
 #'
-#' Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
-#' \eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
+#' Requires a dataframe with little \eqn{\delta} values, and working gas
+#' \eqn{\delta^{13}}C and \eqn{\delta^{18}}O values.
 #'
 #' @param .data A [tibble][tibble::tibble-package] containing delta values 45 through 49.
-# # ' @param d13C_PDB_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C value.
-# #' @param d18O_PDBCO2_wg Column name of reference gas \eqn{\delta^{13}}{δ13}C gas value.
+# # ' @param d13C_PDB_wg Column name of reference gas \eqn{\delta^{13}}C value.
+# #' @param d18O_PDBCO2_wg Column name of reference gas \eqn{\delta^{13}}C gas value.
 #' @param d45 Column name of d45.
 #' @param d46 Column name of d46.
 #' @param d47 Column name of d47.
@@ -14,9 +14,9 @@
 #' @param d49 Column name of d49.
 #' @inheritParams isobar_ratios
 #' @inheritParams default.params
-#' @references Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
-#'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
-#'   measurements, _Chemical Geology_ **2016**, _442_, 83–96.
+#' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+#'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
+#'   measurements, _Chemical Geology_ **2016**, _442_, 83--96.
 #'   \doi{10.1016/j.chemgeo.2016.08.014}
 #' @export
 bulk_and_clumping_deltas  <- function(.data,

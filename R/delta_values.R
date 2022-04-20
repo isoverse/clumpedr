@@ -1,4 +1,4 @@
-#' Calculate abundance ratios, \eqn{\delta^{18}}{δ18}O, \eqn{\delta^{13}}{δ13}C, \eqn{\delta}{δ}'s, and raw \eqn{\Delta}{Δ} values
+#' Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C, \eqn{\delta}'s, and raw \eqn{\Delta} values
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [correct_backgrounds()].

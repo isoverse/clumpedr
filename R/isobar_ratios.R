@@ -1,9 +1,9 @@
 #' Compute isotopic ratios
 #'
 #' Compute isotopic ratios for a sample with isotopic ratios R13 and R18,
-#' optionally accounting for non-zero values of \eqn{\Delta^{17}}{Δ17}O and
+#' optionally accounting for non-zero values of \eqn{\Delta^{17}}O and
 #' clumped isotope anomalies (all expressed in permil). Function based on
-#' Daëron et al., 2016.
+#' Daeron et al., 2016.
 #'
 #' @param .data A tibble with columns R13 and R18.
 # TODO: figure out how to also inherit references from default.params
@@ -16,9 +16,9 @@
 #' @param R49 The output column name for R49.
 #' @inheritParams default.params
 #'
-#' @references Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
-#'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
-#'   measurements, _Chemical Geology_ **2016**, _442_, 83–96.
+#' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+#'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
+#'   measurements, _Chemical Geology_ **2016**, _442_, 83--96.
 #'   \doi{10.1016/j.chemgeo.2016.08.014}
 isobar_ratios <- function(.data,
                           # input columns

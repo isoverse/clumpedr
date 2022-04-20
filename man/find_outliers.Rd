@@ -39,7 +39,7 @@ find_outliers(
 
 \item{nsd_off}{Number of standard deviations away from the mean threshold.}
 
-\item{D47}{The column with \eqn{\Delta_{47}}{Δ47} values.}
+\item{D47}{The column with \eqn{\Delta_{47}} values.}
 
 \item{session}{Column name that defines correction session.}
 

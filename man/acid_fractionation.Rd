@@ -15,9 +15,9 @@ acid_fractionation(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
-\item{aff}{Temperature-dependent acid fractionation projection from 70 °C to
-25 °C. Defaults to 0.062, which is the average of the values obtained by
-De Vlieze et al., 2015 and Murray et al., 2016. See Müller et al., 2017.}
+\item{aff}{Temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to
+25 \eqn{^\circ}C. Defaults to 0.062, which is the average of the values obtained by
+De Vlieze et al., 2015 and Murray et al., 2016. See Muller et al., 2017.}
 
 \item{D47}{The column name of the \eqn{\Delta_47} values to use for the acid
 fractionation calculation.}
@@ -25,7 +25,7 @@ fractionation calculation.}
 \item{D47_out}{The desired new column name.}
 }
 \description{
-The temperature-dependent acid fractionation projection from 70 °C to 25 °C.
+The temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to 25 \eqn{^\circ}C.
 It subtracts the \code{aff} from the \code{D47}-value.
 }
 \references{
@@ -37,7 +37,7 @@ S. T. Murray, M. M. Arienzo, P. K. Swart. Determining the \eqn{\Delta_{47}}
 acid fractionation in dolomites. \emph{Geochem. Cosmochim. Acta} \strong{2016}, \emph{174},
 42.
 
-I. A. Müller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
+I. A. Muller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
 S. M. Bernasconi. Carbonate clumped isotope analyses with the
 long-integration dual-inlet (LIDI) workflow: scratching at the lower sample
 weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},

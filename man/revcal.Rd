@@ -14,7 +14,7 @@ revcal(
 )
 }
 \arguments{
-\item{D47}{The \eqn{\Delta_{47}}{Δ47} value.}
+\item{D47}{The \eqn{\Delta_{47}} value.}
 
 \item{slope}{The slope of the regression.}
 
@@ -28,7 +28,7 @@ revcal(
 calibration.}
 }
 \value{
-A tibble with input \eqn{\Delta_{47}}{Δ47} and estimated Tc value
+A tibble with input \eqn{\Delta_{47}} and estimated Tc value
 with lower and upper bounds.
 }
 \description{
@@ -40,8 +40,7 @@ is expressed as a function of \eqn{T_C}:
 }
 \details{
 Defaults to Bonifacie et al. 2017 \deqn{\Delta_47 = (0.0449 \pm 0.001 \times
-10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167
-± 0.01)}
+10^6) / T^2 + (0.167 \pm 0.01)}
 }
 \seealso{
 tempcal

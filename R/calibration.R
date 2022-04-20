@@ -4,9 +4,9 @@
 #' \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b}
 #'
 #' Defaults to Bonifacie et al. 2017
-#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167 ± 0.01)}
+#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
-#' @param Tc The temperature in °C.
+#' @param Tc The temperature in \eqn{^{\circ}}C.
 #' @param slope The slope of the regression.
 #' @param intercept The intercept of the regression.
 #' @param slpcnf The confidence of the slope of the regression.
@@ -14,14 +14,14 @@
 #' @param ignorecnf Whether or not to ignore the confidence of the temperature
 #'   calibration.
 #' @return A [tibble][tibble::tibble-package] with input Tc and estimated
-#'   \eqn{\Delta_47}{Δ47} value with lower and upper bounds.
+#'   \eqn{\Delta_47} value with lower and upper bounds.
 #' @seealso revcal
 #' @export
 #' @references M. Bonifacie, D. Calmels, J. M. Eiler, J. Horita, C. Chaduteau,
 #'   C. Vasconcelos, P. Agrinier, A. Katz, B. H. Passey, J. M. Ferry, J.
 #'   Bourrand. Calibration of the dolomite clumped isotope thermometer from 25
-#'   to 350 °C, and implications for a universal calibration for all (Ca, Mg,
-#'   Fe)CO\eqn{{}_3}{3} carbonates. **2017**, _200_, 255--279.
+#'   to 350 \eqn{^\circ}C, and implications for a universal calibration for all (Ca, Mg,
+#'   Fe)CO\eqn{{}_3} carbonates. **2017**, _200_, 255--279.
 tempcal <- function(Tc,
                     slope = 0.0449, intercept = 0.167,
                     slpcnf = 0.001, intcnf = 0.01,
@@ -29,7 +29,7 @@ tempcal <- function(Tc,
   # global variables and defaults
   lwr <- upr <- D47 <- NULL
 
-  kkelvin <- 273.15 # 0 °C
+  kkelvin <- 273.15
   if (!is.numeric(Tc)) stop("Tc has to be a numeric")
   # the calibration for one input temperature
   cal <- function(Tc = Tc, slp = slope, int = intercept) {
@@ -61,12 +61,11 @@ tempcal <- function(Tc,
 #' \deqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
 #'
 #' Defaults to Bonifacie et al. 2017 \deqn{\Delta_47 = (0.0449 \pm 0.001 \times
-#' 10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167
-#' ± 0.01)}
+#' 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
-#' @param D47 The \eqn{\Delta_{47}}{Δ47} value.
+#' @param D47 The \eqn{\Delta_{47}} value.
 #' @inheritParams tempcal
-#' @return A tibble with input \eqn{\Delta_{47}}{Δ47} and estimated Tc value
+#' @return A tibble with input \eqn{\Delta_{47}} and estimated Tc value
 #'   with lower and upper bounds.
 #' @seealso tempcal
 #' @export
@@ -77,7 +76,7 @@ revcal <- function(D47,
   # global variables and defaults
   lwr <- upr <- NULL
 
-  kkelvin <- 273.15 # 0 °C
+  kkelvin <- 273.15
 
   if (!is.numeric(D47)) stop("D47 has to be a numeric")
 

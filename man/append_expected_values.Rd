@@ -18,8 +18,8 @@ append_expected_values(
 
 \item{std_names}{Names of the standards.}
 
-\item{std_values}{Expected values of the standards. Defaults to Müller et
-al., 2017 at 70 °C acid digestion.}
+\item{std_values}{Expected values of the standards. Defaults to Muller et
+al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 
 \item{exp}{Name of the new column that will hold expected values.}
 
@@ -31,15 +31,15 @@ ETH-1--ETH-3, subtracting the acid fractionation factor before-hand.
 }
 \references{
 W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature
-effects of phosphoric acid fractionation on \eqn{\Delta_{47}}{Δ47} analysis
+effects of phosphoric acid fractionation on \eqn{\Delta_{47}} analysis
 and implications for discrepant calibrations. \emph{Chem. Geol.} \strong{2016}, \emph{396},
 51.
 
 S. T. Murray, M. M. Arienzo, P. K. Swart. Determining the
-\eqn{\Delta_{47}}{Δ47} acid fractionation in dolomites. \emph{Geochem. Cosmochim.
+\eqn{\Delta_{47}} acid fractionation in dolomites. \emph{Geochem. Cosmochim.
 Acta} \strong{2016}, \emph{174}, 42.
 
-I. A. Müller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
+I. A. Muller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
 S. M. Bernasconi. Carbonate clumped isotope analyses with the
 long-integration dual-inlet (LIDI) workflow: scratching at the lower sample
 weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},

@@ -41,7 +41,7 @@ pipe_plot <- function(.data, plotfun, ...) {
 #' \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b}
 #'
 #' Defaults to Bonifacie et al. 2017
-#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}{Δ47 = (0.0499 ± 0.001 * 10^6) / T^2 + (0.167 ± 0.01)}
+#' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
 #'
 #' @param slope The slope of the calibration.
 #' @param intercept The intercept of the calibration.

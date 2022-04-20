@@ -15,6 +15,12 @@ clean_did_info  <- function(.did, masspec = NULL,
     message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
   }
 
+  if (!requireNamespace("isoreader", quietly = TRUE)) {
+    stop("'isoreader' is required to clean_did_info, please run:\n   remotes::install_github('isoverse/isoreader')",
+         call. = FALSE)
+    return(invisible(.did))
+  }
+
   inits <- get_inits(.did)
 
   .did %>%
@@ -43,6 +49,12 @@ parse_info <- function(.did,
                        id1 = `Identifier 1`) {
   # global variables and defaults
   broadid <- `Identifier 1` <- NULL
+
+  if (!requireNamespace("isoreader", quietly = TRUE)) {
+    stop("'isoreader' is required to parse_info, please run:\n   remotes::install_github('isoverse/isoreader')",
+         call. = FALSE)
+    return(invisible(.did))
+  }
 
   .did %>%
     isoreader::iso_parse_file_info(double = c(.data$Background, .data$`Weight [mg]`),

@@ -1,19 +1,28 @@
 # Taken from isoreader/isoprocessor
 # https://github.com/isoverse/isoprocessor/R/settings.R
-#' @export
-isoreader::iso_turn_info_messages_on
+# #' @export
+## isoreader::iso_turn_info_messages_on
 
-#' @export
-isoreader::iso_turn_info_messages_off
+# #' @export
+## isoreader::iso_turn_info_messages_off
 
-# retrieve package settings, internal function, not exported
-# first checks if the setting exists in the isoreader space, then in the isoprocessor
-# @note: consider providing an option that indicates whether to return the expression or a default value
-# e.g. default(x) that returns expr(x) if x is not set vs. default(x, NULL) that returns expr(NULL) if x is not set
-# @CONSIDER: alternatively set ALL available parameters in the initialize_options and force parameters to exist
+#' retrieve package settings
+#'
+#' first checks if the setting exists in the isoreader space, then in the isoprocessor
+#'
+#' Consider providing an option that indicates whether to return the expression or a default value
+#' e.g. default(x) that returns expr(x) if x is not set vs. default(x, NULL) that returns expr(NULL) if x is not set
+#' alternatively set ALL available parameters in the initialize_options and force parameters to exist
 default <- function(name) {
   name_exp <- rlang::enexpr(name)
+
+  if (!requireNamespace("isoreader", quietly = TRUE)) {
+    stop("'isoreader' is required to `default`, please run:\n   remotes::install_github('isoverse/isoreader')",
+         call. = FALSE)
+  }
+
   value <- isoreader:::default(!!name_exp, allow_null = TRUE)
+
   if (is.null(value)) { # not in isoreader settings
     name <- if (rlang::is_symbol(name_exp)) rlang::as_name(name_exp) else name_exp
     value <- getOption(str_c("clumpedr.", name))
@@ -28,8 +37,9 @@ default <- function(name) {
   return(value)
 }
 
-# set package setting, internal function, not exported
-# @note essetially same function as in isoreader except with the isoprocessor. prefix
+#' set package setting
+#'
+#' Essentially the same function as in isoreader except with the isoprocessor. prefix
 set_default <- function(name, value, overwrite = TRUE) {
   if (overwrite || !str_c("clumpedr.", name) %in% names(options()))
     options(list(value) %>% setNames(str_c("clumpedr.", name)))

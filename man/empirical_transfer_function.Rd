@@ -27,10 +27,10 @@ empirical_transfer_function(
 
 \item{std_names}{Names of the standards.}
 
-\item{std_values}{Expected values of the standards. Defaults to Müller et
-al., 2017 at 70 °C acid digestion.}
+\item{std_values}{Expected values of the standards. Defaults to Muller et
+al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 
-\item{raw}{Column name of raw \eqn{\Delta_{47}}{Δ47} values.}
+\item{raw}{Column name of raw \eqn{\Delta_{47}} values.}
 
 \item{exp}{Name of the new column that will hold expected values.}
 

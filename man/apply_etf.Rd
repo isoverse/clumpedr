@@ -26,13 +26,13 @@ apply_etf(
 }
 \description{
 Uses the previously calculated intercept and slope, and uses them to
-calculate the \eqn{\Delta_{47}}{Δ47} values.
+calculate the \eqn{\Delta_{47}} values.
 }
 \details{
 Note that the intercept and slope were calculated with the
 dependent and independent variables in the other direction, so we flip
 them here. i.e.: \deqn{\Delta_{47etf} = - (\alpha / \beta) + (1 / \beta)
-  \times \Delta_{47_raw}}{Δ47[etf] = - (α / β) + (1 / β) * Δ[47_raw]}
+  \times \Delta_{47_raw}}
 }
 \seealso{
 Other empirical transfer functions: 

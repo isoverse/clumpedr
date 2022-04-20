@@ -1,7 +1,7 @@
 #' Calculate the temperatures
 #'
 #' This uses the [revcal()] function to calculate temperatures from
-#' \eqn{\Delta_{47}}{Δ47} values. At the moment it ignores the uncertainty in
+#' \eqn{\Delta_{47}} values. At the moment it ignores the uncertainty in
 #' the regression.
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from [acid_fractionation()].

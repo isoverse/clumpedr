@@ -2,8 +2,8 @@
 #'
 #' @param .data A [tibble][tibble::tibble-package] to append the delta values to.
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
-#' @param d13C_PDB_wg \eqn{\delta^{13}C}{δ13C} reference gas value to overwrite.
-#' @param d18O_PDBCO2_wg \eqn{\delta^{18}O}{δ18O} reference gas value to overwrite.
+#' @param d13C_PDB_wg \eqn{\delta^{13}C} reference gas value to overwrite.
+#' @param d18O_PDBCO2_wg \eqn{\delta^{18}O} reference gas value to overwrite.
 #' @export
 append_ref_deltas <- function(.data, .did = NULL,
                               d13C_PDB_wg = NULL,
@@ -52,6 +52,12 @@ append_ref_deltas <- function(.data, .did = NULL,
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @export
 get_ref_delta <- function(.did) {
+  if (!requireNamespace("isoreader", quietly = TRUE)) {
+    stop("'isoreader' is required to get_ref_delta, please run:\n   remotes::install_github('isoverse/isoreader')",
+         call. = FALSE)
+    return(invisible(.did))
+  }
+
   isoreader::iso_get_standards(.did, quiet = TRUE) %>%
     filter(delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
     distinct(file_id, delta_name, .keep_all = TRUE) %>%

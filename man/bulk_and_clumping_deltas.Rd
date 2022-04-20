@@ -2,8 +2,8 @@
 % Please edit documentation in R/bulk_and_clumping_deltas.R
 \name{bulk_and_clumping_deltas}
 \alias{bulk_and_clumping_deltas}
-\title{Compute \eqn{\delta^{13}}{δ13}C, \eqn{\delta^{18}}{δ18}O \eqn{\Delta_{47}}{Δ47},
-\eqn{\Delta_{48}}{Δ48}, and \eqn{\Delta_{49}}{Δ49} values}
+\title{Compute \eqn{\delta^{13}}C, \eqn{\delta^{18}}O \eqn{\Delta_{47}},
+\eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values}
 \usage{
 bulk_and_clumping_deltas(
   .data,
@@ -54,12 +54,12 @@ from Barkan and Luz, 2005.}
 and the actual \eqn{\delta^{17}}{\u03b417}O value.}
 }
 \description{
-Requires a dataframe with little \eqn{\delta}{δ} values, and working gas
-\eqn{\delta^{13}}{δ13}C and \eqn{\delta^{18}}{δ18}O values.
+Requires a dataframe with little \eqn{\delta} values, and working gas
+\eqn{\delta^{13}}C and \eqn{\delta^{18}}O values.
 }
 \references{
-Daëron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
-isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}{Δ47}
-  measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83–96.
+Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
+isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
+measurements, \emph{Chemical Geology} \strong{2016}, \emph{442}, 83--96.
 \doi{10.1016/j.chemgeo.2016.08.014}
 }

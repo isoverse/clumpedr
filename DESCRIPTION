@@ -13,15 +13,13 @@ Description: Data processing in clumped isotopes is an involved, evolving field.
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
-Depends:
-    R (>= 2.10),
-    isoreader (>= 1.0.9)
+Depends: R (>= 2.10)
 License: GPL-3 + file LICENSE
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
-    isoreader (>= 1.0.9),
     tidyr (>= 0.8.3.9000),
+    tidyselect,
     magrittr,
     rlang (>= 0.4.0.9000),
     readr,
@@ -29,14 +27,15 @@ Imports:
     dplyr,
     ggplot2,
     purrr,
+    broom,
     stringr,
     tibble
 Suggests:
     testthat (>= 2.1.0),
-    broom,
     plotly,
     ggridges,
     naniar,
     tictoc,
     knitr,
-    future
+    future,
+    isoreader

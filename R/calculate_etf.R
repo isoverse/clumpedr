@@ -1,8 +1,8 @@
 #' Calculate the Empirical Transfer Function
 #'
 #' @param .data A [tibble][tibble::tibble-package].
-#' @param raw Column name of raw \eqn{\Delta_{47}}{Δ47} values.
-#' @param exp Column name of expected \eqn{\Delta_{47}}{Δ47} values.
+#' @param raw Column name of raw \eqn{\Delta_{47}} values.
+#' @param exp Column name of expected \eqn{\Delta_{47}} values.
 #' @param session The column name to group analyses by. Defaults to
 #'   `Preparation`.
 #' @param etf The column name of the new model.
@@ -17,7 +17,7 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
                           intercept = intercept, parallel = FALSE, quiet = default(quiet)) {
   # global variables and defaults
   if (parallel & !requireNamespace("furrr", quietly = TRUE)) {
-    stop("Package \"furrr\" is needed for this function to work. Please install it or run this with `parallel = FALSE`",
+    stop("Package \"furrr\" is needed for this function to work.\n Please install it or run this with `parallel = FALSE`",
       call. = FALSE)
   }
 
