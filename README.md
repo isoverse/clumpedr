@@ -1,10 +1,13 @@
 # clumpedr
 
+<!-- badges: start -->
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/isoprocessor)](https://cran.r-project.org/package=clumpedr)
 [![Build
 Status](https://travis-ci.org/isoverse/clumpedr.svg?branch=master)](https://travis-ci.org/isoverse/clumpedr)
 [![AppVeyor Build
 Status](https://ci.appveyor.com/api/projects/status/github/KopfLab/clumpedr?branch=master&svg=true)](https://ci.appveyor.com/project/KopfLab/clumpedr)
+[![R-CMD-check](https://github.com/isoverse/clumpedr/workflows/R-CMD-check/badge.svg)](https://github.com/isoverse/clumpedr/actions)
+<!-- badges: end -->
 
 Clumpedr aims to facilitate analysis of clumped isotope data. It builds on [isoreader](https://github.com/isoverse/isoreader) which is used to import raw data files from the mass spectrometer, and most of the important data processing parts are based on Huntington et al. 2009 and Daëron et al. 2016.
 

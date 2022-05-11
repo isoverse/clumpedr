@@ -38,3 +38,5 @@ inst/doc
 !docs/*
 /doc/
 /Meta/
+.Rdata
+.DS_Store
