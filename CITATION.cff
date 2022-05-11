@@ -1,0 +1,19 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'clumpedr: clumped isotope processing in R'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Ilja Japhir
+    family-names: Kocken
+    email: i.j.kocken@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0003-2196-8718'
+  - given-names: Sebastian
+    family-names: Kopf
+    affiliation: CU Boulder
+    orcid: 'https://orcid.org/0000-0002-2044-0201'
