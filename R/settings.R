@@ -6,34 +6,17 @@
 # #' @export
 ## isoreader::iso_turn_info_messages_off
 
-#' retrieve package settings
-#'
-#' first checks if the setting exists in the isoreader space, then in the isoprocessor
-#'
-#' Consider providing an option that indicates whether to return the expression or a default value
-#' e.g. default(x) that returns expr(x) if x is not set vs. default(x, NULL) that returns expr(NULL) if x is not set
-#' alternatively set ALL available parameters in the initialize_options and force parameters to exist
-default <- function(name) {
+# retrieve package settings
+default <- function(name, allow_null = FALSE) {
   name_exp <- rlang::enexpr(name)
-
-  if (!requireNamespace("isoreader", quietly = TRUE)) {
-    stop("'isoreader' is required to `default`, please run:\n   remotes::install_github('isoverse/isoreader')",
-         call. = FALSE)
-  }
-
-  value <- isoreader:::default(!!name_exp, allow_null = TRUE)
-
-  if (is.null(value)) { # not in isoreader settings
-    name <- if (rlang::is_symbol(name_exp)) rlang::as_name(name_exp) else name_exp
-    value <- getOption(str_c("clumpedr.", name))
-  }
-  if (is.null(value)) { # not in normal isoprocessor settings
-    func_params <- get_process_parameters()
-    if (name %in% names(func_params))
-      value <- func_params[[name]]
-    else
-      value <- name_exp
-  }
+  if (rlang::is_symbol(name_exp))
+    name <- rlang::as_name(name_exp)
+  else if (is.character(name_exp))
+    name <- name_exp
+  else
+    stop("don't know how to process setting expression '", rlang::as_label(name_exp), "'", call. = FALSE)
+  value <- getOption(str_c("clumpedr.", name))
+  if (!allow_null && is.null(value)) stop("clumpedr setting '", name, "' does not exist", call. = FALSE)
   return(value)
 }
 
