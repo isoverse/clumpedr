@@ -51,7 +51,7 @@ dids <- iso_read_dual_inlet(glue("{folderstr}/253pluskiel/Raw Data/Kiel Raw Data
                             parallel = TRUE)
 ```
 
-It's nice to save a cache/backup as an R data structure file, which we can read
+It is nice to save a cache/backup as an R data structure file, which we can read
 in much faster.
 
 ```{r, eval = FALSE}
@@ -67,7 +67,7 @@ than the raw data.
 dids  <- iso_read_dual_inlet("out/dids.di.rds")
 ```
 
-I've made some standard data available here so as to run the tests, or a single
+I have made some standard data available here so as to run the tests, or a single
 did file for an ETH-3 standard.
 
 See their documentation with the following code:
@@ -78,7 +78,7 @@ See their documentation with the following code:
 
 # process the data!
 
-We save the file info separately, since we'll have to refer to it for some plots.
+We save the file info separately, since we will have to refer to it for some plots.
 
 ```{r}
 stdinfo <- iso_get_file_info(standards)
@@ -89,7 +89,7 @@ using `isoreader::iso_mutate_file_info()`.
 
 ## run the processing step-by-step
 
-Note that normally, it's faster and smarter not to save the output of every
+Note that normally, it is faster and smarter not to save the output of every
 step as a separate tibble, but in this case we do it so that we can easily
 inspect the results along the way. See the end of the vignette for the single
 pipe.
@@ -122,9 +122,7 @@ rawd <- filt |>
 
 ### disable failed cycles
 
-This disables any cycles that have a sudden drop in pressure/intensity. With
-the `genplot = TRUE` option, we tell it to create a default ggplot to inspect
-which cycles have been disabled.
+This disables any cycles that have a sudden drop in pressure/intensity.
 
 ```{r}
 disc <- rawd |>
@@ -220,8 +218,8 @@ dlts <- refd |>
 
 ```{r}
 coll <- dlts |>
-  clumpedr:::collapse_cycles(cols = c(d13C_PDB, d18O_PDB, D47_raw)) # this is an older function which we will likely deprecate in the future in favour of:
-  # nest_cycle_data()
+  clumpedr:::collapse_cycles(cols = c(d13C_PDB, d18O_PDB, D47_raw), id = c(file_id, Analysis)) # this is an older function which we will likely deprecate in the future in favour of:
+  ## nest_cycle_data()
 ```
 
 ### append metadata
@@ -286,7 +284,7 @@ temp |>
   geom_text(aes(x = `Identifier 1`, y = y, label = n), data = summ, inherit.aes = FALSE)
 ```
 
-If you don't understand any of the steps, look at the function documentation
+If you do not understand any of the steps, look at the function documentation
 (e.g.: `?empirical_transfer_function`) or look at the source code (type the
 function name without parentheses into the command line).
 
@@ -303,8 +301,8 @@ standards |>
   iso_filter_files(grepl("Clumped.*met", Method)) |>
   iso_get_raw_data(include_file_info = "Analysis") |>
   mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
-  find_bad_cycles(min = dis_min, max = dis_max,
-                  fac = dis_fac, relative_to = "init") |>
+  find_bad_cycles(min = "dis_min", max = "dis_max",
+                  fac = "dis_fac", relative_to = "init") |>
   correct_backgrounds(0.82) |>
   spread_match(method = "normal") |>
   append_ref_deltas(standards) |>
@@ -340,10 +338,11 @@ ones---interactively using `ggplotly`:
 plotly::toWebGL(plotly::ggplotly(dynamicTicks = TRUE))
 ```
 
-This creates an interactive version of the last plot in your browser. The
-`plot_base()` function assigns a lot of redundant aesthetics to the ggplot
-object. They won't show in regular plots, but when you create an interactive
-version and you hover over a datapoint, all of the metadata is displayed.
+This creates an interactive version of the last plot in your browser.
+
+You can also assign extra aesthetics that you do not directly see to your plot,
+for example `aes(ID = file_id, no = Analysis)` and this information will show
+up when you hover a point.
 
 Note that we use the `toWebGL` wrapper to make it run smoother for plots with
 many points.
