@@ -22,36 +22,35 @@
 #' @export
 #' @family cycle functions
 find_bad_cycles <- function(.data, min, max, fac,
-                            v44 = v44.mV, cycle = cycle,
-                            relative_to = relative_to,
+                            v44 = "v44.mV", cycle = cycle,
+                            relative_to = "init",
                             quiet = default(quiet)) {
-  # global variables and defaults
-  v44.mV <- NULL
-
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
 
   # check parameter relative_to
-  ## if (!relative_to %in% c("init", "prev"))
-  ##   stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
+  if (!relative_to %in% c("init", "prev")) {
+    stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
+  }
 
   out <- .data %>%
     # so that diffs are only calculated within one column of sample gas/ref gas
-    group_by(.data$file_id, .data$type) %>%
-    mutate(outlier_cycle_low = {{ v44 }} <= {{min}},
-           outlier_cycle_high = {{ v44 }} >= {{max}},
-           cycle_diff = lead({{ v44 }}, default = Inf) - {{ v44 }}) %>%
+    group_by(.data$file_id## , .data$type # I think this should be done per acquisition, not per ref gas/sample gas
+             ) %>%
+    mutate(outlier_cycle_low = .data[[v44]] <= .data[[min]],
+           outlier_cycle_high = .data[[v44]] >= .data[[max]],
+           cycle_diff = lead(.data[[v44]], default = Inf) - .data[[v44]]) %>%
     # TODO: rewrite so that relative_to can be a column in original dataframe
     # probably stop using when?
     when({{relative_to}} == "init" ~
            mutate((.),
-                  first_diff_fac = {{fac}} *
+                  first_diff_fac = .data[[fac]] *
                     first(.data$cycle_diff[!(.data$outlier_cycle_low | .data$outlier_cycle_high)]),
                   cycle_drop = .data$cycle_diff < first_diff_fac),
          # cycle drop is currently NA if the whole  sample was  too low.
          {{relative_to}} == "prev" ~
-           mutate((.), cycle_drop = .data$cycle_diff < {{fac}} * lead(.data$cycle_diff))
+           mutate((.), cycle_drop = .data$cycle_diff < .data[[fac]] * lead(.data$cycle_diff))
          ) %>%
     # does the measurement have a pressure drop? (works within group)
     mutate(cycle_has_drop = any(.data$outlier_cycle_low | .data$outlier_cycle_high | .data$cycle_drop, na.rm = TRUE),

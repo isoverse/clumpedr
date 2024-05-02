@@ -9,9 +9,9 @@ find_bad_cycles(
   min,
   max,
   fac,
-  v44 = v44.mV,
+  v44 = "v44.mV",
   cycle = cycle,
-  relative_to = relative_to,
+  relative_to = "init",
   quiet = default(quiet)
 )
 }

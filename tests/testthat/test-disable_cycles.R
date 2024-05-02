@@ -17,9 +17,23 @@ cyc_dat <- tibble::tribble( ~ file_id, ~ type, ~ cycle, ~ v44,
                    "hi", "smp", 4, 30000,
                    "hi", "smp", 5, 29600,
                    "hi", "smp", 6, 29400,
-                   # hey has a high intensity and a simple drop on smp
-                   "hey", "std", 0, 50000,
-                   "hey", "std", 1, 50000,
+                   # hu has a starting intensity that's maxed out
+                   "hu", "std", 0, 50000,
+                   "hu", "std", 1, 50000,
+                   "hu", "std", 2, 50000,
+                   "hu", "std", 3, 30000,
+                   "hu", "std", 4, 29500,
+                   "hu", "std", 5, 29400,
+                   "hu", "std", 6, 29200,
+                   "hu", "smp", 1, 49100,
+                   "hu", "smp", 2, 39600,
+                   "hu", "smp", 3, 31100,
+                   "hu", "smp", 4, 30000,
+                   "hu", "smp", 5, 29600,
+                   "hu", "smp", 6, 29400,
+                   # hey has a a simple drop on smp
+                   "hey", "std", 0, 40000,
+                   "hey", "std", 1, 39000,
                    "hey", "std", 2, 35000,
                    "hey", "std", 3, 32000,
                    "hey", "std", 4, 31000,
@@ -33,6 +47,7 @@ cyc_dat <- tibble::tribble( ~ file_id, ~ type, ~ cycle, ~ v44,
                    "hey", "smp", 6, 10,
                    # ha has a low cutoff, because the sample intensity was too
                    # high and it couldn't match the ref intensity
+                   # TODO: this should be detected by find_init_outliers?
                    "ha", "std", 0, 5000,
                    "ha", "std", 1, 3500,
                    "ha", "std", 2, 2800,
@@ -62,42 +77,37 @@ cyc_dat <- tibble::tribble( ~ file_id, ~ type, ~ cycle, ~ v44,
                    "ho", "smp", 6, 20000,
 )
 
-cyc_dat %>%
-  ggplot(aes(x = cycle, y = v44, colour = type)) +
-  geom_line(aes(group = paste(file_id, type))) +
-  geom_label(aes(label = file_id)) +
-  facet_grid(rows = vars(type))
-find_bad_cycles(cyc_dat, min = 1500, max = 50000, fac = 1.5, v44 = v44) %>%
-  plot_disabled_cycles(y = v44) +
-  geom_label(aes(label = file_id))
-# TODO: rewrite above to desired outcome tibble
-
 test_that("find_bad_cycles works", {
-  bad_cyc <- find_bad_cycles(isoreader::iso_get_raw_data(standards))
-   # is it a tibble?
+  bad_cyc <- #isoreader::iso_get_raw_data(standards) |>
+    cyc_dat %>%
+    mutate(file_id = factor(file_id, levels = unique(cyc_dat$file_id))) |>
+    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+    find_bad_cycles(v44 = "v44", min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init")
+
+  # quick plot for debugging
+  bad_cyc |>
+    ggplot(aes(x = cycle, y = v44, colour = type)) +
+    facet_grid(rows = vars(file_id)) +
+    geom_line() + geom_point(aes(shape = cycle_drop), size = 5)
+
+  # is it a tibble?
   expect_is(bad_cyc, "tbl_df")
-  # do all the new column names exist?
-  ## expect_true("v44_low" %in% colnames(bad_cyc))
-  ## expect_true("v44_high" %in% colnames(bad_cyc))
-  ## expect_true("v44_diff" %in% colnames(bad_cyc))
-  ## expect_true("v44_drop" %in% colnames(bad_cyc))
-  ## expect_true("has_drop" %in% colnames(bad_cyc))
-  ## expect_true("cycle_drop" %in% colnames(bad_cyc))
-  ## expect_true("drop_before" %in% colnames(bad_cyc))
-  ## # are they of the right type?
-  ## expect_is(bad_cyc %>% pluck("v44_low"), "logical")
-  ## expect_is(bad_cyc %>% pluck("v44_high"), "logical")
-  ## expect_is(bad_cyc %>% pluck("v44_diff"), "numeric")
-  ## expect_is(bad_cyc %>% pluck("v44_drop"), "logical")
-  ## expect_is(bad_cyc %>% pluck("has_drop"), "logical")
-  ## expect_is(bad_cyc %>% pluck("drop_before"), "logical")
+  expect_equal(bad_cyc |> distinct(file_id, cycle_has_drop) |> pull(cycle_has_drop),
+               c(## "hi" =
+                 FALSE,
+                 ## "hu" =
+                 TRUE,
+                 ## "hey" =
+                 TRUE,
+                 # in the future we may also want to detect these
+                 ## "ha" =
+                 FALSE,
+                 ## "ho" =
+                 FALSE)
+            )
   # TODO: create test scenario with regular depletion curve, typical drop,
   # beefy start-slow drop, drop-recover (wobble) and make sure it detects them
   # all correctly
   ## expect_equal(bad_cyc %>%
   ##                filter(file_id == "180814_75_IAM_2_ETH-3.did", cycle == ))
-})
-
-test_that("plot_disabled_cycles works", {
-  expect_is(plot_disabled_cycles(find_bad_cycles(isoreader::iso_get_raw_data(standards))), "ggplot")
 })
