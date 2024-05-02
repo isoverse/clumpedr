@@ -1,12 +1,10 @@
-context("Spreading and Matching")
-
 test_that("spread_intensities works", {
   spread_test <- standards %>%
     isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_intensities()
   # it's a tibble
-  expect_is(spread_test, "tbl_df")
+  expect_type(spread_test, "tbl_df")
   # it has the right columns
   expect_true("r44" %in% colnames(spread_test))
   expect_true("r45" %in% colnames(spread_test))
@@ -42,15 +40,15 @@ test_that("match_intensities works", {
     spread_intensities() %>%
     match_intensities()
   # it's a tibble
-  expect_is(match_test, "tbl_df")
+  expect_type(match_test, "tbl_df")
   # it has the right columns
   expect_true("outlier_cycle" %in% colnames(match_test))
   # they are of the right type
-  expect_is(match_test %>% pluck("outlier_cycle"), "logical")
+  expect_type(match_test %>% pluck("outlier_cycle"), "logical")
 })
 
 test_that("spread_match wrapper works", {
-  expect_is(standards %>%
+  expect_type(standards %>%
               isoreader::iso_get_raw_data() %>%
               find_bad_cycles() %>%
               spread_match(), "tbl_df")

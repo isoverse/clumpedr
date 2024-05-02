@@ -1,4 +1,3 @@
-context("Finding Outliers")
 test_that("finding outliers works", {
   # TODO update these tests, work from minimal tibble so that other tests take care of the rest
   ## outliers_test <- standards %>%

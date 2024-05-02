@@ -1,4 +1,3 @@
-context("Disabled Cycles")
 library(ggplot2)
 
 # simple dataframe that represents all possibilities
@@ -91,7 +90,7 @@ test_that("find_bad_cycles works", {
     geom_line() + geom_point(aes(shape = cycle_drop), size = 5)
 
   # is it a tibble?
-  expect_is(bad_cyc, "tbl_df")
+  expect_type(bad_cyc, "tbl_df")
   expect_equal(bad_cyc |> distinct(file_id, cycle_has_drop) |> pull(cycle_has_drop),
                c(## "hi" =
                  FALSE,

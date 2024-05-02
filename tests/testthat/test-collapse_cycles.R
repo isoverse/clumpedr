@@ -1,4 +1,3 @@
-## context("Collapsing cycles")
 ## test_that("collapsing the cycles", {
 ##   collapse_test <- standards %>%
 ##     isoreader::iso_get_raw_data() %>%

@@ -1,5 +1,3 @@
-context("Temperature Equation")
-
 test_that("temperature_calculation works", {
   expect_warning(temp_test <- standards %>%
     clean_did_info("MOTU") %>%
@@ -15,6 +13,6 @@ test_that("temperature_calculation works", {
     empirical_transfer_function() %>%
     acid_fractionation() %>%
     temperature_calculation(), "NaNs produced")
-  expect_is(temp_test, "tbl_df")
+  expect_type(temp_test, "tbl_df")
   expect_true("temperature" %in% colnames(temp_test))
 })

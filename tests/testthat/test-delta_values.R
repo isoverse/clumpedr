@@ -1,5 +1,3 @@
-context("Delta Value Calculation")
-
 test_that("abundance_ratios works", {
   abundance_test <- standards %>%
     isoreader::iso_get_raw_data() %>%
@@ -7,7 +5,7 @@ test_that("abundance_ratios works", {
     spread_match() %>%
     append_ref_deltas(standards) %>%
     abundance_ratios()
-  expect_is(abundance_test, "tbl_df")
+  expect_type(abundance_test, "tbl_df")
   expect_true("R45" %in% colnames(abundance_test))
   expect_true("R46" %in% colnames(abundance_test))
   expect_true("R47" %in% colnames(abundance_test))
@@ -26,7 +24,7 @@ test_that("little_deltas works", {
                      i49 = r49, R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
                      R48 = R48_wg, R49 = R49_wg) %>%
     little_deltas()
-  expect_is(deltas_test, "tbl_df")
+  expect_type(deltas_test, "tbl_df")
   expect_true("d45" %in% colnames(deltas_test))
   expect_true("d46" %in% colnames(deltas_test))
   expect_true("d47" %in% colnames(deltas_test))
@@ -46,7 +44,7 @@ test_that("bulk_and_clumping_deltas works", {
                      R48 = R48_wg, R49 = R49_wg) %>%
     little_deltas() %>%
     bulk_and_clumping_deltas()
-  expect_is(bulk_clump_test, "tbl_df")
+  expect_type(bulk_clump_test, "tbl_df")
   expect_true("D47_raw" %in% colnames(bulk_clump_test))
   expect_true("D48_raw" %in% colnames(bulk_clump_test))
   expect_true("D49_raw" %in% colnames(bulk_clump_test))
@@ -54,7 +52,7 @@ test_that("bulk_and_clumping_deltas works", {
 })
 
 test_that("delta_values wrapper works", {
-  expect_is(standards %>%
+  expect_type(standards %>%
     isoreader::iso_get_raw_data() %>%
     find_bad_cycles() %>%
     spread_match() %>%

@@ -1,5 +1,3 @@
-context("Default Isotopic Parameters")
-
 # probably, I should just check if they're doubles/numerics?
 test_that("defaults are set correctly", {
   expect_equal(default(R13_PDB), 0.01118)
