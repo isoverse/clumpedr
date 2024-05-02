@@ -59,5 +59,5 @@ test_that("delta_values wrapper works", {
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
-    delta_values(genplot=FALSE), "tbl_df")
+    delta_values(), "tbl_df")
 })

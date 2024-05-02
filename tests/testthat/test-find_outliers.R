@@ -7,7 +7,7 @@ test_that("finding outliers works", {
   ##   find_bad_cycles() %>%
   ##   spread_match() %>%
   ##   append_ref_deltas(standards) %>%
-  ##   delta_values(genplot=FALSE) %>%
+  ##   delta_values() %>%
   ##   collapse_cycles(d18O_PDBCO2, d13C_PDB, D47_raw) %>%
   ##   add_info(iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
   ##   unnest(cycle_data) %>%

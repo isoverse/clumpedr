@@ -17,9 +17,7 @@ remove_outliers(
   D47 = D47_raw,
   session = Preparation,
   id1 = `Identifier 1`,
-  plot_x = file_datetime,
-  quiet = default(quiet),
-  genplot = default(genplot)
+  quiet = default(quiet)
 )
 }
 \arguments{
@@ -48,8 +46,6 @@ Preparation of the standards.}
 \item{session}{Column name that defines correction session.}
 
 \item{id1}{Column name of the sample/standard identifier.}
-
-\item{plot_x}{The column to use for plotting the x axis.}
 }
 \description{
 Remove outliers

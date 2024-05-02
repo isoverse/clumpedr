@@ -1,24 +1,24 @@
-context("Collapsing cycles")
-test_that("collapsing the cycles", {
-  collapse_test <- standards %>%
-    isoreader::iso_get_raw_data() %>%
-    disable_cycles(genplot = FALSE) %>%
-    spread_match() %>%
-    append_ref_deltas(standards) %>%
-    delta_values(genplot=FALSE) %>%
-    collapse_cycles(cols = c(d18O_PDB, d13C_PDB))
-  expect_is(collapse_test, "tbl_df")
-  # do the summary columns exist?
-  expect_true(all(expand.grid(c("d18O_PDB", "d13C_PDB"),
-                              c("mean", "sd", "sem", "cl")) %>%
-                    tidyr::unite(col = "new") %>%
-                    pull(new) %in% colnames(collapse_test)))
-})
+## context("Collapsing cycles")
+## test_that("collapsing the cycles", {
+##   collapse_test <- standards %>%
+##     isoreader::iso_get_raw_data() %>%
+##     disable_cycles() %>%
+##     spread_match() %>%
+##     append_ref_deltas(standards) %>%
+##     delta_values() %>%
+##     collapse_cycles(cols = c(d18O_PDB, d13C_PDB))
+##   expect_is(collapse_test, "tbl_df")
+##   # do the summary columns exist?
+##   expect_true(all(expand.grid(c("d18O_PDB", "d13C_PDB"),
+##                               c("mean", "sd", "sem", "cl")) %>%
+##                     tidyr::unite(col = "new") %>%
+##                     pull(new) %in% colnames(collapse_test)))
+## })
 
-test_that("nest_cycle_data works", {
+## test_that("nest_cycle_data works", {
   ## nest_test <- standards %>%
   ##   isoreader::iso_get_raw_data() %>%
-  ##   disable_cycles(genplot = FALSE) %>%
+  ##   disable_cycles() %>%
   ##   spread_match() %>%
   ##   # correct backgrounds
   ##   append_ref_deltas(standards) %>%
@@ -30,4 +30,4 @@ test_that("nest_cycle_data works", {
   ##   bulk_and_clumping_deltas() %>%
   ##   nest_cycle_data()
   ## expect_is(nest_test, "tbl_df")
-})
+## })

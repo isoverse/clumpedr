@@ -7,12 +7,12 @@ test_that("temperature_calculation works", {
     find_bad_cycles() %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
-    delta_values(genplot=FALSE) %>%
+    delta_values() %>%
     collapse_cycles() %>%
     add_info(isoreader::iso_get_file_info(clean_did_info(standards, "MOTU"))) %>%
     unnest(cycle_data) %>%
     find_outliers() %>%
-    empirical_transfer_function(genplot=FALSE) %>%
+    empirical_transfer_function() %>%
     acid_fractionation() %>%
     temperature_calculation(), "NaNs produced")
   expect_is(temp_test, "tbl_df")
