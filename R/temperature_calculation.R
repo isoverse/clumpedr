@@ -7,16 +7,20 @@
 #' @param .data A [tibble][tibble::tibble-package], resulting from [acid_fractionation()].
 #' @param D47 The column name of the \eqn{\Delta_47} values to use as input.
 #' @param temp The column name of the output temperature.
+#' @param slope Character(1) column name with the slope.
+#' @param intercept Character(1) column name with the intercept.
 #' @seealso revcal tempcal
 #' @export
-temperature_calculation <- function(.data, D47 = D47_final, temp = temperature,
-                                    slope = 0.0449, intercept = 0.167,
+temperature_calculation <- function(data, D47 = D47_final, temp = temperature,
+                                    slope = "slope", intercept = "intercept",
                                     quiet = default(quiet)) {
   # global variables and defaults
   D47_final <- temperature <- NULL
 
-  if (!quiet)
-    message(glue::glue("Info: calculating temperature with slope {distinct(.data, {{slope}})} and intercept {distinct(.data, {{intercept}})}, ignoring uncertainty in the calibration."))
-  .data %>%
-    mutate({{ temp }} := revcal({{ D47 }}, slope = {{slope}}, intercept = {{intercept}}, ignorecnf = TRUE))
+  if (!quiet) {
+    message(glue::glue("Info: calculating temperature with slope {unique(data[, slope])} and intercept {unique(data[, intercept])}, ignoring uncertainty in the calibration."))
+  }
+
+  data %>%
+    mutate({{ temp }} := revcal({{ D47 }}, slope = .data[[slope]], intercept = .data[[intercept]], ignorecnf = TRUE))
 }

@@ -4,10 +4,10 @@
 \alias{little_deltas}
 \title{Calculate little deltas from abundance ratios}
 \usage{
-little_deltas(.data, quiet = default(quiet))
+little_deltas(data, quiet = default(quiet))
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} with abundance ratios.}
+\item{data}{A \link[tibble:tibble-package]{tibble} with abundance ratios.}
 }
 \description{
 For all intensities \eqn{i},

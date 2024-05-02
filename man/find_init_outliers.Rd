@@ -5,7 +5,7 @@
 \title{Find measurements that have wrong initial intensities.}
 \usage{
 find_init_outliers(
-  .data,
+  data,
   init_low,
   init_high,
   init_diff,
@@ -13,13 +13,13 @@ find_init_outliers(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
-
 \item{init_low}{Column in .data with minimum initial intensity threshold for mass 44.}
 
 \item{init_high}{Column in .data with maximum initial intensity threshold for mass 44.}
 
 \item{init_diff}{Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.}
+
+\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 }
 \description{
 Finds values of \code{s44_init} and \code{r44_init} that fall outside of

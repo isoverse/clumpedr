@@ -1,6 +1,6 @@
 #' Calculate the Empirical Transfer Function
 #'
-#' @param .data A [tibble][tibble::tibble-package].
+#' @param data A [tibble][tibble::tibble-package].
 #' @param raw Column name of raw \eqn{\Delta_{47}} values.
 #' @param exp Column name of expected \eqn{\Delta_{47}} values.
 #' @param session The column name to group analyses by. Defaults to
@@ -11,7 +11,7 @@
 #' @param intercept The column name of the new intercept.
 #' @param parallel Whether or not (default) to process this in parallel, using package `furrr`.
 #' @importFrom stats na.exclude
-calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
+calculate_etf <- function(data, raw = D47_raw_mean, exp = expected_D47,
                           session = Preparation, etf = etf,
                           etf_coefs = etf_coefs, slope = slope,
                           intercept = intercept, parallel = FALSE, quiet = default(quiet)) {
@@ -38,21 +38,21 @@ calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
       message()
 
   if (parallel) {
-    out <- .data %>%
+    out <- data %>%
       nest(session_nested = -{{ session }}) %>%
       mutate({{ etf }} := furrr::future_map(session_nested, pos_lm),
       {{ etf_coefs }} := furrr::future_map({{ etf }}, "coefficients"),
       {{ intercept }} := furrr::future_map_dbl({{ etf_coefs }}, 1),
       {{ slope }} := furrr::future_map_dbl({{ etf_coefs }}, 2)) %>%
-      unnest(cols = .data$session_nested)
+      unnest(cols = "session_nested")
   } else {
-    out <- .data %>%
+    out <- data %>%
       nest(session_nested = -{{ session }}) %>%
       mutate({{ etf }} := map(session_nested, pos_lm),
       {{ etf_coefs }} := map({{ etf }}, "coefficients"),
       {{ intercept }} := pos_map_dbl({{ etf_coefs }}, 1),
       {{ slope }} := pos_map_dbl({{ etf_coefs }}, 2)) %>%
-      unnest(cols = .data$session_nested)
+      unnest(cols = "session_nested")
   }
 
   out

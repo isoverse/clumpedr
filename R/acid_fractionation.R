@@ -28,7 +28,7 @@
 #' 1057--1066.
 #'
 #' @export
-acid_fractionation <- function(.data, aff = 0.062, D47 = D47_etf,
+acid_fractionation <- function(data, aff = 0.062, D47 = D47_etf,
                                D47_out = D47_final,
                                quiet = default(quiet)) {
   # global variables and defaults
@@ -37,6 +37,6 @@ acid_fractionation <- function(.data, aff = 0.062, D47 = D47_etf,
   if (!quiet)
     glue("Info: adding temperature-dependent acid fractionation factor of {aff}.") %>%
       message()
-  .data %>%
+  data %>%
     mutate({{ D47_out }} := {{ D47 }} + aff)
 }

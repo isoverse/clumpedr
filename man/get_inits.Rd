@@ -4,7 +4,7 @@
 \alias{get_inits}
 \title{Get initial intensities of specified mass}
 \usage{
-get_inits(.did)
+get_inits(did)
 }
 \arguments{
 \item{.data}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}

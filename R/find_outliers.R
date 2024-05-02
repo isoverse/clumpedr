@@ -21,7 +21,7 @@
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
 #' @export
-find_outliers <- function(.data,
+find_outliers <- function(data,
                           init_low = 8000, init_high = 40000, init_diff = 1200,
                           param49_off = 1,
                           internal_sd = 0.15,
@@ -35,7 +35,7 @@ find_outliers <- function(.data,
   # default quoted arguments are bad, hmkay
   D47_raw <- Preparation <- `Identifier 1` <- NULL
 
-  .data %>%
+  data %>%
     ## NOTE: cycle outliers are handled elsewhere!
     ## NOTE: init outliers should be computed once the cycles have been collapsed
     ## find_init_outliers(init_low, init_high, init_diff, quiet) %>%
@@ -67,24 +67,24 @@ find_outliers <- function(.data,
 ##' @param init_high Column in .data with maximum initial intensity threshold for mass 44.
 ##' @param init_diff Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.
 ##' @export
-find_init_outliers <- function(.data, init_low, init_high, init_diff,
+find_init_outliers <- function(data, init_low, init_high, init_diff,
                                quiet = default(quiet)) {
-  if (nrow(.data) == 0L) {
+  if (nrow(data) == 0L) {
     return(tibble(file_id = character()))
   }
 
   if (!quiet)
-    glue("Info: identifying aliquots with {glue_collapse(distinct(.data, {{init_low}}), sep = ', ', last = ' and ')} > i44_init & i44_init < {glue_collapse(distinct(.data, {{init_high}}), sep = ', ', last = ' and ')}, s44 - r44 > {glue_collapse(distinct(.data, {{init_diff}}), sep = ', ', last = ' and ')}.") %>%
+    glue("Info: identifying aliquots with {glue_collapse(distinct(data, {{init_low}}), sep = ', ', last = ' and ')} > i44_init & i44_init < {glue_collapse(distinct(data, {{init_high}}), sep = ', ', last = ' and ')}, s44 - r44 > {glue_collapse(distinct(data, {{init_diff}}), sep = ', ', last = ' and ')}.") %>%
       message()
 
-  .data %>%
+  data %>%
     mutate(outlier_s44_init_low = s44_init <= ifelse(is.na({{init_low}}), 8000, {{init_low}}),
            outlier_r44_init_low = r44_init <= ifelse(is.na({{init_low}}), 8000, {{init_low}}),
            outlier_s44_init_high = s44_init >= ifelse(is.na({{init_high}}), 40000, {{init_high}}),
            outlier_r44_init_high = r44_init >= ifelse(is.na({{init_high}}), 40000, {{init_high}}),
            outlier_i44_init_diff = abs(s44_init - r44_init) >= ifelse(is.na({{init_diff}}), 3000, {{init_diff}}),
            outlier_init = .data$outlier_s44_init_low | .data$outlier_r44_init_low |
-             .data$ outlier_s44_init_high | .data$outlier_r44_init_high |
+             .data$outlier_s44_init_high | .data$outlier_r44_init_high |
              .data$outlier_i44_init_diff)
 }
 
@@ -93,8 +93,8 @@ find_init_outliers <- function(.data, init_low, init_high, init_diff,
 ##' Find measurements with a param49 value that is greater than \code{param49_off}.
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param param49_off The absolute cutoff value for the parameter 49 value.
-find_param49_outliers <- function(.data, param49_off, quiet = default(quiet)) {
-  if (nrow(.data) == 0L) {
+find_param49_outliers <- function(data, param49_off, quiet = default(quiet)) {
+  if (nrow(data) == 0L) {
     return(tibble(file_id = character()))
   }
 
@@ -102,7 +102,7 @@ find_param49_outliers <- function(.data, param49_off, quiet = default(quiet)) {
     glue("Info: identifying rows with `param_49` >= -{param49_off} | <= {param49_off}.") %>%
       message()
 
-  .data %>%
+  data %>%
     mutate(outlier_param49 = .data$param_49 >= {{param49_off}} | .data$param_49 <= -{{param49_off}})
 }
 
@@ -115,7 +115,7 @@ find_param49_outliers <- function(.data, param49_off, quiet = default(quiet)) {
 ##' @param internal_sd The internal standard deviation cutoff value.
 ##' @param D47 The column to calculate the internal sd value for.
 ##' @export
-find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
+find_internal_sd_outlier <- function(data, internal_sd = .15, D47 = D47_raw,
                                      quiet = default(quiet)) {
   if (!quiet)
     glue("Info: identifying aliquots with internal standard deviation of {quo_name(enquo(D47))} > {internal_sd}.") %>%
@@ -123,11 +123,10 @@ find_internal_sd_outlier <- function(.data, internal_sd = .15, D47 = D47_raw,
 
   `Identifier 1` <- D47_raw <- NULL
 
-  .data %>%
-    group_by(file_id) %>%
+  data %>%
     mutate(aliquot_sd = sd({{D47}}, na.rm = TRUE),
-           outlier_internal_sd = aliquot_sd > internal_sd) %>%
-    ungroup(file_id)
+           outlier_internal_sd = aliquot_sd > internal_sd,
+           .by = file_id)
 }
 
 ##' Find session outliers.

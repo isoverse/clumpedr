@@ -31,7 +31,7 @@ Imports:
     stringr,
     tibble
 Suggests:
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     plotly,
     ggridges,
     naniar,
@@ -39,3 +39,4 @@ Suggests:
     knitr,
     future,
     isoreader
+Config/testthat/edition: 3

@@ -5,7 +5,7 @@
 \title{Add acid fractionation}
 \usage{
 acid_fractionation(
-  .data,
+  data,
   aff = 0.062,
   D47 = D47_etf,
   D47_out = D47_final,
@@ -13,8 +13,6 @@ acid_fractionation(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}.}
-
 \item{aff}{Temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to
 25 \eqn{^\circ}C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Muller et al., 2017.}
@@ -23,6 +21,8 @@ De Vlieze et al., 2015 and Murray et al., 2016. See Muller et al., 2017.}
 fractionation calculation.}
 
 \item{D47_out}{The desired new column name.}
+
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
 }
 \description{
 The temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to 25 \eqn{^\circ}C.

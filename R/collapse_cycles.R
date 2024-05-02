@@ -3,7 +3,7 @@
 #' This collapses the cycles of the raw measurements and calculates averages
 #' and standard deviations per aliquot.
 #'
-#' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
+#' @param data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
 #' @param cols Columns to calculate summaries for.
 #' @param id Index columns that will be excluded from nesting. Defaults to`file_id`.
 #' @param outlier The column containing outlier information.
@@ -11,7 +11,7 @@
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
-collapse_cycles <- function(.data,
+collapse_cycles <- function(data,
                             cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
                             id = c(file_id),
                             outlier = outlier_cycle,
@@ -35,14 +35,14 @@ collapse_cycles <- function(.data,
   }
 
   # this creates a nice summary for one of the samples
-  summarize_mean <- function(.data) {
-    .data %>%
+  summarize_mean <- function(data) {
+    data %>%
       filter({{ outlier }} %in% FALSE) %>%
       select({{ cols }}) %>%
       summarise_all(.funs = funs)
   }
 
-  .data %>%
+  data %>%
     # TODO: add an id argument so that I can select multiple columns that aren't nested (i.e. )
     nest(cycle_data = -{{ id }}) %>%
     bind_cols(map_dfr(.$cycle_data, summarize_mean)) %>%
@@ -56,7 +56,7 @@ collapse_cycles <- function(.data,
 #' The parameters are all strings with column names. They default to all the
 #' columns that have cycle information based on previous computation steps.
 #'
-#' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
+#' @param data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
 #' @param masses The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.
 #' @param ratios Ratio columns, based on masses.
 #' @param outlier_cycles Columns with outlier_cycle information.

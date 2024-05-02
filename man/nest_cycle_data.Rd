@@ -29,8 +29,6 @@ nest_cycle_data(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
-
 \item{masses}{The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.}
 
 \item{ratios}{Ratio columns, based on masses.}
@@ -60,6 +58,8 @@ nest_cycle_data(
 \item{Deltas}{Big delta values.}
 
 \item{p49}{Param 49.}
+
+\item{data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 }
 \description{
 Nest the cycle data resulting from previous computations steps.
