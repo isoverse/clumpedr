@@ -61,7 +61,7 @@ get_ref_delta <- function(.did) {
   isoreader::iso_get_standards(.did, quiet = TRUE) %>%
     filter(delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
     distinct(file_id, delta_name, .keep_all = TRUE) %>%
-    pivot_wider(id_cols = .data$file_id, names_from = .data$delta_name, values_from = .data$delta_value) %>%
+    pivot_wider(id_cols = "file_id", names_from = "delta_name", values_from = "delta_value") %>%
     select(.data$file_id, d13C_PDB_wg = .data$`d 13C/12C`, d18O_PDBCO2_wg = .data$`d 18O/16O`) %>%
     as_tibble()
 }

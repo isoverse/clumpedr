@@ -86,7 +86,7 @@ get_inits <- function(.did) {
   .did %>%
     # filter first standard and first sample cycles
     filter(.data$type == "standard" & .data$cycle == 0 | .data$type == "sample" & .data$cycle == 1) %>%
-    pivot_wider(id_cols = c(.data$file_id, .data$Analysis), names_from = .data$type, values_from = .data$v44.mV) %>%
+    pivot_wider(id_cols = c("file_id", "Analysis"), names_from = "type", values_from = "v44.mV") %>%
     select(.data$file_id, .data$Analysis, s44_init = .data$sample, r44_init = .data$standard) %>%
     tibble::as_tibble()
 }

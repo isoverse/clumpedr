@@ -59,8 +59,8 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL,
                  names_pattern = names_pattern) %>%
     # then widen it so that sample and ref gas are next to each other for each cycle
     pivot_wider(id_cols = c("file_id", "cycle", "Analysis"),
-                names_from = c(.data$type, .data$mass),
-                values_from = .data$value) %>%
+                names_from = c("type", "mass"),
+                values_from = "value") %>%
     # clean up names
     purrr::set_names(~ str_replace_all(., "standard_", "r") %>%
                        str_replace_all("sample_", "s")) %>%
@@ -71,17 +71,17 @@ spread_intensities  <- function(.data, ids = NULL, our_cols = NULL,
   cycle_dis_dfr <- .data %>%
     select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = ids,
-                names_from = .data$type,
+                names_from = "type",
                 ## NOTE: these are now hardcoded here, and are strictly related
                 ## to what's happening in the internals of find_bad_cycles!!
-                values_from = c(.data$outlier_cycle_low,
-                                .data$outlier_cycle_high,
-                                .data$cycle_diff,
-                                .data$cycle_drop,
-                                .data$cycle_drop_num,
-                                .data$outlier_cycle_drop,
-                                .data$cycle_has_drop,
-                                .data$outlier_cycle)) %>%
+                values_from = c("outlier_cycle_low",
+                                "outlier_cycle_high",
+                                "cycle_diff",
+                                "cycle_drop",
+                                "cycle_drop_num",
+                                "outlier_cycle_drop",
+                                "cycle_has_drop",
+                                "outlier_cycle")) %>%
     purrr::set_names( ~ str_replace_all(., "^(.*)_standard", "\\1_r44") %>%
                         str_replace_all("^(.*)_sample", "\\1_s44"))
 
