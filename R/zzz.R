@@ -1,8 +1,7 @@
 initialize_options <- function() {
   # set default package options (always resets options to force deliberate change of settings)
   default_options <- list(
-    clumpedr.quiet = FALSE,
-    clumpedr.genplot = TRUE
+    clumpedr.quiet = FALSE
   )
   options(default_options)
   # set temporary options used during file processing

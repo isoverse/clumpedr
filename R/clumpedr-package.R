@@ -5,8 +5,7 @@
 #' @details See the vignette `vignette(clumped)` for an elaborate use-case example.
 #'
 #' @section Package options:
-#' The functions in this package listen to the \code{genplot} and
-#'   \code{quiet} options.
+#' The functions in this package listen to the \code{quiet} option.
 #'
 #' @docType package
 #' @keywords internal
@@ -14,7 +13,7 @@
 
 #' @encoding UTF-8
 #' @importFrom stats lm median sd C D cycle na.omit setNames
-#' @importFrom rlang enquo quo quos UQ !! := get_expr quo_squash quo_name quo_text quo_is_null quo_is_symbol is_quosure is_empty is_integerish eval_tidy sym new_formula f_lhs f_rhs .data
+#' @importFrom rlang enquo quo quos UQ !! := get_expr quo_squash quo_name quo_text quo_is_null quo_is_symbol is_quosure is_empty is_integerish eval_tidy sym new_formula f_lhs f_rhs .data .env
 # #' @importFrom tidyselect everything starts_with ends_with matches vars_select
 #' @importFrom tibble tibble as_tibble
 #' @importFrom tidyselect all_of
@@ -31,4 +30,5 @@ NULL
 
 # quiets concerns of R CMD check about . that appears in pipelines
 # and some very commonly used variable names used in NSE commands
-utils::globalVariables(c(".", ".data", "file_id", "mass", "broadid", "masspec", "quiet", "genplot"))
+utils::globalVariables(c(".", ".data", "file_id", "mass", "broadid", "masspec", "quiet"## , "genplot"
+                         ))

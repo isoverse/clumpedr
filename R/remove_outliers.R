@@ -11,7 +11,6 @@
 #' @param nsd_off The number of standard deviations away from the median
 #'   Preparation of the standards.
 #' @param D47 The column with \eqn{\Delta_47} values. Defaults to `D47_raw_mean`.
-#' @param plot_x The column to use for plotting the x axis.
 #' @inheritParams find_outliers
 #' @export
 remove_outliers <- function(.data,
@@ -24,8 +23,8 @@ remove_outliers <- function(.data,
                             D47 = D47_raw, #D47_raw_mean,
                             session = Preparation,
                             id1 = `Identifier 1`,
-                            plot_x = file_datetime,
-                            quiet = default(quiet), genplot = default(genplot)) {
+                            ## plot_x = file_datetime,
+                            quiet = default(quiet)) {
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- NULL
 
@@ -38,12 +37,9 @@ remove_outliers <- function(.data,
                             {{ session }},
                             {{ id1 }}, quiet = quiet)
 
-  if (genplot) {
-    pipe_plot(out, plot_outliers, x = {{ plot_x }}, y = {{ D47 }})
-  }
-
   if (!quiet)
     glue("Info: found {nrow(filter(out, outlier | is.na(outlier)) %>% select(file_id) %>% distinct())} outliers out of {out %>% select(file_id) %>% distinct() %>% nrow()} measurements.") %>%
       message()
+
   out
 }
