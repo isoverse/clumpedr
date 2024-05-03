@@ -16,6 +16,7 @@
 # TODO: use @describeIn or @rdname to also include the references in the wrapper.
 #' @export
 empirical_transfer_function <- function(.data,
+                                        ...,
                                         # columns for append_expected_values
                                         std_names = paste0("ETH-", 1:3),
                                         std_values = c(0.258, 0.256, 0.691) - 0.062, #0.507),
@@ -32,10 +33,13 @@ empirical_transfer_function <- function(.data,
                                         # for apply_etf
                                         out = D47_etf,
                                         outlier = outlier,
-                                        quiet = default(quiet),
+                                        quiet = NULL,
                                         parallel = FALSE) {
   # defaults from above
   D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   if (!quiet)
     glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") %>%

@@ -6,7 +6,8 @@
 \eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values}
 \usage{
 bulk_and_clumping_deltas(
-  data,
+  .data,
+  ...,
   d45 = d45,
   d46 = d46,
   d47 = d47,
@@ -18,11 +19,13 @@ bulk_and_clumping_deltas(
   R18_PDBCO2 = default(R18_PDBCO2),
   lambda = default(lambda),
   D17O = default(D17O),
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} containing s44-s49, r44-r49,
+R45-R49, R45_wg-R49_wg, d45-d49, and working gas compositions d13C_PDB_wg and
+d18OPDBCO2_wg.}
 
 \item{d45}{Column name of d45.}
 

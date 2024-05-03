@@ -1,15 +1,13 @@
 # The full workflow in the vignette works
 
     Code
-      out <- iso_filter_files(standards, grepl("Clumped.*met", Method))
+      out <- mutate(isoreader::iso_get_raw_data(isoreader::iso_filter_files(standards,
+        grepl("Clumped.*met", Method)), include_file_info = c("file_id", "Analysis",
+        "Identifier 1")), dis_min = 500, dis_max = 50000, dis_fac = 3)
     Message
       Info: applying file filter, keeping 27 of 27 files
+      Info: aggregating raw data from 27 data file(s), including file info 'c("file_id", "Analysis", "Identifier 1")'
     Code
-      out <- iso_get_raw_data(out, include_file_info = "Analysis")
-    Message
-      Info: aggregating raw data from 27 data file(s), including file info '"Analysis"'
-    Code
-      out <- mutate(out, dis_min = 500, dis_max = 50000, dis_fac = 3)
       out <- find_bad_cycles(out, min = "dis_min", max = "dis_max", fac = "dis_fac",
         relative_to = "init")
     Message
@@ -28,12 +26,13 @@
     Message
       Info: appending reference gas δ values from 27 data file(s)
     Code
-      out <- abundance_ratios(out, s44, s45, s46, s47, s48, s49)
+      out <- abundance_ratios(out, i44 = s44, i45 = s45, i46 = s46, i47 = s47, i48 = s48,
+        i49 = s49)
     Message
       Info: calculating abundance ratios R[i] = i / 44
     Code
-      out <- abundance_ratios(out, r44, r45, r46, r47, r48, r49, R45_wg, R46_wg,
-        R47_wg, R48_wg, R49_wg)
+      out <- abundance_ratios(out, i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48,
+        i49 = r49, R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg)
     Message
       Info: calculating abundance ratios R[i] = i / 44
     Code
@@ -42,7 +41,7 @@
       Info: calculating δ values with (Ri / Ri_wg - 1) * 1000
     Code
       out <- mutate(out, Mineralogy = "Calcite", R18_PDB = clumpedr:::default(R18_PDB))
-      out <- bulk_and_clumping_deltas(out, R18_PDB = .data$R18_PDB)
+      out <- bulk_and_clumping_deltas(out, R18_PDB = unique(out$R18_PDB))
     Message
       Info: calculating δ¹³C, δ¹⁸O, and Δ's.
     Code

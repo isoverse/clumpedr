@@ -4,7 +4,7 @@
 \alias{summarise_outlier}
 \title{Summarise the outlier columns.}
 \usage{
-summarise_outlier(.data, out_column = outlier, quiet = default(quiet))
+summarise_outlier(.data, out_column = outlier, ..., quiet = NULL)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}

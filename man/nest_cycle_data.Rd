@@ -5,7 +5,8 @@
 \title{nest cycle data}
 \usage{
 nest_cycle_data(
-  data,
+  .data,
+  ...,
   masses = c(44:49, 54),
   ratios = c(paste0("s", masses), paste0("r", masses)),
   outlier_cycles = c(paste0("outlier_cycle_", c("low_s44", "low_r44", "high_s44",
@@ -29,7 +30,7 @@ nest_cycle_data(
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
 \item{masses}{The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.}
 

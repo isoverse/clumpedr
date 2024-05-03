@@ -5,7 +5,7 @@
 \title{Find outliers}
 \usage{
 find_outliers(
-  data,
+  .data,
   init_low = 8000,
   init_high = 40000,
   init_diff = 1200,
@@ -21,6 +21,8 @@ find_outliers(
 )
 }
 \arguments{
+\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
+
 \item{init_low}{Minimum initial intensity threshold for mass 44.}
 
 \item{init_high}{Maximum initial intensity threshold for mass 44.}
@@ -42,8 +44,6 @@ find_outliers(
 \item{session}{Column name that defines correction session.}
 
 \item{id1}{Column name of the sample/standard identifier.}
-
-\item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
 \item{std_names}{Names of the standards used for the correction.}
 }

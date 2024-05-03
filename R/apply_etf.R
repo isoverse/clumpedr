@@ -15,9 +15,12 @@
 #' @param out The new column name.
 #' @family empirical transfer functions
 #' @export
-apply_etf <- function(.data, intercept = intercept, slope = slope, raw = D47_raw, out = D47_etf, quiet = default(quiet)) {
+apply_etf <- function(.data, ..., intercept = intercept, slope = slope, raw = D47_raw, out = D47_etf, quiet = NULL) {
   # defaults
   D47_raw <- D47_etf <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   if (!quiet)
     glue("Info: Applying ETF to {quo_name(enquo(raw))} using \u03b1 = {quo_name(enquo(slope))} and \u03b2 = {quo_name(enquo(intercept))}.") %>%

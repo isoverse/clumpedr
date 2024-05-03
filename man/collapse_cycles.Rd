@@ -5,7 +5,8 @@
 \title{Collapse the cycles of the raw measurements}
 \usage{
 collapse_cycles(
-  data,
+  .data,
+  ...,
   cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
   id = c(file_id),
   outlier = outlier_cycle,
@@ -16,7 +17,7 @@ collapse_cycles(
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
 \item{cols}{Columns to calculate summaries for.}
 

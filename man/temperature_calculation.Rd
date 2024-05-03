@@ -5,7 +5,8 @@
 \title{Calculate the temperatures}
 \usage{
 temperature_calculation(
-  data,
+  .data,
+  ...,
   D47 = D47_final,
   temp = temperature,
   slope = "slope",
@@ -14,6 +15,8 @@ temperature_calculation(
 )
 }
 \arguments{
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}
+
 \item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
 
 \item{temp}{The column name of the output temperature.}
@@ -21,8 +24,6 @@ temperature_calculation(
 \item{slope}{Character(1) column name with the slope.}
 
 \item{intercept}{Character(1) column name with the intercept.}
-
-\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}
 }
 \description{
 This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from

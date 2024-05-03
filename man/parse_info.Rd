@@ -5,7 +5,7 @@
 \title{Parse info into appropriate types.}
 \usage{
 parse_info(
-  did,
+  .did,
   masspec = NA_character_,
   std_names = paste0("ETH-", 1:4),
   oth_name = "other",
@@ -14,7 +14,7 @@ parse_info(
 )
 }
 \arguments{
-\item{did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 

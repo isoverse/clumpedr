@@ -1,20 +1,25 @@
 #' Spread and match sample gas and reference gas.
 #'
-# #' @param data A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()]
+# #' @param .data A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()]
 #' @inheritParams match_intensities
 #' @export
-spread_match <- function(data, method = "normal", masses = c(44:49, 54), quiet = default(quiet)) {
-  if (nrow(data) == 0L) {
+spread_match <- function(.data, ...,
+                         method = "normal", masses = c(44:49, 54),
+                         quiet = NULL) {
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
+  }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   our_cols <- paste0("v", masses, ".mV")
-  if (!all(our_cols %in% colnames(data))) {
-    warning(glue::glue("Columns {glue::glue_collapse(our_cols, sep = ', ', last = ', and ')} not found in data."))
+  if (!all(our_cols %in% colnames(.data))) {
+    warning(glue::glue("Columns {glue::glue_collapse(our_cols, sep = ', ', last = ', and ')} not found in `.data`."))
     return(tibble(file_id = character()))
   }
 
-  data %>%
+  .data %>%
     # TODO: add duplicate check here?
     spread_intensities(our_cols = our_cols, quiet = quiet) %>%
     match_intensities(method = method, masses = masses, quiet = quiet)
@@ -26,22 +31,28 @@ spread_match <- function(data, method = "normal", masses = c(44:49, 54), quiet =
 #' and reference as columns next to each other. This function transforms the
 #' data into the desired format.
 #'
-#' @param data A [tibble][tibble::tibble-package] containing mass intensities per cycle.
+#' @param .data A [tibble][tibble::tibble-package] containing mass intensities per cycle.
 #' @param ids Identifying columns that we'll group by.
 #' @param our_cols Columns with data values that need to be reshaped. Defaults to v44.mV to v54.mV.
 #' @return A [tibble][tibble::tibble-package] with the sample and reference
 #'   gasses side-by-side.
-spread_intensities  <- function(data, ids = NULL, our_cols = NULL,
-                                names_pattern = "v([4-9]{2}).(mV)", quiet = default(quiet)) {
-  if (nrow(data) == 0L) {
+spread_intensities  <- function(.data, ...,
+                                ids = NULL, our_cols = NULL,
+                                names_pattern = "v([4-9]{2}).(mV)",
+                                quiet = NULL) {
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
-  if (!quiet)
+  if (!quiet) {
     message("Info: reshaping data into wide format.")
+  }
 
-  if (!"type" %in% colnames(data))
-    stop(glue("Column 'type' not found in {paste(colnames(data), collapse = ', ')}"))
+  if (!"type" %in% colnames(.data))
+    stop(glue("Column 'type' not found in {paste(colnames(.data), collapse = ', ')}"))
 
   if (is.null(ids)) {
     ids <- c("file_id", "cycle", "Analysis")
@@ -51,14 +62,14 @@ spread_intensities  <- function(data, ids = NULL, our_cols = NULL,
     our_cols <- c("v44.mV", "v45.mV", "v46.mV", "v47.mV", "v48.mV", "v49.mV", "v54.mV")
   }
 
-  out <- data %>%
+  out <- .data %>%
     group_by("file_id", "Analysis") %>%
     # first lengthen it so that each row is one mass / unit / intensity
     pivot_longer(cols = all_of(our_cols),
                  names_to = c("mass", "unit"),
                  names_pattern = names_pattern) %>%
     # then widen it so that sample and ref gas are next to each other for each cycle
-    pivot_wider(id_cols = c("file_id", "cycle", "Analysis"),
+    pivot_wider(id_cols = all_of(ids),
                 names_from = c("type", "mass"),
                 values_from = "value") %>%
     # clean up names
@@ -68,7 +79,7 @@ spread_intensities  <- function(data, ids = NULL, our_cols = NULL,
   # NOTE: this is neat, but gets rid of all the extra info in cycle_dis etc.
 
   # so we add cycle_dis info back
-  cycle_dis_dfr <- data %>%
+  cycle_dis_dfr <- .data %>%
     select(-one_of(our_cols)) %>%
     pivot_wider(id_cols = all_of(ids),
                 names_from = "type",
@@ -95,16 +106,20 @@ spread_intensities  <- function(data, ids = NULL, our_cols = NULL,
 #' intensity of mass 44 through linear interpolation (option `method =
 #' "linterp"`), and then applies this same offset to the other masses.
 #'
-#' @param data A [tibble][tibble::tibble-package] with s44--s49 and r44--r49; output of
+#' @param .data A [tibble][tibble::tibble-package] with s44--s49 and r44--r49; output of
 #'     [spread_intensities()].
 #' @param method "linterp" for linear interpolation, or "normal" for
 #'     conventional bracketing of sample gas.
 #' @param masses The masses to generate r and s columns from.
-match_intensities <- function(data, method = "normal", masses = c(44:49, 54), quiet = default(quiet)) {
+match_intensities <- function(.data, ...,
+                              method = "normal", masses = c(44:49, 54), quiet = NULL) {
   our_cols <- c(paste0("s", masses), paste0("r", masses))
 
-  if (nrow(data) == 0L) {
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
+  }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   # global variables and defaults
@@ -117,12 +132,12 @@ match_intensities <- function(data, method = "normal", masses = c(44:49, 54), qu
       message()
 
   if (method == "normal") {
-    out <- data %>%
+    out <- .data %>%
         # reference gas cycles bracket sample cycles
         mutate_at(vars(one_of(str_subset(our_cols, "^r"))),
                   list(~ (. + lag(.)) / 2))
   } else {# only alternative is linterp
-    out <- data %>%
+    out <- .data %>%
         # find matching intensity of mass 44 reference to sample gas
         mutate(target_cycle_44 = approx(x = .data$r44, y = .data$cycle, xout = .data$s44)$y) %>%
         mutate_at(vars(one_of(str_subset(our_cols, "^r"))),

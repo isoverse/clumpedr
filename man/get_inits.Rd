@@ -4,10 +4,10 @@
 \alias{get_inits}
 \title{Get initial intensities of specified mass}
 \usage{
-get_inits(did)
+get_inits(.did)
 }
 \arguments{
-\item{did}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
+\item{.did}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 }
 \value{
 A tibble with columns file_id, s44_init, and r44_init

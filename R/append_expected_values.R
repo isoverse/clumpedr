@@ -29,6 +29,7 @@
 #' @export
 #' @family empirical transfer functions
 append_expected_values <- function(.data,
+                                   ...,
                                    std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!
                                    std_values = c(0.258, 0.256, 0.691) - 0.062, #, 0.507),
                                    exp = expected_D47,

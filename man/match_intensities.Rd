@@ -5,14 +5,15 @@
 \title{Match the reference gas intensity to that of the sample gas}
 \usage{
 match_intensities(
-  data,
+  .data,
+  ...,
   method = "normal",
   masses = c(44:49, 54),
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
+\item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
 \code{\link[=spread_intensities]{spread_intensities()}}.}
 
 \item{method}{"linterp" for linear interpolation, or "normal" for

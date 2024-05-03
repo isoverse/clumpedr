@@ -1,17 +1,21 @@
 #' Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C, \eqn{\delta}'s, and raw \eqn{\Delta} values
 #'
-#' @param data A [tibble][tibble::tibble-package], resulting from
+#' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [correct_backgrounds()].
 #' @details This function is a wrapper for the [abundance_ratios()],
 #'   [little_deltas()], and [bulk_and_clumping_deltas()] functions.
 #'
 #' @export
-delta_values <- function(data, quiet = default(quiet)) {
-  if (nrow(data) == 0L) {
+delta_values <- function(.data, ..., quiet = NULL) {
+  R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- NULL
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
-  data %>%
+  .data %>%
     # sample gas
     abundance_ratios(quiet = quiet) %>%
     # working gas

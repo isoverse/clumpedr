@@ -21,11 +21,12 @@
 #'   cycle ("init", default) or to the previous cycle ("prev").
 #' @export
 #' @family cycle functions
-find_bad_cycles <- function(data, min, max, fac,
+find_bad_cycles <- function(.data, ...,
+                            min, max, fac,
                             v44 = "v44.mV", cycle = "cycle",
                             relative_to = "init",
                             quiet = default(quiet)) {
-  if (nrow(data) == 0L) {
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
 
@@ -34,7 +35,7 @@ find_bad_cycles <- function(data, min, max, fac,
     stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
   }
 
-  out <- data %>%
+  out <- .data %>%
     mutate(outlier_cycle_low = .data[[v44]] <= .data[[min]],
            outlier_cycle_high = .data[[v44]] >= .data[[max]],
            cycle_diff = lead(.data[[v44]], default = Inf) - .data[[v44]],
@@ -46,7 +47,7 @@ find_bad_cycles <- function(data, min, max, fac,
     out <- out |>
           mutate(first_diff_fac = .data[[fac]] *
                    first(.data$cycle_diff[!(.data$outlier_cycle_low | .data$outlier_cycle_high)]),
-                 cycle_drop = .data$cycle_diff < first_diff_fac,
+                 cycle_drop = .data$cycle_diff < .data$first_diff_fac,
                  .by = c("file_id", "type"))
   } else if (relative_to == "prev") {
         # cycle drop is currently NA if the whole  sample was  too low.

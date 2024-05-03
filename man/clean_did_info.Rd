@@ -5,15 +5,15 @@
 \title{Clean up the did file info}
 \usage{
 clean_did_info(
-  did,
+  .did,
   masspec = NULL,
   std_names = c(paste0("ETH-", 1:4), "IAEA-C2", "Merck"),
   oth_name = "other",
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
-\item{did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
 \item{masspec}{The name of the mass spectrometer to append.}
 

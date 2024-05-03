@@ -19,7 +19,7 @@ test_that("get_inits works", {
 test_that("clean_did_info works", {
   expect_s3_class(clean_did_info(eth3), "iso_file")
   expect_s3_class(clean_did_info(standards), "iso_file_list")
-  inf <- clean_did_info(eth3, "MOTU") %>% iso_get_file_info()
+  inf <- clean_did_info(eth3, "MOTU") %>% isoreader::iso_get_file_info()
 
   expect_type(inf %>% pluck("Background"), "double")
   expect_type(inf %>% pluck("Weight [mg]"), "double")
@@ -32,7 +32,8 @@ test_that("clean_did_info works", {
   expect_type(inf %>% pluck("Pressadjust"), "logical")
   expect_type(inf %>% pluck("Reference Refill"), "logical")
 
-  cln <- clean_did_info(eth3, "MOTU") %>% iso_get_file_info() %>% colnames()
+  cln <- clean_did_info(eth3, "MOTU") %>%
+    isoreader::iso_get_file_info() %>% colnames()
   expect_true("masspec" %in% cln)
   expect_true("broadid" %in% cln)
   expect_true("s44_init" %in% cln)

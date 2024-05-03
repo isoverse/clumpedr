@@ -6,6 +6,7 @@
 \usage{
 empirical_transfer_function(
   .data,
+  ...,
   std_names = paste0("ETH-", 1:3),
   std_values = c(0.258, 0.256, 0.691) - 0.062,
   raw = D47_raw,
@@ -18,7 +19,7 @@ empirical_transfer_function(
   intercept = intercept,
   out = D47_etf,
   outlier = outlier,
-  quiet = default(quiet),
+  quiet = NULL,
   parallel = FALSE
 )
 }

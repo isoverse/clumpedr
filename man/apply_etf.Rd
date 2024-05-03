@@ -6,11 +6,12 @@
 \usage{
 apply_etf(
   .data,
+  ...,
   intercept = intercept,
   slope = slope,
   raw = D47_raw,
   out = D47_etf,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{

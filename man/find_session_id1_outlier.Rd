@@ -6,12 +6,13 @@
 \usage{
 find_session_id1_outlier(
   .data,
+  ...,
   n_id1 = 5,
   nsd_off = 4,
   D47 = D47_raw,
   session = Preparation,
   id1 = `Identifier 1`,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{

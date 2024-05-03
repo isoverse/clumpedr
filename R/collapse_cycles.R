@@ -3,7 +3,7 @@
 #' This collapses the cycles of the raw measurements and calculates averages
 #' and standard deviations per aliquot.
 #'
-#' @param data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
+#' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
 #' @param cols Columns to calculate summaries for.
 #' @param id Index columns that will be excluded from nesting. Defaults to`file_id`.
 #' @param outlier The column containing outlier information.
@@ -11,18 +11,20 @@
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
-collapse_cycles <- function(data,
+collapse_cycles <- function(.data,
+                            ...,
                             cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
                             id = c(file_id),
                             outlier = outlier_cycle,
                             funs = NULL,
-                           alpha = 0.05,
+                            alpha = 0.05,
                             na.rm = TRUE,
                             quiet = default(quiet)) {
-  outlier_cycle <- NULL
+  outlier_cycle <- d13C_PDB <- d18O_PDB <- D47_raw <- D47_final <- NULL
 
-  if (!quiet)
+  if (!quiet) {
     message("Info: collapsing cycles, calculating sample summaries.")
+  }
 
   if (is.null(funs)) {
     message("defaulting to mean, sd, n, sem, and 95% cl")
@@ -35,16 +37,16 @@ collapse_cycles <- function(data,
   }
 
   # this creates a nice summary for one of the samples
-  summarize_mean <- function(data) {
-    data %>%
+  summarize_mean <- function(.data) {
+    .data %>%
       filter({{ outlier }} %in% FALSE) %>%
       select({{ cols }}) %>%
       summarise_all(.funs = funs)
   }
 
-  data %>%
+  .data %>%
     # TODO: add an id argument so that I can select multiple columns that aren't nested (i.e. )
-    nest(cycle_data = -{{ id }}) %>%
+    nest(.by = {{id}}, .key = "cycle_data") %>%
     bind_cols(map_dfr(.$cycle_data, summarize_mean)) %>%
     as_tibble()
 }
@@ -56,7 +58,7 @@ collapse_cycles <- function(data,
 #' The parameters are all strings with column names. They default to all the
 #' columns that have cycle information based on previous computation steps.
 #'
-#' @param data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
+#' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
 #' @param masses The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.
 #' @param ratios Ratio columns, based on masses.
 #' @param outlier_cycles Columns with outlier_cycle information.
@@ -73,7 +75,8 @@ collapse_cycles <- function(data,
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
 #' @export
-nest_cycle_data <- function(data,
+nest_cycle_data <- function(.data,
+                            ...,
                             masses = c(44:49, 54),
                             ratios = c(paste0("s", masses), paste0("r", masses)),
                             outlier_cycles = c(paste0("outlier_cycle_",
@@ -118,16 +121,16 @@ nest_cycle_data <- function(data,
                                        "D48_raw", "D49_raw"),
                             p49 = "param_49") {
 
-  if (nrow(data) == 0L) {
+  if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
 
   cols <- c("cycle", ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
             Rs, deltas, isotopes, params, stochastic, flags, Deltas, p49)
 
-  if (!all(cols %in% colnames(data)))
-    stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
+  if (!all(cols %in% colnames(.data)))
+    stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(.data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
 
-  data %>%
+  .data %>%
     nest(cycle_data = one_of(cols))
 }

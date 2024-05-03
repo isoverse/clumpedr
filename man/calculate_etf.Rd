@@ -5,7 +5,7 @@
 \title{Calculate the Empirical Transfer Function}
 \usage{
 calculate_etf(
-  data,
+  .data,
   raw = D47_raw_mean,
   exp = expected_D47,
   session = Preparation,
@@ -14,11 +14,11 @@ calculate_etf(
   slope = slope,
   intercept = intercept,
   parallel = FALSE,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{raw}{Column name of raw \eqn{\Delta_{47}} values.}
 

@@ -5,7 +5,8 @@
 \title{Remove outliers}
 \usage{
 remove_outliers(
-  data,
+  .data,
+  ...,
   init_low = 8000,
   init_high = 40000,
   init_diff = 1200,
@@ -21,7 +22,7 @@ remove_outliers(
 )
 }
 \arguments{
-\item{data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
 \item{init_low}{Minimum initial intensity threshold for mass 44.}

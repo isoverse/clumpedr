@@ -3,6 +3,7 @@
 ^\.httr-oauth$
 ^Makefile$
 ^NEWS$
+^CITATION.cff$
 ^cache$
 ^tmp$
 ^README-.*\.png$

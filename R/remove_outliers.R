@@ -6,14 +6,15 @@
 #'   V. 3) The sample or reference raw \eqn{\Delta_47} value is less than
 #'   4 SD away from the preparation mean.
 #'
-#' @param data A [tibble][tibble::tibble-package], resulting from
+#' @param .data A [tibble][tibble::tibble-package], resulting from
 #'   [collapse_cycles()].
 #' @param nsd_off The number of standard deviations away from the median
 #'   Preparation of the standards.
 #' @param D47 The column with \eqn{\Delta_47} values. Defaults to `D47_raw_mean`.
 #' @inheritParams find_outliers
 #' @export
-remove_outliers <- function(data,
+remove_outliers <- function(.data,
+                            ...,
                             init_low = 8000, init_high = 40000, init_diff = 1200,
                             param49_off = 1,
                             internal_sd = 0.15,
@@ -28,7 +29,7 @@ remove_outliers <- function(data,
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- NULL
 
-  out <- data %>%
+  out <- .data %>%
     find_outliers(init_low, init_high, init_diff, param49_off, internal_sd,
                             n_min,
                             n_id1,
