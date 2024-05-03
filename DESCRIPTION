@@ -1,6 +1,6 @@
 Package: clumpedr
 Title: Clumped Isotope Analysis in R
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R:
     person(
         given = "Ilja", family = "Kocken",
