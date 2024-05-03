@@ -17,3 +17,7 @@ authors:
     family-names: Kopf
     affiliation: CU Boulder
     orcid: 'https://orcid.org/0000-0002-2044-0201'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.10638816
+    description: Zenodo
