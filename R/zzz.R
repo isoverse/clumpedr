@@ -4,9 +4,6 @@ initialize_options <- function() {
     clumpedr.quiet = FALSE
   )
   options(default_options)
-  # set temporary options used during file processing
-  # temp_options <- list()
-  # options(temp_options)
 }
 
 initialize_parameters <- function() {

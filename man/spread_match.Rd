@@ -5,14 +5,14 @@
 \title{Spread and match sample gas and reference gas.}
 \usage{
 spread_match(
-  .data,
+  data,
   method = "normal",
   masses = c(44:49, 54),
   quiet = default(quiet)
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
+\item{data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
 \code{\link[=spread_intensities]{spread_intensities()}}.}
 
 \item{method}{"linterp" for linear interpolation, or "normal" for

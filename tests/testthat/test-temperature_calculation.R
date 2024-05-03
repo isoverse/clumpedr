@@ -1,8 +1,9 @@
 test_that("temperature_calculation works", {
   expect_warning(temp_test <- standards %>%
     clean_did_info("MOTU") %>%
-    isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+    isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
+    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+    find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") |>
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values() %>%
@@ -13,6 +14,6 @@ test_that("temperature_calculation works", {
     empirical_transfer_function() %>%
     acid_fractionation() %>%
     temperature_calculation(), "NaNs produced")
-  expect_type(temp_test, "tbl_df")
+  expects3_class(temp_test, "tbl_df")
   expect_true("temperature" %in% colnames(temp_test))
 })

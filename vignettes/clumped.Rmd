@@ -326,7 +326,7 @@ standards |>
   unnest(cols = cycle_data) |>
   find_init_outliers(init_low = 4000, init_high = 40000, init_diff = 3000) |>
   empirical_transfer_function() |>
-  temperature_calculation(D47 = D47_etf, slope = 0.0397, intercept = 0.1518)
+  temperature_calculation(slope = 0.0397, intercept = 0.1518)
 ```
 
 ### HINT: look at plots interactively

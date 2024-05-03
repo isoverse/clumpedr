@@ -1,11 +1,12 @@
 test_that("abundance_ratios works", {
   abundance_test <- standards %>%
-    isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+    isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
+    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+    find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") |>
     spread_match() %>%
     append_ref_deltas(standards) %>%
     abundance_ratios()
-  expect_type(abundance_test, "tbl_df")
+  expect_s3_class(abundance_test, "tbl_df")
   expect_true("R45" %in% colnames(abundance_test))
   expect_true("R46" %in% colnames(abundance_test))
   expect_true("R47" %in% colnames(abundance_test))
@@ -15,8 +16,9 @@ test_that("abundance_ratios works", {
 
 test_that("little_deltas works", {
   deltas_test <- standards %>%
-    isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+    isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
+    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+    find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") |>
     spread_match() %>%
     append_ref_deltas(standards) %>%
     abundance_ratios() %>%
@@ -24,7 +26,7 @@ test_that("little_deltas works", {
                      i49 = r49, R45 = R45_wg, R46 = R46_wg, R47 = R47_wg,
                      R48 = R48_wg, R49 = R49_wg) %>%
     little_deltas()
-  expect_type(deltas_test, "tbl_df")
+  expect_s3_class(deltas_test, "tbl_df")
   expect_true("d45" %in% colnames(deltas_test))
   expect_true("d46" %in% colnames(deltas_test))
   expect_true("d47" %in% colnames(deltas_test))
@@ -34,8 +36,9 @@ test_that("little_deltas works", {
 
 test_that("bulk_and_clumping_deltas works", {
   bulk_clump_test <- standards %>%
-    isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+    isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
+    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+    find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") |>
     spread_match() %>%
     append_ref_deltas(standards) %>%
     abundance_ratios() %>%
@@ -44,7 +47,7 @@ test_that("bulk_and_clumping_deltas works", {
                      R48 = R48_wg, R49 = R49_wg) %>%
     little_deltas() %>%
     bulk_and_clumping_deltas()
-  expect_type(bulk_clump_test, "tbl_df")
+  expect_s3_class(bulk_clump_test, "tbl_df")
   expect_true("D47_raw" %in% colnames(bulk_clump_test))
   expect_true("D48_raw" %in% colnames(bulk_clump_test))
   expect_true("D49_raw" %in% colnames(bulk_clump_test))
@@ -52,9 +55,10 @@ test_that("bulk_and_clumping_deltas works", {
 })
 
 test_that("delta_values wrapper works", {
-  expect_type(standards %>%
-    isoreader::iso_get_raw_data() %>%
-    find_bad_cycles() %>%
+  expect_s3_class(standards %>%
+    isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
+    mutate(min = 1500, max = 50000, fac = 3) |>
+    find_bad_cycles(min = "min", max = "max", fac = "fac") %>%
     spread_match() %>%
     append_ref_deltas(standards) %>%
     delta_values(), "tbl_df")

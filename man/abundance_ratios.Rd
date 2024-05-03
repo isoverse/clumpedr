@@ -5,7 +5,7 @@
 \title{Calculate abundance ratio based on input intensities}
 \usage{
 abundance_ratios(
-  .data,
+  data,
   i44 = s44,
   i45 = s45,
   i46 = s46,
@@ -21,7 +21,7 @@ abundance_ratios(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}.}
+\item{data}{A \link[tibble:tibble-package]{tibble}.}
 
 \item{i44}{Name of mass 44 column.}
 

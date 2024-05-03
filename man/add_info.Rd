@@ -4,13 +4,13 @@
 \alias{add_info}
 \title{Add the information from the did files}
 \usage{
-add_info(.data, .info, cols, quiet = default(quiet))
+add_info(data, info, cols, quiet = default(quiet))
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\item{data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
-\item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
+\item{info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
 \item{cols}{A character vector with column names in info to add to the data.}

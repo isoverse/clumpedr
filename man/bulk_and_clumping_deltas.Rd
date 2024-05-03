@@ -6,7 +6,7 @@
 \eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values}
 \usage{
 bulk_and_clumping_deltas(
-  .data,
+  data,
   d45 = d45,
   d46 = d46,
   d47 = d47,
@@ -22,7 +22,7 @@ bulk_and_clumping_deltas(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
+\item{data}{A \link[tibble:tibble-package]{tibble} containing delta values 45 through 49.}
 
 \item{d45}{Column name of d45.}
 

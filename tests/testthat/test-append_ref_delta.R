@@ -1,10 +1,10 @@
-test_that("get_ref_delta works", {
-  expect_type(get_ref_delta(standards), "tbl_df")
+test_that("get_ref_delta() works", {
+  expect_s3_class(get_ref_delta(standards), "tbl_df")
   expect_true("d13C_PDB_wg" %in% colnames(get_ref_delta(standards)))
   expect_true("d18O_PDBCO2_wg" %in% colnames(get_ref_delta(standards)))
 })
 
-test_that("append_ref_deltas works", {
+test_that("append_ref_deltas() works", {
   expect_error(append_ref_deltas(), "argument \"data\" is missing, with no default",
                fixed = TRUE)
   expect_error(append_ref_deltas(data = "hoi"),
@@ -22,7 +22,7 @@ test_that("append_ref_deltas works", {
     find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") %>%
     spread_match() %>%
     append_ref_deltas(standards)
-  expect_type(ref_delta_test, "tbl_df")
+  expect_s3_class(ref_delta_test, "tbl_df")
   expect_true("d13C_PDB_wg" %in% colnames(ref_delta_test))
   expect_true("d18O_PDBCO2_wg" %in% colnames(ref_delta_test))
 })

@@ -5,7 +5,7 @@
 \title{Compute isotopic ratios}
 \usage{
 isobar_ratios(
-  .data,
+  data,
   R13 = R13,
   R18 = R18,
   R45 = R45,
@@ -23,7 +23,7 @@ isobar_ratios(
 )
 }
 \arguments{
-\item{.data}{A tibble with columns R13 and R18.}
+\item{data}{A tibble with columns R13 and R18.}
 
 \item{R13}{The column name for R13.}
 

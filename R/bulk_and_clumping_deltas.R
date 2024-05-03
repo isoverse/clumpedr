@@ -4,7 +4,7 @@
 #' Requires a dataframe with little \eqn{\delta} values, and working gas
 #' \eqn{\delta^{13}}C and \eqn{\delta^{18}}O values.
 #'
-#' @param .data A [tibble][tibble::tibble-package] containing delta values 45 through 49.
+#' @param data A [tibble][tibble::tibble-package] containing delta values 45 through 49.
 # # ' @param d13C_PDB_wg Column name of reference gas \eqn{\delta^{13}}C value.
 # #' @param d18O_PDBCO2_wg Column name of reference gas \eqn{\delta^{13}}C gas value.
 #' @param d45 Column name of d45.
@@ -19,7 +19,7 @@
 #'   measurements, _Chemical Geology_ **2016**, _442_, 83--96.
 #'   \doi{10.1016/j.chemgeo.2016.08.014}
 #' @export
-bulk_and_clumping_deltas  <- function(.data,
+bulk_and_clumping_deltas  <- function(data,
                                       # make the column names a bit flexible
                                       ## d13C_PDB_wg=d13C_PDB_wg,
                                       ## d18O_PDBCO2_wg=d18O_PDBCO2_wg,
@@ -32,7 +32,7 @@ bulk_and_clumping_deltas  <- function(.data,
                                       R18_PDBCO2 = default(R18_PDBCO2),
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = default(quiet)) {
-  if (nrow(.data) == 0L) {
+  if (nrow(data) == 0L) {
     return(tibble(file_id = character()))
   }
 
@@ -44,7 +44,7 @@ bulk_and_clumping_deltas  <- function(.data,
     # d13C and d18O with nice UTF-8 glyphs
     message("Info: calculating \u03b4\u00b9\u00b3C, \u03b4\u00b9\u2078O, and \u0394's.")
 
-  out <- .data %>%
+  out <- data %>%
     # scramble the working gas
     mutate(R13_wg  = R13_PDB * (1 + .data$d13C_PDB_wg / 1000),
            R18_wg  = R18_PDBCO2 * (1 + .data$d18O_PDBCO2_wg / 1000)) %>%

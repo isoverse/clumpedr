@@ -19,6 +19,7 @@ temperature_calculation <- function(data, D47 = D47_final, temp = temperature,
 
   if (!quiet) {
     message(glue::glue("Info: calculating temperature with slope {unique(data[, slope])} and intercept {unique(data[, intercept])}, ignoring uncertainty in the calibration."))
+    message("If you would like to include temperature uncertainty using bootstrapping, see the package `clumpedcalib` on <https://github.com/japhir/clumpedcalib>")
   }
 
   data %>%

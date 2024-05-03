@@ -21,7 +21,7 @@ clean_did_info  <- function(did, masspec = NULL,
     return(invisible(did))
   }
 
-  inits <- get_inits(did)
+  inits <- get_inits(iso_get_raw_data(did, include_file_info = "Analysis"))
 
   did %>%
     parse_info(masspec = masspec, std_names = std_names, oth_name = oth_name) %>%
@@ -69,7 +69,7 @@ parse_info <- function(did,
 
 #' Get initial intensities of specified mass
 #'
-#' @param .data The raw data, resulting from [isoreader::iso_get_raw_data()].
+#' @param did The raw data, resulting from [isoreader::iso_get_raw_data()].
 #'
 #' @family metadata cleaning functions
 #' @return A tibble with columns file_id, s44_init, and r44_init

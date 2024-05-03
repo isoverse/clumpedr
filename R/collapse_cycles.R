@@ -73,7 +73,7 @@ collapse_cycles <- function(data,
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
 #' @export
-nest_cycle_data <- function(.data,
+nest_cycle_data <- function(data,
                             masses = c(44:49, 54),
                             ratios = c(paste0("s", masses), paste0("r", masses)),
                             outlier_cycles = c(paste0("outlier_cycle_",
@@ -118,16 +118,16 @@ nest_cycle_data <- function(.data,
                                        "D48_raw", "D49_raw"),
                             p49 = "param_49") {
 
-  if (nrow(.data) == 0L) {
+  if (nrow(data) == 0L) {
     return(tibble(file_id = character()))
   }
 
   cols <- c("cycle", ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
             Rs, deltas, isotopes, params, stochastic, flags, Deltas, p49)
 
-  if (!all(cols %in% colnames(.data)))
-    stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(.data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
+  if (!all(cols %in% colnames(data)))
+    stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
 
-  .data %>%
+  data %>%
     nest(cycle_data = one_of(cols))
 }

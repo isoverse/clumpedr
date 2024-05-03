@@ -5,7 +5,7 @@
 \title{Spread intensities from iso_read format into wide format.}
 \usage{
 spread_intensities(
-  .data,
+  data,
   ids = NULL,
   our_cols = NULL,
   names_pattern = "v([4-9]{2}).(mV)",
@@ -13,7 +13,7 @@ spread_intensities(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
+\item{data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
 
 \item{ids}{Identifying columns that we'll group by.}
 

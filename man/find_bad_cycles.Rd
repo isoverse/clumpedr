@@ -5,20 +5,17 @@
 \title{Find bad cycles based on several criteria.}
 \usage{
 find_bad_cycles(
-  .data,
+  data,
   min,
   max,
   fac,
   v44 = "v44.mV",
-  cycle = cycle,
+  cycle = "cycle",
   relative_to = "init",
   quiet = default(quiet)
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
-\code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
-
 \item{min}{Minimum intensity level for good cycles. Defaults to 1,500 mV.}
 
 \item{max}{Maximum intensity level for good cycles. Defaults to 50,000 mV.}
@@ -32,6 +29,9 @@ one specified in \code{relative_to}.}
 
 \item{relative_to}{cycle Drop detection occurs relative to either the first
 cycle ("init", default) or to the previous cycle ("prev").}
+
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
+\code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 }
 \description{
 This function tries to identify cycles in which the pressure has dropped

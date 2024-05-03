@@ -1,5 +1,4 @@
-# Taken from isoreader/isoprocessor
-# https://github.com/isoverse/isoprocessor/R/settings.R
+# Taken from isoreader
 
 # retrieve package settings, internal function, not exported
 default <- function(name, allow_null = FALSE) {
