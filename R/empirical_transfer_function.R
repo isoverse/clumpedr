@@ -5,9 +5,13 @@
 #' then apply the ETF to all the samples and standards.
 #'
 #' @param .data A [tibble][tibble::tibble-package] resulting from [collapse_cycles()].
+#' @param id1 Column name of `Identifier 1` (default).
+#' @param outlier Column name of `outlier` (default).
 #' @inheritParams append_expected_values
 #' @inheritParams calculate_etf
-#'
+#' @inheritParams apply_etf
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @details This function is a wrapper for [append_expected_values()],
 #'   [calculate_etf()], and [apply_etf()].
 #'

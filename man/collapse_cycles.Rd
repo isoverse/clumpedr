@@ -13,11 +13,13 @@ collapse_cycles(
   funs = NULL,
   alpha = 0.05,
   na.rm = TRUE,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{cols}{Columns to calculate summaries for.}
 
@@ -31,6 +33,8 @@ collapse_cycles(
 
 \item{na.rm}{a logical value indicating wheter NA values should be stripped
 before the computation proceeds.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 This collapses the cycles of the raw measurements and calculates averages

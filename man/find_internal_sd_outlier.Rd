@@ -9,7 +9,7 @@ find_internal_sd_outlier(
   internal_sd = 0.15,
   ...,
   D47 = D47_raw,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
@@ -17,7 +17,11 @@ find_internal_sd_outlier(
 
 \item{internal_sd}{The internal standard deviation cutoff value.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{D47}{The column to calculate the internal sd value for.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Outliers are flagged based on an internal standard deviation cutoff value

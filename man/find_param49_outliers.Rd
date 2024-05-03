@@ -10,6 +10,10 @@ find_param49_outliers(.data, param49_off, ..., quiet = NULL)
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
 \item{param49_off}{The absolute cutoff value for the parameter 49 value.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Find measurements with a param49 value that is greater than \code{param49_off}.

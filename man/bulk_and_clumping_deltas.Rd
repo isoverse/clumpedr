@@ -27,6 +27,8 @@ bulk_and_clumping_deltas(
 R45-R49, R45_wg-R49_wg, d45-d49, and working gas compositions d13C_PDB_wg and
 d18OPDBCO2_wg.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{d45}{Column name of d45.}
 
 \item{d46}{Column name of d46.}
@@ -55,6 +57,8 @@ from Barkan and Luz, 2005.}
 \item{D17O}{The difference between the expected \eqn{\delta^{17}}{\u03b417}O
 (\eqn{\delta^{18}}{\u03b418}O\eqn{-\lambda*\delta^{18}}{- lambda *\u03b418}O)
 and the actual \eqn{\delta^{17}}{\u03b417}O value.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Requires a dataframe with little \eqn{\delta} values, and working gas

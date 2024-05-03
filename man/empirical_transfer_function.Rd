@@ -26,6 +26,8 @@ empirical_transfer_function(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=collapse_cycles]{collapse_cycles()}}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{std_names}{Names of the standards.}
 
 \item{std_values}{Expected values of the standards. Defaults to Muller et
@@ -38,6 +40,8 @@ al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 \item{session}{The column name to group analyses by. Defaults to
 \code{Preparation}.}
 
+\item{id1}{Column name of \verb{Identifier 1} (default).}
+
 \item{etf}{The column name of the new model.}
 
 \item{etf_coefs}{The column name with the coefficients of the model.}
@@ -45,6 +49,12 @@ al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 \item{slope}{The column name of the new slope.}
 
 \item{intercept}{The column name of the new intercept.}
+
+\item{out}{The new column name.}
+
+\item{outlier}{Column name of \code{outlier} (default).}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 
 \item{parallel}{Whether or not (default) to process this in parallel, using package \code{furrr}.}
 }

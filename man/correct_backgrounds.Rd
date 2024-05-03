@@ -7,6 +7,7 @@
 correct_backgrounds(
   .data,
   factor,
+  ...,
   i47 = v47.mV,
   i54 = v54.mV,
   quiet = default(quiet)
@@ -17,9 +18,13 @@ correct_backgrounds(
 
 \item{factor}{Factor by which to multiply the half-cup before subtraction.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{i47}{Column with mass 47 intensities to correct.}
 
 \item{i54}{Column with mass 47.5 intensities to use for correction.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 This function applies a very simple background correction based on the cup

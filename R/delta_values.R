@@ -4,7 +4,8 @@
 #'   [correct_backgrounds()].
 #' @details This function is a wrapper for the [abundance_ratios()],
 #'   [little_deltas()], and [bulk_and_clumping_deltas()] functions.
-#'
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 delta_values <- function(.data, ..., quiet = NULL) {
   R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- NULL

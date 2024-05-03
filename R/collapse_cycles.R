@@ -11,6 +11,8 @@
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
+#' @inheritParams dots
+#' @inheritParams quiet
 collapse_cycles <- function(.data,
                             ...,
                             cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
@@ -19,8 +21,11 @@ collapse_cycles <- function(.data,
                             funs = NULL,
                             alpha = 0.05,
                             na.rm = TRUE,
-                            quiet = default(quiet)) {
+                            quiet = NULL) {
   outlier_cycle <- d13C_PDB <- d18O_PDB <- D47_raw <- D47_final <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   if (!quiet) {
     message("Info: collapsing cycles, calculating sample summaries.")
@@ -74,6 +79,8 @@ collapse_cycles <- function(.data,
 #' @param flags Flag columns.
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 nest_cycle_data <- function(.data,
                             ...,
@@ -119,17 +126,25 @@ nest_cycle_data <- function(.data,
                             flags = c("R45_flag", "R46_flag"),
                             Deltas = c("D45_raw", "D46_raw", "D47_raw",
                                        "D48_raw", "D49_raw"),
-                            p49 = "param_49") {
+                            p49 = "param_49", quiet = NULL) {
 
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
+  }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   cols <- c("cycle", ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
             Rs, deltas, isotopes, params, stochastic, flags, Deltas, p49)
 
-  if (!all(cols %in% colnames(.data)))
+  if (!all(cols %in% colnames(.data))) {
     stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(.data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
+  }
+
+  if (!quiet) {
+    message(glue::glue("Nesting by {glue::glue_collapse(cols, sep=', ', last=' and ', width = 60)}."))
+  }
 
   .data %>%
     nest(cycle_data = one_of(cols))

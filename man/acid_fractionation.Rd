@@ -7,6 +7,7 @@
 acid_fractionation(
   .data,
   aff = 0.062,
+  ...,
   D47 = D47_etf,
   D47_out = D47_final,
   quiet = default(quiet)
@@ -19,10 +20,14 @@ acid_fractionation(
 25 \eqn{^\circ}C. Defaults to 0.062, which is the average of the values obtained by
 De Vlieze et al., 2015 and Murray et al., 2016. See Muller et al., 2017.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{D47}{The column name of the \eqn{\Delta_47} values to use for the acid
 fractionation calculation.}
 
 \item{D47_out}{The desired new column name.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 The temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to 25 \eqn{^\circ}C.

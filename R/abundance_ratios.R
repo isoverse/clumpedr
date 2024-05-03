@@ -15,6 +15,8 @@
 #' @param R47 Desired new name of the calculated ratio for mass 47.
 #' @param R48 Desired new name of the calculated ratio for mass 48.
 #' @param R49 Desired new name of the calculated ratio for mass 49.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 abundance_ratios <- function(.data,
                              ...,
@@ -24,6 +26,7 @@ abundance_ratios <- function(.data,
                              R45 = R45, R46 = R46, R47 = R47,
                              R48 = R48, R49 = R49,
                              quiet = NULL) {
+  # global variables and defaults
   s44 <- s45 <- s46 <- s47 <- s48 <- s49 <- NULL
 
   if (nrow(.data) == 0L) {
@@ -33,8 +36,9 @@ abundance_ratios <- function(.data,
     quiet <- default(quiet)
   }
 
-  if (!quiet)
+  if (!quiet) {
     message("Info: calculating abundance ratios R[i] = i / 44")
+  }
 
   .data %>%
     mutate({{ R45 }} := {{ i45 }} / {{ i44 }},

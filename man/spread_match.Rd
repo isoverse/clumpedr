@@ -16,10 +16,14 @@ spread_match(
 \item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
 \code{\link[=spread_intensities]{spread_intensities()}}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{method}{"linterp" for linear interpolation, or "normal" for
 conventional bracketing of sample gas.}
 
 \item{masses}{The masses to generate r and s columns from.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Spread and match sample gas and reference gas.

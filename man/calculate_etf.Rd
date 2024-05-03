@@ -6,6 +6,7 @@
 \usage{
 calculate_etf(
   .data,
+  ...,
   raw = D47_raw_mean,
   exp = expected_D47,
   session = Preparation,
@@ -19,6 +20,8 @@ calculate_etf(
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{raw}{Column name of raw \eqn{\Delta_{47}} values.}
 
@@ -36,6 +39,8 @@ calculate_etf(
 \item{intercept}{The column name of the new intercept.}
 
 \item{parallel}{Whether or not (default) to process this in parallel, using package \code{furrr}.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Calculate the Empirical Transfer Function

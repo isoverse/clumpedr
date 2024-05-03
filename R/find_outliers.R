@@ -17,11 +17,13 @@
 #' @param n_id1 Minimum number of aliquots within session to calculate threshold within group.
 #' @param nsd_off Number of standard deviations away from the mean threshold.
 #' @param D47 The column with \eqn{\Delta_{47}} values.
-#' @param std_names Names of the standards used for the correction.
 #' @param session Column name that defines correction session.
 #' @param id1 Column name of the sample/standard identifier.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 find_outliers <- function(.data,
+                          ...,
                           init_low = 8000, init_high = 40000, init_diff = 1200,
                           param49_off = 1,
                           internal_sd = 0.15,
@@ -31,9 +33,13 @@ find_outliers <- function(.data,
                           D47 = D47_raw, #D47_raw_mean,
                           session = Preparation,
                           id1 = `Identifier 1`,
-                          quiet = default(quiet)) {
+                          quiet = NULL) {
   # default quoted arguments are bad, hmkay
   D47_raw <- Preparation <- `Identifier 1` <- NULL
+
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   .data %>%
     ## NOTE: cycle outliers are handled elsewhere!
@@ -66,13 +72,18 @@ find_outliers <- function(.data,
 ##' @param init_low Column in .data with minimum initial intensity threshold for mass 44.
 ##' @param init_high Column in .data with maximum initial intensity threshold for mass 44.
 ##' @param init_diff Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.
+#' @inheritParams dots
+#' @inheritParams quiet
 ##' @export
 find_init_outliers <- function(.data,
                                init_low, init_high, init_diff,
                                ...,
-                               quiet = default(quiet)) {
+                               quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
+  }
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   if (!quiet) {
@@ -96,6 +107,8 @@ find_init_outliers <- function(.data,
 ##' Find measurements with a param49 value that is greater than \code{param49_off}.
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param param49_off The absolute cutoff value for the parameter 49 value.
+#' @inheritParams dots
+#' @inheritParams quiet
 find_param49_outliers <- function(.data, param49_off, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
@@ -121,11 +134,16 @@ find_param49_outliers <- function(.data, param49_off, ..., quiet = NULL) {
 ##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
 ##' @param internal_sd The internal standard deviation cutoff value.
 ##' @param D47 The column to calculate the internal sd value for.
+#' @inheritParams dots
+#' @inheritParams quiet
 ##' @export
 find_internal_sd_outlier <- function(.data, internal_sd = .15, ...,
                                      D47 = D47_raw,
-                                     quiet = default(quiet)) {
+                                     quiet = NULL) {
   `Identifier 1` <- D47_raw <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   if (!quiet) {
     glue("Info: identifying aliquots with internal standard deviation of {quo_name(enquo(D47))} > {internal_sd}.") %>%
@@ -134,19 +152,22 @@ find_internal_sd_outlier <- function(.data, internal_sd = .15, ...,
   .data %>%
     mutate(aliquot_sd = sd({{D47}}, na.rm = TRUE),
            outlier_internal_sd = .data$aliquot_sd > .env$internal_sd,
-           .by = .data$file_id)
+           .by = "file_id")
 }
 
-##' Find session outliers.
-##'
-##' Find outliers that are more than 4 standard deviations away from the session median.
-##'
-##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-##' @param n The minimum number of measurements in the session needed to calculate an offset from the median.
-##' @param nsd_off The number of standard deviations away from the median.
-##' @param D47 The column to calculate the internal sd value for.
-##' @param session The session for which to calculate the standard deviation and median values.
-##' @export
+#' Find session outliers.
+#'
+#' Find outliers that are more than 4 standard deviations away from the session median.
+#'
+#' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
+#' @param n The minimum number of measurements in the session needed to calculate an offset from the median.
+#' @param nsd_off The number of standard deviations away from the median.
+#' @param D47 The column to calculate the internal sd value for.
+#' @param session The session for which to calculate the standard deviation and median values.
+#' @param outlier_session Column name of new output column.
+#' @export
+#' @inheritParams dots
+#' @inheritParams quiet
 find_session_outlier <- function(.data, ...,
                                  n = 5, nsd_off = 4, D47 = D47_raw, outlier_session = outlier_session_D47,
                                  session = Preparation, quiet = NULL) {
@@ -169,20 +190,24 @@ find_session_outlier <- function(.data, ...,
     mutate({{outlier_session}} := ifelse(.data$n > .env$n, {{D47}} - .data$median > .env$nsd_off * .data$sd, NA))
 }
 
-##' Find session outliers by sample/standard type.
-##'
-##' Find outliers that are more than 4 standard deviations away from the session and sample/standard median.
-##'
-##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-##' @param n_id1 The minimum number of measurements of the sample/standard in the session needed to calculate an offset from the median.
-##' @param nsd_off The number of standard deviations away from the median.
-##' @param D47 The column to calculate the internal sd value for.
-##' @param session The session for which to calculate the standard deviation and median values.
-##' @param id1 The column that defines the sample/standard name.
+#' Find session outliers by sample/standard type.
+#'
+#' Find outliers that are more than 4 standard deviations away from the session and sample/standard median.
+#'
+#' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
+#' @param n_id1 The minimum number of measurements of the sample/standard in the session needed to calculate an offset from the median.
+#' @param nsd_off The number of standard deviations away from the median.
+#' @param D47 The column to calculate the internal sd value for.
+#' @param session The session for which to calculate the standard deviation and median values.
+#' @param id1 The column that defines the sample/standard name.
+#' @inheritParams dots
+#' @inheritParams quiet
 ##' @export
 find_session_id1_outlier <- function(.data, ...,
                                      n_id1 = 5, nsd_off = 4, D47 = D47_raw,
                                  session = Preparation, id1 = `Identifier 1`, quiet = NULL) {
+  D47_raw <- Preparation <- `Identifier 1` <- outlier <- NULL
+
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }
@@ -190,7 +215,6 @@ find_session_id1_outlier <- function(.data, ...,
   if (!quiet)
     glue("Info: identifying rows that are >{nsd_off} sd of {quo_name(enquo(D47))} away from the median by {quo_name(enquo(session))} and {quo_name(enquo(id1))}.") %>%
       message()
-  D47_raw <- Preparation <- `Identifier 1` <- NULL
 
   .data %>%
     group_by({{ session }}, {{ id1 }}) %>%
@@ -205,13 +229,15 @@ find_session_id1_outlier <- function(.data, ...,
 
 }
 
-##' Summarise the outlier columns.
-##'
-##' Calculate whether a sample is an outlier or not based on all the existing \code{"outlier_"} columns.
-##'
-##' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
-##' @param out_column The name of the outlier column.
-##' @export
+#' Summarise the outlier columns.
+#'
+#' Calculate whether a sample is an outlier or not based on all the existing \code{"outlier_"} columns.
+#'
+#' @param .data A [tibble][tibble::tibble-package] with raw Delta values and file information.
+#' @param out_column The name of the outlier column.
+#' @inheritParams dots
+#' @inheritParams quiet
+#' @export
 summarise_outlier <- function(.data, out_column = outlier, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))

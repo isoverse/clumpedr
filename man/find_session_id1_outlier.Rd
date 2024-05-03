@@ -18,6 +18,8 @@ find_session_id1_outlier(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{n_id1}{The minimum number of measurements of the sample/standard in the session needed to calculate an offset from the median.}
 
 \item{nsd_off}{The number of standard deviations away from the median.}
@@ -27,6 +29,8 @@ find_session_id1_outlier(
 \item{session}{The session for which to calculate the standard deviation and median values.}
 
 \item{id1}{The column that defines the sample/standard name.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Find outliers that are more than 4 standard deviations away from the session and sample/standard median.

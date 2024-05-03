@@ -10,7 +10,7 @@ append_ref_deltas(
   ...,
   d13C_PDB_wg = NULL,
   d18O_PDBCO2_wg = NULL,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
@@ -18,9 +18,13 @@ append_ref_deltas(
 
 \item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{d13C_PDB_wg}{\eqn{\delta^{13}C} reference gas value to overwrite.}
 
 \item{d18O_PDBCO2_wg}{\eqn{\delta^{18}O} reference gas value to overwrite.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Append reference gas delta values

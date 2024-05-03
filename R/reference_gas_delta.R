@@ -4,18 +4,24 @@
 #' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @param d13C_PDB_wg \eqn{\delta^{13}C} reference gas value to overwrite.
 #' @param d18O_PDBCO2_wg \eqn{\delta^{18}O} reference gas value to overwrite.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 append_ref_deltas <- function(.data, .did = NULL,
                               ...,
                               d13C_PDB_wg = NULL,
                               d18O_PDBCO2_wg = NULL,
-                              quiet = default(quiet)) {
+                              quiet = NULL) {
   if (!any(class(.data) %in% c("data.frame", "tbl_df", "tbl"))) {
     stop("`.data` must be a data.frame or tibble", call. = FALSE)
   }
 
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
+  }
+
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   # i had this commented out but I forgot why
@@ -26,8 +32,13 @@ append_ref_deltas <- function(.data, .did = NULL,
   }
 
   if (!((is.null(.did) & !is.null(d13C_PDB_wg) & !is.null(d18O_PDBCO2_wg)) |
-          (!is.null(.did) & is.null(d13C_PDB_wg) & is.null(d18O_PDBCO2_wg))))
+          (!is.null(.did) & is.null(d13C_PDB_wg) & is.null(d18O_PDBCO2_wg)))) {
     stop("Either did or d13C_PDB_wg and d18O_PDBCO2_wg must be provided.", call. = FALSE)
+  }
+
+  if (!quiet) {
+    message("Info: collapsing cycles, calculating sample summaries.")
+  }
 
   if (is.null(d13C_PDB_wg) & is.null(d18O_PDBCO2_wg) & !is.null(.did)) {
     if (!quiet) {
@@ -65,8 +76,8 @@ get_ref_delta <- function(did) {
   }
 
   isoreader::iso_get_standards(did, quiet = TRUE) %>%
-    filter(delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
-    distinct(file_id, delta_name, .keep_all = TRUE) %>%
+    filter(.data$delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
+    distinct(.data$file_id, .data$delta_name, .keep_all = TRUE) %>%
     pivot_wider(id_cols = "file_id", names_from = "delta_name", values_from = "delta_value") %>%
     select("file_id", "d 13C/12C", "d 18O/16O") %>%
     rename(d13C_PDB_wg = "d 13C/12C", d18O_PDBCO2_wg = "d 18O/16O") %>%

@@ -17,6 +17,8 @@ append_expected_values(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{std_names}{Names of the standards.}
 
 \item{std_values}{Expected values of the standards. Defaults to Muller et
@@ -25,6 +27,8 @@ al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 \item{exp}{Name of the new column that will hold expected values.}
 
 \item{by}{Name of the standard/sample identifier column.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Append the expected values for the standards. Defaults to using

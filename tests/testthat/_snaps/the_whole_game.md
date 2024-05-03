@@ -24,6 +24,7 @@
     Code
       out <- append_ref_deltas(out, standards)
     Message
+      Info: collapsing cycles, calculating sample summaries.
       Info: appending reference gas δ values from 27 data file(s)
     Code
       out <- abundance_ratios(out, i44 = s44, i45 = s45, i46 = s46, i47 = s47, i48 = s48,

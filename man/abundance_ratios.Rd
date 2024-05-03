@@ -24,6 +24,8 @@ abundance_ratios(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{i44}{Name of mass 44 column.}
 
 \item{i45}{Name of mass 45 column.}
@@ -45,6 +47,8 @@ abundance_ratios(
 \item{R48}{Desired new name of the calculated ratio for mass 48.}
 
 \item{R49}{Desired new name of the calculated ratio for mass 49.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Calculate abundance ratios by dividing input mass column \eqn{i} over mass

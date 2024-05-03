@@ -7,6 +7,8 @@
 #' @param .info A [tibble][tibble::tibble-package], resulting from
 #'   [clean_did_info()].
 #' @param cols  A character vector with column names in info to add to the data.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 #' @family metadata cleaning functions
 add_info <- function(.data, .info, ...,

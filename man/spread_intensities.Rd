@@ -16,9 +16,15 @@ spread_intensities(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing mass intensities per cycle.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{ids}{Identifying columns that we'll group by.}
 
 \item{our_cols}{Columns with data values that need to be reshaped. Defaults to v44.mV to v54.mV.}
+
+\item{names_pattern}{Regular expression passed to [\link[tidyr:pivot_longer]{tidyr::pivot_longer}].}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the sample and reference

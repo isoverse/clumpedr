@@ -7,6 +7,7 @@
 clean_did_info(
   .did,
   masspec = NULL,
+  ...,
   std_names = c(paste0("ETH-", 1:4), "IAEA-C2", "Merck"),
   oth_name = "other",
   quiet = NULL
@@ -17,9 +18,13 @@ clean_did_info(
 
 \item{masspec}{The name of the mass spectrometer to append.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{std_names}{Character vector of the standard names to find in \verb{Identifier 1}.}
 
 \item{oth_name}{Single general name to assign to non-standard "other" measurements.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Converts mass spectrometer metadata into the correct types and appends the

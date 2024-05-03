@@ -10,6 +10,8 @@
 #' @param D47 The column name of the \eqn{\Delta_47} values to use for the acid
 #'   fractionation calculation.
 #' @param D47_out The desired new column name.
+#' @inheritParams dots
+#' @inheritParams quiet
 #'
 #' @references
 #'
@@ -28,7 +30,8 @@
 #' 1057--1066.
 #'
 #' @export
-acid_fractionation <- function(.data, aff = 0.062, D47 = D47_etf,
+acid_fractionation <- function(.data, aff = 0.062, ...,
+                               D47 = D47_etf,
                                D47_out = D47_final,
                                quiet = default(quiet)) {
   # global variables and defaults

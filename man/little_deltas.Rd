@@ -8,6 +8,10 @@ little_deltas(.data, ..., quiet = NULL)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with abundance ratios.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 For all intensities \eqn{i},

@@ -26,6 +26,8 @@ isobar_ratios(
 \arguments{
 \item{.data}{A tibble with columns R13 and R18.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{R13}{The column name for R13.}
 
 \item{R18}{The column name for R18.}

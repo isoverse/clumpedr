@@ -16,6 +16,8 @@
 #' @param d49 Column name of d49.
 #' @inheritParams isobar_ratios
 #' @inheritParams default.params
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
 #'   measurements, _Chemical Geology_ **2016**, _442_, 83--96.

@@ -28,13 +28,15 @@
 #'
 #' @export
 #' @family empirical transfer functions
+#' @inheritParams dots
+#' @inheritParams quiet
 append_expected_values <- function(.data,
                                    ...,
                                    std_names = paste0("ETH-", 1:3),  # we don't use ETH-4!
                                    std_values = c(0.258, 0.256, 0.691) - 0.062, #, 0.507),
                                    exp = expected_D47,
                                    by = `Identifier 1`,
-                                   quiet = default(quiet)) {
+                                   quiet = NULL) {
   # global variables and defaults
   `Identifier 1` <- expected_D47 <- NULL
 

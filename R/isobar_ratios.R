@@ -15,6 +15,8 @@
 #' @param R48 The output column name for R48.
 #' @param R49 The output column name for R49.
 #' @inheritParams default.params
+#' @inheritParams dots
+#' @inheritParams quiet
 #'
 #' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}

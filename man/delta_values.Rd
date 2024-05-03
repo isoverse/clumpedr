@@ -9,6 +9,10 @@ delta_values(.data, ..., quiet = NULL)
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=correct_backgrounds]{correct_backgrounds()}}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Calculate abundance ratios, \eqn{\delta^{18}}O, \eqn{\delta^{13}}C, \eqn{\delta}'s, and raw \eqn{\Delta} values

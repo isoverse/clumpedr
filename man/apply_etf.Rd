@@ -17,6 +17,8 @@ apply_etf(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} containing column D47.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{intercept}{The column name with the ETF intercept.}
 
 \item{slope}{The column name with the ETF slope.}
@@ -24,6 +26,8 @@ apply_etf(
 \item{raw}{The column with raw values to apply the ETF to.}
 
 \item{out}{The new column name.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Uses the previously calculated intercept and slope, and uses them to

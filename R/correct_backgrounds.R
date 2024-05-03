@@ -7,8 +7,10 @@
 #' @param factor Factor by which to multiply the half-cup before subtraction.
 #' @param i47 Column with mass 47 intensities to correct.
 #' @param i54 Column with mass 47.5 intensities to use for correction.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
-correct_backgrounds  <- function(.data, factor,
+correct_backgrounds  <- function(.data, factor, ...,
                                  i47 = v47.mV, i54 = v54.mV,
                                  quiet = default(quiet)) {
   # global variables and defaults

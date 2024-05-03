@@ -11,11 +11,13 @@ temperature_calculation(
   temp = temperature,
   slope = "slope",
   intercept = "intercept",
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{\link[=acid_fractionation]{acid_fractionation()}}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
 
@@ -24,6 +26,8 @@ temperature_calculation(
 \item{slope}{Character(1) column name with the slope.}
 
 \item{intercept}{Character(1) column name with the intercept.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures from

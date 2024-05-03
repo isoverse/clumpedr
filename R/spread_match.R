@@ -34,8 +34,11 @@ spread_match <- function(.data, ...,
 #' @param .data A [tibble][tibble::tibble-package] containing mass intensities per cycle.
 #' @param ids Identifying columns that we'll group by.
 #' @param our_cols Columns with data values that need to be reshaped. Defaults to v44.mV to v54.mV.
+#' @param names_pattern Regular expression passed to [[tidyr::pivot_longer]].
 #' @return A [tibble][tibble::tibble-package] with the sample and reference
 #'   gasses side-by-side.
+#' @inheritParams dots
+#' @inheritParams quiet
 spread_intensities  <- function(.data, ...,
                                 ids = NULL, our_cols = NULL,
                                 names_pattern = "v([4-9]{2}).(mV)",
@@ -111,6 +114,8 @@ spread_intensities  <- function(.data, ...,
 #' @param method "linterp" for linear interpolation, or "normal" for
 #'     conventional bracketing of sample gas.
 #' @param masses The masses to generate r and s columns from.
+#' @inheritParams dots
+#' @inheritParams quiet
 match_intensities <- function(.data, ...,
                               method = "normal", masses = c(44:49, 54), quiet = NULL) {
   our_cols <- c(paste0("s", masses), paste0("r", masses))
@@ -147,6 +152,6 @@ match_intensities <- function(.data, ...,
   out %>%
     filter(cycle != 0) %>% # cycle 0 of the ref gas is no longer needed
     # create the summary outlier column
-    mutate(cycle_has_drop = cycle_has_drop_s44 | cycle_has_drop_r44,
-           outlier_cycle = outlier_cycle_s44 | outlier_cycle_r44)
+    mutate(cycle_has_drop = .data$cycle_has_drop_s44 | .data$cycle_has_drop_r44,
+           outlier_cycle = .data$outlier_cycle_s44 | .data$outlier_cycle_r44)
 }

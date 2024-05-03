@@ -12,6 +12,8 @@
 #'   Preparation of the standards.
 #' @param D47 The column with \eqn{\Delta_47} values. Defaults to `D47_raw_mean`.
 #' @inheritParams find_outliers
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 remove_outliers <- function(.data,
                             ...,
@@ -25,9 +27,12 @@ remove_outliers <- function(.data,
                             session = Preparation,
                             id1 = `Identifier 1`,
                             ## plot_x = file_datetime,
-                            quiet = default(quiet)) {
+                            quiet = NULL) {
   # global variables and defaults
-  D47_raw <- file_datetime <- Preparation <- NULL
+  D47_raw <- file_datetime <- Preparation <- `Identifier 1` <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   out <- .data %>%
     find_outliers(init_low, init_high, init_diff, param49_off, internal_sd,

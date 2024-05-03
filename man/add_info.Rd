@@ -13,7 +13,11 @@ add_info(.data, .info, ..., cols = NULL, quiet = NULL)
 \item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{cols}{A character vector with column names in info to add to the data.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Append mass spectrometer metadata to the raw data.

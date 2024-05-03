@@ -4,14 +4,7 @@
 \alias{find_init_outliers}
 \title{Find measurements that have wrong initial intensities.}
 \usage{
-find_init_outliers(
-  .data,
-  init_low,
-  init_high,
-  init_diff,
-  ...,
-  quiet = default(quiet)
-)
+find_init_outliers(.data, init_low, init_high, init_diff, ..., quiet = NULL)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
@@ -21,6 +14,10 @@ find_init_outliers(
 \item{init_high}{Column in .data with maximum initial intensity threshold for mass 44.}
 
 \item{init_diff}{Column in .data with maximum initial difference in mass 44 threshold between standard and sample gas.}
+
+\item{...}{These dots are for future extensions and must be empty.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Finds values of \code{s44_init} and \code{r44_init} that fall outside of

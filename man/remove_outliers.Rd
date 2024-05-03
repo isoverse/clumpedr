@@ -18,12 +18,14 @@ remove_outliers(
   D47 = D47_raw,
   session = Preparation,
   id1 = `Identifier 1`,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=collapse_cycles]{collapse_cycles()}}.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{init_low}{Minimum initial intensity threshold for mass 44.}
 
@@ -47,6 +49,8 @@ Preparation of the standards.}
 \item{session}{Column name that defines correction session.}
 
 \item{id1}{Column name of the sample/standard identifier.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Remove outliers

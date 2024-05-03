@@ -18,13 +18,19 @@ find_session_outlier(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
 
+\item{...}{These dots are for future extensions and must be empty.}
+
 \item{n}{The minimum number of measurements in the session needed to calculate an offset from the median.}
 
 \item{nsd_off}{The number of standard deviations away from the median.}
 
 \item{D47}{The column to calculate the internal sd value for.}
 
+\item{outlier_session}{Column name of new output column.}
+
 \item{session}{The session for which to calculate the standard deviation and median values.}
+
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 Find outliers that are more than 4 standard deviations away from the session median.

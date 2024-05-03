@@ -24,3 +24,11 @@
 temperature_axis <- function(slope = 0.0449, intercept = 0.167) {
       ~ sqrt((slope * 1e6) / (. - intercept)) - 273.15
 }
+
+#' @name dots
+#' @param ... These dots are for future extensions and must be empty.
+NULL
+
+#' @name quiet
+#' @param quiet If `TRUE`, print info messages. If `NULL` (default) listens to `options(clumpedr.quiet)`
+NULL

@@ -6,6 +6,7 @@
 \usage{
 find_outliers(
   .data,
+  ...,
   init_low = 8000,
   init_high = 40000,
   init_diff = 1200,
@@ -17,11 +18,13 @@ find_outliers(
   D47 = D47_raw,
   session = Preparation,
   id1 = `Identifier 1`,
-  quiet = default(quiet)
+  quiet = NULL
 )
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} with raw Delta values and file information.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{init_low}{Minimum initial intensity threshold for mass 44.}
 
@@ -45,7 +48,7 @@ find_outliers(
 
 \item{id1}{Column name of the sample/standard identifier.}
 
-\item{std_names}{Names of the standards used for the correction.}
+\item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
 \description{
 This function finds outliers based on several criteria.

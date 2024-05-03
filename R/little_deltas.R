@@ -4,6 +4,8 @@
 #' \deqn{\delta_i = (R_i / R_iwg - 1) \times 1000}
 #'
 #' @param .data A [tibble][tibble::tibble-package] with abundance ratios.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 little_deltas <- function(.data, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {

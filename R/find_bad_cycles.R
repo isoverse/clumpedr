@@ -19,13 +19,15 @@
 #' @param cycle Column name of the column with the measurement cycle number.
 #' @param relative_to cycle Drop detection occurs relative to either the first
 #'   cycle ("init", default) or to the previous cycle ("prev").
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @export
 #' @family cycle functions
 find_bad_cycles <- function(.data, ...,
                             min, max, fac,
                             v44 = "v44.mV", cycle = "cycle",
                             relative_to = "init",
-                            quiet = default(quiet)) {
+                            quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
@@ -33,6 +35,10 @@ find_bad_cycles <- function(.data, ...,
   # check parameter relative_to
   if (!relative_to %in% c("init", "prev")) {
     stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
+  }
+
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
   }
 
   out <- .data %>%
@@ -66,9 +72,10 @@ find_bad_cycles <- function(.data, ...,
            .by = "file_id") %>%
     mutate(outlier_cycle = .data$outlier_cycle_low | .data$outlier_cycle_high | .data$outlier_cycle_drop, .by = "file_id")
 
-  if (!quiet)
+  if (!quiet) {
     glue("Info: found {length(unique(pull(filter(out, .data$cycle_has_drop), file_id)))} out of {length(unique(pull(out, file_id)))} acquisitions with a drop in pressure of mass 44.") %>%
       message()
+  }
 
   out
 }

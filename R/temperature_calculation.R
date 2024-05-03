@@ -9,14 +9,19 @@
 #' @param temp The column name of the output temperature.
 #' @param slope Character(1) column name with the slope.
 #' @param intercept Character(1) column name with the intercept.
+#' @inheritParams dots
+#' @inheritParams quiet
 #' @seealso revcal tempcal
 #' @export
 temperature_calculation <- function(.data, ...,
                                     D47 = D47_final, temp = temperature,
                                     slope = "slope", intercept = "intercept",
-                                    quiet = default(quiet)) {
+                                    quiet = NULL) {
   # global variables and defaults
   D47_final <- temperature <- NULL
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
 
   if (!quiet) {
     message(glue::glue("Info: calculating temperature with slope {unique(.data[, slope])} and intercept {unique(.data[, intercept])}, ignoring uncertainty in the calibration."))

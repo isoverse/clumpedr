@@ -11,7 +11,10 @@
 #' @param intercept The column name of the new intercept.
 #' @param parallel Whether or not (default) to process this in parallel, using package `furrr`.
 #' @importFrom stats na.exclude
-calculate_etf <- function(.data, raw = D47_raw_mean, exp = expected_D47,
+#' @inheritParams dots
+#' @inheritParams quiet
+calculate_etf <- function(.data, ...,
+                          raw = D47_raw_mean, exp = expected_D47,
                           session = Preparation, etf = etf,
                           etf_coefs = etf_coefs, slope = slope,
                           intercept = intercept, parallel = FALSE, quiet = NULL) {
