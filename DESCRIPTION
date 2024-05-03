@@ -40,5 +40,7 @@ Suggests:
     knitr,
     future,
     furrr,
-    isoreader
+    isoreader (>= 1.4.1)
 Config/testthat/edition: 3
+Remotes:
+    isoverse/isoreader
