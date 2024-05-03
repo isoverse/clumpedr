@@ -4,7 +4,7 @@
 <!-- always refer to the latest Zenodoi DOI -->
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10638816.svg)](https://doi.org/10.5281/zenodo.10638816)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/isoprocessor)](https://cran.r-project.org/package=clumpedr)
-[![GPL-3](https://img.shields.io/github/license/japhir/snvecR?logo=gnu&.svg)](https://github.com/japhir/snvecR/blob/master/LICENSE.md)
+[![GPL-3](https://img.shields.io/github/license/isoverse/clumpedr?logo=gnu&.svg)](https://github.com/isoverse/clumpedr/blob/master/LICENSE.md)
 [![release](https://img.shields.io/github/v/release/isoverse/clumpedr.svg)](https://github.com/isoverse/isoreader/releases)
 [![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/isoverse/clumpedr/main)
 <!-- [![Build -->
