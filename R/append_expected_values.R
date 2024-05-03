@@ -48,6 +48,10 @@ append_expected_values <- function(.data,
     std_values <- std_values[!is.na(std_values)]
   }
 
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
+
   if (!quiet)
     glue("Info: Appending expected values as {quo_name(enquo(exp))} for standards {glue::glue_collapse(unique(std_names), sep = ' ', last = ' and ', width = 30)}") %>%
       message()
