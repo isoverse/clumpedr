@@ -1,12 +1,18 @@
 # clumpedr
 
 <!-- badges: start -->
+<!-- always refer to the latest Zenodoi DOI -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10638816.svg)](https://doi.org/10.5281/zenodo.10638816)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/isoprocessor)](https://cran.r-project.org/package=clumpedr)
-[![Build
-Status](https://travis-ci.org/isoverse/clumpedr.svg?branch=master)](https://travis-ci.org/isoverse/clumpedr)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/KopfLab/clumpedr?branch=master&svg=true)](https://ci.appveyor.com/project/KopfLab/clumpedr)
-[![R-CMD-check](https://github.com/isoverse/clumpedr/workflows/R-CMD-check/badge.svg)](https://github.com/isoverse/clumpedr/actions)
+[![GPL-3](https://img.shields.io/github/license/japhir/snvecR?logo=gnu&.svg)](https://github.com/japhir/snvecR/blob/master/LICENSE.md)
+[![release](https://img.shields.io/github/v/release/japhir/snvecR.svg)](https://github.com/japhir/snvecR/releases)
+[![Launch binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/isoverse/clumpedr/main)
+<!-- [![Build -->
+<!-- Status](https://travis-ci.org/isoverse/clumpedr.svg?branch=master)](https://travis-ci.org/isoverse/clumpedr) -->
+<!-- [![AppVeyor Build -->
+<!-- Status](https://ci.appveyor.com/api/projects/status/github/KopfLab/clumpedr?branch=master&svg=true)](https://ci.appveyor.com/project/KopfLab/clumpedr) -->
+<!-- [![R-CMD-check](https://github.com/isoverse/clumpedr/workflows/R-CMD-check/badge.svg)](https://github.com/isoverse/clumpedr/actions) -->
+[![check-standard](https://github.com/isoverse/clumpedr/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/isoverse/clumpedr/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 Clumpedr aims to facilitate analysis of clumped isotope data. It builds on [isoreader](https://github.com/isoverse/isoreader) which is used to import raw data files from the mass spectrometer, and most of the important data processing parts are based on Huntington et al. 2009 and Daëron et al. 2016.
