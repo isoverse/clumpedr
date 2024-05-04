@@ -42,6 +42,7 @@ them here. i.e.: \deqn{\Delta_{47etf} = - (\alpha / \beta) + (1 / \beta)
 \seealso{
 Other empirical transfer functions: 
 \code{\link{append_expected_values}()},
+\code{\link{calculate_etf}()},
 \code{\link{empirical_transfer_function}()}
 }
 \concept{empirical transfer functions}

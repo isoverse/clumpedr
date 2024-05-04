@@ -45,3 +45,10 @@ calculate_etf(
 \description{
 Calculate the Empirical Transfer Function
 }
+\seealso{
+Other empirical transfer functions: 
+\code{\link{append_expected_values}()},
+\code{\link{apply_etf}()},
+\code{\link{empirical_transfer_function}()}
+}
+\concept{empirical transfer functions}

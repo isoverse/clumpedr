@@ -53,6 +53,7 @@ weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
 \seealso{
 Other empirical transfer functions: 
 \code{\link{apply_etf}()},
+\code{\link{calculate_etf}()},
 \code{\link{empirical_transfer_function}()}
 }
 \concept{empirical transfer functions}

@@ -1,7 +1,7 @@
 ---
 title: "Using clumpedr: basic data analysis"
 author: "Ilja J. Kocken"
-date: 2019-11-13
+date: 2024-05-03
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using clumpedr: basic data analysis}
@@ -9,17 +9,17 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
-  ## comment = "#>"
-  error = TRUE
+  collapse = TRUE,
+  comment = "#>"
 )
 ```
 
 Once you have `clumpedr` installed (see the README), you can first load the libraries:
 
 # load the packages that we use
-```{r}
+```{r setup}
   # library(tidyverse)  # a few of the below and many more
   library(glue)      # optional, if you want to glue strings together
   library(dplyr)     # for pipes, mutate, summarise, etc.
@@ -82,6 +82,7 @@ We save the file info separately, since we will have to refer to it for some plo
 
 ```{r}
 stdinfo <- iso_get_file_info(standards)
+glimpse(stdinfo)
 ```
 
 This would also be the place to add potential fixes to typos in the file info
@@ -92,7 +93,7 @@ using `isoreader::iso_mutate_file_info()`.
 Note that normally, it is faster and smarter not to save the output of every
 step as a separate tibble, but in this case we do it so that we can easily
 inspect the results along the way. See the end of the vignette for the single
-pipe.
+pipeline.
 
 ### filter measurements of interest
 
@@ -101,11 +102,15 @@ First we filter out the measurements we want, based on the Method name.
 We use a regular expression, or `regexp`. They are very useful ways of looking
 for patterns in strings.
 
+Note that I put the name of the newly generated object at the end here for this
+and future code chunks, so we `print()` the result for inspection.
+
 ```{r}
 filt <- standards |>
   # we can subset to some files of interest (e.g., based on a regular expression)
   # in this case we subset to all the runs that have a "Clumped" method.
   iso_filter_files(grepl("Clumped.*met", Method))
+filt
 ```
 
 ### extract raw data
@@ -118,6 +123,7 @@ is one cycle of either `standard` or `sample` gas, with initensities
 rawd <- filt |>
   # get all the raw data, per cycle from the dids
   iso_get_raw_data(include_file_info = "Analysis")
+rawd
 ```
 
 ### disable failed cycles
@@ -127,14 +133,16 @@ This disables any cycles that have a sudden drop in pressure/intensity.
 ```{r}
 disc <- rawd |>
   mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
-  find_bad_cycles(min = dis_min, max = dis_max,
-                  fac = dis_fac, relative_to = "init")
+  find_bad_cycles(min = "dis_min", max = "dis_max",
+                  fac = "dis_fac", relative_to = "init")
+disc |> select(file_id, outlier_cycle_low:outlier_cycle)
 ```
 
 ### find initial intensities of each cycle
 
 ```{r}
 inits <- get_inits(rawd)
+inits
 ```
 
 ### background correction
@@ -144,7 +152,11 @@ Do a very simple background correction based on the half-cup mass 54.
 ```{r}
 bgds <- disc |>
   correct_backgrounds(factor = 0.82)
+bgds |> select(file_id, v47.mV, v54.mV)
 ```
+
+This overwrites the `v47.mV` column by subtracting `factor` * the `v54.mV`
+column from `v47.mV`.
 
 For a background correction based on background scans performed before each run
 we have to get the raw scan data into R.
@@ -158,6 +170,11 @@ We can do this with:
 Processing the background scan files in this way is beyond the scope of this
 vignette for now, since the functions that do the work are not generalized
 enough to work for other set-ups.
+
+See our
+[clumped-processing](https://github.com/UtrechtUniversity/clumped-processing)
+scripts for how we do background corrections and implement the full clumped
+isotope workflow at Utrecht University.
 
 ### spread match
 
@@ -188,8 +205,9 @@ to the following output:
 | `"file_1.did"` | 2019-03-01 12:00:00 | 1     | 1200 | 1100 | 1000 | 5000 | -302 | 1250 | 1110 | 1010 | 5010 | -245 |
 
 ```{r}
-sprd <- disc |>
+sprd <- bgds |>
   spread_match(method = "normal")
+sprd |> select(file_id, r44:s49)
 ```
 
 ### extract reference gas d13C and d18O values
@@ -197,29 +215,46 @@ sprd <- disc |>
 ```{r}
 refd <- sprd |>
   append_ref_deltas(standards)
+refd |> select(file_id, d13C_PDB_wg:d18O_PDBCO2_wg)
 ```
 ### calculate little delta's and clumped values
 
 Now we can go to the bread and butter of clumpedr, delta calculations!
 
 ```{r}
-dlts <- refd |>
-  abundance_ratios(s44, s45, s46, s47, s48, s49) |>
-  abundance_ratios(r44, r45, r46, r47, r48, r49,
-                   R45_wg, R46_wg, R47_wg, R48_wg, R49_wg) |>
-  little_deltas() |>
-  mutate(Mineralogy = "Calcite", R18_PDB = clumpedr:::default(R18_PDB)) |>
-  bulk_and_clumping_deltas(R18_PDB = .data$R18_PDB) |>
+abd <- refd |>
+  abundance_ratios(i44 = s44, i45 = s45, i46 = s46, i47 = s47, i48 = s48, i49 = s49) |>
+  abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48, i49 = r49,
+                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg)
+abd |> select(file_id, R45:R49_wg)
+```
+
+```{r}
+dlts <- abd |>
+  little_deltas()
+# this contains some more columns, but just showing the ones of interest for now
+dlts |> select(file_id, d45:d49)
+```
+
+```{r}
+bigD <- dlts |>
+  mutate(Mineralogy = "Calcite") |>
+  bulk_and_clumping_deltas()
   # outlier on the cycle level now contains all the reasons for cycle outliers
-  summarise_outlier(quiet = TRUE)
+# it calculates more columns, but we show some of the new ones here:
+bigD |> select(file_id, R13_wg:R17, C12, C626, C628, C828, # some columns not shown here
+               d18O_PDB, d13C_PDB, R47_stoch, D47_raw)
 ```
 
 ### collapse cycles: calculate averages and standard deviations
 
 ```{r}
-coll <- dlts |>
-  clumpedr:::collapse_cycles(cols = c(d13C_PDB, d18O_PDB, D47_raw), id = c(file_id, Analysis)) # this is an older function which we will likely deprecate in the future in favour of:
-  ## nest_cycle_data()
+coll <- bigD |>
+  collapse_cycles(cols = c(d13C_PDB, d18O_PDB, D47_raw), id = c(file_id, Analysis))
+  # in the future we may want to use this nicer nesting approach?
+  # It doesn't calculate summaries yet though.
+  # nest_cycle_data(bgs = NULL)
+coll |> select(file_id, d13C_PDB_mean, D47_raw_mean, D47_raw_cl)
 ```
 
 ### append metadata
@@ -237,6 +272,7 @@ dati <- coll |>
                              "Preparation", "Method", "measurement_info",
                              "MS_integration_time.s")) |>
   add_info(inits, cols = c("s44_init", "r44_init"))
+dati |> select(file_id, file_root:r44_init)
 ```
 
 ### remove outliers
@@ -249,29 +285,44 @@ Here we just filter outliers based on initial intensities.
 ```{r}
 rout <- dati |>
   unnest(cols = cycle_data) |>
-  find_init_outliers(init_low = 4000, init_high = 40000, init_diff = 3000)
+  find_init_outliers(init_low = 4000, init_high = 40000, init_diff = 3000) |>
+  summarize_outlier()
+rout |> select(file_id, starts_with("outlier"))
 ```
 
 ### empirical transfer function
 
 ```{r}
 detf <- rout |>
-  empirical_transfer_function()
+  append_expected_values() |>
+  calculate_etf() |>
+  apply_etf()
+  ## or the three functions above combined into one function
+  ## empirical_transfer_function()
+detf |> select(file_id, expected_D47:D47_etf)
 ```
 
 ### temperature calculation
 ```{r}
 temp <- detf |>
-  temperature_calculation(D47 = D47_etf, slope = 0.0397, intercept = 0.1518)
+  mutate(slope = 0.0397, intercept = 0.1518) |>
+  temperature_calculation(D47 = D47_etf, slope = "slope", intercept = "intercept")
+temp |> select(file_id, D47_raw_mean, D47_etf, temperature)
 ```
 
-Note that in the case of many small replicates, it is better to do your analysis based on the D47 in stead of on aliquot temperatures. Furthermore, error propagation of the calibration uncertainty is not incorporated here.
+Note that in the case of many small replicates, it is better to do your
+analysis based on the D47 values and then convert to temperature in the final
+phase of your analysis, rather than here at the aliquot level.
+
+Furthermore, error propagation of the calibration uncertainty is not incorporated here.
+If you would like to include temperature uncertainty using bootstrapping, see
+the package `clumpedcalib` on <https://github.com/japhir/clumpedcalib>.
 
 ## plots and summary
 
-We can create some summary plots, i.e. of the temperature per standard:
+We can create some summary plots, i.e. of the final D47 values for each standard:
 
-```{r}
+```{r, fig.width = 7, fig.height = 5}
 # create a tibble that holds heights for text annotations
 summ <- temp |>
   group_by(`Identifier 1`) |>
@@ -280,7 +331,7 @@ summ <- temp |>
 temp |>
   ggplot(aes(x = `Identifier 1`, y = D47_etf)) +
   geom_violin(aes(group = `Identifier 1`, fill = `Identifier 1`), alpha = 0.2) +
-  geom_jitter(width = .05, alpha = .6) +
+  geom_jitter(aes(colour = `Identifier 1`), width = .05, alpha = .6) +
   geom_text(aes(x = `Identifier 1`, y = y, label = n), data = summ, inherit.aes = FALSE)
 ```
 
@@ -306,12 +357,12 @@ standards |>
   correct_backgrounds(0.82) |>
   spread_match(method = "normal") |>
   append_ref_deltas(standards) |>
-  abundance_ratios(s44, s45, s46, s47, s48, s49) |>
-  abundance_ratios(r44, r45, r46, r47, r48, r49,
-                   R45_wg, R46_wg, R47_wg, R48_wg, R49_wg) |>
+  abundance_ratios(i44 = s44, i45 = s45, i46 = s46, i47 = s47, i48 = s48, i49 = s49) |>
+  abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48, i49 = r49,
+                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg) |>
   little_deltas() |>
-  mutate(Mineralogy = "Calcite", R18_PDB = clumpedr:::default(R18_PDB)) |>
-  bulk_and_clumping_deltas(R18_PDB = .data$R18_PDB) |>
+  mutate(Mineralogy = "Calcite") |>
+  bulk_and_clumping_deltas() |>
   # outlier on the cycle level now contains all the reasons for cycle outliers
   summarise_outlier(quiet = TRUE) |>
   collapse_cycles(cols = c(d18O_PDBCO2, d13C_PDB, D47_raw), id = c(file_id, Analysis)) |>
@@ -325,8 +376,10 @@ standards |>
   add_info(inits, cols = c("s44_init", "r44_init")) |>
   unnest(cols = cycle_data) |>
   find_init_outliers(init_low = 4000, init_high = 40000, init_diff = 3000) |>
+  summarize_outlier() |>
   empirical_transfer_function() |>
-  temperature_calculation(slope = 0.0397, intercept = 0.1518)
+  mutate(slope = 0.0397, intercept = 0.1518) |>
+  temperature_calculation(D47 = D47_etf, slope = "slope", intercept = "intercept")
 ```
 
 ### HINT: look at plots interactively

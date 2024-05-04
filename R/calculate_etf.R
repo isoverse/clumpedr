@@ -13,6 +13,8 @@
 #' @importFrom stats na.exclude
 #' @inheritParams dots
 #' @inheritParams quiet
+#' @family empirical transfer functions
+#' @export
 calculate_etf <- function(.data, ...,
                           raw = D47_raw_mean, exp = expected_D47,
                           session = Preparation, etf = etf,

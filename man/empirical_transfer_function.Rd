@@ -70,6 +70,7 @@ This function is a wrapper for \code{\link[=append_expected_values]{append_expec
 \seealso{
 Other empirical transfer functions: 
 \code{\link{append_expected_values}()},
-\code{\link{apply_etf}()}
+\code{\link{apply_etf}()},
+\code{\link{calculate_etf}()}
 }
 \concept{empirical transfer functions}

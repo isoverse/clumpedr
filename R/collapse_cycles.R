@@ -13,6 +13,7 @@
 #'   before the computation proceeds.
 #' @inheritParams dots
 #' @inheritParams quiet
+#' @export
 collapse_cycles <- function(.data,
                             ...,
                             cols = c(d13C_PDB, d18O_PDB, D47_raw, D47_final),
@@ -135,11 +136,11 @@ nest_cycle_data <- function(.data,
     quiet <- default(quiet)
   }
 
-  cols <- c("cycle", ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
+  cols <- c("cycle", ..., ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
             Rs, deltas, isotopes, params, stochastic, flags, Deltas, p49)
 
   if (!all(cols %in% colnames(.data))) {
-    stop(glue::glue("columns {glue::glue_collapse(cols[!colnames(.data) %in% cols], sep=', ', last=' and ', width = 60)} not found in data"))
+    warning(glue::glue("columns {glue::glue_collapse(cols[!cols %in% colnames(.data)], sep=', ', last=' and ', width = 60)} not found in data"))
   }
 
   if (!quiet) {
@@ -147,5 +148,5 @@ nest_cycle_data <- function(.data,
   }
 
   .data %>%
-    nest(cycle_data = one_of(cols))
+    nest(cycle_data = any_of(cols))
 }
