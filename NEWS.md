@@ -16,6 +16,7 @@
 # clumpedr 0.2.0 (2022-05-11)
 
 * Second release to assign Zenodo DOI.
+* Added warning to calibration functions if `ignorecnf` is specified.
 
 # clumpedr 0.1.0 (2021-09-14)
 
