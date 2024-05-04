@@ -11,7 +11,7 @@
 #' @param intercept The column name of the new intercept.
 #' @param parallel Whether or not (default) to process this in parallel, using package `furrr`.
 #' @importFrom stats na.exclude
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @family empirical transfer functions
 #' @export
@@ -20,6 +20,7 @@ calculate_etf <- function(.data, ...,
                           session = Preparation, etf = etf,
                           etf_coefs = etf_coefs, slope = slope,
                           intercept = intercept, parallel = FALSE, quiet = NULL) {
+  rlang::check_dots_empty(...)
   # global variables and defaults
   if (parallel & !requireNamespace("furrr", quietly = TRUE)) {
     stop("Package \"furrr\" is needed for this function to work.\n Please install it or run this with `parallel = FALSE`",

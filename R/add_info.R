@@ -7,12 +7,13 @@
 #' @param .info A [tibble][tibble::tibble-package], resulting from
 #'   [clean_did_info()].
 #' @param cols  A character vector with column names in info to add to the data.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @export
 #' @family metadata cleaning functions
 add_info <- function(.data, .info, ...,
                      cols = NULL, quiet = NULL) {
+  rlang::check_dots_empty0(...)
   if (nrow(.data) == 0) {
     return(tibble(file_id = character()))
   }

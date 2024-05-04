@@ -32,7 +32,7 @@ test_that("spread_match wrapper works", {
     standards %>%
       isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
       mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
-      find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_tove_to = "init") |>
+      find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") |>
       spread_match(),
     "tbl_df")
 })

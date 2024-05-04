@@ -10,7 +10,7 @@
 #' @inheritParams append_expected_values
 #' @inheritParams calculate_etf
 #' @inheritParams apply_etf
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @details This function is a wrapper for [append_expected_values()],
 #'   [calculate_etf()], and [apply_etf()].
@@ -41,6 +41,7 @@ empirical_transfer_function <- function(.data,
                                         parallel = FALSE) {
   # defaults from above
   D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
+  rlang::check_dots_empty0(...)
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }

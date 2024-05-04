@@ -16,7 +16,7 @@
 #' @param d49 Column name of d49.
 #' @inheritParams isobar_ratios
 #' @inheritParams default.params
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
@@ -36,6 +36,7 @@ bulk_and_clumping_deltas  <- function(.data, ...,
                                       R18_PDBCO2 = default(R18_PDBCO2),
                                       lambda = default(lambda),
                                       D17O = default(D17O), quiet = NULL) {
+  rlang::check_dots_empty0(...)
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }

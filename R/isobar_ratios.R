@@ -15,7 +15,7 @@
 #' @param R48 The output column name for R48.
 #' @param R49 The output column name for R49.
 #' @inheritParams default.params
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #'
 #' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
@@ -38,6 +38,7 @@ isobar_ratios <- function(.data,
                           D47 = default(D47),
                           D48 = default(D48),
                           D49 = default(D49)) {
+  rlang::check_dots_empty0(...)
   .data %>%
     mutate(
       # Compute R17

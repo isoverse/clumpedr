@@ -8,12 +8,13 @@
 #' @seealso [isoreader::iso_read_dual_inlet()]
 #' @seealso [isoreader::iso_get_file_info()]
 #' @family metadata cleaning functions
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 clean_did_info  <- function(.did, masspec = NULL, ...,
                             std_names = c(paste0("ETH-", 1:4), "IAEA-C2", "Merck"),
                             oth_name = "other",
                             quiet = NULL) {
+  rlang::check_dots_empty(...)
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }

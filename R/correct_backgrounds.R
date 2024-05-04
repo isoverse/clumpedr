@@ -7,7 +7,7 @@
 #' @param factor Factor by which to multiply the half-cup before subtraction.
 #' @param i47 Column with mass 47 intensities to correct.
 #' @param i54 Column with mass 47.5 intensities to use for correction.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @export
 correct_backgrounds  <- function(.data, factor, ...,
@@ -15,6 +15,7 @@ correct_backgrounds  <- function(.data, factor, ...,
                                  quiet = default(quiet)) {
   # global variables and defaults
   v47.mV <- v54.mV <- NULL
+  rlang::check_dots_empty0(...)
 
   if (!quiet)
     glue("Info: adding background based on half-mass with factor {factor}") %>%

@@ -28,7 +28,7 @@
 #'
 #' @export
 #' @family empirical transfer functions
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 append_expected_values <- function(.data,
                                    ...,
@@ -39,6 +39,7 @@ append_expected_values <- function(.data,
                                    quiet = NULL) {
   # global variables and defaults
   `Identifier 1` <- expected_D47 <- NULL
+  rlang::check_dots_empty0(...)
 
   if (length(std_names) != length(std_values))
     stop("std_names should be of equal length to std_values.")

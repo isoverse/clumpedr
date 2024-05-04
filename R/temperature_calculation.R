@@ -9,7 +9,7 @@
 #' @param temp The column name of the output temperature.
 #' @param slope Character(1) column name with the slope.
 #' @param intercept Character(1) column name with the intercept.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @seealso revcal tempcal
 #' @export
@@ -19,6 +19,7 @@ temperature_calculation <- function(.data, ...,
                                     quiet = NULL) {
   # global variables and defaults
   D47_final <- temperature <- NULL
+  rlang::check_dots_empty0(...)
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }

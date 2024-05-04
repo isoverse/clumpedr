@@ -6,6 +6,7 @@
 spread_match <- function(.data, ...,
                          method = "normal", masses = c(44:49, 54),
                          quiet = NULL) {
+  rlang::check_dots_empty0(...)
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
@@ -37,12 +38,13 @@ spread_match <- function(.data, ...,
 #' @param names_pattern Regular expression passed to [[tidyr::pivot_longer]].
 #' @return A [tibble][tibble::tibble-package] with the sample and reference
 #'   gasses side-by-side.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 spread_intensities  <- function(.data, ...,
                                 ids = NULL, our_cols = NULL,
                                 names_pattern = "v([4-9]{2}).(mV)",
                                 quiet = NULL) {
+  rlang::check_dots_empty0(...)
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
@@ -114,10 +116,11 @@ spread_intensities  <- function(.data, ...,
 #' @param method "linterp" for linear interpolation, or "normal" for
 #'     conventional bracketing of sample gas.
 #' @param masses The masses to generate r and s columns from.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 match_intensities <- function(.data, ...,
                               method = "normal", masses = c(44:49, 54), quiet = NULL) {
+  rlang::check_dots_empty0(...)
   our_cols <- c(paste0("s", masses), paste0("r", masses))
 
   if (nrow(.data) == 0L) {

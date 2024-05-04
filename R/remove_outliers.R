@@ -12,7 +12,7 @@
 #'   Preparation of the standards.
 #' @param D47 The column with \eqn{\Delta_47} values. Defaults to `D47_raw_mean`.
 #' @inheritParams find_outliers
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @export
 remove_outliers <- function(.data,
@@ -30,6 +30,7 @@ remove_outliers <- function(.data,
                             quiet = NULL) {
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- `Identifier 1` <- NULL
+  rlang::check_dots_empty0(...)
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }

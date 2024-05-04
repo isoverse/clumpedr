@@ -19,7 +19,7 @@
 #' @param cycle Column name of the column with the measurement cycle number.
 #' @param relative_to cycle Drop detection occurs relative to either the first
 #'   cycle ("init", default) or to the previous cycle ("prev").
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @export
 #' @family cycle functions
@@ -28,6 +28,7 @@ find_bad_cycles <- function(.data, ...,
                             v44 = "v44.mV", cycle = "cycle",
                             relative_to = "init",
                             quiet = NULL) {
+  rlang::check_dots_empty0(...)
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }

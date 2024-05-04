@@ -11,7 +11,7 @@
 #' @param alpha The confidence level for the summary functions.
 #' @param na.rm a logical value indicating wheter NA values should be stripped
 #'   before the computation proceeds.
-#' @inheritParams dots
+#' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
 #' @export
 collapse_cycles <- function(.data,
@@ -24,6 +24,7 @@ collapse_cycles <- function(.data,
                             na.rm = TRUE,
                             quiet = NULL) {
   outlier_cycle <- d13C_PDB <- d18O_PDB <- D47_raw <- D47_final <- NULL
+  rlang::check_dots_empty0(...)
   if (is.null(quiet)) {
     quiet <- default(quiet)
   }
@@ -65,6 +66,7 @@ collapse_cycles <- function(.data,
 #' columns that have cycle information based on previous computation steps.
 #'
 #' @param .data A [tibble][tibble::tibble-package] resulting from [bulk_and_clumping_deltas()].
+#' @param ... Additional chacter vectors to nest by.
 #' @param masses The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.
 #' @param ratios Ratio columns, based on masses.
 #' @param outlier_cycles Columns with outlier_cycle information.
@@ -80,7 +82,6 @@ collapse_cycles <- function(.data,
 #' @param flags Flag columns.
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
-#' @inheritParams dots
 #' @inheritParams quiet
 #' @export
 nest_cycle_data <- function(.data,

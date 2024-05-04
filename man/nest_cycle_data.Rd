@@ -33,7 +33,7 @@ nest_cycle_data(
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble} resulting from \code{\link[=bulk_and_clumping_deltas]{bulk_and_clumping_deltas()}}.}
 
-\item{...}{These dots are for future extensions and must be empty.}
+\item{...}{Additional chacter vectors to nest by.}
 
 \item{masses}{The masses that are present in the mass spectrometer. Defaults to 44:49 and 54.}
 
