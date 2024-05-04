@@ -22,7 +22,7 @@
 #' @importFrom glue glue glue_collapse
 #' @importFrom purrr map map_lgl map_chr map_df map_dfr map_int map_dbl map2 map2_chr map2_lgl map2_dbl map2_int safely is_empty when pluck
 #' @importFrom broom tidy
-#' @importFrom dplyr vars n select select_ rename rename_ arrange desc mutate mutate_ mutate_at mutate_if filter filter_ distinct as_data_frame left_join right_join full_join data_frame bind_rows bind_cols group_by group_by_ ungroup tally summarize summarise do case_when lead one_of summarise_all first last lead lag pull funs
+#' @importFrom dplyr vars n select select_ rename rename_ arrange desc mutate mutate_ mutate_at mutate_if filter filter_ distinct as_data_frame left_join right_join full_join data_frame bind_rows bind_cols group_by group_by_ ungroup tally summarize summarise do case_when lead one_of any_of summarise_all first last lead lag pull funs
 #' @importFrom stringr str_c str_detect str_to_title str_replace str_replace_all str_replace_na str_match str_match_all str_interp str_subset str_extract str_sub fixed
 #' @importFrom utils data getFromNamespace
 NULL
