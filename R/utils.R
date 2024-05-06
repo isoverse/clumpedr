@@ -31,10 +31,10 @@ check_quiet <- function(quiet = NULL) {
     quiet <- default(quiet)
   }
   if (!is.logical(quiet)) {
-    stop("'quiet' must be logical (TRUE or FALSE)")
+    stop("'quiet' must be logical (TRUE or FALSE).", call. = FALSE)
   }
   if (is.na(quiet)) {
-    stop("'quiet' must not be NA, must be TRUE or FALSE")
+    stop("'quiet' must be TRUE/FALSE, not NA.", call. = FALSE)
   }
   return(quiet)
 }
