@@ -57,8 +57,10 @@ Note that the min, max, and fac input parameters must be columns in the
 input data, so that reproducibility is guaranteed.
 }
 \examples{
+# get the raw data from the example dataset
 isoreader::iso_get_raw_data(standards, include_file_info = "Analysis") |>
-  mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+  # add new columns with criteria
+  dplyr::mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
   find_bad_cycles(min = "dis_min", max = "dis_max",
                   fac = "dis_fac", relative_to = "init")
 }

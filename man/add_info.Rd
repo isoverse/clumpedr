@@ -4,7 +4,7 @@
 \alias{add_info}
 \title{Add the information from the did files}
 \usage{
-add_info(.data, .info, ..., cols = NULL, quiet = NULL)
+add_info(.data, .info, cols = NULL, ..., quiet = NULL)
 }
 \arguments{
 \item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from
@@ -13,9 +13,9 @@ add_info(.data, .info, ..., cols = NULL, quiet = NULL)
 \item{.info}{A \link[tibble:tibble-package]{tibble}, resulting from
 \code{\link[=clean_did_info]{clean_did_info()}}.}
 
-\item{...}{These dots are for future extensions and must be empty.}
-
 \item{cols}{A character vector with column names in info to add to the data.}
+
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
@@ -27,15 +27,17 @@ Append mass spectrometer metadata to the raw data.
 }
 \examples{
 # generate some artificial data
-dat <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
+dat <- tibble::tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
 # and artificial metadata
-inf <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
-              file_path = c("/path/to/file", "/path/to/file"),
-              weight = c(69, 87), )
+inf <- tibble::tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
+                      file_path = c("/path/to/file", "/path/to/file"),
+                      weight = c(69, 87), )
 dat <- dat |>
   add_info(inf, c("weight", "file_path"))
 }
 \seealso{
+\code{\link[dplyr:mutate-joins]{dplyr::left_join()}} for the function that does the matching.
+
 Other metadata cleaning functions: 
 \code{\link{clean_did_info}()},
 \code{\link{get_inits}()},

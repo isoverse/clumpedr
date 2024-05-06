@@ -41,7 +41,7 @@ some labs acid fractionation correction is no longer needed.
 }
 \examples{
 # generate artificial example data
-dat <- tibble(D47 = rnorm(10))
+dat <- tibble::tibble(D47 = rnorm(10))
 dat <- dat |>
   acid_fractionation(aff = 0.062, D47 = D47, D47_out = D47_aff)
 }

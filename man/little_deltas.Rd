@@ -23,8 +23,8 @@ For all intensities \eqn{i},
 \examples{
 # generate some artificial data to show how it works
 x <- function() rnorm(n = 10)
-dat <- tibble(R45 = x(), R46 = x(), R47 = x(), R48 = x(), R49 = x(),
-                       R45_wg = x(), R46_wg = x(), R47_wg = x(), R48_wg = x(), R49_wg = x())
+dat <- tibble::tibble(R45 = x(), R46 = x(), R47 = x(), R48 = x(), R49 = x(),
+                      R45_wg = x(), R46_wg = x(), R47_wg = x(), R48_wg = x(), R49_wg = x())
 dat <- dat |>
    little_deltas()
 }

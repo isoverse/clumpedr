@@ -35,7 +35,7 @@ This function applies a very simple background correction based on the cup
 }
 \examples{
 # generate some fake data
-dat <- tibble(v47.mV = seq(0, 1, length.out = 10), v54.mV = seq(.1, 0, length.out = 10))
+dat <- tibble::tibble(v47.mV = seq(0, 1, length.out = 10), v54.mV = seq(.1, 0, length.out = 10))
 # correct the mass 47 using the half-cup
 dat <- dat |> correct_backgrounds(factor = 1)
 # or use the example data included

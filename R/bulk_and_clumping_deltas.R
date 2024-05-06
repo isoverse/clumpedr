@@ -19,7 +19,7 @@
 #' @examples
 #' # generate some artificial data to demonstrate:
 #' x <- function() rnorm(n = 10)
-#' dat <- tibble(
+#' dat <- tibble::tibble(
 #'  s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
 #'  r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x(),
 #'  d45 = x(), d46 = x(), d47 = x(), d48 = x(), d49 = x(),

@@ -13,7 +13,7 @@
 #' @returns Same as `.data` but with altered i47 column.
 #' @examples
 #' # generate some fake data
-#' dat <- tibble(v47.mV = seq(0, 1, length.out = 10), v54.mV = seq(.1, 0, length.out = 10))
+#' dat <- tibble::tibble(v47.mV = seq(0, 1, length.out = 10), v54.mV = seq(.1, 0, length.out = 10))
 #' # correct the mass 47 using the half-cup
 #' dat <- dat |> correct_backgrounds(factor = 1)
 #' # or use the example data included

@@ -24,7 +24,7 @@ isobar_ratios(
 )
 }
 \arguments{
-\item{.data}{A tibble with columns R13 and R18.}
+\item{.data}{A \link[tibble:tibble-package]{tibble} with columns R13 and R18.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

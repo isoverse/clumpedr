@@ -12,17 +12,17 @@
 #' @returns Same as `.data` but with new columns in `cols`.
 #' @examples
 #' # generate some artificial data
-#' dat <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
+#' dat <- tibble::tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
 #' # and artificial metadata
-#' inf <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
-#'               file_path = c("/path/to/file", "/path/to/file"),
-#'               weight = c(69, 87), )
+#' inf <- tibble::tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
+#'                       file_path = c("/path/to/file", "/path/to/file"),
+#'                       weight = c(69, 87), )
 #' dat <- dat |>
 #'   add_info(inf, c("weight", "file_path"))
 #' @export
 #' @family metadata cleaning functions
-add_info <- function(.data, .info, ...,
-                     cols = NULL, quiet = NULL) {
+#' @seealso [dplyr::left_join()] for the function that does the matching.
+add_info <- function(.data, .info, cols = NULL, ..., quiet = NULL) {
   rlang::check_dots_empty0(...)
   if (nrow(.data) == 0) {
     return(tibble(file_id = character()))

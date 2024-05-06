@@ -12,9 +12,9 @@
 #' @export
 #' @examples
 #' # easily generate some artificial data
-#' x <- function() rnorm(n = 10)
-#' dat <- tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
-#'               r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x())
+#' x <- function() { rnorm(n = 10) }
+#' dat <- tibble::tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
+#'                       r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x())
 #' dat <- dat |>
 #'   abundance_ratios()
 #' # to specify the column names, for example when we calculate the bg ratios

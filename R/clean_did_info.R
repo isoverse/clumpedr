@@ -80,7 +80,7 @@ parse_info <- function(.did,
 #' @family metadata cleaning functions
 #' @returns A new [tibble][tibble::tibble-package] with columns file_id, s44_init, and r44_init
 #' @examples
-#' isoreader::iso_get_raw_data(standards) |>
+#' isoreader::iso_get_raw_data(standards, include_file_info = "Analysis") |>
 #'   get_inits()
 #' @export
 get_inits <- function(.did) {

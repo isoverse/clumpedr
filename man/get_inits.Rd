@@ -16,7 +16,7 @@ A new \link[tibble:tibble-package]{tibble} with columns file_id, s44_init, and r
 Get initial intensities of specified mass
 }
 \examples{
-isoreader::iso_get_raw_data(standards) |>
+isoreader::iso_get_raw_data(standards, include_file_info = "Analysis") |>
   get_inits()
 }
 \seealso{

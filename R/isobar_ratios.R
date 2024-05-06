@@ -5,7 +5,7 @@
 #' clumped isotope anomalies (all expressed in permil). Function based on
 #' Daeron et al., 2016.
 #'
-#' @param .data A tibble with columns R13 and R18.
+#' @param .data A [tibble][tibble::tibble-package] with columns R13 and R18.
 # TODO: figure out how to also inherit references from default.params
 #' @param R13 The column name for R13.
 #' @param R18 The column name for R18.

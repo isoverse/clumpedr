@@ -41,11 +41,12 @@ Calculate abundance ratios by dividing input mass column \eqn{i} over mass
 }
 \examples{
 # easily generate some artificial data
-x <- function() rnorm(n = 10)
-dat <- tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x())
+x <- function() { rnorm(n = 10) }
+dat <- tibble::tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
+                      r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x())
 dat <- dat |>
   abundance_ratios()
-# and in case you wish to specify the column names (e.g. when we calculate the bg ratios)
+# to specify the column names, for example when we calculate the bg ratios
 dat <- dat |>
   abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48, i49 = r49,
                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg)

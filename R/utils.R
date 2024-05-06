@@ -9,15 +9,12 @@
 #' @param slope The slope of the calibration.
 #' @param intercept The intercept of the calibration.
 #' @examples
-#' # load libraries
-#' library(ggplot2)
-#' library(tibble)
+#' dat <- tibble::tibble(age = 1:10, D47 = rnorm(10, 0.7, .1))
 #' # create an empty plot
-#' dat <- tibble(age = 1:10, D47 = rnorm(10, 0.7, .1))
-#' ggplot(dat, aes(x = age, y = D47)) +
-#'   geom_point() +
+#' ggplot2::ggplot(dat, ggplot2::aes(x = age, y = D47)) +
+#'   ggplot2::geom_point() +
 #'   # generate the formula for temperature on the fly
-#'   scale_y_continuous(sec.axis = sec_axis(temperature_axis()))
+#'   ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(temperature_axis()))
 #' @seealso revcal
 #' @seealso tempcal
 #' @export

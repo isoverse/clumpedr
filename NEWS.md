@@ -1,6 +1,7 @@
 # clumpedr (development version)
 
-* change default accepted standard values to use I-CDES.
+* Change default accepted standard values to use I-CDES.
+* Add returns and examples to all function documentation.
 
 # clumpedr 0.3.0 (2024-05-03)
 
