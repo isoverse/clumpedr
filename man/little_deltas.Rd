@@ -13,7 +13,18 @@ little_deltas(.data, ..., quiet = NULL)
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with new columns d45-d49.
+}
 \description{
 For all intensities \eqn{i},
 \deqn{\delta_i = (R_i / R_iwg - 1) \times 1000}
+}
+\examples{
+# generate some artificial data to show how it works
+x <- function() rnorm(n = 10)
+dat <- tibble(R45 = x(), R46 = x(), R47 = x(), R48 = x(), R49 = x(),
+                       R45_wg = x(), R46_wg = x(), R47_wg = x(), R48_wg = x(), R49_wg = x())
+dat <- dat |>
+   little_deltas()
 }

@@ -14,9 +14,6 @@ test_that("append_ref_deltas() works", {
   # this one might be too complex to rewrite to not rely on any other functions from our package
   ref_delta_test <- standards %>%
     isoreader::iso_get_raw_data(include_file_info = "Analysis") %>%
-    mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) %>%
-    find_bad_cycles(min = "dis_min", max = "dis_max", fac = "dis_fac", relative_to = "init") %>%
-    spread_match() %>%
     append_ref_deltas(standards)
   expect_s3_class(ref_delta_test, "tbl_df")
   expect_true("d13C_PDB_wg" %in% colnames(ref_delta_test))

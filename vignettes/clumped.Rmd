@@ -294,7 +294,9 @@ rout |> select(file_id, starts_with("outlier"))
 
 ```{r}
 detf <- rout |>
-  append_expected_values() |>
+  append_expected_values(std_names = c("ETH-1", "ETH-2", "ETH-3"),
+                         # I-CDES values (make sure to double-check which ones you use!)
+                         std_values = c(0.2052, 0.2085, 0.6132)) |>
   calculate_etf() |>
   apply_etf()
   ## or the three functions above combined into one function

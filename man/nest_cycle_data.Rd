@@ -67,6 +67,9 @@ nest_cycle_data(
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+A summary of .data,
+}
 \description{
 Nest the cycle data resulting from previous computations steps.
 }

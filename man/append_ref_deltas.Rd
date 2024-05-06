@@ -26,6 +26,13 @@ append_ref_deltas(
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with new columns \code{d13C_PDB_wg} and \code{d18O_PDBCO2_wg}.
+}
 \description{
 Append reference gas delta values
+}
+\examples{
+dat <- isoreader::iso_get_raw_data(standards)
+append_ref_deltas(.data = dat, .did = standards)
 }

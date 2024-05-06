@@ -6,6 +6,14 @@
 #' @param .data A [tibble][tibble::tibble-package] with abundance ratios.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns Same as `.data` but with new columns d45-d49.
+#' @examples
+#' # generate some artificial data to show how it works
+#' x <- function() rnorm(n = 10)
+#' dat <- tibble(R45 = x(), R46 = x(), R47 = x(), R48 = x(), R49 = x(),
+#'                        R45_wg = x(), R46_wg = x(), R47_wg = x(), R48_wg = x(), R49_wg = x())
+#' dat <- dat |>
+#'    little_deltas()
 #' @export
 little_deltas <- function(.data, ..., quiet = NULL) {
   rlang::check_dots_empty0(...)

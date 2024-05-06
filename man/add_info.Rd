@@ -19,8 +19,21 @@ add_info(.data, .info, ..., cols = NULL, quiet = NULL)
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with new columns in \code{cols}.
+}
 \description{
 Append mass spectrometer metadata to the raw data.
+}
+\examples{
+# generate some artificial data
+dat <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
+# and artificial metadata
+inf <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
+              file_path = c("/path/to/file", "/path/to/file"),
+              weight = c(69, 87), )
+dat <- dat |>
+  add_info(inf, c("weight", "file_path"))
 }
 \seealso{
 Other metadata cleaning functions: 

@@ -10,10 +10,14 @@ get_inits(.did)
 \item{.did}{The raw data, resulting from \code{\link[isoreader:iso_get_raw_data]{isoreader::iso_get_raw_data()}}.}
 }
 \value{
-A tibble with columns file_id, s44_init, and r44_init
+A new \link[tibble:tibble-package]{tibble} with columns file_id, s44_init, and r44_init
 }
 \description{
 Get initial intensities of specified mass
+}
+\examples{
+isoreader::iso_get_raw_data(standards) |>
+  get_inits()
 }
 \seealso{
 Other metadata cleaning functions: 

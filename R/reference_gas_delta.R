@@ -6,6 +6,10 @@
 #' @param d18O_PDBCO2_wg \eqn{\delta^{18}O} reference gas value to overwrite.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns Same as `.data` but with new columns `d13C_PDB_wg` and `d18O_PDBCO2_wg`.
+#' @examples
+#' dat <- isoreader::iso_get_raw_data(standards)
+#' append_ref_deltas(.data = dat, .did = standards)
 #' @export
 append_ref_deltas <- function(.data, .did = NULL,
                               ...,

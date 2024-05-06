@@ -13,8 +13,7 @@ spread_match(
 )
 }
 \arguments{
-\item{.data}{A \link[tibble:tibble-package]{tibble} with s44--s49 and r44--r49; output of
-\code{\link[=spread_intensities]{spread_intensities()}}.}
+\item{.data}{A \link[tibble:tibble-package]{tibble}, resulting from \code{isoreader::iso_get_raw_data()}.}
 
 \item{...}{These dots are for future extensions and must be empty.}
 

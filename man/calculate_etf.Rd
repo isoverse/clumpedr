@@ -42,6 +42,9 @@ calculate_etf(
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} with new columns \code{etf}, \code{etf_coefs}, \code{slope}, and \code{intercept}.
+}
 \description{
 Calculate the Empirical Transfer Function
 }

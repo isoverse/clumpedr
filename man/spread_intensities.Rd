@@ -28,7 +28,7 @@ spread_intensities(
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the sample and reference
-gasses side-by-side.
+gasses side-by-side as s44-s49 and r44-r49.
 }
 \description{
 To be able to calculate ratios per cycle, it is necessary to put the sample

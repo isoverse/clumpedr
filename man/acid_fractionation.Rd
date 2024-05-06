@@ -29,9 +29,21 @@ fractionation calculation.}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with new column, named for the value of parameter \code{D47_out}.
+}
 \description{
-The temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to 25 \eqn{^\circ}C.
-It subtracts the \code{aff} from the \code{D47}-value.
+The temperature-dependent acid fractionation projection from 70
+\eqn{^\circ}C to 25 \eqn{^\circ}C. It subtracts the \code{aff} from the
+\code{D47}-value.
+NOTE: The I-CDES temperature scale is at 70\eqn{^\circ}C by default, so for
+some labs acid fractionation correction is no longer needed.
+}
+\examples{
+# generate artificial example data
+dat <- tibble(D47 = rnorm(10))
+dat <- dat |>
+  acid_fractionation(aff = 0.062, D47 = D47, D47_out = D47_aff)
 }
 \references{
 W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature

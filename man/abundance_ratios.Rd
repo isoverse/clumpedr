@@ -26,31 +26,27 @@ abundance_ratios(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{i44}{Name of mass 44 column.}
+\item{i44, i45, i46, i47, i48, i49}{Name of mass x column. Defaults to \code{sx}.}
 
-\item{i45}{Name of mass 45 column.}
-
-\item{i46}{Name of mass 46 column.}
-
-\item{i47}{Name of mass 47 column.}
-
-\item{i48}{Name of mass 48 column.}
-
-\item{i49}{Name of mass 49 column.}
-
-\item{R45}{Desired new name of the calculated ratio for mass 45.}
-
-\item{R46}{Desired new name of the calculated ratio for mass 46.}
-
-\item{R47}{Desired new name of the calculated ratio for mass 47.}
-
-\item{R48}{Desired new name of the calculated ratio for mass 48.}
-
-\item{R49}{Desired new name of the calculated ratio for mass 49.}
+\item{R45, R46, R47, R48, R49}{Desired new name of the calculated ratio for mass x. Defaults to \code{Rx}.}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
+}
+\value{
+Same as \code{.data} but with new columns Rx.
 }
 \description{
 Calculate abundance ratios by dividing input mass column \eqn{i} over mass
 44. \deqn{R_i = mass_i / mass_{44}}
+}
+\examples{
+# easily generate some artificial data
+x <- function() rnorm(n = 10)
+dat <- tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x())
+dat <- dat |>
+  abundance_ratios()
+# and in case you wish to specify the column names (e.g. when we calculate the bg ratios)
+dat <- dat |>
+  abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48, i49 = r49,
+                  R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg)
 }

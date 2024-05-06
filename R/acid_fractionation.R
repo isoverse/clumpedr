@@ -1,7 +1,10 @@
 #' Add acid fractionation
 #'
-#' The temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to 25 \eqn{^\circ}C.
-#' It subtracts the `aff` from the `D47`-value.
+#' The temperature-dependent acid fractionation projection from 70
+#' \eqn{^\circ}C to 25 \eqn{^\circ}C. It subtracts the `aff` from the
+#' `D47`-value.
+#' NOTE: The I-CDES temperature scale is at 70\eqn{^\circ}C by default, so for
+#' some labs acid fractionation correction is no longer needed.
 #'
 #' @param .data A [tibble][tibble::tibble-package].
 #' @param aff Temperature-dependent acid fractionation projection from 70 \eqn{^\circ}C to
@@ -12,7 +15,12 @@
 #' @param D47_out The desired new column name.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
-#'
+#' @returns Same as `.data` but with new column, named for the value of parameter `D47_out`.
+#' @examples
+#' # generate artificial example data
+#' dat <- tibble(D47 = rnorm(10))
+#' dat <- dat |>
+#'   acid_fractionation(aff = 0.062, D47 = D47, D47_out = D47_aff)
 #' @references
 #'
 #' W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature

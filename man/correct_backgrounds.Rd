@@ -20,13 +20,25 @@ correct_backgrounds(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{i47}{Column with mass 47 intensities to correct.}
+\item{i47}{Column with mass 47 intensities to correct. Defaults to \code{v47.mV}.}
 
-\item{i54}{Column with mass 47.5 intensities to use for correction.}
+\item{i54}{Column with mass 47.5 intensities to use for correction. Defaults to \code{v54.mV}.}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
+}
+\value{
+Same as \code{.data} but with altered i47 column.
 }
 \description{
 This function applies a very simple background correction based on the cup
 54 intensity and an input scaling factor.
+}
+\examples{
+# generate some fake data
+dat <- tibble(v47.mV = seq(0, 1, length.out = 10), v54.mV = seq(.1, 0, length.out = 10))
+# correct the mass 47 using the half-cup
+dat <- dat |> correct_backgrounds(factor = 1)
+# or use the example data included
+isoreader::iso_get_raw_data(standards) |>
+  correct_backgrounds(1.1)
 }

@@ -38,6 +38,10 @@ cycle ("init", default) or to the previous cycle ("prev").}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with some new columns that allow us to disable
+certain cycles/whole samples.
+}
 \description{
 This function tries to identify cycles in which the pressure has dropped
 fast. It first disables all the cycles above or below certain thresholds
@@ -48,5 +52,14 @@ or the previous (\code{relative_to = "prev"}) cycle.
 \details{
 The drop in intensity can be defined relative to the first change
 in intensity (default), or to the previous cycle.
+
+Note that the min, max, and fac input parameters must be columns in the
+input data, so that reproducibility is guaranteed.
+}
+\examples{
+isoreader::iso_get_raw_data(standards, include_file_info = "Analysis") |>
+  mutate(dis_min = 500, dis_max = 50000, dis_fac = 3) |>
+  find_bad_cycles(min = "dis_min", max = "dis_max",
+                  fac = "dis_fac", relative_to = "init")
 }
 \concept{cycle functions}

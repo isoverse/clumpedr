@@ -4,20 +4,23 @@
 #' 44. \deqn{R_i = mass_i / mass_{44}}
 #'
 #' @param .data A [tibble][tibble::tibble-package].
-#' @param i44 Name of mass 44 column.
-#' @param i45 Name of mass 45 column.
-#' @param i46 Name of mass 46 column.
-#' @param i47 Name of mass 47 column.
-#' @param i48 Name of mass 48 column.
-#' @param i49 Name of mass 49 column.
-#' @param R45 Desired new name of the calculated ratio for mass 45.
-#' @param R46 Desired new name of the calculated ratio for mass 46.
-#' @param R47 Desired new name of the calculated ratio for mass 47.
-#' @param R48 Desired new name of the calculated ratio for mass 48.
-#' @param R49 Desired new name of the calculated ratio for mass 49.
+#' @param i44,i45,i46,i47,i48,i49 Name of mass x column. Defaults to `sx`.
+#' @param R45,R46,R47,R48,R49 Desired new name of the calculated ratio for mass x. Defaults to `Rx`.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns Same as `.data` but with new columns Rx.
 #' @export
+#' @examples
+#' # easily generate some artificial data
+#' x <- function() rnorm(n = 10)
+#' dat <- tibble(s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
+#'               r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x())
+#' dat <- dat |>
+#'   abundance_ratios()
+#' # to specify the column names, for example when we calculate the bg ratios
+#' dat <- dat |>
+#'   abundance_ratios(i44 = r44, i45 = r45, i46 = r46, i47 = r47, i48 = r48, i49 = r49,
+#'                   R45 = R45_wg, R46 = R46_wg, R47 = R47_wg, R48 = R48_wg, R49 = R49_wg)
 abundance_ratios <- function(.data,
                              ...,
                              i44 = s44, i45 = s45,

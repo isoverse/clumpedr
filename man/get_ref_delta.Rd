@@ -4,10 +4,10 @@
 \alias{get_ref_delta}
 \title{Get reference gas delta values}
 \usage{
-get_ref_delta(did)
+get_ref_delta(.did)
 }
 \arguments{
-\item{did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
+\item{.did}{An iso file, resulting from \code{\link[isoreader:iso_read_dual_inlet]{isoreader::iso_read_dual_inlet()}}.}
 }
 \description{
 Get reference gas delta values

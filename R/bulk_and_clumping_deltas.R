@@ -18,6 +18,17 @@
 #' @inheritParams default.params
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns Same as `.data` but with new columns R45-R49, a lot of intermediate steps, and D47_raw.
+#' @examples
+#' # generate some artificial data to demonstrate:
+#' x <- function() rnorm(n = 10)
+#' dat <- tibble(
+#'  s44 = x(), s45 = x(), s46 = x(), s47 = x(), s48 = x(), s49 = x(),
+#'  r44 = x(), r45 = x(), r46 = x(), r47 = x(), r48 = x(), r49 = x(),
+#'  d45 = x(), d46 = x(), d47 = x(), d48 = x(), d49 = x(),
+#'  d13C_PDB_wg = x(), d18O_PDBCO2_wg = x())
+#' dat <- dat |>
+#'   bulk_and_clumping_deltas()
 #' @references Daeron, M., Blamart, D., Peral, M., & Affek, H. P., Absolute
 #'   isotopic abundance ratios and the accuracy of \eqn{\Delta_{47}}
 #'   measurements, _Chemical Geology_ **2016**, _442_, 83--96.

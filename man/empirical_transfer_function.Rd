@@ -30,8 +30,7 @@ empirical_transfer_function(
 
 \item{std_names}{Names of the standards.}
 
-\item{std_values}{Expected values of the standards. Defaults to Muller et
-al., 2017 at 70 \eqn{^\circ}C acid digestion.}
+\item{std_values}{Expected values of the standards. Defaults to Bernasconi et al., 2021.}
 
 \item{raw}{Column name of raw \eqn{\Delta_{47}} values.}
 

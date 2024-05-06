@@ -36,10 +36,11 @@ spread_match <- function(.data, ...,
 #' @param ids Identifying columns that we'll group by.
 #' @param our_cols Columns with data values that need to be reshaped. Defaults to v44.mV to v54.mV.
 #' @param names_pattern Regular expression passed to [[tidyr::pivot_longer]].
-#' @return A [tibble][tibble::tibble-package] with the sample and reference
-#'   gasses side-by-side.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns A [tibble][tibble::tibble-package] with the sample and reference
+#'   gasses side-by-side as s44-s49 and r44-r49.
+# #' @examples TODO
 spread_intensities  <- function(.data, ...,
                                 ids = NULL, our_cols = NULL,
                                 names_pattern = "v([4-9]{2}).(mV)",

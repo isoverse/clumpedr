@@ -8,7 +8,7 @@ append_expected_values(
   .data,
   ...,
   std_names = paste0("ETH-", 1:3),
-  std_values = c(0.258, 0.256, 0.691) - 0.062,
+  std_values = c(0.2052, 0.2085, 0.6132),
   exp = expected_D47,
   by = `Identifier 1`,
   quiet = NULL
@@ -21,8 +21,7 @@ append_expected_values(
 
 \item{std_names}{Names of the standards.}
 
-\item{std_values}{Expected values of the standards. Defaults to Muller et
-al., 2017 at 70 \eqn{^\circ}C acid digestion.}
+\item{std_values}{Expected values of the standards. Defaults to Bernasconi et al., 2021.}
 
 \item{exp}{Name of the new column that will hold expected values.}
 
@@ -30,25 +29,30 @@ al., 2017 at 70 \eqn{^\circ}C acid digestion.}
 
 \item{quiet}{If \code{TRUE}, print info messages. If \code{NULL} (default) listens to \code{options(clumpedr.quiet)}}
 }
+\value{
+Same as \code{.data} but with new column in \code{exp}.
+}
 \description{
 Append the expected values for the standards. Defaults to using
-ETH-1--ETH-3, subtracting the acid fractionation factor before-hand.
+ETH-1--ETH-3.
+}
+\examples{
+standards |>
+  isoreader::iso_get_raw_data(include_file_info = "Identifier 1") |>
+  append_expected_values(std_names = c("ETH-1", "ETH-2", "ETH-3"),
+                         std_values = c(0.2052, 0.2085, 0.6132),
+                         exp = expected_D47,
+                         by = `Identifier 1`)
 }
 \references{
-W. F. Defliese, M.T. Hren, K. C. Lohmann. Compositional and temperature
-effects of phosphoric acid fractionation on \eqn{\Delta_{47}} analysis
-and implications for discrepant calibrations. \emph{Chem. Geol.} \strong{2016}, \emph{396},
-51.
-
-S. T. Murray, M. M. Arienzo, P. K. Swart. Determining the
-\eqn{\Delta_{47}} acid fractionation in dolomites. \emph{Geochem. Cosmochim.
-Acta} \strong{2016}, \emph{174}, 42.
-
-I. A. Muller, A. Fernandez, J. Radke, J. van Dijk, D. Bowen, J. Schwieters,
-S. M. Bernasconi. Carbonate clumped isotope analyses with the
-long-integration dual-inlet (LIDI) workflow: scratching at the lower sample
-weight boundaries. \emph{Rapid Commun. Mass Spectrom.} \strong{2017}, \emph{31},
-1057--1066.
+Bernasconi, S. M., Daëron, M., Bergmann, K. D., Bonifacie, M., Meckler, A.
+N., Affek, H. P., Anderson, N., Bajnai, D., Barkan, E., Beverly, E.,
+Blamart, D., Burgener, L., Calmels, D., Chaduteau, C., Clog, M.,
+Davidheiser-Kroll, B., Davies, A., Dux, F., Eiler, J., … Ziegler, M.
+(2021). InterCarb: A community effort to improve inter-laboratory
+standardization of the carbonate clumped isotope thermometer using
+carbonate standards. Geochemistry, Geophysics, Geosystems, 22.
+\url{https://doi.org/10.1029/2020GC009588}
 }
 \seealso{
 Other empirical transfer functions: 

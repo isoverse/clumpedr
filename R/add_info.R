@@ -9,6 +9,16 @@
 #' @param cols  A character vector with column names in info to add to the data.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
+#' @returns Same as `.data` but with new columns in `cols`.
+#' @examples
+#' # generate some artificial data
+#' dat <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2))
+#' # and artificial metadata
+#' inf <- tibble(file_id = c("hi", "bye"), Analysis = c(1, 2),
+#'               file_path = c("/path/to/file", "/path/to/file"),
+#'               weight = c(69, 87), )
+#' dat <- dat |>
+#'   add_info(inf, c("weight", "file_path"))
 #' @export
 #' @family metadata cleaning functions
 add_info <- function(.data, .info, ...,
