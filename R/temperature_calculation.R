@@ -20,9 +20,7 @@ temperature_calculation <- function(.data, ...,
   # global variables and defaults
   D47_final <- temperature <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message(glue::glue("Info: calculating temperature with slope {unique(.data[, slope])} and intercept {unique(.data[, intercept])}, ignoring uncertainty in the calibration."))

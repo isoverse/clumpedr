@@ -1,6 +1,6 @@
 #' Spread and match sample gas and reference gas.
 #'
-# #' @param .data A [tibble][tibble::tibble-package], resulting from [correct_backgrounds()]
+#' @param .data A [tibble][tibble::tibble-package], resulting from `isoreader::iso_get_raw_data()`.
 #' @inheritParams match_intensities
 #' @export
 spread_match <- function(.data, ...,
@@ -10,9 +10,7 @@ spread_match <- function(.data, ...,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   our_cols <- paste0("v", masses, ".mV")
   if (!all(our_cols %in% colnames(.data))) {
@@ -49,9 +47,7 @@ spread_intensities  <- function(.data, ...,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message("Info: reshaping data into wide format.")
@@ -127,9 +123,7 @@ match_intensities <- function(.data, ...,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   # global variables and defaults
   if (! method %in% c("normal", "linterp")) {

@@ -25,9 +25,7 @@ append_ref_deltas <- function(.data, .did = NULL,
     return(tibble(file_id = character()))
   }
 
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   # i had this commented out but I forgot why
   if (!is.null(.did)) {
@@ -71,16 +69,16 @@ append_ref_deltas <- function(.data, .did = NULL,
 
 #' Get reference gas delta values
 #'
-#' @param did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
+#' @param .did An iso file, resulting from [isoreader::iso_read_dual_inlet()].
 #' @export
-get_ref_delta <- function(did) {
+get_ref_delta <- function(.did) {
   if (!requireNamespace("isoreader", quietly = TRUE)) {
     stop("'isoreader' is required to get_ref_delta, please run:\n   remotes::install_github('isoverse/isoreader')",
          call. = FALSE)
-    return(invisible(did))
+    return(invisible(.did))
   }
 
-  isoreader::iso_get_standards(did, quiet = TRUE) %>%
+  isoreader::iso_get_standards(.did, quiet = TRUE) %>%
     filter(.data$delta_name %in% c("d 13C/12C", "d 18O/16O")) %>%
     distinct(.data$file_id, .data$delta_name, .keep_all = TRUE) %>%
     pivot_wider(id_cols = "file_id", names_from = "delta_name", values_from = "delta_value") %>%

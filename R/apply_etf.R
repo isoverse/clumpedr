@@ -21,9 +21,7 @@ apply_etf <- function(.data, ..., intercept = intercept, slope = slope, raw = D4
   # defaults
   D47_raw <- D47_etf <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet)
     glue("Info: Applying ETF to {quo_name(enquo(raw))} using \u03b1 = {quo_name(enquo(slope))} and \u03b2 = {quo_name(enquo(intercept))}.") %>%

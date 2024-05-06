@@ -25,9 +25,7 @@ collapse_cycles <- function(.data,
                             quiet = NULL) {
   outlier_cycle <- d13C_PDB <- d18O_PDB <- D47_raw <- D47_final <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message("Info: collapsing cycles, calculating sample summaries.")
@@ -83,6 +81,7 @@ collapse_cycles <- function(.data,
 #' @param Deltas Big delta values.
 #' @param p49 Param 49.
 #' @inheritParams quiet
+#' @returns A summary of .data,
 #' @export
 nest_cycle_data <- function(.data,
                             ...,
@@ -133,9 +132,7 @@ nest_cycle_data <- function(.data,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   cols <- c("cycle", ..., ratios, outlier_cycles, outliers, cycle_drop, bg_corrected, bgs,
             Rs, deltas, isotopes, params, stochastic, flags, Deltas, p49)

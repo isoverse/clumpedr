@@ -13,9 +13,7 @@ delta_values <- function(.data, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   .data %>%
     # sample gas

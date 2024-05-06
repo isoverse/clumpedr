@@ -47,10 +47,7 @@ find_bad_cycles <- function(.data, ...,
   if (!relative_to %in% c("init", "prev")) {
     stop("'relative_to': ", relative_to, " should be eigher 'init' or 'prev'")
   }
-
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   out <- .data %>%
     mutate(outlier_cycle_low = .data[[v44]] <= .data[[min]],

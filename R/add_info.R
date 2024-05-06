@@ -27,9 +27,7 @@ add_info <- function(.data, .info, ...,
   if (nrow(.data) == 0) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (is.null(cols)) {
     cols <- c("file_id", "Analysis")

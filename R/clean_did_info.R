@@ -15,9 +15,7 @@ clean_did_info  <- function(.did, masspec = NULL, ...,
                             oth_name = "other",
                             quiet = NULL) {
   rlang::check_dots_empty(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message(glue("Info: appending and parsing file info for {length(.did)} data file(s)"))
@@ -80,7 +78,10 @@ parse_info <- function(.did,
 #' @param .did The raw data, resulting from [isoreader::iso_get_raw_data()].
 #'
 #' @family metadata cleaning functions
-#' @return A tibble with columns file_id, s44_init, and r44_init
+#' @returns A new [tibble][tibble::tibble-package] with columns file_id, s44_init, and r44_init
+#' @examples
+#' isoreader::iso_get_raw_data(standards) |>
+#'   get_inits()
 #' @export
 get_inits <- function(.did) {
   # what to do if did is an empty dataframe?

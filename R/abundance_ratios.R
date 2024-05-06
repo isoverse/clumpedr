@@ -36,9 +36,7 @@ abundance_ratios <- function(.data,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message("Info: calculating abundance ratios R[i] = i / 44")

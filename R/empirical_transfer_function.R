@@ -42,13 +42,12 @@ empirical_transfer_function <- function(.data,
   # defaults from above
   D47_raw <- expected_D47 <- D47_etf <- `Identifier 1` <- Preparation <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
-  if (!quiet)
+  if (!quiet) {
     glue("Info: calculating and applying Emperical Transfer Function, with {quo_name(enquo(raw))} as a function of {quo_name(enquo(exp))}, for each {quo_name(enquo(session))}.") %>%
       message()
+  }
 
   .data %>%
     append_expected_values(std_names = std_names, std_values = std_values,

@@ -21,9 +21,7 @@ little_deltas <- function(.data, ..., quiet = NULL) {
     return(tibble(file_id = character()))
   }
 
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     message("Info: calculating \u03b4 values with (Ri / Ri_wg - 1) * 1000")

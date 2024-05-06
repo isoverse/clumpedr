@@ -29,10 +29,7 @@ calculate_etf <- function(.data, ...,
     stop("Package \"furrr\" is needed for this function to work.\n Please install it or run this with `parallel = FALSE`",
       call. = FALSE)
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
-
+  quiet <- check_quiet(quiet)
   outlier <- D47_raw_mean <- expected_D47 <- Preparation <- NULL
 
   # this makes it continue even if lm fails.

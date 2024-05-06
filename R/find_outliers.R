@@ -37,10 +37,7 @@ find_outliers <- function(.data,
   # default quoted arguments are bad, hmkay
   D47_raw <- Preparation <- `Identifier 1` <- NULL
   rlang::check_dots_empty0(...)
-
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   .data %>%
     ## NOTE: cycle outliers are handled elsewhere!
@@ -84,9 +81,7 @@ find_init_outliers <- function(.data,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     glue("Info: identifying aliquots with {glue_collapse(distinct(.data, {{init_low}}), sep = ', ', last = ' and ')} > i44_init & i44_init < {glue_collapse(distinct(.data, {{init_high}}), sep = ', ', last = ' and ')}, s44 - r44 > {glue_collapse(distinct(.data, {{init_diff}}), sep = ', ', last = ' and ')}.") %>%
@@ -116,9 +111,7 @@ find_param49_outliers <- function(.data, param49_off, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     glue("Info: identifying rows with `param_49` >= -{param49_off} | <= {param49_off}.") %>%
@@ -145,9 +138,7 @@ find_internal_sd_outlier <- function(.data, internal_sd = .15, ...,
                                      quiet = NULL) {
   rlang::check_dots_empty0(...)
   `Identifier 1` <- D47_raw <- NULL
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     glue("Info: identifying aliquots with internal standard deviation of {quo_name(enquo(D47))} > {internal_sd}.") %>%
@@ -177,9 +168,7 @@ find_session_outlier <- function(.data, ...,
                                  session = Preparation, quiet = NULL) {
   D47_raw <- Preparation <- outlier_session_D47 <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet)
     glue("Info: identifying rows that are >{nsd_off} sd of {quo_name(enquo(D47))} away from the median by {quo_name(enquo(session))}.") %>%
@@ -213,10 +202,7 @@ find_session_id1_outlier <- function(.data, ...,
                                  session = Preparation, id1 = `Identifier 1`, quiet = NULL) {
   D47_raw <- Preparation <- `Identifier 1` <- outlier <- NULL
   rlang::check_dots_empty0(...)
-
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet)
     glue("Info: identifying rows that are >{nsd_off} sd of {quo_name(enquo(D47))} away from the median by {quo_name(enquo(session))} and {quo_name(enquo(id1))}.") %>%
@@ -249,9 +235,7 @@ summarise_outlier <- function(.data, out_column = outlier, ..., quiet = NULL) {
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   if (!quiet) {
     glue("Info: creating a single `outlier` column, based on all \"outlier_\" columns.") %>%

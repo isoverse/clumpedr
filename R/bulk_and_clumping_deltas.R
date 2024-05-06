@@ -1,9 +1,6 @@
 #' Compute \eqn{\delta^{13}}C, \eqn{\delta^{18}}O \eqn{\Delta_{47}},
 #' \eqn{\Delta_{48}}, and \eqn{\Delta_{49}} values
 #'
-#' Requires a dataframe with little \eqn{\delta} values, and working gas
-#' \eqn{\delta^{13}}C and \eqn{\delta^{18}}O values.
-#'
 #' @param .data A [tibble][tibble::tibble-package] containing s44-s49, r44-r49,
 #'   R45-R49, R45_wg-R49_wg, d45-d49, and working gas compositions d13C_PDB_wg and
 #'   d18OPDBCO2_wg.
@@ -51,9 +48,7 @@ bulk_and_clumping_deltas  <- function(.data, ...,
   if (nrow(.data) == 0L) {
     return(tibble(file_id = character()))
   }
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   # global variables and defaults
   R18_wg <- R13_wg <- R45_wg <- R46_wg <- R47_wg <- R48_wg <- R49_wg <- R45_stoch <-

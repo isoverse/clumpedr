@@ -31,9 +31,7 @@ remove_outliers <- function(.data,
   # global variables and defaults
   D47_raw <- file_datetime <- Preparation <- `Identifier 1` <- NULL
   rlang::check_dots_empty0(...)
-  if (is.null(quiet)) {
-    quiet <- default(quiet)
-  }
+  quiet <- check_quiet(quiet)
 
   out <- .data %>%
     find_outliers(init_low, init_high, init_diff, param49_off, internal_sd,

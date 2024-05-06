@@ -28,3 +28,16 @@ temperature_axis <- function(slope = 0.0449, intercept = 0.167) {
 #' @name quiet
 #' @param quiet If `TRUE`, print info messages. If `NULL` (default) listens to `options(clumpedr.quiet)`
 NULL
+
+check_quiet <- function(quiet = NULL) {
+  if (is.null(quiet)) {
+    quiet <- default(quiet)
+  }
+  if (!is.logical(quiet)) {
+    stop("'quiet' must be logical (TRUE or FALSE)")
+  }
+  if (is.na(quiet)) {
+    stop("'quiet' must not be NA, must be TRUE or FALSE")
+  }
+  return(quiet)
+}
