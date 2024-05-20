@@ -15,7 +15,7 @@
 #' @inheritParams quiet
 #' @family empirical transfer functions
 #' @returns Same as `.data` with new columns `etf`, `etf_coefs`, `slope`, and `intercept`.
-#' @examples
+# @examples
 # TODO
 #' @export
 calculate_etf <- function(.data, ...,

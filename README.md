@@ -69,3 +69,5 @@ Contributions to improving the clumped data processing package are more than wel
 - [`seasonalclumped`](https://github.com/nielsjdewinter/seasonalclumped) can be used to reconstruct temperature and salinity variations from seasonal oxygen and clumped isotope records.
 - [`isogeochem`](https://github.com/davidbajnai/isogeochem) can be used to calculate equilibrium Δ₄₇ and Δ₄₈ values, carbonate growth temperatures, isotopic fractionation factors and more.
 - [`D47crunch`](https://github.com/mdaeron/D47crunch) is the Python processing code to process clumped data from δ₄₇ values. It features a pooled regression for the empirical transfer function and many other features.
+- [`clumpedcalib`](https://github.com/japhir/clumpedcalib) Calculate and Apply Clumped Isotope Calibrations Using Bootstrapping.
+- [`clumped-processing`](https://github.com/UtrechtUniversity/clumped-processing) Clumped isotope measurement processing script for Thermo Fisher MAT 253 plus isotope ratio mass spectrometer with the Kiel IV used at Utrecht University.
