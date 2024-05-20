@@ -125,12 +125,51 @@ cycle ("init", default) or to the previous cycle ("prev").</p></dd>
 <dd><p>If <code>TRUE</code>, print info messages. If <code>NULL</code> (default) listens to <code>options(clumpedr.quiet)</code></p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>Same as <code>.data</code> but with some new columns that allow us to disable
+certain cycles/whole samples.</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>The drop in intensity can be defined relative to the first change
 in intensity (default), or to the previous cycle.</p>
+<p>Note that the min, max, and fac input parameters must be columns in the
+input data, so that reproducibility is guaranteed.</p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># get the raw data from the example dataset</span></span></span>
+<span class="r-in"><span><span class="fu">isoreader</span><span class="fu">::</span><span class="fu"><a href="http://isoreader.isoverse.org/reference/iso_get_raw_data.html" class="external-link">iso_get_raw_data</a></span><span class="op">(</span><span class="va">standards</span>, include_file_info <span class="op">=</span> <span class="st">"Analysis"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="co"># add new columns with criteria</span></span></span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>dis_min <span class="op">=</span> <span class="fl">500</span>, dis_max <span class="op">=</span> <span class="fl">50000</span>, dis_fac <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">find_bad_cycles</span><span class="op">(</span>min <span class="op">=</span> <span class="st">"dis_min"</span>, max <span class="op">=</span> <span class="st">"dis_max"</span>,</span></span>
+<span class="r-in"><span>                  fac <span class="op">=</span> <span class="st">"dis_fac"</span>, relative_to <span class="op">=</span> <span class="st">"init"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: aggregating raw data from 27 data file(s), including file info '"Analysis"'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: found 0 out of 27 acquisitions with a drop in pressure of mass 44.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,187 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    file_id Analysis type  cycle v44.mV v45.mV v46.mV v47.mV v48.mV v49.mV v54.mV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 180814… 4841     stan…     0 <span style="text-decoration: underline;">16</span>647. <span style="text-decoration: underline;">19</span>675. <span style="text-decoration: underline;">23</span>072. <span style="text-decoration: underline;">25</span>664.  <span style="text-decoration: underline;">2</span>124.  -<span style="color: #BB0000;">268.</span>  -<span style="color: #BB0000;">270.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 180814… 4841     stan…     1 <span style="text-decoration: underline;">16</span>406. <span style="text-decoration: underline;">19</span>391. <span style="text-decoration: underline;">22</span>738. <span style="text-decoration: underline;">25</span>293.  <span style="text-decoration: underline;">2</span>094.  -<span style="color: #BB0000;">264.</span>  -<span style="color: #BB0000;">265.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 180814… 4841     stan…     2 <span style="text-decoration: underline;">16</span>153. <span style="text-decoration: underline;">19</span>091. <span style="text-decoration: underline;">22</span>387. <span style="text-decoration: underline;">24</span>899.  <span style="text-decoration: underline;">2</span>062.  -<span style="color: #BB0000;">259.</span>  -<span style="color: #BB0000;">261.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 180814… 4841     stan…     3 <span style="text-decoration: underline;">15</span>891. <span style="text-decoration: underline;">18</span>782. <span style="text-decoration: underline;">22</span>024. <span style="text-decoration: underline;">24</span>502.  <span style="text-decoration: underline;">2</span>029.  -<span style="color: #BB0000;">255.</span>  -<span style="color: #BB0000;">257.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 180814… 4841     stan…     4 <span style="text-decoration: underline;">15</span>631. <span style="text-decoration: underline;">18</span>476. <span style="text-decoration: underline;">21</span>665. <span style="text-decoration: underline;">24</span>100.  <span style="text-decoration: underline;">1</span>997.  -<span style="color: #BB0000;">250.</span>  -<span style="color: #BB0000;">252.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 180814… 4841     stan…     5 <span style="text-decoration: underline;">15</span>383. <span style="text-decoration: underline;">18</span>182. <span style="text-decoration: underline;">21</span>321. <span style="text-decoration: underline;">23</span>717.  <span style="text-decoration: underline;">1</span>964.  -<span style="color: #BB0000;">246.</span>  -<span style="color: #BB0000;">249.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 180814… 4841     stan…     6 <span style="text-decoration: underline;">15</span>135. <span style="text-decoration: underline;">17</span>889. <span style="text-decoration: underline;">20</span>978. <span style="text-decoration: underline;">23</span>336.  <span style="text-decoration: underline;">1</span>934.  -<span style="color: #BB0000;">241.</span>  -<span style="color: #BB0000;">244.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 180814… 4841     stan…     7 <span style="text-decoration: underline;">14</span>892. <span style="text-decoration: underline;">17</span>603. <span style="text-decoration: underline;">20</span>641. <span style="text-decoration: underline;">22</span>959.  <span style="text-decoration: underline;">1</span>903.  -<span style="color: #BB0000;">237.</span>  -<span style="color: #BB0000;">240.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 180814… 4841     stan…     8 <span style="text-decoration: underline;">14</span>656. <span style="text-decoration: underline;">17</span>323. <span style="text-decoration: underline;">20</span>313. <span style="text-decoration: underline;">22</span>600.  <span style="text-decoration: underline;">1</span>873.  -<span style="color: #BB0000;">234.</span>  -<span style="color: #BB0000;">236.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 180814… 4841     stan…     9 <span style="text-decoration: underline;">14</span>422. <span style="text-decoration: underline;">17</span>047. <span style="text-decoration: underline;">19</span>990. <span style="text-decoration: underline;">22</span>234.  <span style="text-decoration: underline;">1</span>844.  -<span style="color: #BB0000;">229.</span>  -<span style="color: #BB0000;">232.</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,177 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 12 more variables: dis_min &lt;dbl&gt;, dis_max &lt;dbl&gt;, dis_fac &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   outlier_cycle_low &lt;lgl&gt;, outlier_cycle_high &lt;lgl&gt;, cycle_diff &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   first_diff_fac &lt;dbl&gt;, cycle_drop &lt;lgl&gt;, cycle_has_drop &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cycle_drop_num &lt;int&gt;, outlier_cycle_drop &lt;lgl&gt;, outlier_cycle &lt;lgl&gt;</span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

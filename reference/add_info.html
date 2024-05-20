@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_info</span><span class="op">(</span><span class="va">.data</span>, <span class="va">.info</span>, <span class="va">...</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, quiet <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_info</span><span class="op">(</span><span class="va">.data</span>, <span class="va">.info</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, quiet <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,26 +78,46 @@
 <code><a href="clean_did_info.html">clean_did_info()</a></code>.</p></dd>
 
 
-<dt>...</dt>
-<dd><p>These dots are for future extensions and must be empty.</p></dd>
-
-
 <dt>cols</dt>
 <dd><p>A character vector with column names in info to add to the data.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
 <dt>quiet</dt>
 <dd><p>If <code>TRUE</code>, print info messages. If <code>NULL</code> (default) listens to <code>options(clumpedr.quiet)</code></p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p>Same as <code>.data</code> but with new columns in <code>cols</code>.</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other metadata cleaning functions: 
+    <div class="dont-index"><p><code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">dplyr::left_join()</a></code> for the function that does the matching.</p>
+<p>Other metadata cleaning functions: 
 <code><a href="clean_did_info.html">clean_did_info</a>()</code>,
 <code><a href="get_inits.html">get_inits</a>()</code>,
 <code><a href="parse_info.html">parse_info</a>()</code></p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># generate some artificial data</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>file_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hi"</span>, <span class="st">"bye"</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># and artificial metadata</span></span></span>
+<span class="r-in"><span><span class="va">inf</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>file_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hi"</span>, <span class="st">"bye"</span><span class="op">)</span>, Analysis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"/path/to/file"</span>, <span class="st">"/path/to/file"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">69</span>, <span class="fl">87</span><span class="op">)</span>, <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">add_info</span><span class="op">(</span><span class="va">inf</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"weight"</span>, <span class="st">"file_path"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: appending measurement information.</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

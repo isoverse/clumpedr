@@ -76,7 +76,7 @@
     <h2>Value</h2>
     
 
-<p>A tibble with columns file_id, s44_init, and r44_init</p>
+<p>A new <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with columns file_id, s44_init, and r44_init</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -86,6 +86,27 @@
 <code><a href="parse_info.html">parse_info</a>()</code></p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">isoreader</span><span class="fu">::</span><span class="fu"><a href="http://isoreader.isoverse.org/reference/iso_get_raw_data.html" class="external-link">iso_get_raw_data</a></span><span class="op">(</span><span class="va">standards</span>, include_file_info <span class="op">=</span> <span class="st">"Analysis"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">get_inits</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: aggregating raw data from 27 data file(s), including file info '"Analysis"'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    file_id                      Analysis s44_init r44_init</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 180814_75_IAM_1_ETH-3.did    4841       <span style="text-decoration: underline;">16</span>368.   <span style="text-decoration: underline;">16</span>647.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 180814_75_IAM_10_IAEA-C2.did 4850       <span style="text-decoration: underline;">17</span>072.   <span style="text-decoration: underline;">17</span>463.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 180814_75_IAM_11_IAEA-C1.did 4851       <span style="text-decoration: underline;">18</span>887.   <span style="text-decoration: underline;">19</span>526.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 180814_75_IAM_2_ETH-3.did    4842       <span style="text-decoration: underline;">23</span>711.   <span style="text-decoration: underline;">24</span>487.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 180814_75_IAM_3_ETH-1.did    4843       <span style="text-decoration: underline;">13</span>337.   <span style="text-decoration: underline;">13</span>713.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 180814_75_IAM_4_ETH-1.did    4844       <span style="text-decoration: underline;">17</span>347.   <span style="text-decoration: underline;">17</span>681.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 180814_75_IAM_5_ETH-2.did    4845       <span style="text-decoration: underline;">17</span>347.   <span style="text-decoration: underline;">17</span>726.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 180814_75_IAM_6_ETH-2.did    4846       <span style="text-decoration: underline;">19</span>338.   <span style="text-decoration: underline;">19</span>731.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 180814_75_IAM_7_ETH-4.did    4847       <span style="text-decoration: underline;">16</span>709.   <span style="text-decoration: underline;">17</span>037.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 180814_75_IAM_8_ETH-4.did    4848       <span style="text-decoration: underline;">16</span>031.   <span style="text-decoration: underline;">16</span>123.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

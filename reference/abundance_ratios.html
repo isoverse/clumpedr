@@ -93,55 +93,41 @@
 <dd><p>These dots are for future extensions and must be empty.</p></dd>
 
 
-<dt>i44</dt>
-<dd><p>Name of mass 44 column.</p></dd>
+<dt>i44, i45, i46, i47, i48, i49</dt>
+<dd><p>Name of mass x column. Defaults to <code>sx</code>.</p></dd>
 
 
-<dt>i45</dt>
-<dd><p>Name of mass 45 column.</p></dd>
-
-
-<dt>i46</dt>
-<dd><p>Name of mass 46 column.</p></dd>
-
-
-<dt>i47</dt>
-<dd><p>Name of mass 47 column.</p></dd>
-
-
-<dt>i48</dt>
-<dd><p>Name of mass 48 column.</p></dd>
-
-
-<dt>i49</dt>
-<dd><p>Name of mass 49 column.</p></dd>
-
-
-<dt>R45</dt>
-<dd><p>Desired new name of the calculated ratio for mass 45.</p></dd>
-
-
-<dt>R46</dt>
-<dd><p>Desired new name of the calculated ratio for mass 46.</p></dd>
-
-
-<dt>R47</dt>
-<dd><p>Desired new name of the calculated ratio for mass 47.</p></dd>
-
-
-<dt>R48</dt>
-<dd><p>Desired new name of the calculated ratio for mass 48.</p></dd>
-
-
-<dt>R49</dt>
-<dd><p>Desired new name of the calculated ratio for mass 49.</p></dd>
+<dt>R45, R46, R47, R48, R49</dt>
+<dd><p>Desired new name of the calculated ratio for mass x. Defaults to <code>Rx</code>.</p></dd>
 
 
 <dt>quiet</dt>
 <dd><p>If <code>TRUE</code>, print info messages. If <code>NULL</code> (default) listens to <code>options(clumpedr.quiet)</code></p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
 
+<p>Same as <code>.data</code> but with new columns Rx.</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># easily generate some artificial data</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>s44 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, s45 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, s46 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, s47 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, s48 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, s49 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      r44 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, r45 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, r46 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, r47 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, r48 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, r49 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">abundance_ratios</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: calculating abundance ratios R[i] = i / 44</span>
+<span class="r-in"><span><span class="co"># to specify the column names, for example when we calculate the bg ratios</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">abundance_ratios</span><span class="op">(</span>i44 <span class="op">=</span> <span class="va">r44</span>, i45 <span class="op">=</span> <span class="va">r45</span>, i46 <span class="op">=</span> <span class="va">r46</span>, i47 <span class="op">=</span> <span class="va">r47</span>, i48 <span class="op">=</span> <span class="va">r48</span>, i49 <span class="op">=</span> <span class="va">r49</span>,</span></span>
+<span class="r-in"><span>                  R45 <span class="op">=</span> <span class="va">R45_wg</span>, R46 <span class="op">=</span> <span class="va">R46_wg</span>, R47 <span class="op">=</span> <span class="va">R47_wg</span>, R48 <span class="op">=</span> <span class="va">R48_wg</span>, R49 <span class="op">=</span> <span class="va">R49_wg</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: calculating abundance ratios R[i] = i / 44</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>

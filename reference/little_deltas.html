@@ -82,7 +82,24 @@ $$\delta_i = (R_i / R_iwg - 1) \times 1000$$</p>
 <dd><p>If <code>TRUE</code>, print info messages. If <code>NULL</code> (default) listens to <code>options(clumpedr.quiet)</code></p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
 
+<p>Same as <code>.data</code> but with new columns d45-d49.</p>
+    </div>
+
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># generate some artificial data to show how it works</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>R45 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R46 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R47 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R48 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R49 <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                      R45_wg <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R46_wg <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R47_wg <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R48_wg <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span>, R49_wg <span class="op">=</span> <span class="fu">x</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>   <span class="fu">little_deltas</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Info: calculating δ values with (Ri / Ri_wg - 1) * 1000</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
