@@ -35,7 +35,7 @@ with lower and upper bounds.
 A clumped isotope temperature calibration in reversed form, where the
 calibration
 \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b} with \eqn{T} in Kelvin,
-is expressed as a function of \eqn{T_C} (in degrees Celsius):
+is expressed as a function of \eqn{T_C}{T[C]}(in degrees Celsius):
 \deqn{T_C = \sqrt{(a \times 10^6) / (y - b)} - 273.15}{T[C] = sqrt((a * 10^6) / (y - b)) - 273.15}
 }
 \details{
