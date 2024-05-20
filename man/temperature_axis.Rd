@@ -28,7 +28,9 @@ ggplot2::ggplot(dat, ggplot2::aes(x = age, y = D47)) +
   ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(temperature_axis()))
 }
 \seealso{
-revcal
+temperature_calculation()
 
-tempcal
+revcal()
+
+tempcal()
 }

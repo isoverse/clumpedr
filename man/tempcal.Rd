@@ -48,5 +48,5 @@ to 350 \eqn{^\circ}C, and implications for a universal calibration for all (Ca, 
 Fe)CO\eqn{{}_3} carbonates. \strong{2017}, \emph{200}, 255--279.
 }
 \seealso{
-revcal
+revcal()
 }

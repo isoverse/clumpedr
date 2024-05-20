@@ -16,7 +16,7 @@
 #'   calibration.
 #' @return A [tibble][tibble::tibble-package] with input Tc and estimated
 #'   \eqn{\Delta_47} value with lower and upper bounds.
-#' @seealso revcal
+#' @seealso revcal()
 #' @export
 #' @references M. Bonifacie, D. Calmels, J. M. Eiler, J. Horita, C. Chaduteau,
 #'   C. Vasconcelos, P. Agrinier, A. Katz, B. H. Passey, J. M. Ferry, J.
@@ -68,7 +68,7 @@ tempcal <- function(Tc,
 #' @inheritParams tempcal
 #' @return A tibble with input \eqn{\Delta_{47}} and estimated Tc value
 #'   with lower and upper bounds.
-#' @seealso tempcal
+#' @seealso tempcal()
 #' @export
 revcal <- function(D47,
                    slope = 0.0449, intercept = 0.167,

@@ -19,7 +19,7 @@ temperature_calculation(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{D47}{The column name of the \eqn{\Delta_47} values to use as input.}
+\item{D47}{The column name of the \eqn{\Delta_{47}} values to use as input.}
 
 \item{temp}{The column name of the output temperature.}
 
@@ -35,5 +35,7 @@ This uses the \code{\link[=revcal]{revcal()}} function to calculate temperatures
 the regression.
 }
 \seealso{
-revcal tempcal
+revcal()
+
+tempcal()
 }

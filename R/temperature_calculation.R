@@ -5,13 +5,14 @@
 #' the regression.
 #'
 #' @param .data A [tibble][tibble::tibble-package], resulting from [acid_fractionation()].
-#' @param D47 The column name of the \eqn{\Delta_47} values to use as input.
+#' @param D47 The column name of the \eqn{\Delta_{47}} values to use as input.
 #' @param temp The column name of the output temperature.
 #' @param slope Character(1) column name with the slope.
 #' @param intercept Character(1) column name with the intercept.
 #' @inheritParams rlang::args_dots_empty
 #' @inheritParams quiet
-#' @seealso revcal tempcal
+#' @seealso revcal()
+#' @seealso tempcal()
 #' @export
 temperature_calculation <- function(.data, ...,
                                     D47 = D47_final, temp = temperature,

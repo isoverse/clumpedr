@@ -15,8 +15,9 @@
 #'   ggplot2::geom_point() +
 #'   # generate the formula for temperature on the fly
 #'   ggplot2::scale_y_continuous(sec.axis = ggplot2::sec_axis(temperature_axis()))
-#' @seealso revcal
-#' @seealso tempcal
+#' @seealso temperature_calculation()
+#' @seealso revcal()
+#' @seealso tempcal()
 #' @export
 temperature_axis <- function(slope = 0.0449, intercept = 0.167) {
       ~ sqrt((slope * 1e6) / (. - intercept)) - 273.15

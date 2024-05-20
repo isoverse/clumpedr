@@ -43,5 +43,5 @@ Defaults to Bonifacie et al. 2017 \deqn{\Delta_47 = (0.0449 \pm 0.001 \times
 10^6) / T^2 + (0.167 \pm 0.01)}
 }
 \seealso{
-tempcal
+tempcal()
 }
