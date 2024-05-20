@@ -8,7 +8,7 @@ empirical_transfer_function(
   .data,
   ...,
   std_names = paste0("ETH-", 1:3),
-  std_values = c(0.258, 0.256, 0.691) - 0.062,
+  std_values = c(0.2052, 0.2085, 0.6132),
   raw = D47_raw,
   exp = expected_D47,
   session = Preparation,

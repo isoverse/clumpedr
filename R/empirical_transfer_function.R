@@ -23,7 +23,7 @@ empirical_transfer_function <- function(.data,
                                         ...,
                                         # columns for append_expected_values
                                         std_names = paste0("ETH-", 1:3),
-                                        std_values = c(0.258, 0.256, 0.691) - 0.062, #0.507),
+                                        std_values = c(0.2052, 0.2085, 0.6132),
                                         ## outlier = outlier,
                                         raw = D47_raw,
                                         exp = expected_D47,
