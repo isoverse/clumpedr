@@ -3,7 +3,7 @@ pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   clumped: clumped.html
-last_built: 2024-05-20T19:42Z
+last_built: 2024-05-20T19:52Z
 urls:
   reference: http://clumpedr.isoverse.org/reference
   article: http://clumpedr.isoverse.org/articles
