@@ -259,7 +259,7 @@ coll |> select(file_id, d13C_PDB_mean, D47_raw_mean, D47_raw_cl)
 
 ### append metadata
 
-This just `left_join`s the metadata based on `file_id`, so that we can use it
+This just `left_join()`s the metadata based on `file_id`, so that we can use it
 for outlier removal etc.
 
 ```{r}
