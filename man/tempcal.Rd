@@ -33,7 +33,8 @@ A \link[tibble:tibble-package]{tibble} with input Tc and estimated
 }
 \description{
 A clumped isotope temperature calibration of the form:
-\deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b}
+\deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b},
+where T is in Kelvin.
 }
 \details{
 Defaults to Bonifacie et al. 2017

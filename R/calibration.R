@@ -1,7 +1,8 @@
 #' Temperature calibration
 #'
 #' A clumped isotope temperature calibration of the form:
-#' \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b}
+#' \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b},
+#' where T is in Kelvin.
 #'
 #' Defaults to Bonifacie et al. 2017
 #' \deqn{\Delta_47 = (0.0449 \pm 0.001 \times 10^6) / T^2 + (0.167 \pm 0.01)}
@@ -54,11 +55,11 @@ tempcal <- function(Tc,
 
 #' Reverse temperature calibration
 #'
-#' A clumped isotope temperature calibration in reversed form, where the normal
+#' A clumped isotope temperature calibration in reversed form, where the
 #' calibration
-#' \deqn{y = a \times 10^6 / T_K^2 + b}{y = a * 10^6 / T_K^2 + b}
-#' is expressed as a function of \eqn{T_C}:
-#' \deqn{T_C = sqrt((a \times 10^6) / (y - b)) - 273.15}
+#' \deqn{y = a \times 10^6 / T^2 + b}{y = a * 10^6 / T^2 + b} with \eqn{T} in Kelvin,
+#' is expressed as a function of \eqn{T_C} (in degrees Celsius):
+#' \deqn{T_C = \sqrt((a \times 10^6) / (y - b)) - 273.15}{T[C] = sqrt((a * 10^6) / (y - b)) - 273.15}
 #'
 #' Defaults to Bonifacie et al. 2017 \deqn{\Delta_47 = (0.0449 \pm 0.001 \times
 #' 10^6) / T^2 + (0.167 \pm 0.01)}
