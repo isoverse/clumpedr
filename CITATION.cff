@@ -2,7 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: 'clumpedr: clumped isotope processing in R'
+title: 'clumpedr: clumped isotope data analysis in R'
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -21,3 +21,48 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.10638816
     description: Zenodo
+repository-code: 'https://github.com/isoverse/clumpedr/'
+url: 'https://clumpedr.isoverse.org/'
+repository-artifact: 'https://zenodo.org/records/11111304'
+abstract: >
+  Clumpedr aims to facilitate analysis of clumped isotope
+  data. It builds on isoreader which is used to import raw
+  data files from the mass spectrometer, and most of the
+  important data processing parts are based on Huntington et
+  al. 2009 and Daëron et al. 2016.
+
+
+  Clumpedr includes dataprocessing steps such as:
+
+  - exclusion of failed cycles, based on a sudden drop of
+  pressure
+
+  - simple background corrections using the mass 47.5 cup
+
+  - linear intensity matching of reference gas mass 44 to
+  the sample gas, and application of this shift to all other
+  masses
+
+  - calculation of delta values
+
+  - default calculations use the Brand et al., 2010
+  pararameters.
+
+  - calculation of big delta values, Δ₄₇
+
+  - summarize per sample
+
+  - per-run correction and calculation of the empirical
+  reference frame
+keywords:
+  - isotope
+  - stable isotope
+  - clumped isotope
+  - data
+  - processing
+  - R
+  - tidyverse
+license: AGPL-3.0-or-later
+commit: 0c673f45d6d8aa69a40f22313780afc75faeb2a1
+version: v0.3.0
+date-released: '2024-05-03'

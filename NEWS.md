@@ -2,6 +2,7 @@
 
 * Change default accepted standard values to use I-CDES.
 * Add returns and examples to all function documentation.
+* Update CITATION.cff file with urls
 
 # clumpedr 0.3.0 (2024-05-03)
 
