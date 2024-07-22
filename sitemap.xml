@@ -1,153 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://clumpedr.isoverse.org/404.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/articles/clumped.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/index.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/abundance_ratios.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/acid_fractionation.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/add_info.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/append_expected_values.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/append_ref_deltas.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/apply_etf.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/bulk_and_clumping_deltas.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/calculate_etf.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/clean_did_info.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/clumpedr-package.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/clumpedr_get_default_parameters.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/collapse_cycles.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/correct_backgrounds.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/default.params.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/delta_values.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/empirical_transfer_function.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/eth3.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_bad_cycles.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_init_outliers.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_internal_sd_outlier.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_outliers.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_param49_outliers.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_session_id1_outlier.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/find_session_outlier.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/get_inits.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/get_ref_delta.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/isobar_ratios.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/little_deltas.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/match_intensities.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/nest_cycle_data.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/parse_info.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/remove_outliers.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/revcal.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/spread_intensities.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/spread_match.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/standards.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/summarise_outlier.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/summarize_outlier.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/tempcal.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/temperature_axis.html</loc>
-  </url>
-  <url>
-    <loc>http://clumpedr.isoverse.org/reference/temperature_calculation.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://clumpedr.isoverse.org/404.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/LICENSE.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/articles/clumped.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/articles/index.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/authors.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/index.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/news/index.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/abundance_ratios.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/acid_fractionation.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/add_info.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/append_expected_values.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/append_ref_deltas.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/apply_etf.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/bulk_and_clumping_deltas.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/calculate_etf.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/clean_did_info.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/clumpedr-package.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/clumpedr_get_default_parameters.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/collapse_cycles.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/correct_backgrounds.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/default.params.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/delta_values.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/empirical_transfer_function.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/eth3.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_bad_cycles.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_init_outliers.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_internal_sd_outlier.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_outliers.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_param49_outliers.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_session_id1_outlier.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/find_session_outlier.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/get_inits.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/get_ref_delta.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/index.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/isobar_ratios.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/little_deltas.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/match_intensities.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/nest_cycle_data.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/parse_info.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/pipe.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/remove_outliers.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/revcal.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/spread_intensities.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/spread_match.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/standards.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/summarise_outlier.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/summarize_outlier.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/tempcal.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/temperature_axis.html</loc></url>
+<url><loc>http://clumpedr.isoverse.org/reference/temperature_calculation.html</loc></url>
 </urlset>
+

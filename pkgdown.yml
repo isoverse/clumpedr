@@ -1,10 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   clumped: clumped.html
-last_built: 2024-05-20T21:56Z
+last_built: 2024-07-22T09:24Z
 urls:
   reference: http://clumpedr.isoverse.org/reference
   article: http://clumpedr.isoverse.org/articles
-
